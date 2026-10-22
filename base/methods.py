@@ -1406,6 +1406,14 @@ def pdfkit_configuration():
     import os
     import shutil
 
+    if getattr(settings, "HR_DEPLOYMENT_STAGE", None) in {"staging", "production"}:
+        from django.core.exceptions import ImproperlyConfigured
+
+        raise ImproperlyConfigured(
+            "PDF rendering is disabled pending replacement of vulnerable pdfkit "
+            "and university acceptance of document exports."
+        )
+
     candidates = [
         os.environ.get("WKHTMLTOPDF_PATH"),
         shutil.which("wkhtmltopdf"),

@@ -1,0 +1,126 @@
+name: bells-hr
+
+x-runtime: &runtime
+  image: university-hr-backend:${HR_IMAGE_TAG:-staging}
+  build:
+    context: ../..
+    dockerfile: deploy/university/backend.Dockerfile
+    args:
+      SOURCE_REVISION: ${HR_SOURCE_REVISION:?Set the source commit}
+  env_file: ${HR_CONFIG_DIR:?Set an absolute configuration directory}/runtime.env
+  secrets: [django_key, initialization_key, mysql_password, redis_password]
+  volumes:
+    - media:/app/media
+    - static:/app/staticfiles
+    - ${HR_CONFIG_DIR}/acceptance:/run/acceptance:ro
+  read_only: true
+  tmpfs: ["/tmp:size=256m,mode=1777"]
+  cap_drop: [ALL]
+  group_add: ['${HR_SECRET_GID:-1000}']
+  security_opt: [no-new-privileges:true]
+  networks: [private]
+  restart: unless-stopped
+
+services:
+  mysql:
+    image: mysql:8.4@sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69
+    environment:
+      MYSQL_DATABASE: university_hr
+      MYSQL_USER: university_hr
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    secrets: [mysql_password, mysql_root_password]
+    volumes: [database:/var/lib/mysql]
+    networks: [private]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD-SHELL, 'MYSQL_PWD="$$(cat /run/secrets/mysql_password)" mysql -u university_hr -D university_hr -e "SELECT 1" >/dev/null']
+      interval: 10s
+      timeout: 5s
+      retries: 30
+  redis:
+    image: redis:8-alpine@sha256:615b4cedaff0c1437a1548acae4222572df8c021eeb7382d64cb8b5e3a13ac7a
+    command: [sh, -c, 'umask 077; printf "requirepass %s\nappendonly yes\nmaxmemory 256mb\nmaxmemory-policy noeviction\n" "$$(cat /run/secrets/redis_password)" > /tmp/redis.conf; exec redis-server /tmp/redis.conf']
+    secrets: [redis_password]
+    user: '999:${HR_SECRET_GID:-1000}'
+    volumes: [redis:/data]
+    tmpfs: ["/tmp:size=16m,mode=1777"]
+    networks: [private]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH="$$(cat /run/secrets/redis_password)" redis-cli ping | grep -qx PONG']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  release:
+    <<: *runtime
+    restart: 'no'
+    command: [sh, -c, 'python manage.py migrate --noinput && python manage.py collectstatic --noinput']
+    depends_on:
+      mysql: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  backend:
+    <<: *runtime
+    depends_on:
+      release: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, /app/deploy/university/healthcheck.py]
+      interval: 20s
+      timeout: 5s
+      start_period: 90s
+      retries: 4
+  scheduler:
+    <<: *runtime
+    command: [python, manage.py, run_production_scheduler]
+    depends_on:
+      release: {condition: service_completed_successfully}
+  frontend:
+    image: university-hr-frontend:${HR_IMAGE_TAG:-staging}
+    build:
+      context: ../..
+      dockerfile: deploy/university/frontend.Dockerfile
+    environment:
+      HR_PUBLIC_URL: ${HR_PUBLIC_URL:?Set the HTTPS origin}
+    networks: [private]
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+  edge:
+    image: nginxinc/nginx-unprivileged:stable-alpine@sha256:f5116ed4606f3eb015dd4a8e28cb9b351476dc0ad4bc6e9f93b19cec130cdf03
+    ports:
+      - '${HR_BIND_ADDRESS:-127.0.0.1}:${HR_HTTPS_PORT:-8443}:8443'
+    volumes:
+      - ${HR_CONFIG_DIR}/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${HR_CONFIG_DIR}/tls:/etc/nginx/tls:ro
+      - static:/app/staticfiles:ro
+    networks: [private]
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    cap_drop: [ALL]
+    group_add: ['${HR_SECRET_GID:-1000}']
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+    depends_on:
+      backend: {condition: service_healthy}
+      frontend: {condition: service_started}
+
+networks:
+  private:
+volumes:
+  database:
+  media:
+  static:
+  redis:
+secrets:
+  django_key:
+    file: ${HR_CONFIG_DIR}/secrets/django_key
+  initialization_key:
+    file: ${HR_CONFIG_DIR}/secrets/initialization_key
+  mysql_password:
+    file: ${HR_CONFIG_DIR}/secrets/mysql_password
+  mysql_root_password:
+    file: ${HR_CONFIG_DIR}/secrets/mysql_root_password
+  redis_password:
+    file: ${HR_CONFIG_DIR}/secrets/redis_password

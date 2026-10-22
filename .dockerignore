@@ -92,3 +92,10 @@ CODEBASE_INDEX.md
 
 # Claude/AI
 .claude/
+.production/
+.production-*/
+.university-setup/
+frontend/.next/
+frontend/node_modules/
+*.age
+*.sql

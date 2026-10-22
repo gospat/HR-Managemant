@@ -1,0 +1,55 @@
+pid /tmp/nginx.pid;
+error_log /dev/stderr warn;
+events { worker_connections 2048; }
+http {
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+  server_tokens off;
+  client_body_temp_path /tmp/client;
+  proxy_temp_path /tmp/proxy;
+  fastcgi_temp_path /tmp/fastcgi;
+  uwsgi_temp_path /tmp/uwsgi;
+  scgi_temp_path /tmp/scgi;
+  # Never log query strings, cookies, credentials or response bodies.
+  log_format safe '$remote_addr $request_method $uri $status $request_time';
+  access_log /dev/stdout safe;
+  limit_req_zone $binary_remote_addr zone=login:10m rate=5r/m;
+  upstream django { server backend:8000; }
+  upstream nextjs { server frontend:3000; }
+  server {
+    listen 8443 ssl default_server;
+    server_name __DOMAIN__;
+    if ($host != __DOMAIN__) { return 444; }
+    ssl_certificate /etc/nginx/tls/fullchain.pem;
+    ssl_certificate_key /etc/nginx/tls/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_session_tickets off;
+    client_max_body_size 2m;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options DENY always;
+    add_header Referrer-Policy same-origin always;
+    proxy_hide_header X-Powered-By;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Forwarded-Proto https;
+    # Overwrite untrusted headers; Django trusts exactly this proxy.
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_read_timeout 90s;
+    location = /ready/ { return 404; }
+    location = /health/ { return 404; }
+    location ~ ^/(initialize-database|load-demo|load-data) { return 404; }
+    location /static/ { alias /app/staticfiles/; }
+    location ~ ^/(login/?|admin/login/?|api/v1/auth/login/?|api/auth/login/?)$ {
+      limit_req zone=login burst=10 nodelay;
+      limit_req_status 429;
+      proxy_pass http://django;
+    }
+    location = / { proxy_pass http://nextjs; }
+    location /staff { proxy_pass http://nextjs; }
+    location /_next/ { proxy_pass http://nextjs; }
+    location = /favicon.ico { proxy_pass http://nextjs; }
+    location = /icon.svg { proxy_pass http://nextjs; }
+    location / { proxy_pass http://django; }
+  }
+}

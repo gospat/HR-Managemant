@@ -4,6 +4,13 @@ MySQL/Django/Next.js university development edition. Start with
 [setup, validation and remaining work](docs/UNIVERSITY-SETUP.md).
 University extensions are in `university/`; the React portal is in `frontend/`.
 
+# Bells University release status
+
+The university application uses MySQL and a Next.js frontend. See
+[production readiness and DigitalOcean deployment](docs/PRODUCTION-READINESS.md)
+for the hardened staging stack, acceptance requirements and known launch blockers.
+All HR modules require university acceptance before a live release.
+
 The original upstream documentation follows.
 
 ---

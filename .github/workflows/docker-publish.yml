@@ -34,6 +34,7 @@ env:
 
 jobs:
   publish:
+    if: github.repository == 'horilla-opensource/horilla'
     runs-on: ubuntu-latest
     timeout-minutes: 90
 

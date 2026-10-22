@@ -1,0 +1,91 @@
+name: University HR
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependency auditor
+        run: python -m pip install pip-audit==2.10.1
+      # Intentionally fails while pdfkit's unpatched advisory remains. Never
+      # ignore the advisory or use continue-on-error to claim a clean release.
+      - name: Audit locked Python dependencies
+        run: pip-audit --disable-pip --no-deps -r requirements-university.lock
+  application:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ephemeral-ci-password
+          MYSQL_DATABASE: university_hr
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pephemeral-ci-password"
+          --health-interval=10s --health-timeout=5s --health-retries=20
+    env:
+      DJANGO_SETTINGS_MODULE: university.settings
+      DATABASE_URL: mysql://root:ephemeral-ci-password@127.0.0.1:3306/university_hr
+      DEBUG: 'true'
+      SECRET_KEY: ephemeral-ci-only-development-key
+      ALLOWED_HOSTS: localhost,127.0.0.1,testserver
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install native dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-libmysqlclient-dev pkg-config libcairo2 libpango-1.0-0 libgdk-pixbuf-2.0-0
+      - name: Install locked dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install --require-hashes -r requirements-university.lock
+          npm --prefix frontend ci --no-audit --no-fund
+      - name: Reject committed runtime configuration
+        run: |
+          if git ls-files | rg '(^|/)(\.production[^/]*|\.env$|privkey\.pem$)'; then
+            echo 'Private runtime configuration must not be committed.'
+            exit 1
+          fi
+      - name: MySQL regression tests and frontend build
+        run: bash scripts/test-university.sh
+      - name: Production boundary and acceptance tests
+        run: .venv/bin/python manage.py test university.operations.tests --noinput
+      - name: Frontend dependency audit
+        run: npm --prefix frontend audit --omit=dev --audit-level=moderate
+  images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build backend image
+        run: docker build --build-arg SOURCE_REVISION="$GITHUB_SHA" -f deploy/university/backend.Dockerfile -t university-hr-backend:staging .
+      - name: Build frontend image
+        run: docker build -f deploy/university/frontend.Dockerfile -t university-hr-frontend:staging .
+      - name: Generate isolated staging inputs
+        run: python scripts/production_config.py --domain hr.test --directory .production-staging --test-certificate
+      - name: Start hardened stack
+        run: docker compose --env-file .production-staging/compose.env -f deploy/university/compose.yml up -d --no-build --wait --wait-timeout 900
+      - name: Verify HTTPS and access boundaries
+        run: python scripts/test-production-stack.py
+      - name: Stop isolated stack
+        if: always()
+        run: docker compose --env-file .production-staging/compose.env -f deploy/university/compose.yml down

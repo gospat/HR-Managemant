@@ -48,7 +48,16 @@ export default async function Home() {
   try {
     const response = await fetch(
       `${process.env.HR_BACKEND_URL || "http://127.0.0.1:8000"}/ready/`,
-      { cache: "no-store", signal: AbortSignal.timeout(4000) },
+      {
+        cache: "no-store",
+        headers: process.env.HR_PUBLIC_URL
+          ? {
+              Host: new URL(process.env.HR_PUBLIC_URL).host,
+              "X-Forwarded-Proto": "https",
+            }
+          : {},
+        signal: AbortSignal.timeout(4000),
+      },
     );
     available = response.ok;
   } catch {

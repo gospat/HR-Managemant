@@ -69,6 +69,11 @@ def acceptance_errors(path, revision):
         errors.append(
             "An authorized university reviewer must supply name, role and email."
         )
+    if (
+        isinstance(reviewer, dict)
+        and str(reviewer.get("role", "")).strip().casefold() != "registrar"
+    ):
+        errors.append("The Registrar must approve the university release.")
     try:
         approved = datetime.fromisoformat(
             str(manifest.get("approved_at", "")).replace("Z", "+00:00")

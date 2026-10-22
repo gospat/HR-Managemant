@@ -37,7 +37,7 @@ class AcceptanceTests(SimpleTestCase):
             source_revision=self.revision,
             target_staff_count=10000,
             approved_by=dict(
-                name="Test Reviewer", role="Test role", email="reviewer@invalid.test"
+                name="Test Reviewer", role="Registrar", email="reviewer@invalid.test"
             ),
             approved_at="2026-01-01T00:00:00+00:00",
             modules={key: dict(entry) for key in MODULES},
@@ -54,6 +54,10 @@ class AcceptanceTests(SimpleTestCase):
     def test_release_revision_must_match(self):
         self.manifest["source_revision"] = "b" * 40
         self.assertTrue(any("commit" in e for e in self.validate()))
+
+    def test_registrar_approval_is_required(self):
+        self.manifest["approved_by"]["role"] = "HR officer"
+        self.assertTrue(any("Registrar" in e for e in self.validate()))
 
     def test_every_module_is_required(self):
         for key in MODULES:

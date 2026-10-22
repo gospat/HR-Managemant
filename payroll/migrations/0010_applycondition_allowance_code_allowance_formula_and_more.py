@@ -191,7 +191,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='allowance',
             name='based_on',
-            field=models.CharField(blank=True, choices=[('basic_pay', 'Basic Pay'), ('component', 'Percentage of Another Component'), ('formula', 'Custom Formula'), ('balance', 'Balance of CTC'), ('children', 'Children'), ('overtime', 'Regular Overtime'), ('week_off_overtime', 'Week Off Overtime'), ('holiday_overtime', 'Holiday Overtime'), ('shift_id', 'Shift'), ('work_type_id', 'Work Type'), ('attendance', 'Attendance')], default='basic_pay', max_length=255, null=True),
+            field=models.CharField(blank=True, choices=[('basic_pay', 'Basic Pay'), ('component', 'Percentage of Another Component'), ('formula', 'Custom Formula'), ('balance', 'Balance of CTC'), ('children', 'Children'), ('overtime', 'Regular Overtime'), ('week_off_overtime', 'Week Off Overtime'), ('holiday_overtime', 'Holiday Overtime'), ('shift_id', 'Shift'), ('work_type_id', 'Work Type'), ('attendance', 'Attendance')], default='basic_pay', max_length=32, null=True),
         ),
         migrations.AlterField(
             model_name='allowance',

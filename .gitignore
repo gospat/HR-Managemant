@@ -164,3 +164,9 @@ CLAUDE.md
 .mcp.safe.json
 .claudeignore
 .specify/
+
+# University frontend build and dependencies
+frontend/node_modules/
+frontend/.next/
+frontend/*.tsbuildinfo
+.university-setup/

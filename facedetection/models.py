@@ -35,11 +35,7 @@ class FaceDetection(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(
-                fields=["company_id"],
-                name="unique_company_id_when_not_null_facedetection",
-                condition=~models.Q(company_id=None),
-            )
+            models.UniqueConstraint(fields=['company_id'], name='unique_company_id_when_not_null_facedetection')
         ]
 
 

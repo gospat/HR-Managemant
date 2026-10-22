@@ -1630,13 +1630,13 @@ class Allowance(HorillaModel):
     )
     # If condition based
     field = models.CharField(
-        max_length=255,
+        max_length=128,
         choices=FIELD_CHOICE,
         null=True,
         blank=True,
     )
     condition = models.CharField(
-        max_length=255, choices=CONDITION_CHOICE, null=True, blank=True
+        max_length=20, choices=CONDITION_CHOICE, null=True, blank=True
     )
     value = models.CharField(
         max_length=255,
@@ -1696,7 +1696,7 @@ class Allowance(HorillaModel):
     )
     # If is fixed is false
     based_on = models.CharField(
-        max_length=255,
+        max_length=32,
         default="basic_pay",
         choices=based_on_choice,
         null=True,

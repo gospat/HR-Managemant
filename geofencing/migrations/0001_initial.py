@@ -41,11 +41,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 "constraints": [
-                    models.UniqueConstraint(
-                        condition=models.Q(("company_id", None), _negated=True),
-                        fields=("company_id",),
-                        name="unique_company_id_when_not_null_geofencing",
-                    )
+                    models.UniqueConstraint(fields=('company_id',), name='unique_company_id_when_not_null_geofencing')
                 ],
             },
         ),

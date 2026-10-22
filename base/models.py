@@ -97,7 +97,7 @@ class Company(HorillaModel):
     company = models.CharField(max_length=50, verbose_name=_("Name"))
     hq = models.BooleanField(default=False)
     # Nullable so a company can be created from just a name (master data import).
-    address = models.TextField(max_length=255, null=True)
+    address = models.CharField(max_length=255, null=True)
     country = models.CharField(max_length=50, null=True)
     state = models.CharField(max_length=50, null=True)
     city = models.CharField(max_length=50, null=True)
@@ -2884,14 +2884,7 @@ class Holidays(HorillaModel):
                     "A holiday already exists for this date range in this company."
                 ),
             ),
-            models.UniqueConstraint(
-                fields=["start_date", "end_date"],
-                condition=models.Q(company_id__isnull=True),
-                name="unique_global_holiday_dates",
-                violation_error_message=_(
-                    "A holiday already exists for this date range for all companies."
-                ),
-            ),
+            models.UniqueConstraint(models.Case(models.When(company_id__isnull=True, then=models.F('start_date')), default=models.Value(None), output_field=models.DateField()), models.Case(models.When(company_id__isnull=True, then=models.F('end_date')), default=models.Value(None), output_field=models.DateField()), name='unique_global_holiday_dates', violation_error_message=_('A holiday already exists for this date range for all companies.')),
         ]
 
     def __str__(self):
@@ -3276,24 +3269,16 @@ class DefaultExportPermission(HorillaModel):
         # Two constraints rather than one with nulls_distinct=False: that
         # flag needs PostgreSQL 15+, and Django SKIPS the constraint
         # silently on older servers -- so on Postgres 14 it would enforce
-        # nothing while looking correct. A partial unique index works
-        # everywhere.
+        # nothing while looking correct. A CASE expression index enforces
+        # the global singleton on MySQL 8.4 as well as PostgreSQL.
         constraints = [
-            models.UniqueConstraint(
-                fields=["company_id"],
-                condition=Q(company_id__isnull=False),
-                name="unique_default_export_permission_per_company",
-            ),
+            models.UniqueConstraint(fields=['company_id'], name='unique_default_export_permission_per_company'),
             # Postgres treats every NULL as distinct, so a plain unique index
             # on company_id does NOT stop a second "all companies" row
             # (verified: two NULL rows insert happily). Indexing the constant
-            # expression company_id IS NULL gives that partial index a single
+            # expression CASE WHEN company_id IS NULL THEN 1 END gives a single
             # possible key, which is what makes it a one-row guard.
-            models.UniqueConstraint(
-                Q(company_id__isnull=True),
-                condition=Q(company_id__isnull=True),
-                name="unique_default_export_permission_all_companies",
-            ),
+            models.UniqueConstraint(models.Case(models.When(company_id__isnull=True, then=models.Value(1)), default=models.Value(None), output_field=models.IntegerField()), name='unique_default_export_permission_all_companies'),
         ]
 
     def __str__(self):

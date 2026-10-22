@@ -172,7 +172,7 @@ class Migration(migrations.Migration):
                 ),
                 ("company", models.CharField(max_length=50, verbose_name="Name")),
                 ("hq", models.BooleanField(default=False)),
-                ("address", models.TextField(max_length=255)),
+                ("address", models.CharField(max_length=255)),
                 ("country", models.CharField(max_length=50)),
                 ("state", models.CharField(max_length=50)),
                 ("city", models.CharField(max_length=50)),

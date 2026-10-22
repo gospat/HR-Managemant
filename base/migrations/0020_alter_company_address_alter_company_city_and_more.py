@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='company',
             name='address',
-            field=models.TextField(max_length=255, null=True),
+            field=models.CharField(max_length=255, null=True),
         ),
         migrations.AlterField(
             model_name='company',

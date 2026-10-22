@@ -1372,11 +1372,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddConstraint(
             model_name="employee",
-            constraint=models.UniqueConstraint(
-                condition=models.Q(("badge_id__isnull", False)),
-                fields=("badge_id",),
-                name="unique_badge_id",
-            ),
+            constraint=models.UniqueConstraint(fields=('badge_id',), name='unique_badge_id'),
         ),
         migrations.AlterUniqueTogether(
             name="employee",

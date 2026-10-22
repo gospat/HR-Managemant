@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='allowance',
             name='based_on',
-            field=models.CharField(blank=True, choices=[('basic_pay', 'Basic Pay'), ('children', 'Children'), ('overtime', 'Regular Overtime'), ('week_off_overtime', 'Week Off Overtime'), ('holiday_overtime', 'Holiday Overtime'), ('shift_id', 'Shift'), ('work_type_id', 'Work Type'), ('attendance', 'Attendance')], default='basic_pay', help_text='If the allowance is not fixed then specifies how the allowance provided', max_length=255, null=True),
+            field=models.CharField(blank=True, choices=[('basic_pay', 'Basic Pay'), ('children', 'Children'), ('overtime', 'Regular Overtime'), ('week_off_overtime', 'Week Off Overtime'), ('holiday_overtime', 'Holiday Overtime'), ('shift_id', 'Shift'), ('work_type_id', 'Work Type'), ('attendance', 'Attendance')], default='basic_pay', help_text='If the allowance is not fixed then specifies how the allowance provided', max_length=32, null=True),
         ),
     ]

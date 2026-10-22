@@ -378,6 +378,9 @@ def is_geofencing_enabled(request):
     check-in/out buttons only need to capture the browser's location (and
     the backend only needs to enforce it) when this is true.
     """
+    if not apps.is_installed("geofencing"):
+        return False
+
     from geofencing.models import GeoFencing
 
     selected_company = request.session.get("selected_company")

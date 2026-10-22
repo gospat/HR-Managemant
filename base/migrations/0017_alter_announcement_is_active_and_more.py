@@ -205,6 +205,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddConstraint(
             model_name='holidays',
-            constraint=models.UniqueConstraint(condition=models.Q(('company_id__isnull', True)), fields=('start_date', 'end_date'), name='unique_global_holiday_dates', violation_error_message='A holiday already exists for this date range for all companies.'),
+            constraint=models.UniqueConstraint(models.Case(models.When(company_id__isnull=True, then=models.F('start_date')), default=models.Value(None), output_field=models.DateField()), models.Case(models.When(company_id__isnull=True, then=models.F('end_date')), default=models.Value(None), output_field=models.DateField()), name='unique_global_holiday_dates', violation_error_message='A holiday already exists for this date range for all companies.'),
         ),
     ]

@@ -1,3 +1,13 @@
+# University HR — Nigeria
+
+MySQL/Django/Next.js university development edition. Start with
+[setup, validation and remaining work](docs/UNIVERSITY-SETUP.md).
+University extensions are in `university/`; the React portal is in `frontend/`.
+
+The original upstream documentation follows.
+
+---
+
 # Horilla HRMS
 
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)

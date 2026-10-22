@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='allowance',
             name='based_on',
-            field=models.CharField(blank=True, choices=[('basic_pay', 'Basic Pay'), ('children', 'Children'), ('overtime', 'Regular Overtime'), ('week_off_overtime', 'Week Off Overtime'), ('holiday_overtime', 'Holiday Overtime'), ('shift_id', 'Shift'), ('work_type_id', 'Work Type'), ('attendance', 'Attendance')], default='basic_pay', max_length=255, null=True),
+            field=models.CharField(blank=True, choices=[('basic_pay', 'Basic Pay'), ('children', 'Children'), ('overtime', 'Regular Overtime'), ('week_off_overtime', 'Week Off Overtime'), ('holiday_overtime', 'Holiday Overtime'), ('shift_id', 'Shift'), ('work_type_id', 'Work Type'), ('attendance', 'Attendance')], default='basic_pay', max_length=32, null=True),
         ),
         migrations.AlterField(
             model_name='allowance',
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='allowance',
             name='field',
-            field=models.CharField(blank=True, choices=[('children', 'Children'), ('marital_status', 'Marital Status'), ('experience', 'Experience'), ('employee_work_info__experience', 'Company Experience'), ('gender', 'Gender'), ('country', 'Country'), ('state', 'State'), ('contract_set__pay_frequency', 'Pay Frequency'), ('contract_set__wage_type', 'Wage Type'), ('contract_set__department__department', 'Department on Contract')], max_length=255, null=True),
+            field=models.CharField(blank=True, choices=[('children', 'Children'), ('marital_status', 'Marital Status'), ('experience', 'Experience'), ('employee_work_info__experience', 'Company Experience'), ('gender', 'Gender'), ('country', 'Country'), ('state', 'State'), ('contract_set__pay_frequency', 'Pay Frequency'), ('contract_set__wage_type', 'Wage Type'), ('contract_set__department__department', 'Department on Contract')], max_length=128, null=True),
         ),
         migrations.AlterField(
             model_name='allowance',

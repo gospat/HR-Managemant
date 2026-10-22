@@ -721,11 +721,7 @@ class Employee(models.Model):
             "id",
         ]
         constraints = [
-            models.UniqueConstraint(
-                fields=["badge_id"],
-                condition=models.Q(badge_id__isnull=False),
-                name="unique_badge_id",
-            )
+            models.UniqueConstraint(fields=['badge_id'], name='unique_badge_id')
         ]
 
     def days_until_birthday(self):

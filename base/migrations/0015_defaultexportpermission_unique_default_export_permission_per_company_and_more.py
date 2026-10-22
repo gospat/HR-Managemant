@@ -14,10 +14,10 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddConstraint(
             model_name='defaultexportpermission',
-            constraint=models.UniqueConstraint(condition=models.Q(('company_id__isnull', False)), fields=('company_id',), name='unique_default_export_permission_per_company'),
+            constraint=models.UniqueConstraint(fields=('company_id',), name='unique_default_export_permission_per_company'),
         ),
         migrations.AddConstraint(
             model_name='defaultexportpermission',
-            constraint=models.UniqueConstraint(models.Q(('company_id__isnull', True)), condition=models.Q(('company_id__isnull', True)), name='unique_default_export_permission_all_companies'),
+            constraint=models.UniqueConstraint(models.Case(models.When(company_id__isnull=True, then=models.Value(1)), default=models.Value(None), output_field=models.IntegerField()), name='unique_default_export_permission_all_companies'),
         ),
     ]

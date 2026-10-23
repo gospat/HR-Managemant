@@ -10,7 +10,12 @@ import {
 } from "lucide-react";
 export const dynamic = "force-dynamic";
 const modules = [
-  {name:"Promotions", description:"Review evidence, recommendations and Registrar approvals.", icon:GraduationCap, href:"/promotions"},
+  {
+    name: "Promotions",
+    description: "Review evidence, recommendations and Registrar approvals.",
+    icon: GraduationCap,
+    href: "/promotions",
+  },
   {
     name: "Staff directory",
     description:
@@ -72,7 +77,7 @@ export default async function Home() {
             <GraduationCap size={25} />
           </span>
           <span>
-            UNIVERSITY<span className="brand-sub">PEOPLE & CULTURE</span>
+            BELLS UNIVERSITY<span className="brand-sub">PEOPLE & CULTURE</span>
           </span>
         </a>
         <div className="nav-label">WORKSPACE</div>
@@ -118,7 +123,7 @@ export default async function Home() {
               <span className="edition-mark">
                 <GraduationCap size={42} />
               </span>
-              <span>University edition</span>
+              <span>Bells University of Technology</span>
               <small>Nigeria · Africa/Lagos</small>
             </div>
           </div>
@@ -158,16 +163,16 @@ export default async function Home() {
           <div className="notice">
             <ShieldCheck size={21} />
             <p>
-              <strong>A foundation for your university</strong>
+              <strong>University review and configuration</strong>
               <span>
-                This development release includes the university staff
-                directory. University promotions, salary structures and Nigerian
-                statutory payroll rules still need implementation and review.
+                Staff management and promotion approvals are available. Review
+                the provisional university policies and configure salary scales
+                and statutory payroll rules before your first live release.
               </span>
             </p>
           </div>
           <footer>
-            <span>University Human Resources</span>
+            <span>Bells University Human Resources</span>
             <span className="service">
               <i className={available ? "online" : ""} />
               {available ? "HR service available" : "HR service unavailable"}

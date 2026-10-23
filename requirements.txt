@@ -50,7 +50,7 @@ django-widget-tweaks==1.5.1
 # invalid write, disclosing data the caller's permissions deny on GET --
 # not reachable here, since no view sets AdminRenderer, but pinned past it
 # anyway rather than relying on that staying true).
-djangorestframework==3.18.1
+djangorestframework>=3.18.2,<4
 # 5.5.1, not 5.5.0: 5.5.0 caps pyjwt<2.10.0, which pins the JWT library to
 # a version with the advisories below. 5.5.1 drops the cap (pyjwt>=1.7.1).
 djangorestframework-simplejwt==5.5.1
@@ -69,10 +69,7 @@ pandas>=2.1,<4
 XlsxWriter==3.2.9
 
 # PDF handling
-# PYSEC-2026-2860 (from_string allows script execution and local-file
-# exfiltration) has no upstream fix. Mitigated in base.methods.generate_pdf,
-# which XSS-checks the rendered body before wkhtmltopdf sees it.
-pdfkit==1.0.0
+# HTML-based pdfkit/wkhtmltopdf removed: exports use a bounded text/table renderer.
 PyMuPDF>=1.28.2,<2
 reportlab==4.0.9
 xhtml2pdf==0.2.17

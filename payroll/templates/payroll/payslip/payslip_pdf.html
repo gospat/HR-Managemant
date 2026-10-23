@@ -1,4 +1,4 @@
-{% load static i18n horillafilters %}
+{% load static i18n horillafilters university_exports %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -138,7 +138,7 @@
                 {% if regular_hours_label %}
                     <tr>
                         <td class="lbl">{% trans "Hourly rate:" %}</td>
-                        <td>{{ contract_wage|currency_symbol_position }}</td>
+                        <td>{% export_currency contract_wage %}</td>
                         <td class="gap"></td>
                         <td class="lbl">{% trans "Regular hours:" %}</td>
                         <td>{{ regular_hours_label }}</td>
@@ -152,7 +152,7 @@
                 {% else %}
                     <tr>
                         <td class="lbl">{% trans "Contract wage:" %}</td>
-                        <td>{{ contract_wage|currency_symbol_position }}</td>
+                        <td>{% export_currency contract_wage %}</td>
                         <td class="gap"></td>
                         <td class="lbl">{% trans "Loss of pay days:" %}</td>
                         <td>
@@ -178,17 +178,17 @@
                 </tr>
                 <tr>
                     <td>{% trans "Basic Pay" %}</td>
-                    <td class="num">{{ basic_pay|floatformat:2|currency_symbol_position }}</td>
+                    <td class="num">{% export_currency basic_pay %}</td>
                 </tr>
                 {% for allowance in allowances %}
                     <tr>
                         <td>{{ allowance.title }}</td>
-                        <td class="num">{{ allowance.amount|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency allowance.amount %}</td>
                     </tr>
                 {% endfor %}
                 <tr class="total">
                     <td>{% trans "Total (Gross Pay)" %}</td>
-                    <td class="num">{{ gross_pay|floatformat:2|currency_symbol_position }}</td>
+                    <td class="num">{% export_currency gross_pay %}</td>
                 </tr>
             </table>
 
@@ -207,7 +207,7 @@
                             <span class="sub">{{ unpaid_days }} {% trans "days" %} &middot; {{ lop_base|lower }} &divide; {{ lop_divisor|lower }}</span>
                         {% endif %}
                     </td>
-                    <td class="num">{{ loss_of_pay|floatformat:2|currency_symbol_position }}</td>
+                    <td class="num">{% export_currency loss_of_pay %}</td>
                 </tr>
                 {% if custom_leave_deduction %}
                     <tr>
@@ -217,62 +217,62 @@
                                 {% blocktrans %}{{ partial_pay_days }} day(s) on a partially paid leave type{% endblocktrans %}
                             </span>
                         </td>
-                        <td class="num">{{ custom_leave_deduction|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency custom_leave_deduction %}</td>
                     </tr>
                 {% endif %}
                 {% for deduction in basic_pay_deductions %}
                     <tr>
                         <td>{{ deduction.title }} <span class="sub">{% trans "off basic pay" %}</span></td>
-                        <td class="num">{{ deduction.amount|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency deduction.amount %}</td>
                     </tr>
                 {% endfor %}
                 {% for deduction in gross_pay_deductions %}
                     <tr>
                         <td>{{ deduction.title }} <span class="sub">{% trans "off gross pay" %}</span></td>
-                        <td class="num">{{ deduction.amount|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency deduction.amount %}</td>
                     </tr>
                 {% endfor %}
                 {% for deduction in pretax_deductions %}
                     <tr>
                         <td>{{ deduction.title }} <span class="sub">{% trans "before tax" %}</span></td>
-                        <td class="num">{{ deduction.amount|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency deduction.amount %}</td>
                     </tr>
                 {% endfor %}
                 {% for deduction in post_tax_deductions %}
                     <tr>
                         <td>{{ deduction.title }}</td>
-                        <td class="num">{{ deduction.amount|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency deduction.amount %}</td>
                     </tr>
                 {% endfor %}
                 <tr>
                     <td>{% trans "Income Tax" %}</td>
-                    <td class="num">{{ federal_tax|floatformat:2|currency_symbol_position }}</td>
+                    <td class="num">{% export_currency federal_tax %}</td>
                 </tr>
                 {% for deduction in tax_deductions %}
                     <tr>
                         <td>{{ deduction.title }}</td>
-                        <td class="num">{{ deduction.amount|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency deduction.amount %}</td>
                     </tr>
                 {% endfor %}
                 {% for deduction in net_deductions %}
                     <tr>
                         <td>{{ deduction.title }} <span class="sub">{% trans "off net pay" %}</span></td>
-                        <td class="num">{{ deduction.amount|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency deduction.amount %}</td>
                     </tr>
                 {% endfor %}
                 {% if uncovered_deduction %}
                     <tr>
                         <td>{% trans "Deductions owed" %}</td>
-                        <td class="num">{{ deduction_before_cap|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">{% export_currency deduction_before_cap %}</td>
                     </tr>
                     <tr>
                         <td>{% trans "Capped at gross pay" %} <span class="sub">{% trans "cannot deduct more than was earned" %}</span></td>
-                        <td class="num">&minus;{{ uncovered_deduction|floatformat:2|currency_symbol_position }}</td>
+                        <td class="num">&minus;{% export_currency uncovered_deduction %}</td>
                     </tr>
                 {% endif %}
                 <tr class="total">
                     <td>{% if uncovered_deduction %}{% trans "Total (Deductions Taken)" %}{% else %}{% trans "Total (Deductions)" %}{% endif %}</td>
-                    <td class="num">{{ total_deductions|floatformat:2|currency_symbol_position }}</td>
+                    <td class="num">{% export_currency total_deductions %}</td>
                 </tr>
             </table>
 
@@ -290,7 +290,7 @@
                             <td>{{ entry.leave_type }}</td>
                             <td>{{ entry.days }}</td>
                             <td>{{ entry.percentage|floatformat:0 }}%</td>
-                            <td class="num">{{ entry.deduction_amount|floatformat:2|currency_symbol_position }}</td>
+                            <td class="num">{% export_currency entry.deduction_amount %}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -308,12 +308,12 @@
                 </tr>
                 <tr class="total">
                     <td class="lbl">{% trans "Total net pay:" %}</td>
-                    <td>{{ net_pay|floatformat:2|currency_symbol_position }}</td>
+                    <td>{% export_currency net_pay %}</td>
                 </tr>
             </table>
             {% if uncovered_deduction %}
                 <p class="note">
-                    <b>{{ uncovered_deduction|floatformat:2|currency_symbol_position }} {% trans "could not be deducted." %}</b>
+                    <b>{% export_currency uncovered_deduction %} {% trans "could not be deducted." %}</b>
                     {% blocktrans %}What was owed came to more than the pay, so deductions were capped at gross and this much is still outstanding.{% endblocktrans %}
                 </p>
             {% endif %}

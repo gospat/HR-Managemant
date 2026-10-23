@@ -173,3 +173,5 @@ frontend/*.tsbuildinfo
 .production/
 .production-*/
 *.age
+
+*.hrbackup

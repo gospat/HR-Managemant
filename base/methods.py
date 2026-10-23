@@ -10,7 +10,6 @@ from datetime import date, datetime, time, timedelta
 from types import SimpleNamespace
 
 import pandas as pd
-import pdfkit
 from django import template
 from django.apps import apps
 from django.conf import settings
@@ -1394,58 +1393,8 @@ def link_callback(uri, rel):
 #     return response
 
 
-def pdfkit_configuration():
-    """
-    pdfkit pointed at wkhtmltopdf, found even when it is not on PATH.
-
-    pdfkit looks the program up on PATH (``where`` on Windows) and fails with
-    'No wkhtmltopdf executable found: b""' when the installer did not add it, as the
-    Windows installer by default does not. WKHTMLTOPDF_PATH, then the usual
-    install folders, are tried before leaving it to pdfkit's own search.
-    """
-    import os
-    import shutil
-
-    if getattr(settings, "HR_DEPLOYMENT_STAGE", None) in {"staging", "production"}:
-        from django.core.exceptions import ImproperlyConfigured
-
-        raise ImproperlyConfigured(
-            "PDF rendering is disabled pending replacement of vulnerable pdfkit "
-            "and university acceptance of document exports."
-        )
-
-    candidates = [
-        os.environ.get("WKHTMLTOPDF_PATH"),
-        shutil.which("wkhtmltopdf"),
-        "C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe",
-        "C:/Program Files (x86)/wkhtmltopdf/bin/wkhtmltopdf.exe",
-        "/usr/local/bin/wkhtmltopdf",
-        "/usr/bin/wkhtmltopdf",
-    ]
-    for path in candidates:
-        if path and os.path.isfile(path):
-            return pdfkit.configuration(wkhtmltopdf=path)
-    return None
-
-
 def generate_pdf(template_path, context, path=True, title=None, html=True):
-    """
-    Render HTML to a PDF response.
-
-    The rendered body is XSS-checked before it reaches pdfkit. wkhtmltopdf
-    executes scripts in the document, and every call site here passes
-    `enable-local-file-access` (see template_pdf's pdf_options, where it is
-    needed to load local CSS and images). pdfkit 1.0.0 has a known,
-    currently-unfixed advisory for exactly that combination -- PYSEC-2026-2860:
-    `from_string` allows script execution and local-file exfiltration -- so a
-    template carrying an injected payload could read files off the server and
-    post them out.
-
-    horilla_automations/signals.py already did this check at its own call site.
-    Four other callers (recruitment, attendance API, employee dashboard,
-    onboarding) did not, so the guard belongs here, where all five route
-    through, rather than repeated at each one.
-    """
+    """Render a validated document through the bounded, resource-free exporter."""
     title = "Document" if not title else title
 
     if html:
@@ -1456,7 +1405,7 @@ def generate_pdf(template_path, context, path=True, title=None, html=True):
     if has_xss(html):
         logger.error(
             "generate_pdf: rendered body failed the XSS check; refusing to "
-            "hand it to wkhtmltopdf (title=%s).",
+            "export document (title=%s).",
             title,
         )
         return HttpResponse(
@@ -1797,35 +1746,18 @@ def template_pdf(template, context={}, html=False, filename="payslip.pdf"):
     Returns:
         HttpResponse: A response with the generated PDF file or raw HTML.
     """
+    from university.documents import render_pdf, DocumentRenderError
+    from django.utils.http import content_disposition_header
+
     try:
-        bootstrap_css = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">'
-        html_content = f"{bootstrap_css}\n{template}"
-
-        pdf_options = {
-            "page-size": "A4",
-            "margin-top": "10mm",
-            "margin-bottom": "10mm",
-            "margin-left": "10mm",
-            "margin-right": "10mm",
-            "encoding": "UTF-8",
-            "enable-local-file-access": None,
-            "dpi": 300,
-            "zoom": 1.3,
-            "footer-center": "[page]/[topage]",
-        }
-
-        pdf = pdfkit.from_string(
-            html_content,
-            False,
-            options=pdf_options,
-            configuration=pdfkit_configuration(),
-        )
-
-        response = HttpResponse(pdf, content_type="application/pdf")
-        response["Content-Disposition"] = f"inline; filename={filename}"
-        return response
-    except Exception as e:
-        return HttpResponse(f"Error generating PDF: {str(e)}", status=500)
+        pdf = render_pdf(template)
+    except DocumentRenderError:
+        return HttpResponse("Document could not be exported safely.", status=400)
+    response = HttpResponse(pdf, content_type="application/pdf")
+    response["Content-Disposition"] = content_disposition_header(False, filename)
+    response["Cache-Control"] = "private, no-store"
+    response["X-Content-Type-Options"] = "nosniff"
+    return response
 
 
 def generate_otp():

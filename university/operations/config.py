@@ -153,7 +153,7 @@ def production_errors(values):
         )
     if stage == "production":
         errors.append(
-            "Production release remains blocked until safe PDF rendering, "
+            "Production release remains blocked until "
             "per-document authorization and the university promotion workflow "
             "are implemented and independently verified."
         )

@@ -145,14 +145,6 @@ class ConfigurationTests(SimpleTestCase):
 
 
 class BoundaryTests(SimpleTestCase):
-    def test_vulnerable_pdf_renderer_is_disabled_in_hardened_runtime(self):
-        from base.methods import pdfkit_configuration
-        from django.core.exceptions import ImproperlyConfigured
-
-        with self.settings(HR_DEPLOYMENT_STAGE="staging"):
-            with self.assertRaises(ImproperlyConfigured):
-                pdfkit_configuration()
-
     def setUp(self):
         self.factory = RequestFactory()
         self.middleware = ProductionBoundaryMiddleware(

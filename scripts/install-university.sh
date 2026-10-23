@@ -18,9 +18,13 @@ if ! pkg-config --exists mysqlclient && ! pkg-config --exists mariadb; then
   export MYSQLCLIENT_CFLAGS="-I$setup_dir/sysroot/usr/include/mariadb"
   export MYSQLCLIENT_LDFLAGS=-l:libmariadb.so.3
 fi
+if [[ ! -f /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf ]]; then
+  echo "Install fonts-dejavu-core before setup; secure Unicode PDF exports require DejaVu Sans." >&2
+  exit 1
+fi
 export CC=gcc
 uv venv --allow-existing .venv
-uv pip install --python .venv/bin/python --require-hashes -r requirements-university.lock
+uv pip sync --python .venv/bin/python --require-hashes requirements-university.lock
 npm --prefix frontend ci --cache "$setup_dir/npm-cache" --no-audit --no-fund
 python scripts/university_dev.py init
 npm --prefix frontend run build

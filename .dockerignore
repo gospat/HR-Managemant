@@ -99,3 +99,5 @@ frontend/.next/
 frontend/node_modules/
 *.age
 *.sql
+
+*.hrbackup

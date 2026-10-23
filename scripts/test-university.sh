@@ -15,6 +15,13 @@ export DJANGO_SETTINGS_MODULE=university.settings
   base.tests.test_holiday_form \
   base.tests.test_login_bruteforce \
   payroll.tests.test_component_conditions \
+  university.documents.tests \
+  university.documents.test_access \
+  university.documents.test_payslip_api \
+  university.operations.tests \
+  university.people.tests.test_scale \
+  base.tests.test_pdf_xss_guard \
+  horilla.tests.test_has_xss_bypass \
   --keepdb --noinput
 npm --prefix frontend run build
 npm --prefix frontend run typecheck

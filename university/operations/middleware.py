@@ -11,15 +11,15 @@ class ProductionBoundaryMiddleware:
         path = request.path_info
         if path.startswith(("/initialize-database", "/load-demo", "/load-data")):
             return HttpResponseNotFound()
-        if path.startswith("/media/") and not path.startswith(
-            ("/media/base/icon/", "/media/base/company/icon/")
-        ):
-            # Upstream checks authentication but does not establish file ownership
-            # for every HR module. Fail closed until those ACLs are accepted.
-            if not request.user.is_authenticated or not request.user.is_superuser:
-                return HttpResponseForbidden(
-                    "Document access requires an approved file access policy."
+        if path.startswith("/media/"):
+            from university.documents.access import can_read_media
+
+            if not can_read_media(request.user, path[len("/media/") :]):
+                response = HttpResponseForbidden(
+                    "You do not have access to this document."
                 )
+                response["Cache-Control"] = "private, no-store"
+                return response
         response = self.get_response(request)
         if path.startswith(
             ("/university-api/", "/admin/", "/login", "/change-password", "/media/")

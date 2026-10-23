@@ -473,12 +473,18 @@ from payroll.models.tax_models import PayrollSettings
 from payroll.views.component_views import filter_payslip
 from payroll.views.views import equalize_lists_length
 
-try:
-    import pdfkit
 
-    HAVE_PDFKIT = True
-except Exception:
-    HAVE_PDFKIT = False
+
+from rest_framework.negotiation import DefaultContentNegotiation
+
+
+class PayslipDocumentNegotiation(DefaultContentNegotiation):
+    def select_renderer(self, request, renderers, format_suffix=None):
+        # Binary output is an HttpResponse from get(); errors stay normal JSON.
+        # DRF otherwise treats ?format=pdf as an unavailable JSON renderer.
+        if request.query_params.get("format", "").lower() == "pdf":
+            return renderers[0], renderers[0].media_type
+        return super().select_renderer(request, renderers, format_suffix)
 
 
 class PayslipPDFAPIView(APIView):
@@ -491,10 +497,21 @@ class PayslipPDFAPIView(APIView):
 
     authentication_classes = (TenantScopedJWTAuthentication, SessionAuthentication)
     permission_classes = (IsAuthenticated,)
+    content_negotiation_class = PayslipDocumentNegotiation
 
     def get(self, request, id, format=None):
         # get payslip or 404
-        payslip = get_object_or_404(Payslip, id=id)
+        from university.documents.access import actor_company_id as company_scope
+
+        payslips = Payslip.objects.entire()
+        if not request.user.is_superuser:
+            scope = company_scope(request.user)
+            payslips = (
+                payslips.filter(employee_id__employee_work_info__company_id_id=scope)
+                if scope
+                else payslips.none()
+            )
+        payslip = get_object_or_404(payslips, id=id)
 
         # authorization: same logic as your view
         user = request.user
@@ -507,20 +524,18 @@ class PayslipPDFAPIView(APIView):
                 status=status.HTTP_403_FORBIDDEN,
             )
 
-        # employee & company date format resolution
-        employee = user.employee_get  # keep same accessor you used
-        info = EmployeeWorkInformation.objects.filter(employee_id=employee)
-        if info.exists():
-            # take the last one (mirrors your loop behavior)
-            employee_company = info.last().company_id
-            emp_company = Company.objects.filter(company=employee_company).first()
-            date_format = (
-                emp_company.date_format
-                if emp_company and emp_company.date_format
-                else "MMM. D, YYYY"
+        work = getattr(payslip.employee_id, "employee_work_info", None)
+        if not work or not work.company_id_id:
+            return Response(
+                {
+                    "detail": _(
+                        "Complete staff employment details before exporting payslips."
+                    )
+                },
+                status=400,
             )
-        else:
-            date_format = "MMM. D, YYYY"
+        company = work.company_id
+        date_format = company.date_format or "MMM. D, YYYY"
 
         # compose data from payslip (same as original)
         data = (
@@ -538,8 +553,11 @@ class PayslipPDFAPIView(APIView):
             )
 
         # parse dates
-        start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
-        end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+        try:
+            start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+            end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+        except (ValueError, TypeError):
+            return Response({"detail": _("The payslip period is invalid.")}, status=400)
 
         month_start_name = start_date.strftime("%B %d, %Y")
         month_end_name = end_date.strftime("%B %d, %Y")
@@ -563,11 +581,20 @@ class PayslipPDFAPIView(APIView):
         data["json_data"]["employee"] = payslip.employee_id.id
         data["json_data"]["payslip"] = payslip.id
         data["instance"] = payslip
-        data["currency"] = (
-            PayrollSettings.objects.first().currency_symbol
-            if PayrollSettings.objects.exists()
-            else "₹"
+        payroll_settings = (
+            PayrollSettings.objects.entire().filter(company_id=company).first()
         )
+        if not payroll_settings or not payroll_settings.currency_symbol:
+            return Response(
+                {
+                    "detail": _(
+                        "Configure the institution payroll currency before exporting payslips."
+                    )
+                },
+                status=400,
+            )
+        data["currency"] = payroll_settings.currency_symbol
+        data["currency_position"] = payroll_settings.position
         data["all_deductions"] = []
         for deduction_list in [
             data.get("basic_pay_deductions", []),
@@ -585,46 +612,15 @@ class PayslipPDFAPIView(APIView):
         data["zipped_data"] = zip(data["allowances"], data["all_deductions"])
         data["host"] = request.get_host()
         data["protocol"] = "https" if request.is_secure() else "http"
-        data["company"] = Company.objects.filter(hq=True).first()
+        data["company"] = company
 
         # render HTML string using template
-        html = render_to_string(
-            "payroll/payslip/payslip_pdf.html", context=data, request=request
-        )
+        html = render_to_string("payroll/payslip/payslip_pdf.html", context=data)
 
-        # If client asked for PDF and pdfkit is available -> return PDF
-        requested_format = request.GET.get("format", "").lower()
-        if requested_format == "pdf":
-            if not HAVE_PDFKIT:
-                return Response(
-                    {
-                        "detail": _(
-                            "PDF generation not available on server. Install pdfkit/wkhtmltopdf."
-                        )
-                    },
-                    status=status.HTTP_503_SERVICE_UNAVAILABLE,
-                )
-            try:
-                # optional: configure pdfkit with path if needed
-                pdf_options = {
-                    "enable-local-file-access": None,  # if your template references local CSS
-                }
-                from base.methods import pdfkit_configuration
+        if request.query_params.get("format", "").lower() == "pdf":
+            from base.methods import template_pdf
 
-                pdf_bytes = pdfkit.from_string(
-                    html,
-                    False,
-                    options=pdf_options,
-                    configuration=pdfkit_configuration(),
-                )
-                response = HttpResponse(pdf_bytes, content_type="application/pdf")
-                response["Content-Disposition"] = f'inline; filename="payslip-{id}.pdf"'
-                return response
-            except Exception as e:
-                return Response(
-                    {"detail": f"PDF generation failed: {str(e)}"},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                )
+            return template_pdf(html, filename=f"payslip-{id}.pdf")
 
         # default: return rendered HTML (use HttpResponse so browser sees it nicely)
         return HttpResponse(html)

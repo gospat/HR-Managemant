@@ -194,6 +194,12 @@ merges must review these explicit compatibility patches.
 
 ## Remaining production work
 
+See [current production-readiness evidence and blockers](PRODUCTION-READINESS.md).
+The setup requires `fonts-dejavu-core` for bounded Unicode document exports.
+The installer synchronizes the hash-locked runtime environment so removed vulnerable
+packages cannot remain installed after an upgrade. Browser tests require the
+separate locked development requirements.
+
 University promotion committees, sabbatical/study-leave policies, salary
 structures such as applicable CONUASS/CONTISS variants, current Nigerian PAYE,
 pensions and institution-specific deductions require requirements and payroll

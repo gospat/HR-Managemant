@@ -91,7 +91,7 @@ def register_dynamic_url(route: str, view, name: str = None) -> str:
     """
     from django.conf import settings
 
-    if settings.ROOT_URLCONF == "university.urls":
+    if settings.ROOT_URLCONF in {"university.urls", "university.operations.urls"}:
         from university.operations.dynamic_routes import register
 
         return register(route, view)

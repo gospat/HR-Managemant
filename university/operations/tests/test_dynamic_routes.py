@@ -3,7 +3,7 @@ from unittest.mock import patch
 from django.contrib.auth.models import Permission
 from django.core.cache import cache
 from django.http import JsonResponse
-from django.test import Client, RequestFactory, TestCase
+from django.test import Client, RequestFactory, TestCase, override_settings
 from django.views import View
 from employee.models import Employee, EmployeeWorkInformation
 from horilla.testkit import make_company, make_employee, make_user
@@ -125,3 +125,24 @@ class DynamicCallbackSecurityTests(TestCase):
         orphan = make_user("callback-unassigned")
         with self.assertRaises(PermissionDenied):
             self.registered(Client(), orphan)
+
+    @override_settings(ROOT_URLCONF="university.operations.urls")
+    def test_production_root_uses_the_shared_dispatcher_too(self):
+        from horilla_views.generic.cbv.views import register_dynamic_url
+
+        client = Client()
+        client.force_login(self.root, backend="base.auth_backends.CompanyScopedBackend")
+        request = RequestFactory().get("/production-module/")
+        request.user = self.root
+        request.session = client.session
+        with patch(
+            "horilla.horilla_middlewares._thread_locals",
+            SimpleNamespace(request=request),
+        ):
+            url = register_dynamic_url(
+                "production-probe-" + request.session.session_key,
+                SyntheticPopupView.as_view(),
+            )
+        self.assertTrue(url.startswith("university-dynamic/"))
+        self.assertNotIn(request.session.session_key, url)
+        self.assertEqual(client.get("/" + url).status_code, 200)

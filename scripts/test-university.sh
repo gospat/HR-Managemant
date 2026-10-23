@@ -17,6 +17,8 @@ export DJANGO_SETTINGS_MODULE=university.settings
   payroll.tests.test_component_conditions \
   university.documents.tests \
   university.documents.test_access \
+  university.documents.test_rules \
+  university.governance.tests \
   university.documents.test_payslip_api \
   university.operations.tests \
   university.people.tests.test_scale \

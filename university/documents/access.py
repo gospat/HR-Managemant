@@ -19,6 +19,16 @@ def actor_company_id(user):
     )
 
 
+def is_secret_upload(path):
+    from django.apps import apps
+    from .rules import NEVER_SERVE
+
+    for label, fields in NEVER_SERVE.items():
+        if apps.get_model(label).objects.filter(**{fields[0]: path}).exists():
+            return True
+    return False
+
+
 def can_read_media(user, relative_path):
     if (
         not relative_path
@@ -32,34 +42,64 @@ def can_read_media(user, relative_path):
         return True
     if not user.is_authenticated:
         return False
+    from django.apps import apps
+    from django.db.models import Q
+    from .rules import RULES
+
+    # Resolve only registered paths. Upload prefixes select candidate models;
+    # database field equality establishes the actual resource, never the prefix.
+    segments = relative_path.split("/")
+    candidate = (segments[0] + "." + segments[1]).lower() if len(segments) > 2 else ""
+    if is_secret_upload(relative_path):
+        return False
+    if not getattr(user, "pk", None):
+        return False
+    if not user.is_active:
+        return False
     if user.is_superuser:
         return True
-    if not getattr(user, "pk", None) or not user.is_active:
-        return False
-    from employee.models import Employee
-    from horilla_documents.models import Document
-
     scope = actor_company_id(user)
     if not scope:
         return False
-    # Ownership is established from database relations, never filenames,
-    # guessed employee IDs or a client-selected company/session value.
-    documents = Document.objects.entire().filter(
-        document=relative_path,
-        employee_id__employee_work_info__company_id_id=scope,
-        employee_id__is_active=True,
-    )
-    if documents.filter(employee_id__employee_user_id=user).exists():
-        return True
-    if user.has_perm("horilla_documents.view_document") and documents.exists():
-        return True
-    return (
-        Employee.objects.entire()
-        .filter(
-            employee_profile=relative_path,
-            employee_user_id=user,
-            is_active=True,
-            employee_work_info__company_id_id=scope,
+    labels = [label for label in RULES if label.lower() == candidate]
+    # Legacy document/profile paths predate canonical upload prefixes.
+    if not labels:
+        labels = ["horilla_documents.Document", "employee.Employee"]
+    for label in labels:
+        fields, owners, companies = RULES[label]
+        model = apps.get_model(label)
+        match = Q(pk__in=[])
+        for field in fields:
+            match |= Q(**{field: relative_path})
+        manager = model.objects
+        qs = (manager.entire() if hasattr(manager, "entire") else manager.all()).filter(
+            match
         )
-        .exists()
-    )
+        # A blob related to another institution must never leak through a second
+        # relationship (for example a cross-institution task assignee).
+        scope_paths = companies + [
+            (owner + "__" if owner else "") + "employee_work_info__company_id"
+            for owner in owners
+        ]
+        for path in scope_paths:
+            qs = qs.exclude(~Q(**{path: scope}) & Q(**{path + "__isnull": False}))
+        for owner in owners:
+            prefix = owner + "__" if owner else ""
+            owner_scope = {prefix + "employee_work_info__company_id_id": scope}
+            if (
+                label not in {"employee.NoteFiles", "employee.DisciplinaryAction"}
+                and qs.filter(
+                    **owner_scope, **{prefix + "employee_user_id_id": user.pk}
+                ).exists()
+            ):
+                return True
+            permission = label.split(".")[0] + ".view_" + model._meta.model_name
+            if user.has_perm(permission) and qs.filter(**owner_scope).exists():
+                return True
+        for company in companies:
+            if (
+                user.has_perm(model._meta.app_label + ".view_" + model._meta.model_name)
+                and qs.filter(**{company: scope}).exists()
+            ):
+                return True
+    return False

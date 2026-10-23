@@ -1,0 +1,66 @@
+"""Provisional configuration examples, not adopted university rules or legal advice."""
+
+POLICY_VERSION = "university-template-2026-1"
+DEFAULTS = {
+    "leave": {
+        "annual_leave_working_days": 20,
+        "working_weekdays": [0, 1, 2, 3, 4],
+        "carryover_days": 5,
+        "carryover_expiry_month": 3,
+        "approval_roles": ["line_manager", "hr"],
+        "exclude_public_holidays": True,
+        "sick_leave_requires_evidence_after_days": 2,
+        "sabbatical_study_maternity_leave": "Configure applicable contracts and law; no automatic entitlement is assumed.",
+    },
+    "promotions": {
+        "minimum_service_months": 36,
+        "teaching_ranks": [
+            "Graduate Assistant",
+            "Assistant Lecturer",
+            "Lecturer II",
+            "Lecturer I",
+            "Senior Lecturer",
+            "Reader",
+            "Professor",
+        ],
+        "non_teaching_ranks": [
+            "Assistant Officer",
+            "Officer",
+            "Senior Officer",
+            "Principal Officer",
+            "Chief Officer",
+            "Assistant Director",
+            "Deputy Director",
+            "Director",
+        ],
+        "require_evidence": True,
+        "require_independent_reviewer": True,
+        "automatic_salary_change": False,
+    },
+    "payroll": {
+        "currency": "NGN",
+        "currency_symbol": "₦",
+        "pay_frequency": "monthly",
+        "calculation_precision_decimal_places": 2,
+        "salary_scales": [],
+        "statutory_tax_tables": [],
+        "require_configured_statutory_tables": True,
+        "require_independent_payroll_approval": True,
+        "note": "No invented PAYE/pension rates or salary scales. Configure current applicable law and contracts before payment.",
+    },
+    "attendance": {
+        "working_weekdays": [0, 1, 2, 3, 4],
+        "hours_per_day": 8,
+        "automatic_salary_deductions": False,
+        "exceptions_require_hr_review": True,
+    },
+    "data_access": {
+        "employee_self_service": True,
+        "institution_scope_required": True,
+        "approval_does_not_grant_administrator_access": True,
+        "offboarding_revokes_login": True,
+        "audit_reasons_required": True,
+        "retention_years": None,
+        "retention_requires_data_protection_review": True,
+    },
+}

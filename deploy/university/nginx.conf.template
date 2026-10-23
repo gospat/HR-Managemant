@@ -47,6 +47,7 @@ http {
     }
     location = / { proxy_pass http://nextjs; }
     location /staff { proxy_pass http://nextjs; }
+    location /promotions { proxy_pass http://nextjs; }
     location /_next/ { proxy_pass http://nextjs; }
     location = /favicon.ico { proxy_pass http://nextjs; }
     location = /icon.svg { proxy_pass http://nextjs; }

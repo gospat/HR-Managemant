@@ -243,6 +243,20 @@ def update_staff(*, actor, employee_id, data):
                 }
             )
         profile = StaffProfile(employee=employee, category=data["category"])
+    if "rank" in data and data["rank"] != profile.rank:
+        from university.governance.models import UniversityPolicy
+
+        if (
+            not actor.is_superuser
+            and UniversityPolicy.objects.entire()
+            .filter(company_id=work.company_id_id, module="promotions", active=True)
+            .exists()
+        ):
+            raise ValidationError(
+                {
+                    "rank": "Use the promotion workflow to change rank under an adopted policy."
+                }
+            )
     for field in ["category", "faculty_id", "rank"]:
         if field in data:
             setattr(profile, field, data[field])

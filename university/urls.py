@@ -9,7 +9,13 @@ from university.people.views import (
     StaffHistoryView,
 )
 
+from university.governance.views import PolicyView, PolicyAdoptView, PromotionView, PromotionActionView
+
 urlpatterns = [
+    path("university-api/policies/", PolicyView.as_view()),
+    path("university-api/policies/<int:pk>/adopt/", PolicyAdoptView.as_view()),
+    path("university-api/promotions/", PromotionView.as_view()),
+    path("university-api/promotions/<int:pk>/action/", PromotionActionView.as_view()),
     path("university-api/session/", SessionView.as_view()),
     path("university-api/staff/", StaffView.as_view()),
     path("university-api/staff/options/", StaffOptionsView.as_view()),

@@ -4,6 +4,8 @@ Requires installed frontend dependencies and system Chromium (or CHROMIUM_PATH).
 Run separately from the API suite because LiveServerTestCase flushes its DB.
 """
 
+from datetime import date
+from copy import deepcopy
 import os
 from pathlib import Path
 import signal
@@ -17,7 +19,10 @@ from playwright.sync_api import sync_playwright, expect
 
 from horilla.testkit import make_company, make_employee, make_user
 from employee.models import Employee
-from university.people.models import StaffChange
+from university.people.models import StaffChange, StaffProfile
+from university.governance.models import UniversityPolicy, PromotionRequest
+from university.governance.defaults import DEFAULTS, POLICY_VERSION
+from university.governance.services import adopt_policy
 
 
 @override_settings(CSRF_TRUSTED_ORIGINS=["http://127.0.0.1:3100"])
@@ -79,6 +84,21 @@ class PortalBrowserTests(LiveServerTestCase):
             is_superuser=True,
         )
         make_employee(company=company, user=admin, email="browser-admin@example.test")
+        target = make_employee(
+            company=company,
+            email="promotion-browser@example.test",
+            date_joining=date(2018, 1, 1),
+        )
+        StaffProfile.objects.create(
+            employee=target, category="teaching", rank="Lecturer II"
+        )
+        policy = UniversityPolicy.objects.create(
+            company=company,
+            module="promotions",
+            version=POLICY_VERSION,
+            configuration=deepcopy(DEFAULTS["promotions"]),
+        )
+        adopt_policy(admin, policy.pk)
         with sync_playwright() as p:
             browser = p.chromium.launch(
                 executable_path=os.environ.get("CHROMIUM_PATH", "/usr/bin/chromium"),
@@ -182,13 +202,52 @@ class PortalBrowserTests(LiveServerTestCase):
             self.assertLessEqual(
                 page.evaluate("document.documentElement.scrollWidth"), 390
             )
-            page.get_by_role("link", name="Staff directory", exact=True).click()
+            page.goto("http://127.0.0.1:3100/promotions")
+            expect(
+                page.get_by_role("heading", name="Staff promotions", exact=True)
+            ).to_be_visible()
+            page.get_by_label("Find staff", exact=True).fill(
+                "promotion-browser@example.test"
+            )
+            expect(
+                page.get_by_label("Staff member", exact=True).locator("option")
+            ).to_have_count(2)
+            page.get_by_label("Staff member", exact=True).select_option(str(target.pk))
+            page.get_by_label("Adopted promotion policy", exact=True).select_option(
+                str(policy.pk)
+            )
+            page.get_by_label("Proposed rank", exact=True).select_option("Lecturer I")
+            page.get_by_label("Effective date", exact=True).fill(
+                date.today().isoformat()
+            )
+            page.get_by_label("Evidence and justification", exact=True).fill(
+                "Synthetic browser promotion evidence."
+            )
+            page.get_by_role("button", name="Submit for review", exact=True).click()
+            expect(page.get_by_role("status")).to_contain_text(
+                "saved and recorded", timeout=15000
+            )
+            expect(
+                page.locator("section p").filter(
+                    has_text="Synthetic browser promotion evidence."
+                )
+            ).to_be_visible()
+            self.assertLessEqual(
+                page.evaluate("document.documentElement.scrollWidth"), 390
+            )
+            page.screenshot(
+                path="/tmp/university-promotions-mobile.png", full_page=True
+            )
+            page.goto("http://127.0.0.1:3100/staff")
             page.get_by_role("button", name="Sign out", exact=True).click()
             expect(
                 page.get_by_role("heading", name="Sign in to view your people")
             ).to_be_visible()
             browser.close()
 
+        self.assertEqual(
+            PromotionRequest.objects.get(employee=target).status, "submitted"
+        )
         employee = Employee.objects.entire().get(email="amina-browser@example.test")
         self.assertFalse(employee.employee_user_id.has_usable_password())
         self.assertEqual(employee.university_profile.category, "non_teaching")

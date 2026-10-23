@@ -1,0 +1,100 @@
+.portal {
+  max-width: 1100px;
+  margin: auto;
+  padding: 28px;
+  overflow-wrap: anywhere;
+}
+.portal h1 {
+  color: var(--ink);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+}
+.portal h2 {
+  margin-top: 2rem;
+  color: var(--ink);
+}
+.portal form,
+.portal section {
+  background: white;
+  padding: 24px;
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.portal label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 16px 0;
+}
+.portal input,
+.portal select,
+.portal textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid #a7b7ac;
+  border-radius: 7px;
+  font: inherit;
+  background: white;
+  color: var(--ink);
+}
+.portal textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.portal button {
+  padding: 10px 16px;
+  margin: 4px;
+  background: var(--green);
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  font: inherit;
+  cursor: pointer;
+  min-height: 44px;
+}
+.portal button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.portal :focus-visible {
+  outline: 3px solid #9b6e10;
+  outline-offset: 3px;
+}
+.portal [role="alert"] {
+  background: #fff0ed;
+  color: #8b231b;
+  padding: 16px;
+  border-radius: 8px;
+}
+.portal [role="status"] {
+  background: #e7f4e9;
+  padding: 16px;
+  border-radius: 8px;
+}
+.portal a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.portal summary {
+  cursor: pointer;
+  padding: 12px 0;
+}
+.portal dt {
+  font-weight: bold;
+  margin-top: 10px;
+}
+.portal dd {
+  margin: 6px 0 12px;
+}
+@media (max-width: 600px) {
+  .portal {
+    padding: 16px;
+  }
+  .portal form,
+  .portal section {
+    padding: 16px;
+  }
+}

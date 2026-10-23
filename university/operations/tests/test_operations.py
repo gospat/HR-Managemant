@@ -130,6 +130,20 @@ class ConfigurationTests(SimpleTestCase):
         config["HR_DEPLOYMENT_STAGE"] = "production"
         self.assertTrue(any("manifest" in e for e in production_errors(config)))
 
+    def test_production_uses_evidence_gate_without_obsolete_implementation_block(self):
+        config = self.config()
+        config.update(
+            HR_DEPLOYMENT_STAGE="production",
+            HR_PUBLIC_URL="https://hr.bells.edu.ng",
+            ALLOWED_HOSTS="hr.bells.edu.ng",
+            CSRF_TRUSTED_ORIGINS="https://hr.bells.edu.ng",
+        )
+        with patch(
+            "university.operations.config.acceptance_errors", return_value=[]
+        ) as gate:
+            self.assertEqual(production_errors(config), [])
+            gate.assert_called_once()
+
     def test_secret_files_and_password_url_encoding(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "secret"
@@ -146,6 +160,12 @@ class ConfigurationTests(SimpleTestCase):
 
 class BoundaryTests(SimpleTestCase):
     def setUp(self):
+        secret_check = patch(
+            "university.documents.access.can_read_media",
+            side_effect=lambda user, path: user.is_superuser,
+        )
+        secret_check.start()
+        self.addCleanup(secret_check.stop)
         self.factory = RequestFactory()
         self.middleware = ProductionBoundaryMiddleware(
             lambda request: HttpResponse("ok")
@@ -153,7 +173,9 @@ class BoundaryTests(SimpleTestCase):
 
     def request(self, path, superuser=False):
         request = self.factory.get(path)
-        request.user = SimpleNamespace(is_authenticated=True, is_superuser=superuser)
+        request.user = SimpleNamespace(
+            is_authenticated=True, is_superuser=superuser, is_active=True, pk=1
+        )
         return self.middleware(request)
 
     def test_initialization_and_document_access_fail_closed(self):

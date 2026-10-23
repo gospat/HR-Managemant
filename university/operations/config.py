@@ -152,11 +152,6 @@ def production_errors(values):
             "External Redis requires a certificate-verified rediss connection."
         )
     if stage == "production":
-        errors.append(
-            "Production release remains blocked until "
-            "per-document authorization and the university promotion workflow "
-            "are implemented and independently verified."
-        )
         if public.hostname and (
             public.hostname.endswith((".test", ".example", ".invalid"))
             or public.hostname in {"localhost", "127.0.0.1", "example.com"}

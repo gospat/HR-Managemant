@@ -211,3 +211,8 @@ workers, backup retention, monitoring and a production process supervisor. Run
 representative load tests, a data-protection review and end-to-end acceptance of
 all required HR modules. This delivery is a tested first development release,
 not a completed production university HR system.
+
+
+### University governance templates
+
+After migrations, run `DJANGO_SETTINGS_MODULE=university.settings .venv/bin/python manage.py seed_university_policies --company INSTITUTION_ID` for the correct existing company ID. See [production readiness](PRODUCTION-READINESS.md#provisional-university-policy-templates-and-promotion-operations) for roles, policy review/adoption and `/promotions`. Seeding creates provisional drafts, not Registrar approval. Leave/attendance templates require separate operational module configuration; promotion policy is enforced by the new workflow. Salary/statutory tables must be configured from validated sources.

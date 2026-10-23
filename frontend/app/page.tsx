@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 export const dynamic = "force-dynamic";
 const modules = [
+  {name:"Promotions", description:"Review evidence, recommendations and Registrar approvals.", icon:GraduationCap, href:"/promotions"},
   {
     name: "Staff directory",
     description:

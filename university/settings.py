@@ -10,5 +10,5 @@ DATABASES["default"].setdefault("OPTIONS", {}).update(  # noqa: F405
     charset="utf8mb4", init_command="SET sql_mode='STRICT_TRANS_TABLES'"
 )
 
-INSTALLED_APPS = [*INSTALLED_APPS, "university.people.apps.PeopleConfig"]
+INSTALLED_APPS = [*INSTALLED_APPS, "university.people.apps.PeopleConfig", "university.governance"]
 ROOT_URLCONF = "university.urls"

@@ -16,13 +16,13 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import paginator_qry
 from base.models import Holidays
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
-from horilla_views.generic.cbv.pipeline import Pipeline
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.pipeline import Pipeline
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

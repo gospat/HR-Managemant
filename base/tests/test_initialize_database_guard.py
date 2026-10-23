@@ -28,7 +28,7 @@ from django.urls import reverse
 
 from base.models import Company
 from horilla.testkit import make_employee
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 # Every view in the flow, including the edit/delete endpoints that are easy to
 # miss when auditing "the signup steps".

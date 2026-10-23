@@ -28,18 +28,18 @@ from employee.filters import DocumentPipelineFilter, DocumentRequestFilter
 from employee.models import Employee
 from horilla.decorators import manager_can_enter
 from horilla.http.response import HorillaRedirect
-from horilla_documents.forms import DocumentForm
-from horilla_documents.forms import DocumentRejectCbvForm as RejectForm
-from horilla_documents.forms import DocumentRequestForm, DocumentUpdateForm
-from horilla_documents.models import Document, DocumentRequest
-from horilla_views import models as horilla_views_models
-from horilla_views.cbv_methods import (
+from hr_documents.forms import DocumentForm
+from hr_documents.forms import DocumentRejectCbvForm as RejectForm
+from hr_documents.forms import DocumentRequestForm, DocumentUpdateForm
+from hr_documents.models import Document, DocumentRequest
+from hr_views import models as horilla_views_models
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     saved_filter_path_query,
 )
-from horilla_views.generic.cbv.pipeline import Pipeline
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.pipeline import Pipeline
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

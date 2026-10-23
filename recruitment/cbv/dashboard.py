@@ -11,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.filters import JobRoleFilter
 from base.models import JobPosition
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaListView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaListView
 from recruitment.cbv_decorators import manager_can_enter
 from recruitment.filters import CandidateFilter, RecruitmentFilter, SkillZoneFilter
 from recruitment.models import Candidate, Recruitment, SkillZone

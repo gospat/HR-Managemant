@@ -28,8 +28,8 @@ def pivot_json_with_meta(rows, limit: int = MAX_PIVOT_ROWS, bare: bool = True):
     if bare:
         response = JsonResponse(data, safe=False)
         if truncated:
-            response["X-Horilla-Pivot-Truncated"] = "1"
-            response["X-Horilla-Pivot-Limit"] = str(limit)
+            response["X-Report-Pivot-Truncated"] = "1"
+            response["X-Report-Pivot-Limit"] = str(limit)
         return response
     return JsonResponse(
         {

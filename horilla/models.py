@@ -23,8 +23,8 @@ from django.utils.translation import gettext_lazy as _
 
 from horilla.horilla_middlewares import _thread_locals
 from horilla.inherit.model_inherit import EXTENSION_REGISTRY, HorillaModelBase
-from horilla_auth.models import HorillaUser
-from horilla_views.cbv_methods import render_template
+from hr_auth.models import HorillaUser
+from hr_views.cbv_methods import render_template
 
 
 @property

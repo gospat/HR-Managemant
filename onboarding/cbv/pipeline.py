@@ -20,20 +20,20 @@ from django.views.generic import TemplateView
 from base.methods import eval_validate
 from horilla.horilla_middlewares import _thread_locals
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     render_template,
 )
-from horilla_views.generic.cbv.kanban import HorillaKanbanView
-from horilla_views.generic.cbv.pipeline import Pipeline
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.kanban import HorillaKanbanView
+from hr_views.generic.cbv.pipeline import Pipeline
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,
     HorillaTabView,
 )
-from horilla_views.models import ActiveView
+from hr_views.models import ActiveView
 from onboarding import filters as onboarding_filters
 from onboarding import forms
 from onboarding import models as onboarding_models

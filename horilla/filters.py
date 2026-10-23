@@ -17,9 +17,9 @@ from django_filters.filterset import FILTER_FOR_DBFIELD_DEFAULTS
 
 from base.methods import reload_queryset
 from horilla.horilla_middlewares import _thread_locals
-from horilla_views.templatetags.generic_template_filters import getattribute
-from horilla_widgets.generic_ajax import register_ajax_field
-from horilla_widgets.widgets.select_widgets import HorillaAjaxSelectWidget
+from hr_views.templatetags.generic_template_filters import getattribute
+from hr_widgets.generic_ajax import register_ajax_field
+from hr_widgets.widgets.select_widgets import HorillaAjaxSelectWidget
 
 FILTER_FOR_DBFIELD_DEFAULTS[models.ForeignKey][
     "filter_class"

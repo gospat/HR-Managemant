@@ -672,14 +672,14 @@ class PivotTruncationDisclosureTests(TestCase):
 
         rows = [{"n": i} for i in range(12)]
         response = pivot_json_with_meta(rows, limit=5)
-        self.assertEqual(response["X-Horilla-Pivot-Truncated"], "1")
-        self.assertEqual(response["X-Horilla-Pivot-Limit"], "5")
+        self.assertEqual(response["X-Report-Pivot-Truncated"], "1")
+        self.assertEqual(response["X-Report-Pivot-Limit"], "5")
 
     def test_untruncated_response_sets_no_flag(self):
         from report.pivot_limits import pivot_json_with_meta
 
         response = pivot_json_with_meta([{"n": 1}], limit=5)
-        self.assertIsNone(response.get("X-Horilla-Pivot-Truncated"))
+        self.assertIsNone(response.get("X-Report-Pivot-Truncated"))
 
     def test_notice_script_is_loaded_for_pivot_pages(self):
         """The banner is installed once in the shared base template rather
@@ -706,8 +706,8 @@ class PivotTruncationDisclosureTests(TestCase):
             / "pivot_safety.js"
         )
         source = script.read_text(encoding="utf-8")
-        self.assertIn("X-Horilla-Pivot-Truncated", source)
-        self.assertIn("X-Horilla-Pivot-Limit", source)
+        self.assertIn("X-Report-Pivot-Truncated", source)
+        self.assertIn("X-Report-Pivot-Limit", source)
 
 
 class SharedFormulaGuardTests(TestCase):
@@ -758,8 +758,8 @@ class SharedFormulaGuardTests(TestCase):
         import inspect
 
         from base import methods as base_methods
-        from horilla_views import cbv_methods as hv_cbv
-        from horilla_views import views as hv_views
+        from hr_views import cbv_methods as hv_cbv
+        from hr_views import views as hv_views
 
         self.assertIn("safe_cell", inspect.getsource(base_methods.export_data))
         self.assertIn("safe_cell", inspect.getsource(hv_views))
@@ -770,7 +770,7 @@ class SharedFormulaGuardTests(TestCase):
         easiest way to reintroduce the sink."""
         import inspect
 
-        from horilla_views import cbv_methods as hv_cbv
+        from hr_views import cbv_methods as hv_cbv
 
         source = inspect.getsource(hv_cbv)
         # Header rows are literals built in-module, not user data; the two
@@ -788,7 +788,7 @@ class SharedFormulaGuardTests(TestCase):
         script = (
             base / "report" / "static" / "report" / "js" / "pivot_safety.js"
         ).read_text(encoding="utf-8")
-        self.assertIn("horillaSafeCell", script)
+        self.assertIn("safeSpreadsheetCell", script)
 
         for name in (
             "employee",
@@ -800,10 +800,10 @@ class SharedFormulaGuardTests(TestCase):
             "recruitment",
         ):
             markup = (
-                base / "horilla_theme" / "templates" / "report" / f"{name}_report.html"
+                base / "hr_theme" / "templates" / "report" / f"{name}_report.html"
             ).read_text(encoding="utf-8")
             self.assertIn(
-                "horillaSafeCell",
+                "safeSpreadsheetCell",
                 markup,
                 f"{name} pivot export writes cells unguarded",
             )
@@ -853,7 +853,7 @@ class PeriodNoteDisclosureTests(TestCase):
 
         markup = (
             Path(settings.BASE_DIR)
-            / "horilla_theme"
+            / "hr_theme"
             / "templates"
             / "report"
             / "standard_report.html"
@@ -872,7 +872,7 @@ class PeriodNoteDisclosureTests(TestCase):
 
         markup = (
             Path(settings.BASE_DIR)
-            / "horilla_theme"
+            / "hr_theme"
             / "templates"
             / "report"
             / "standard_report.html"
@@ -1025,7 +1025,7 @@ class MetricTruncationDisclosureTests(TestCase):
         self.assertIn("(sample)", inspect.getsource(export._write_data_sheet))
         markup = (
             Path(settings.BASE_DIR)
-            / "horilla_theme"
+            / "hr_theme"
             / "templates"
             / "report"
             / "standard_report.html"
@@ -1169,7 +1169,7 @@ class TemplateShadowingTests(TestCase):
             with self.subTest(explorer=name):
                 origin = get_template(f"report/{name}_report.html").origin.name or ""
                 self.assertIn(
-                    "horilla_theme",
+                    "hr_theme",
                     origin,
                     f"{name} no longer resolves to the theme copy: {origin}",
                 )
@@ -1184,7 +1184,7 @@ class TemplateShadowingTests(TestCase):
         self.assertFalse(
             shadowed.exists(),
             "report/templates/report/ is shadowed by the theme loader and can "
-            "never render; put explorer templates in horilla_theme instead.",
+            "never render; put explorer templates in hr_theme instead.",
         )
 
     def test_dead_export_helper_stays_deleted(self):
@@ -1198,7 +1198,7 @@ class TemplateShadowingTests(TestCase):
         self.assertFalse(
             (base / "report" / "static" / "report" / "js" / "report_export.js").exists()
         )
-        theme = base / "horilla_theme" / "templates" / "report"
+        theme = base / "hr_theme" / "templates" / "report"
         for path in theme.glob("*_report.html"):
             self.assertNotIn(
                 "report_export.js",
@@ -1224,7 +1224,7 @@ class ExplorerStylesheetTests(TestCase):
 
         return (
             Path(settings.BASE_DIR)
-            / "horilla_theme"
+            / "hr_theme"
             / "templates"
             / "report"
             / f"{name}_report.html"

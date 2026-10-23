@@ -51,8 +51,8 @@ WAGE_BY_COMPANY = {NORTHWIND: 6500.0, MERIDIAN: 5200.0}
 # load_data/base_data.json points its own demo companies at -- so each
 # branch gets a distinct, real icon rather than the "no icon" fallback.
 ICON_BY_COMPANY = {
-    NORTHWIND: "base/icon/Horilla_1.png",
-    MERIDIAN: "base/icon/Horilla_2.png",
+    NORTHWIND: "base/icon/BellsTech_1.png",
+    MERIDIAN: "base/icon/BellsTech_2.png",
 }
 WEEKEND_CHECKINS_PER_COMPANY = 6
 # Employees per branch left out of the payroll run, so the dashboard has
@@ -1334,7 +1334,7 @@ class ExtrasMixin:
         from employee.models import Employee, EmployeeWorkInformation
         from payroll.models.models import Contract, FilingStatus
 
-        admin = Employee.objects.get(email="adam@horilla.com")
+        admin = Employee.objects.get(email="adam@bells.edu.ng")
         Contract.objects.filter(employee_id=admin).delete()
         contract = Contract.objects.create(
             contract_name="Adam Admin — Standard",
@@ -1413,12 +1413,12 @@ class ExtrasMixin:
             EmployeeBankDetails,
             EmployeeWorkInformation,
         )
-        from horilla_documents.models import Document
+        from hr_documents.models import Document
         from leave.models import AvailableLeave, LeaveType
         from pms.models import EmployeeKeyResult, EmployeeObjective, Objective
         from project.models import Task
 
-        admin = Employee.objects.filter(email="adam@horilla.com").first()
+        admin = Employee.objects.filter(email="adam@bells.edu.ng").first()
         work_info = getattr(admin, "employee_work_info", None) if admin else None
         if not admin or not work_info or work_info.company_id_id != company.pk:
             return
@@ -1590,7 +1590,7 @@ class ExtrasMixin:
     def _document_requests_for(self, company, employees, today):
         """5 document requests in total, sent to 10 employees (5 per company),
         with a mix of request statuses."""
-        from horilla_documents.models import Document, DocumentRequest
+        from hr_documents.models import Document, DocumentRequest
 
         statuses = ["approved", "requested", "rejected", "approved", "requested"]
         group = employees[:5]
@@ -2732,7 +2732,7 @@ class Command(ExtrasMixin, BaseCommand):
 
     def _superuser(self, company):
         """
-        Adam Admin -- the same name Horilla's own load_data/user_data.json
+        Adam Admin -- the same name Bells Tech's own load_data/user_data.json
         seeds as pk=1 ("admin", is_superuser). ``flush`` wipes every
         HorillaUser along with everything else, and a demo dataset nobody
         can log in to isn't actually usable, so it's recreated here rather
@@ -2743,12 +2743,12 @@ class Command(ExtrasMixin, BaseCommand):
         user = make_user(
             "admin",
             password="admin",
-            email="adam@horilla.com",
+            email="adam@bells.edu.ng",
             is_superuser=True,
         )
         make_employee(
             company=company,
-            email="adam@horilla.com",
+            email="adam@bells.edu.ng",
             first_name="Adam",
             last_name="Admin",
             user=user,
@@ -2933,7 +2933,7 @@ class Command(ExtrasMixin, BaseCommand):
         # promoted to that department's head (reporting to Admin) the first
         # time that department is seen, everyone else in it reporting to
         # that head -- so the Organization Chart has more than a lone node.
-        admin_employee = Employee.objects.filter(email="adam@horilla.com").first()
+        admin_employee = Employee.objects.filter(email="adam@bells.edu.ng").first()
         dept_heads = {}
         employees = []
         for i in range(EMPLOYEES_PER_COMPANY):
@@ -3763,7 +3763,7 @@ class Command(ExtrasMixin, BaseCommand):
 
         from base.models import ShiftRequest, WorkType, WorkTypeRequest
         from employee.models import EmployeeWorkInformation
-        from horilla_documents.models import Document
+        from hr_documents.models import Document
 
         month_start = today.replace(day=1)
 

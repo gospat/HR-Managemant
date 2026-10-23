@@ -3,7 +3,7 @@ from django.contrib.auth.models import Permission
 from django.test import Client, TestCase
 from horilla.testkit import make_company, make_employee, make_user
 from employee.models import Employee
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from university.people.models import Faculty, StaffChange, StaffProfile
 
 

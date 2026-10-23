@@ -96,7 +96,7 @@ def backfill_employee_feature_coverage(today: date | None = None) -> dict[str, i
             RosterPublishLog,
         )
         from employee.models import EmployeeWorkInformation
-        from horilla_auth.models import HorillaUser
+        from hr_auth.models import HorillaUser
 
         # Roster: a week-ahead published schedule for a few employees per
         # department, so the "My Roster" / roster-planning views have

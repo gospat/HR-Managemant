@@ -20,8 +20,8 @@ from helpdesk.forms import TicketForm, TicketTypeForm
 from helpdesk.models import Attachment, Ticket, TicketType
 from helpdesk.threading import TicketSendThread
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

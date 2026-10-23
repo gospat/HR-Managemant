@@ -198,9 +198,9 @@ from horilla.group_by import group_by_queryset
 from horilla.http.response import HorillaRedirect, with_bulk_result
 from horilla.menu import get_settings_menu
 from horilla.methods import get_horilla_model_class, remove_dynamic_url
-from horilla_audit.forms import HistoryTrackingFieldsForm
-from horilla_audit.models import AccountBlockUnblock, AuditTag, HistoryTrackingFields
-from horilla_auth.models import HorillaUser
+from hr_audit.forms import HistoryTrackingFieldsForm
+from hr_audit.models import AccountBlockUnblock, AuditTag, HistoryTrackingFields
+from hr_auth.models import HorillaUser
 from notifications.models import Notification
 from notifications.signals import notify
 
@@ -459,7 +459,7 @@ def normalize_demo_payslips():
 
 
 def load_demo_database(request):
-    from horilla_automations.signals import suspend_automations
+    from hr_automations.signals import suspend_automations
 
     if initialize_database_condition():
         if request.method == "POST":
@@ -2129,8 +2129,10 @@ def mail_server_conf(request):
 def mail_server_test_email(request):
     instance_id = request.GET.get("instance_id")
     white_labelling = getattr(settings, "WHITE_LABELLING", False)
-    image_path = path.join(settings.STATIC_ROOT, "images/ui/horilla-logo.png")
-    company_name = "Horilla"
+    image_path = path.join(settings.STATIC_ROOT, "images/ui/brand-logo.png")
+    company_name = getattr(
+        settings, "BRAND_FALLBACK_NAME", "Bells University of Technology"
+    )
 
     if white_labelling:
         hq = Company.objects.filter(hq=True).last()
@@ -2152,7 +2154,7 @@ def mail_server_test_email(request):
         form = DynamicMailTestForm(request.POST)
         if form.is_valid():
             email_to = form.cleaned_data["to_email"]
-            subject = _("Test mail from Horilla")
+            subject = _("Test mail from %(company)s") % {"company": company_name}
 
             # HTML content
             html_content = f"""
@@ -8005,7 +8007,7 @@ def activate_biometric_attendance(request):
 
 
 @login_required
-def get_horilla_installed_apps(request):
+def get_installed_apps(request):
     return JsonResponse({"installed_apps": settings.APPS})
 
 

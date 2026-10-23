@@ -15,9 +15,9 @@ from django.utils.translation import gettext_lazy as _
 from base.filters import CompanyFilter
 from base.forms import CompanyForm
 from base.models import Company
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.forms import DynamicBulkUpdateForm
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.forms import DynamicBulkUpdateForm
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

@@ -50,10 +50,10 @@ from horilla.decorators import (
 from horilla.group_by import group_by_queryset
 from horilla.http.response import HorillaRedirect, with_bulk_result
 from horilla.methods import handle_no_permission
-from horilla_auth.models import HorillaUser
-from horilla_automations.methods.methods import generate_choices
-from horilla_automations.methods.serialize import serialize_form
-from horilla_views.models import ActiveTab
+from hr_auth.models import HorillaUser
+from hr_automations.methods.methods import generate_choices
+from hr_automations.methods.serialize import serialize_form
+from hr_views.models import ActiveTab
 from notifications.signals import notify
 from pms.filters import (
     ActualKeyResultFilter,
@@ -3310,7 +3310,7 @@ def anonymous_feedback_add(request):
             if feedback.based_on == "employee":
                 try:
                     notify.send(
-                        HorillaUser.objects.filter(username="Horilla Bot").first(),
+                        HorillaUser.objects.filter(username="Bells Bot").first(),
                         recipient=feedback.employee_id.employee_user_id,
                         verb=gettext_noop("You received anonymous feedback!"),
                         redirect=reverse("feedback-view"),

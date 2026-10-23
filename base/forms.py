@@ -79,10 +79,10 @@ from employee.models import Employee, EmployeeTag
 from horilla import horilla_middlewares
 from horilla.horilla_middlewares import _thread_locals
 from horilla.methods import get_horilla_model_class
-from horilla_audit.models import AuditTag
-from horilla_auth.models import HorillaUser
-from horilla_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from horilla_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_audit.models import AuditTag
+from hr_auth.models import HorillaUser
+from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
+from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
 
 # your form here
 
@@ -3263,11 +3263,12 @@ class PassWordResetForm(forms.Form):
     def get_branding(employee):
         """
         The name and logo the mail is sent under: the employee's company when
-        WHITE_LABELLING is on (else the headquarters company), Horilla when it
-        is off or no company has one.
+        WHITE_LABELLING is on, otherwise the configured brand fallback.
         """
-        name = "Horilla"
-        logo_path = finders.find("images/ui/horilla-sticker-round.png")
+        name = getattr(
+            settings, "BRAND_FALLBACK_NAME", "Bells University of Technology"
+        )
+        logo_path = finders.find("images/ui/brand-logo.png")
         if getattr(settings, "WHITE_LABELLING", False):
             company = None
             try:

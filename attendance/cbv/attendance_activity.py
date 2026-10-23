@@ -12,8 +12,8 @@ from attendance.filters import AttendanceActivityFilter
 from attendance.forms import AttendanceActivityExportForm
 from attendance.models import AttendanceActivity
 from base.methods import filtersubordinates, has_export_access, is_reportingmanager
-from horilla_views.cbv_methods import hx_request_required, login_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import hx_request_required, login_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaListView,
     HorillaNavView,

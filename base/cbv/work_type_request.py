@@ -25,12 +25,12 @@ from base.methods import (
 from base.models import WorkType, WorkTypeRequest
 from base.views import include_employee_instance
 from employee.models import Employee
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

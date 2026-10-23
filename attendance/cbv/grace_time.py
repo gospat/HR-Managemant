@@ -16,8 +16,8 @@ from attendance.filters import GraceTimeFilter
 from attendance.forms import GraceTimeForm
 from attendance.models import GraceTime
 from base.cbv.employee_shift import EmployeeShiftListView
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

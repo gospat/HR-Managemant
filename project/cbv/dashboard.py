@@ -13,8 +13,8 @@ from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaDetailedView, HorillaListView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaDetailedView, HorillaListView
 from project.cbv.cbv_decorators import is_projectmanager_or_member_or_perms
 from project.filters import ProjectFilter
 from project.models import Project

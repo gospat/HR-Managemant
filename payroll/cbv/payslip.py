@@ -17,12 +17,12 @@ from base.methods import has_export_access
 from employee import views as employee_view
 from employee.cbv.employee_profile import EmployeeProfileView
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from employee.models import Employee
 from horilla.horilla_middlewares import _thread_locals
 from horilla.methods import handle_no_permission
-from horilla_views.cbv_methods import decorator_with_arguments
+from hr_views.cbv_methods import decorator_with_arguments
 from recruitment.models import Recruitment, Stage
 
 

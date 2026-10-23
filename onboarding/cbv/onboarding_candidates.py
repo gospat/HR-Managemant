@@ -11,12 +11,12 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from base.models import HorillaMailTemplate
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaListView,
     HorillaNavView,
     TemplateView,

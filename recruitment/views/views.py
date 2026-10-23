@@ -70,8 +70,8 @@ from horilla.decorators import (
 )
 from horilla.group_by import group_by_queryset
 from horilla.http import HorillaRedirect
-from horilla_auth.models import HorillaUser
-from horilla_documents.models import Document
+from hr_auth.models import HorillaUser
+from hr_documents.models import Document
 from notifications.signals import notify
 from recruitment.auth import CandidateAuthenticationBackend
 from recruitment.decorators import (

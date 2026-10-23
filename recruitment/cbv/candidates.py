@@ -29,14 +29,14 @@ from base.methods import has_export_access
 from employee.forms import BulkUpdateFieldForm
 from horilla.horilla_middlewares import _thread_locals
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     export_xlsx,
     hx_request_required,
     login_required,
     permission_required,
 )
-from horilla_views.forms import DynamicBulkUpdateForm
-from horilla_views.generic.cbv.views import (
+from hr_views.forms import DynamicBulkUpdateForm
+from hr_views.generic.cbv.views import (
     HorillaCardView,
     HorillaDetailedView,
     HorillaFormView,
@@ -44,7 +44,7 @@ from horilla_views.generic.cbv.views import (
     HorillaNavView,
     TemplateView,
 )
-from horilla_views.templatetags.generic_template_filters import getattribute
+from hr_views.templatetags.generic_template_filters import getattribute
 from recruitment.cbv.candidate_reject_reason import DynamicRejectReasonFormView
 from recruitment.cbv_decorators import all_manager_can_enter, manager_can_enter
 from recruitment.filters import CandidateFilter

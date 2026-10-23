@@ -34,7 +34,7 @@ from horilla.filters import (
     filter_by_name,
     filter_name_or_badge_terms,
 )
-from horilla_views.templatetags.generic_template_filters import getattribute
+from hr_views.templatetags.generic_template_filters import getattribute
 
 from .models import (
     AvailableLeave,
@@ -587,7 +587,7 @@ class LeaveAllocationRequestFilter(HorillaFilterSet):
     # created_by is a FK to HorillaUser, not Employee -- rendering/
     # filtering on it directly (Meta.fields's own auto-generated
     # ModelChoiceFilter) surfaced raw usernames/emails ("admin",
-    # "michael.brown@horilla.com", ...) in the picker instead of the
+    # "michael.brown@bells.edu.ng", ...) in the picker instead of the
     # employee's name, since a HorillaUser has no display-friendly
     # __str__ of its own. Overrides that auto field with one that goes
     # through the User -> Employee reverse OneToOne instead

@@ -18,8 +18,8 @@ from django.utils.translation import gettext_lazy as _
 from base.horilla_company_manager import HorillaCompanyManager
 from employee.models import Employee
 from horilla.models import HorillaModel
-from horilla_audit.models import HorillaAuditInfo, HorillaAuditLog
-from horilla_views.cbv_methods import render_template
+from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from hr_views.cbv_methods import render_template
 from recruitment.models import Candidate, Recruitment
 
 

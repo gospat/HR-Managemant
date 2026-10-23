@@ -28,10 +28,10 @@ from employee.templatetags.employee_filter import edit_accessibility
 from employee.views import _check_reporting_manager
 from horilla.horilla_middlewares import _thread_locals
 from horilla.signals import post_generic_delete, post_generic_import
-from horilla_auth.models import HorillaUser
-from horilla_views.cbv_methods import hx_request_required, login_required
-from horilla_views.forms import DynamicBulkUpdateForm
-from horilla_views.generic.cbv.views import (
+from hr_auth.models import HorillaUser
+from hr_views.cbv_methods import hx_request_required, login_required
+from hr_views.forms import DynamicBulkUpdateForm
+from hr_views.generic.cbv.views import (
     HorillaCardView,
     HorillaDetailedView,
     HorillaListView,

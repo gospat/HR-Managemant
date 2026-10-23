@@ -51,8 +51,8 @@ from horilla import settings
 from horilla.decorators import hx_request_required, login_required, permission_required
 from horilla.group_by import group_by_queryset as general_group_by
 from horilla.http.response import HorillaRedirect
-from horilla_auth.models import HorillaUser
-from horilla_documents.models import Document
+from hr_auth.models import HorillaUser
+from hr_documents.models import Document
 from notifications.signals import notify
 from onboarding.decorators import (
     all_manager_can_enter,
@@ -887,7 +887,7 @@ def email_send(request):
             if company and company.icon and os.path.exists(company.icon.path):
                 image_path = company.icon.path
             else:
-                image_path = finders.find("images/ui/horilla-sticker-round.png")
+                image_path = finders.find("images/ui/brand-logo.png")
 
             if image_path:
                 with open(image_path, "rb") as f:

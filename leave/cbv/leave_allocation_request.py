@@ -16,8 +16,8 @@ from django.utils.translation import gettext_noop
 from base.methods import choosesubordinates, filtersubordinates, is_reportingmanager
 from employee.cbv.employee_profile import EmployeeProfileView
 from employee.models import Employee
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

@@ -1,7 +1,7 @@
 {
-    "name": "Horilla",
-    "short_name": "Horilla",
-    "description": "Free and Open Source HR Software",
+    "name": "Bells University of Technology",
+    "short_name": "Bells Tech",
+    "description": "Bells University of Technology HR workspace",
     "start_url": "/",
     "display": "standalone",
     "background_color": "orangered",

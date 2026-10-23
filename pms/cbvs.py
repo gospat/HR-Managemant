@@ -18,7 +18,7 @@ from employee.models import Employee
 from horilla import horilla_middlewares
 from horilla.decorators import login_required, owner_can_enter, permission_required
 from horilla.methods import handle_no_permission
-from horilla_views.generic.cbv import views
+from hr_views.generic.cbv import views
 from pms import models
 from pms.filters import BonusPointSettingFilter, EmployeeBonusPointFilter
 from pms.forms import (

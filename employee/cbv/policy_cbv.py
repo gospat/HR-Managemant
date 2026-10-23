@@ -12,8 +12,8 @@ from django.utils.translation import gettext_lazy as _
 from employee.filters import PolicyFilter
 from employee.forms import PolicyForm
 from employee.models import Policy
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import HorillaFormView, HorillaNavView
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import HorillaFormView, HorillaNavView
 
 
 @method_decorator(login_required, name="dispatch")

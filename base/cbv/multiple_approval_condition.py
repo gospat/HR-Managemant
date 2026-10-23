@@ -17,8 +17,8 @@ from base.forms import MultipleApproveConditionForm
 from base.models import MultipleApprovalCondition, MultipleApprovalManagers
 from base.widgets import CustomModelChoiceWidget
 from employee.models import Employee
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

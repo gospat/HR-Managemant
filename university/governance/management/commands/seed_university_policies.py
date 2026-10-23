@@ -23,18 +23,18 @@ class Command(BaseCommand):
                 defaults={"configuration": deepcopy(data), "provisional": True},
             )
         groups = {
-            "University HR Officer": [
+            "Bells Tech HR Officer": [
                 "view_universitypolicy",
                 "view_promotionrequest",
                 "add_promotionrequest",
                 "apply_promotion",
             ],
-            "University Promotion Reviewer": [
+            "Bells Tech Promotion Reviewer": [
                 "view_universitypolicy",
                 "view_promotionrequest",
                 "review_promotion",
             ],
-            "University Registrar": [
+            "Bells Tech Registrar": [
                 "view_universitypolicy",
                 "view_promotionrequest",
                 "approve_promotion",
@@ -48,7 +48,7 @@ class Command(BaseCommand):
                     content_type__app_label="university_governance", codename__in=codes
                 )
             )
-        Group.objects.get(name="University HR Officer").permissions.add(
+        Group.objects.get(name="Bells Tech HR Officer").permissions.add(
             Permission.objects.get(
                 content_type__app_label="employee", codename="view_employee"
             )

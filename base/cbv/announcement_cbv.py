@@ -16,9 +16,9 @@ from base.methods import closest_numbers
 from base.models import Announcement, AnnouncementView, Attachment
 from employee.models import Employee
 from horilla.http.response import HorillaRedirect
-from horilla_auth.models import HorillaUser
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_auth.models import HorillaUser
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

@@ -49,7 +49,7 @@
 /base/horilla_company_manager.py  @horilla-opensource
 /base/middleware.py               @horilla-opensource
 /base/auth_backends.py            @horilla-opensource
-/horilla_api/authentication.py    @horilla-opensource
+/hr_api/authentication.py         @horilla-opensource
 /horilla/decorators.py            @horilla-opensource
 
 # --- Payroll ---

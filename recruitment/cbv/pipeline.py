@@ -15,9 +15,9 @@ from django.utils.translation import gettext_lazy as _
 
 from horilla.decorators import hx_request_required
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.kanban import HorillaKanbanView
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.kanban import HorillaKanbanView
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,
@@ -25,7 +25,7 @@ from horilla_views.generic.cbv.views import (
     TemplateView,
     get_short_uuid,
 )
-from horilla_views.models import ActiveView
+from hr_views.models import ActiveView
 from recruitment import filters, forms, models
 from recruitment.cbv_decorators import manager_can_enter
 from recruitment.templatetags.recruitmentfilters import (

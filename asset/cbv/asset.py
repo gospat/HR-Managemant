@@ -5,8 +5,8 @@ from django.utils.translation import gettext_lazy as _
 
 from asset.filters import AssetFilter
 from asset.models import Asset
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import HorillaDetailedView, HorillaListView
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import HorillaDetailedView, HorillaListView
 
 
 @method_decorator(login_required, name="dispatch")

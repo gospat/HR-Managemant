@@ -2,17 +2,17 @@
  * tourController.js
  *
  * Loads tours from the server for the current page, auto-starts any pending
- * auto-start tour, and exposes window.horillaTour.toggle() so the "?" navbar
+ * auto-start tour, and exposes window.productTour.toggle() so the "?" navbar
  * button can open/close the launcher panel.
  *
  * Depends on:
  *   - driver.js  (already on window.driver.js.driver)
- *   - window.HORILLA_TOUR  set by footer_scripts.html
+ *   - window.PRODUCT_TOUR  set by footer_scripts.html
  */
 (function () {
   'use strict';
 
-  var CFG = window.HORILLA_TOUR || {};
+  var CFG = window.PRODUCT_TOUR || {};
   if (!CFG.activeUrl) return;
 
   var driverFactory = window.driver && window.driver.js && window.driver.js.driver;
@@ -243,7 +243,7 @@
 
   // ── Public API ────────────────────────────────────────────────────────────
 
-  window.horillaTour = {
+  window.productTour = {
     toggle: function () {
       var panel = _panel;
       if (!panel || panel.style.display === 'none') {

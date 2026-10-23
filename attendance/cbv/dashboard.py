@@ -13,8 +13,8 @@ from attendance.cbv.attendances import OTAttendancesList, ValidateAttendancesLis
 from attendance.filters import LateComeEarlyOutFilter
 from attendance.models import AttendanceLateComeEarlyOut, AttendanceValidationCondition
 from base.methods import filtersubordinates
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaListView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaListView
 
 
 @method_decorator(login_required, name="dispatch")

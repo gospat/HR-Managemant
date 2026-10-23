@@ -257,7 +257,7 @@ class EngineSourceTests(TestCase):
         one click on "Add condition" then appends a row per time the modal had
         been opened.
         """
-        self.assertIn("window.horillaComponentForm", read(ENGINE))
+        self.assertIn("window.componentFormEngine", read(ENGINE))
 
     def test_the_engine_also_listens_through_jquery(self):
         """

@@ -9,8 +9,8 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
-from horilla_views.cbv_methods import hx_request_required, login_required
-from horilla_views.generic.cbv.views import HorillaTabView, TemplateView
+from hr_views.cbv_methods import hx_request_required, login_required
+from hr_views.generic.cbv.views import HorillaTabView, TemplateView
 from payroll.cbv.allowances import AllowanceListView
 from payroll.cbv.deduction import DeductionListView
 from payroll.cbv.payslip_automation import PaySlipAutomationListView

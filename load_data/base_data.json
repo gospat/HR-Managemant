@@ -14,7 +14,7 @@
       "state": "Nevada",
       "city": "Las Vegas",
       "zip": "89101",
-      "icon": "base/icon/Horilla_2.png",
+      "icon": "base/icon/BellsTech_2.png",
       "date_format": null,
       "time_format": null
     }
@@ -34,7 +34,7 @@
       "state": "Karnataka",
       "city": "Bengaluru",
       "zip": "560001",
-      "icon": "base/icon/Horilla_3.png",
+      "icon": "base/icon/BellsTech_3.png",
       "date_format": null,
       "time_format": null
     }
@@ -54,7 +54,7 @@
       "state": "England",
       "city": "London",
       "zip": "SE1 1LB",
-      "icon": "base/icon/Horilla_1.png",
+      "icon": "base/icon/BellsTech_1.png",
       "date_format": null,
       "time_format": null
     }
@@ -3534,7 +3534,7 @@
       "is_active": true,
       "announcement_id": 2,
       "employee_id": 13,
-      "comment": "Quick question — does the self-assessment in Horilla auto-save as you fill it, or do you need to submit all at once? Want to start early but take time on each section."
+      "comment": "Quick question — does the self-assessment in Bells Tech auto-save as you fill it, or do you need to submit all at once? Want to start early but take time on each section."
     }
   },
   {

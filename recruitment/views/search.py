@@ -19,7 +19,7 @@ from horilla.decorators import (
 )
 from horilla.group_by import group_by_queryset
 from horilla.group_by import group_by_queryset as general_group_by
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from recruitment.filters import (
     CandidateFilter,
     RecruitmentFilter,

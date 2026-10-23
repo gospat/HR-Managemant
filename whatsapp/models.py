@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company
 from horilla.models import HorillaModel
-from horilla_views.cbv_methods import render_template
+from hr_views.cbv_methods import render_template
 
 
 class WhatsappCredientials(HorillaModel):
@@ -26,7 +26,7 @@ class WhatsappCredientials(HorillaModel):
         verbose_name=_("App Secret"),
         help_text=_(
             "Meta app secret, used to verify the X-Hub-Signature-256 header on "
-            "incoming webhook calls. Without it Horilla cannot tell a real "
+            "incoming webhook calls. Without it the system cannot tell a real "
             "delivery from a forged one, so unsigned payloads are rejected. "
             "Find it under App Settings > Basic in the Meta developer console."
         ),

@@ -11,11 +11,11 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from employee.models import Employee
-from horilla_audit.activity_feed import (
+from hr_audit.activity_feed import (
     normalize_log_entries,
     normalize_tracking_entries,
 )
-from horilla_views.history_methods import get_diff
+from hr_views.history_methods import get_diff
 
 # Overrides for models with more than one Employee FK, or reached only
 # indirectly (a cross-relation lookup path instead of a field on the model

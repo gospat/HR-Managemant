@@ -4,7 +4,7 @@ from django.test import TestCase
 from rest_framework.test import APIRequestFactory, force_authenticate
 from horilla.testkit import make_company, make_employee
 from horilla.testkit.factories import make_payslip
-from horilla_api.api_views.payroll.views import PayslipPDFAPIView
+from hr_api.api_views.payroll.views import PayslipPDFAPIView
 from payroll.models.tax_models import PayrollSettings
 
 

@@ -203,7 +203,7 @@ def _ensure_employees(company, shift, gross_up, ctc_down, name_offset):
     employees = []
     for i in range(EMPLOYEES_PER_COMPANY):
         first, last = PRECISE_NAMES[(name_offset + i) % len(PRECISE_NAMES)]
-        email = f"{first.lower()}.{last.lower()}@precise-payroll-demo.horilla"
+        email = f"{first.lower()}.{last.lower()}@precise-payroll-demo.bells.edu.ng"
         employee = Employee._base_manager.filter(email=email).first()
         if employee is None:
             employee = make_employee(

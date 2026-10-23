@@ -41,12 +41,12 @@ from employee.models import Employee
 from horilla.horilla_middlewares import _thread_locals
 from horilla.http.response import HorillaRedirect
 from horilla.methods import horilla_users_with_perms
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     login_required,
     owner_can_enter,
     permission_required,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

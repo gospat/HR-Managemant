@@ -22,7 +22,7 @@ from django.test import TestCase
 
 from base.models import Company, Department, JobPosition
 from employee.models import Employee
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from recruitment.models import Candidate, CandidateDocument, Recruitment
 from recruitment.views.views import candidate_documents_visible_to
 

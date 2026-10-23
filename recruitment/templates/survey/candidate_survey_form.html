@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="{% static 'horilla_theme/assets/css/tailwind.css' %}" rel="stylesheet">
+    <link href="{% static 'hr_theme/assets/css/tailwind.css' %}" rel="stylesheet">
     <title>{% trans "Survey" %}{% if candidate %} - {{ candidate.name }}{% endif %}</title>
     <link
         rel="apple-touch-icon"
@@ -32,17 +32,17 @@
     />
     <link
         rel="stylesheet"
-        href="/static/horilla_theme/assets/css/global.css"
+        href="/static/hr_theme/assets/css/global.css"
     />
     <link
         rel="stylesheet"
-        href="/static/horilla_theme/assets/css/v1_styles.css"
+        href="/static/hr_theme/assets/css/v1_styles.css"
     >
     <link
         href="{% static 'cdn/googleapi/css/plus-jakarta-sans-font-style.css' %}"
         rel="stylesheet"
     >
-    <script src="{% static "horilla_theme/assets/js/tailwindcdn.js" %}"></script>
+    <script src="{% static "hr_theme/assets/js/tailwindcdn.js" %}"></script>
     <script>
         window.tailwind.config = {
             theme: {
@@ -105,12 +105,12 @@
                 {% if hq_company.icon %}
                     <img src="{{ hq_company.icon.url }}" alt="" class="w-full h-full object-cover">
                 {% else %}
-                    <span>{{ hq_company.company|default:"Horilla"|first|upper }}</span>
+                    <span>{{ hq_company.company|default:white_label_company_name|first|upper }}</span>
                 {% endif %}
             </div>
             <div>
                 <h1 class="text-xl font-bold leading-tight">
-                    {{ hq_company.company|default:"Horilla" }} {% trans "Careers" %}
+                    {{ hq_company.company|default:white_label_company_name }} {% trans "Careers" %}
                 </h1>
                 <p class="text-sm text-dark-100 leading-tight">
                     {% trans "Open positions across our teams" %}

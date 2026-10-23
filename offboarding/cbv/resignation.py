@@ -12,12 +12,12 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from horilla.methods import handle_no_permission
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     check_feature_enabled,
     login_required,
     permission_required,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

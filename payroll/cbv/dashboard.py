@@ -14,8 +14,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.filters import DepartmentViewFilter
 from base.models import Department
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaListView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaListView
 from payroll.filters import ContractFilter
 from payroll.models.models import Contract
 

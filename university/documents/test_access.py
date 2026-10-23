@@ -1,7 +1,7 @@
 from django.test import TestCase, override_settings
 from django.contrib.auth.models import Permission
 from horilla.testkit import make_company, make_employee, make_user
-from horilla_documents.models import Document
+from hr_documents.models import Document
 from university.documents.access import can_read_media
 
 

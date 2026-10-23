@@ -16,12 +16,19 @@ import re
 from datetime import date, datetime
 from typing import Any, Optional
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.utils import timezone
 
 from horilla.export_safety import FORMULA_TRIGGERS, neutralize_formula
 
 logger = logging.getLogger(__name__)
+
+
+def _brand_name() -> str:
+    """Institution brand shown to end users, from settings with a safe default."""
+    return getattr(settings, "BRAND_FALLBACK_NAME", "Bells University of Technology")
+
 
 # ---------------------------------------------------------------------------
 # Style tokens — Horilla primary (coral / #E54F38)
@@ -428,7 +435,7 @@ def _apply_print_setup(ws, meta: Optional[dict] = None, landscape: bool = False)
     ws.page_setup.fitToHeight = 0
     ws.sheet_properties.pageSetUpPr = PageSetupProperties(fitToPage=True)
 
-    product = meta.get("product_name") or "Horilla HR"
+    product = meta.get("product_name") or _brand_name()
     generated = _local_stamp()
     ws.oddFooter.left.text = f"{product}"
     ws.oddFooter.left.size = 8
@@ -487,7 +494,7 @@ def _write_letterhead(ws, company: dict, styles, meta: dict, col_span: int = 6) 
     product = ws.cell(
         row=1,
         column=col_span,
-        value=meta.get("product_name") or "Horilla HR · Standard Reports",
+        value=meta.get("product_name") or f"{_brand_name()} · Standard Reports",
     )
     product.font = styles["product_font"]
     product.alignment = styles["right"]
@@ -803,7 +810,7 @@ def _write_cover(wb, payload: dict[str, Any], meta: Optional[dict] = None):
         column=1,
         value=(
             "Confidential — for internal use only. "
-            "Figures are aggregated server-side from Horilla HR source data."
+            f"Figures are aggregated server-side from {_brand_name()} source data."
         ),
     )
     footer.font = styles["footer_font"]
@@ -1126,9 +1133,9 @@ def export_xlsx(
     _write_chart_sheet(wb, payload, meta=meta)
 
     props = wb.properties
-    props.title = str(payload.get("title") or "Horilla Report")
+    props.title = str(payload.get("title") or f"{_brand_name()} Report")
     company = _company_from_meta(meta)
-    props.creator = company.get("name") or "Horilla HR"
+    props.creator = company.get("name") or _brand_name()
     props.description = (
         f"Standard report export · {(payload.get('slug') or '')} · "
         f"{_period_label(payload.get('period') or {})}"
@@ -1397,7 +1404,7 @@ def export_pdf(
                 "dense": len(headers) > 8,
                 "report_ref": payload.get("slug") or meta.get("slug") or "",
                 "product_name": meta.get("product_name")
-                or "Horilla HR · Standard Reports",
+                or f"{_brand_name()} · Standard Reports",
                 "generated_at": generated_str,
                 "generated_by": meta.get("user") or "",
             },

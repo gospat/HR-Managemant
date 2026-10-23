@@ -27,8 +27,8 @@ from base.models import (
     WorkType,
 )
 from employee.models import Employee, EmployeeWorkInformation
-from horilla_auth.methods import generate_random_password
-from horilla_auth.models import HorillaUser
+from hr_auth.methods import generate_random_password
+from hr_auth.models import HorillaUser
 
 logger = logging.getLogger(__name__)
 

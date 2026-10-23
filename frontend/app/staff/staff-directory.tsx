@@ -201,7 +201,7 @@ export default function StaffDirectory() {
     <main className="directory">
       <header>
         <a href="/" className="back">
-          <ArrowLeft size={16} /> University HR
+          <ArrowLeft size={16} /> Bells University of Technology
         </a>
         {session?.authenticated ? (
           <button className="sign-in sign-out" onClick={signOut}>

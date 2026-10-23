@@ -301,7 +301,7 @@ class PayrollBatch(HorillaModel):
         return reverse("payroll-batch-detail", args=[self.pk])
 
     def run_actions(self):
-        from horilla_views.cbv_methods import render_template
+        from hr_views.cbv_methods import render_template
 
         return render_template(
             path="payroll/batch/_run_actions.html", context={"instance": self}
@@ -314,7 +314,7 @@ class PayrollBatch(HorillaModel):
         return f"{self.pay_date:%d %b %Y}" if self.pay_date else "—"
 
     def _money(self, amount):
-        from horilla_views.cbv_methods import render_template
+        from hr_views.cbv_methods import render_template
 
         return render_template(
             path="cbv/payslip/pay_display.html", context={"amount": amount}

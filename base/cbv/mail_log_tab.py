@@ -16,8 +16,8 @@ from base.models import EmailLog
 from employee.models import Employee
 from horilla.decorators import check_manager
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaDetailedView, HorillaListView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaDetailedView, HorillaListView
 
 
 def _can_view_mail_log(request, employee):

@@ -25,7 +25,7 @@ from base.models import (
 from employee.models import Employee
 from horilla.decorators import hx_request_required, login_required, permission_required
 from horilla.http.response import HorillaRedirect
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from notifications.signals import notify
 
 

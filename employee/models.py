@@ -40,14 +40,14 @@ from horilla import horilla_middlewares
 from horilla.horilla_middlewares import _thread_locals
 from horilla.methods import get_horilla_model_class
 from horilla.models import HorillaModel, has_xss, upload_path
-from horilla_audit.methods import get_diff
-from horilla_audit.models import HorillaAuditInfo, HorillaAuditLog
-from horilla_auth.methods import (
+from hr_audit.methods import get_diff
+from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from hr_auth.methods import (
     generate_random_password,
     generate_unique_fallback_username,
 )
-from horilla_auth.models import HorillaUser
-from horilla_views.cbv_methods import render_template
+from hr_auth.models import HorillaUser
+from hr_views.cbv_methods import render_template
 
 # create your model
 

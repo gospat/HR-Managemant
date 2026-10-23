@@ -13,23 +13,23 @@ from django.contrib.auth.models import Group
 from django.db import transaction
 
 from base.models import Company, CompanyGroupAssignment
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 logger = logging.getLogger(__name__)
 
 # (user email, group name, company name)
 # Keep this small — enough to demo Roles & Permissions and company-scoped access.
 DEMO_ROLE_ASSIGNMENTS = (
-    ("alexander.smith@horilla.com", "Asset Manager", "Your Company"),
-    ("alexander.smith@horilla.com", "Asset Manager", "Your Company Inc."),
-    ("michael.brown@horilla.com", "HR Manager", "Your Company"),
-    ("sarah.anderson@horilla.com", "Payroll Manager", "Your Company"),
-    ("emily.clark@horilla.com", "Leave Manager", "Your Company"),
-    ("jessica.evans@horilla.com", "Attendance Manager", "Your Company"),
-    ("benjamin.parker@horilla.com", "Recruiter", "Your Company Ltd."),
-    ("lily.campbell@horilla.com", "Helpdesk Agent", "Your Company Inc."),
-    ("matthew.harris@horilla.com", "Performance Manager", "Your Company"),
-    ("david.king@horilla.com", "Project Manager", "Your Company"),
+    ("alexander.smith@bells.edu.ng", "Asset Manager", "Your Company"),
+    ("alexander.smith@bells.edu.ng", "Asset Manager", "Your Company Inc."),
+    ("michael.brown@bells.edu.ng", "HR Manager", "Your Company"),
+    ("sarah.anderson@bells.edu.ng", "Payroll Manager", "Your Company"),
+    ("emily.clark@bells.edu.ng", "Leave Manager", "Your Company"),
+    ("jessica.evans@bells.edu.ng", "Attendance Manager", "Your Company"),
+    ("benjamin.parker@bells.edu.ng", "Recruiter", "Your Company Ltd."),
+    ("lily.campbell@bells.edu.ng", "Helpdesk Agent", "Your Company Inc."),
+    ("matthew.harris@bells.edu.ng", "Performance Manager", "Your Company"),
+    ("david.king@bells.edu.ng", "Project Manager", "Your Company"),
 )
 
 

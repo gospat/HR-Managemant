@@ -18,8 +18,8 @@ from base.cbv.work_shift_tab import ProfileTabShellView
 from base.methods import filtersubordinates
 from base.request_and_approve import paginator_qry
 from employee.models import Employee
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import (
     HorillaListView,
     HorillaNavView,
     HorillaTabView,

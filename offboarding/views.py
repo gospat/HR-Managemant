@@ -31,8 +31,8 @@ from horilla.decorators import (
 from horilla.group_by import group_by_queryset as group_by
 from horilla.http.response import HorillaRedirect
 from horilla.methods import get_horilla_model_class
-from horilla_auth.models import HorillaUser
-from horilla_views.generic.cbv.views import HorillaFormView
+from hr_auth.models import HorillaUser
+from hr_views.generic.cbv.views import HorillaFormView
 from notifications.signals import notify
 from offboarding.decorators import (
     any_manager_can_enter,

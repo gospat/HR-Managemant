@@ -8,8 +8,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import filter_own_records
 from horilla.methods import handle_no_permission
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

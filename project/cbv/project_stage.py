@@ -12,8 +12,8 @@ from django.utils.translation import gettext_lazy as _
 
 from horilla.http import HorillaRedirect
 from horilla.methods import handle_no_permission
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaFormView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaFormView
 
 # from project.decorator import project_delete_permission
 from project.forms import ProjectStageForm

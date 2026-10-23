@@ -41,7 +41,7 @@ REDIS_URL = env("REDIS_URL", default=None)
 # Default site ID for django.contrib.sites framework.
 SITE_ID = 1
 
-THEME_APP = "horilla_theme"
+THEME_APP = "hr_theme"
 
 INSTALLED_APPS = [
     # Default Django apps
@@ -70,7 +70,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "drf_yasg",
     # Core Horilla apps
-    "horilla_auth",
+    "hr_auth",
     THEME_APP,
     "base",
     "employee",
@@ -82,24 +82,24 @@ INSTALLED_APPS = [
     "attendance",
     "payroll",
     "accessibility",
-    "horilla_audit",
-    "horilla_widgets",
-    "horilla_crumbs",
-    "horilla_documents",
-    "horilla_views",
-    "horilla_automations",
-    "horilla_api",
+    "hr_audit",
+    "hr_widgets",
+    "hr_crumbs",
+    "hr_documents",
+    "hr_views",
+    "hr_automations",
+    "hr_api",
     "biometric",
     "helpdesk",
     "offboarding",
-    "horilla_backup",
+    "hr_backup",
     "project",
-    "horilla_meet",
+    "hr_meet",
     "report",
     "whatsapp",
-    "horilla_ldap",
-    "horilla_dbtemplate",
-    "horilla_tour",
+    "hr_ldap",
+    "hr_dbtemplate",
+    "hr_tour",
     "master_import",
 ]
 
@@ -115,8 +115,8 @@ REST_FRAMEWORK = {
         # HorillaCompanyManager scopes on. CompanyMiddleware cannot do it for
         # API calls: middleware runs before DRF resolves the token, so it sees
         # AnonymousUser and returns early, leaving queries unscoped. See
-        # horilla_api/authentication.py.
-        "horilla_api.authentication.TenantScopedJWTAuthentication",
+        # hr_api/authentication.py.
+        "hr_api.authentication.TenantScopedJWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
@@ -316,11 +316,11 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 # ========================================
 # In production (DEBUG=False) these are wrapped in the cached template
 # loader so Django compiles each template once per process instead of
-# re-parsing it (and re-running horilla_dbtemplate's DB-lookup chain) on
+# re-parsing it (and re-running hr_dbtemplate's DB-lookup chain) on
 # every include, on every request. Left uncached in DEBUG so template
 # edits during development are picked up without restarting the server.
 _TEMPLATE_LOADERS = [
-    "horilla_dbtemplate.loaders.Loader",
+    "hr_dbtemplate.loaders.Loader",
     ("django.template.loaders.filesystem.Loader", [BASE_DIR / THEME_APP / "templates"]),
     "django.template.loaders.app_directories.Loader",
     ("django.template.loaders.filesystem.Loader", [BASE_DIR / "templates"]),
@@ -355,8 +355,8 @@ TEMPLATES = [
                 "base.context_processors.enable_profile_edit",
                 "base.context_processors.export_access_enabled",
                 "base.context_processors.navbar_languages",
-                "horilla_tour.context_processors.pending_tours_flag",
-                "horilla_crumbs.context_processors.breadcrumbs",
+                "hr_tour.context_processors.pending_tours_flag",
+                "hr_crumbs.context_processors.breadcrumbs",
             ],
             "loaders": (
                 _TEMPLATE_LOADERS
@@ -468,7 +468,7 @@ SIDEBARS = [
     "report",
 ]
 
-# Audit logging is opt-in: the horilla_audit app registers models explicitly
+# Audit logging is opt-in: the hr_audit app registers models explicitly
 # through its registry, driven by AuditModelConfig and a default whitelist
 # (Employee, EmployeeWorkInformation, EmployeeBankDetails).
 AUDITLOG_INCLUDE_ALL_MODELS = False
@@ -691,7 +691,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 # assert.
 #
 # Disabling the rates here rather than clearing the cache per test keeps the
-# mechanism in one place. horilla_api/tests/test_throttling.py still proves
+# mechanism in one place. hr_api/tests/test_throttling.py still proves
 # the throttles work, because it sets its own rate on
 # SimpleRateThrottle.THROTTLE_RATES -- the class attribute the throttle
 # actually reads -- rather than relying on these settings.

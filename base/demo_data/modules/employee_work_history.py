@@ -42,7 +42,7 @@ def backfill_employee_work_info_history(today: date | None = None) -> dict[str, 
 
     from base.models import JobPosition
     from employee.models import EmployeeWorkInformation
-    from horilla_views.history_methods import get_diff
+    from hr_views.history_methods import get_diff
 
     work_infos = list(
         EmployeeWorkInformation._base_manager.order_by("employee_id")[

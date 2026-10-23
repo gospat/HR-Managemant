@@ -10,8 +10,8 @@ from django.utils.translation import gettext_lazy as _
 
 from employee.cbv.employee_profile import EmployeeProfileView
 from horilla import settings
-from horilla_views.cbv_methods import hx_request_required, login_required
-from horilla_views.generic.cbv.views import HorillaListView, HorillaProfileView
+from hr_views.cbv_methods import hx_request_required, login_required
+from hr_views.generic.cbv.views import HorillaListView, HorillaProfileView
 from recruitment.cbv import skill_zone
 from recruitment.cbv.candidate_document import CandidateDocumentListView
 from recruitment.cbv.candidate_mail_log import CandidateMailLogTabList

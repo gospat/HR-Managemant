@@ -10,7 +10,7 @@ Examples:
     DEBUG = False
     ALLOWED_HOSTS = ["client.example.com"]
     WHITE_LABELLING = True
-    DOC_BASE_URL = "https://www.horilla.com"
+    DOC_BASE_URL = "https://hr.bells.edu.ng"
 
     # Extend lists via selective import (same list object as base):
     from .base import INSTALLED_APPS, MIDDLEWARE

@@ -13,8 +13,8 @@ from asset.models import AssetAssignment, AssetRequest
 from base.cbv.work_shift_tab import ProfileTabShellView
 from employee.cbv.employee_profile import EmployeeProfileView
 from employee.models import Employee
-from horilla_views.cbv_methods import login_required, owner_can_enter
-from horilla_views.generic.cbv.views import HorillaNavView, HorillaTabView
+from hr_views.cbv_methods import login_required, owner_can_enter
+from hr_views.generic.cbv.views import HorillaNavView, HorillaTabView
 
 
 # Every view below is opened with the *employee's* id in the url (pk), so the

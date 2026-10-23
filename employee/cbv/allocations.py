@@ -31,13 +31,13 @@ from employee.models import models as django_models
 from horilla.horilla_middlewares import _thread_locals
 from horilla.http import HorillaRedirect
 from horilla.methods import handle_no_permission
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     allocation_manager_can_enter,
     hx_request_required,
     login_required,
     render_template,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

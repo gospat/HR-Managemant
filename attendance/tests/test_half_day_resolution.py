@@ -690,7 +690,7 @@ class DayHistoryTests(PopoverStatusTests):
         self.assertNotIn('class="crp-hist"', self._panel())
 
     def test_the_audit_trail_covers_the_two_models(self):
-        from horilla_audit.registry import DEFAULT_TRACKED_MODELS
+        from hr_audit.registry import DEFAULT_TRACKED_MODELS
 
         self.assertIn(
             ("attendance", "AttendanceConflictResolution"), DEFAULT_TRACKED_MODELS

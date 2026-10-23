@@ -128,7 +128,7 @@ class DynamicCallbackSecurityTests(TestCase):
 
     @override_settings(ROOT_URLCONF="university.operations.urls")
     def test_production_root_uses_the_shared_dispatcher_too(self):
-        from horilla_views.generic.cbv.views import register_dynamic_url
+        from hr_views.generic.cbv.views import register_dynamic_url
 
         client = Client()
         client.force_login(self.root, backend="base.auth_backends.CompanyScopedBackend")

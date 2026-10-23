@@ -6,7 +6,7 @@ from django.contrib.auth.context_processors import PermWrapper
 
 from base.methods import check_manager
 from employee.models import Employee
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from recruitment.methods import (
     in_all_managers,
     is_recruitmentmanager,

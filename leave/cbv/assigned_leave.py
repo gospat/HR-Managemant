@@ -14,13 +14,13 @@ from django.utils.translation import gettext_lazy as _
 
 from base.decorators import manager_can_enter
 from base.methods import eval_validate, filtersubordinates, has_export_access
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     get_short_uuid,
     hx_request_required,
     login_required,
 )
-from horilla_views.forms import DynamicBulkUpdateForm
-from horilla_views.generic.cbv.views import (
+from hr_views.forms import DynamicBulkUpdateForm
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

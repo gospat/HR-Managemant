@@ -16,8 +16,8 @@ from django.views.generic import ListView
 from base.methods import has_export_access
 from base.models import Company
 from employee.models import Employee
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import (
     HorillaCardView,
     HorillaFormView,
     HorillaListView,

@@ -74,7 +74,11 @@ export default async function Home() {
       <aside>
         <a className="brand" href="/">
           <span className="crest">
-            <GraduationCap size={25} />
+            <img
+              src="/icon.svg"
+              alt="Bells University of Technology"
+              style={{ width: 40, height: 40, objectFit: "contain" }}
+            />
           </span>
           <span>
             BELLS UNIVERSITY<span className="brand-sub">PEOPLE & CULTURE</span>
@@ -141,7 +145,7 @@ export default async function Home() {
           </div>
           <div className="section-title">
             <h2>Explore your workspace</h2>
-            <span>Powered by Horilla HR</span>
+            <span>Bells University of Technology</span>
           </div>
           <div className="cards">
             {modules.map(({ name, description, icon: Icon, href }) => (

@@ -25,9 +25,9 @@ from employee.models import BonusPoint, Employee
 from horilla import horilla_middlewares
 from horilla.horilla_middlewares import _thread_locals
 from horilla.methods import get_horilla_model_class
-from horilla_widgets.forms import HorillaForm, default_select_option_template
-from horilla_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from horilla_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.forms import HorillaForm, default_select_option_template
+from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
+from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
 from notifications.signals import notify
 from payroll.models import tax_models as models
 from payroll.models.models import (

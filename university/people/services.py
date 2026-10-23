@@ -6,7 +6,7 @@ from django.db import transaction
 from rest_framework.exceptions import PermissionDenied
 from base.models import Company, Department
 from employee.models import Employee, EmployeeWorkInformation
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from .models import Faculty, StaffProfile, StaffChange
 
 

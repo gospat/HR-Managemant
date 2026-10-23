@@ -49,10 +49,10 @@ from employee.models import (
     PolicyMultipleFile,
 )
 from horilla import horilla_middlewares
-from horilla_audit.models import AccountBlockUnblock
-from horilla_auth.models import HorillaUser
-from horilla_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from horilla_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_audit.models import AccountBlockUnblock
+from hr_auth.models import HorillaUser
+from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
+from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
 
 logger = logging.getLogger(__name__)
 

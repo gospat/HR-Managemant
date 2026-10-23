@@ -21,7 +21,7 @@ from base.methods import filtersubordinates
 from base.models import ShiftRequest, WorkTypeRequest
 from employee.models import Employee
 from horilla.decorators import login_required, manager_can_enter
-from horilla_documents.models import Document
+from hr_documents.models import Document
 
 EMPLOYEE_PERM = "employee.view_employee"
 NEW_EMPLOYEES_LIMIT = 10

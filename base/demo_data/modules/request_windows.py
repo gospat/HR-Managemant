@@ -281,7 +281,7 @@ def _document_expiry(today: date) -> int:
     """
     if not apps.is_installed("horilla_documents"):
         return 0
-    from horilla_documents.models import Document
+    from hr_documents.models import Document
 
     updated = 0
     for i, doc in enumerate(

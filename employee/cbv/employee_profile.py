@@ -30,8 +30,8 @@ from employee.history import (
 from employee.models import Employee
 from horilla import settings
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import HorillaDetailedView, HorillaProfileView
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import HorillaDetailedView, HorillaProfileView
 
 Employee.cbv_employee_profile_edi_url = reverse_lazy("edit-profile")
 

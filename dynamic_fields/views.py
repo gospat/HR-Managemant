@@ -11,7 +11,7 @@ from django.views.generic import View
 from dynamic_fields import forms, models
 from dynamic_fields.methods import structured
 from horilla.decorators import login_required, permission_required
-from horilla_views.generic.cbv.views import HorillaFormView
+from hr_views.generic.cbv.views import HorillaFormView
 
 
 @method_decorator(login_required, name="dispatch")

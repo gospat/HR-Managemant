@@ -14,8 +14,8 @@ from django.utils.translation import gettext_lazy as _
 from base.forms import EmployeeTagForm
 from employee.filters import EmployeeTagFilter
 from employee.models import EmployeeTag
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

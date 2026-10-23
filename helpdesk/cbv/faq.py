@@ -12,8 +12,8 @@ from base.models import Tags
 from helpdesk.cbv.tags import DynamicTagsCreateFormView
 from helpdesk.forms import FAQCategoryForm, FAQForm
 from helpdesk.models import FAQ, FAQCategory
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import HorillaFormView
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import HorillaFormView
 
 
 @method_decorator(login_required, name="dispatch")

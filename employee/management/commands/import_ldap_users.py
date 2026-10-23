@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from django.db.models import Q
 
 from employee.models import Employee
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 
 class Command(BaseCommand):

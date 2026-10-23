@@ -27,15 +27,15 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         >
-        <link href="{% static 'horilla_theme/assets/css/tailwind.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="/static/horilla_theme/assets/css/global.css">
-        <link rel="stylesheet" href="/static/horilla_theme/assets/css/v1_styles.css">
+        <link href="{% static 'hr_theme/assets/css/tailwind.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="/static/hr_theme/assets/css/global.css">
+        <link rel="stylesheet" href="/static/hr_theme/assets/css/v1_styles.css">
         <link
             href="{% static 'cdn/googleapi/css/plus-jakarta-sans-font-style.css' %}"
             rel="stylesheet"
         >
         {% get_company as theme_obj %}
-        <script src='{% static "horilla_theme/assets/js/tailwindcdn.js" %}'></script>
+        <script src='{% static "hr_theme/assets/js/tailwindcdn.js" %}'></script>
         <script>
             window.tailwind.config = {
                 theme: {
@@ -72,12 +72,12 @@
                     {% if hq_company.icon %}
                         <img src="{{ hq_company.icon.url }}" alt="" class="w-full h-full object-cover">
                     {% else %}
-                        <span>{{ hq_company.company|default:"Horilla"|first|upper }}</span>
+                        <span>{{ hq_company.company|default:white_label_company_name|first|upper }}</span>
                     {% endif %}
                 </div>
                 <div>
                     <h1 class="text-xl font-bold leading-tight">
-                        {{ hq_company.company|default:"Horilla" }} {% trans "Careers" %}
+                        {{ hq_company.company|default:white_label_company_name }} {% trans "Careers" %}
                     </h1>
                     <p class="text-sm text-dark-100 leading-tight">
                         {% trans "Open positions across our teams" %}

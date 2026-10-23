@@ -12,12 +12,12 @@ from asset.filters import AssetHistoryFilter
 from asset.forms import AssetHistoryExportForm
 from asset.models import AssetAssignment
 from base.methods import export_data, has_export_access
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaListView,
     HorillaNavView,

@@ -62,8 +62,8 @@ from base.models import (
     WorkType,
     WorkTypeRequest,
 )
-from horilla_audit.cbv import audit
-from horilla_audit.models import AuditTag
+from hr_audit.cbv import audit
+from hr_audit.models import AuditTag
 
 urlpatterns = [
     path("", views.home, name="home-page"),
@@ -1896,9 +1896,9 @@ urlpatterns = [
         name="detail-view-multiple-approval-condition",
     ),
     path(
-        "get-horilla-installed-apps/",
-        views.get_horilla_installed_apps,
-        name="get-horilla-installed-apps",
+        "get-installed-apps/",
+        views.get_installed_apps,
+        name="get-installed-apps",
     ),
     # path("configuration/holiday-view", views.holiday_view, name="holiday-view"),
     path(

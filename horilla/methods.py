@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
 
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 
 def get_horilla_model_class(app_label, model):

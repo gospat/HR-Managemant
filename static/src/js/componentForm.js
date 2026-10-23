@@ -24,8 +24,8 @@
   // The form is swapped in by HTMX, which re-runs this file's <script src> on
   // every open. Without this, each open adds another set of document
   // listeners and one click on "Add condition" appends a row per open.
-  if (window.horillaComponentForm) {
-    window.horillaComponentForm();
+  if (window.componentFormEngine) {
+    window.componentFormEngine();
     return;
   }
 
@@ -508,7 +508,7 @@
     });
   });
 
-  window.horillaComponentForm = wire;
+  window.componentFormEngine = wire;
 
   // htmx:afterSettle fires after its ~20ms settle delay (time for CSS
   // transition classes to apply), by which point the browser has already

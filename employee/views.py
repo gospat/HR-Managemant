@@ -129,16 +129,16 @@ from horilla.filters import HorillaPaginator
 from horilla.group_by import group_by_queryset
 from horilla.http.response import HorillaRedirect, with_bulk_result
 from horilla.methods import dynamic_attr, get_horilla_model_class
-from horilla_audit.models import AccountBlockUnblock, HistoryTrackingFields
-from horilla_auth.methods import generate_random_password
-from horilla_auth.models import HorillaUser
-from horilla_documents.forms import (
+from hr_audit.models import AccountBlockUnblock, HistoryTrackingFields
+from hr_auth.methods import generate_random_password
+from hr_auth.models import HorillaUser
+from hr_documents.forms import (
     DocumentForm,
     DocumentRejectForm,
     DocumentRequestForm,
     DocumentUpdateForm,
 )
-from horilla_documents.models import Document, DocumentRequest
+from hr_documents.models import Document, DocumentRequest
 from notifications.signals import notify
 
 

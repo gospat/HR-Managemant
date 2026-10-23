@@ -35,9 +35,9 @@ from base.forms import ModelForm
 from base.methods import reload_queryset
 from employee.filters import EmployeeFilter
 from employee.models import Employee, EmployeeBankDetails
-from horilla_auth.models import HorillaUser
-from horilla_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from horilla_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_auth.models import HorillaUser
+from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
+from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
 from onboarding.models import (
     CandidateStage,
     CandidateTask,

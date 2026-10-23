@@ -17,9 +17,9 @@ from django.views import View
 from base.methods import closest_numbers
 from horilla.decorators import manager_can_enter
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.history import HorillaHistoryView
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.history import HorillaHistoryView
+from hr_views.generic.cbv.views import (
     HorillaCardView,
     HorillaDetailedView,
     HorillaFormView,

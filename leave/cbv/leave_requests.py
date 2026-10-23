@@ -25,8 +25,8 @@ from base.methods import (
     is_reportingmanager,
 )
 from base.models import PenaltyAccounts
-from horilla_views.cbv_methods import hx_request_required, login_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import hx_request_required, login_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

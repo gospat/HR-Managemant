@@ -4,7 +4,7 @@ from django.core.management import call_command, CommandError
 from django.test import TestCase
 from base.models import Company, Department
 from employee.models import Employee
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 
 class BootstrapTests(TestCase):

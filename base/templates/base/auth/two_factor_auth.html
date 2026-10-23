@@ -10,19 +10,19 @@
         <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="{% if white_label_company.icon %}{{white_label_company.icon.url}} {% else %}{% static 'favicons/apple-touch-icon.png' %}{% endif %}"
+            href="{% static 'favicons/apple-touch-icon.png' %}"
         >
         <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="{% if white_label_company.icon %}{{white_label_company.icon.url}} {% else %}{% static 'favicons/favicon-32x32.png' %}{% endif %}"
+            href="{% static 'favicons/favicon-32x32.png' %}"
         >
         <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="{% if white_label_company.icon %}{{white_label_company.icon.url}} {% else %}{% static 'favicons/favicon-16x16.png' %}{% endif %}"
+            href="{% static 'favicons/favicon-16x16.png' %}"
         >
         <link rel="stylesheet" href="{% static '/build/css/style.min.css' %}">
         <link rel="manifest" href="{% static 'build/manifest.json' %}">
@@ -143,8 +143,8 @@
                 </div>
                 <img
                     src="{% if white_label_company.icon %}
-                "{{white_label_company.icon.url}}" {% else %} "{% static 'images/ui/auth-logo.png' %}" {% endif %}"
-                    alt="{% trans 'Horilla' %}"
+                "{% static 'images/ui/auth-logo.png' %}"
+                    alt="{{ white_label_company_name }}"
                 >
             </main>
         </div>

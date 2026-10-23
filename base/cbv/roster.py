@@ -28,8 +28,8 @@ from base.forms import RosterCellUpdateForm
 from base.models import CompanyLeaves, EmployeeShift, Holidays, Roster, RosterPublishLog
 from employee.models import Employee
 from horilla.decorators import hx_request_required
-from horilla_views.cbv_methods import login_required, paginator_qry
-from horilla_views.generic.cbv.views import HorillaCardView, HorillaNavView
+from hr_views.cbv_methods import login_required, paginator_qry
+from hr_views.generic.cbv.views import HorillaCardView, HorillaNavView
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -696,7 +696,7 @@ class RosterTemplateDownloadView(View):
                     c.fill = off_fill
                     c.font = off_font
                     if off_reason != "Weekly Off Day":
-                        c.comment = Comment(f"Holiday: {off_reason}", "Horilla")
+                        c.comment = Comment(f"Holiday: {off_reason}", "Bells Tech")
                 elif d.weekday() >= 5:
                     c.fill = weekend_fill
 

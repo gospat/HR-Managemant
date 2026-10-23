@@ -19,7 +19,7 @@ from base.models import Company, EmployeeShiftSchedule, IntegrationApps
 from employee.methods.duration_methods import strtime_seconds
 from horilla.horilla_middlewares import _thread_locals, get_selected_company
 from horilla.methods import get_horilla_model_class
-from horilla_theme.models import CompanyTheme, HorillaColorTheme
+from hr_theme.models import CompanyTheme, HorillaColorTheme
 
 register = template.Library()
 

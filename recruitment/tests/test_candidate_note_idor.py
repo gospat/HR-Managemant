@@ -21,7 +21,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from base.models import Company, Department, JobPosition
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from recruitment.models import Candidate, Recruitment, Stage, StageNote
 from recruitment.views.views import candidate_reachable_by
 

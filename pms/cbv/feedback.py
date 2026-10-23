@@ -18,9 +18,9 @@ from base.methods import is_reportingmanager
 from employee.cbv.employee_profile import EmployeeProfileView
 from employee.models import Employee
 from horilla.http.response import HorillaRedirect
-from horilla_auth.models import HorillaUser
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import (
+from hr_auth.models import HorillaUser
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,
@@ -644,7 +644,7 @@ class AddAnonymousFeedbackForm(HorillaFormView):
                 message = _("Feedback Created Successfully")
                 if feedback.based_on == "employee":
                     notify.send(
-                        HorillaUser.objects.filter(username="Horilla Bot").first(),
+                        HorillaUser.objects.filter(username="Bells Bot").first(),
                         recipient=feedback.employee_id.employee_user_id,
                         verb=gettext_noop("You received anonymous feedback!"),
                         redirect=reverse("feedback-view"),

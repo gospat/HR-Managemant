@@ -13,7 +13,7 @@ import uuid
 from django import template
 from django.apps import apps
 
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from recruitment.models import CandidateRating
 
 # from django.forms.boundfield

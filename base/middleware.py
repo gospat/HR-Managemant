@@ -26,7 +26,7 @@ from employee.models import (
 )
 from horilla.horilla_middlewares import _thread_locals, set_selected_company
 from horilla.methods import get_horilla_model_class
-from horilla_documents.models import DocumentRequest
+from hr_documents.models import DocumentRequest
 
 CACHE_KEY = "horilla_company_models_cache_key"
 

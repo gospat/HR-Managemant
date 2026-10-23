@@ -4,12 +4,12 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import get_session_company
 from base.models import AttendanceAllowedIP
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     login_required,
     permission_required,
     render_template,
 )
-from horilla_views.generic.cbv.views import HorillaListView, HorillaNavView
+from hr_views.generic.cbv.views import HorillaListView, HorillaNavView
 
 
 @method_decorator(login_required, name="dispatch")

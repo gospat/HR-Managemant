@@ -7,7 +7,7 @@ from django.contrib.auth.context_processors import PermWrapper
 
 from base.methods import check_manager
 from employee.models import Employee
-from horilla_audit.models import AccountBlockUnblock
+from hr_audit.models import AccountBlockUnblock
 
 
 def edit_accessibility(

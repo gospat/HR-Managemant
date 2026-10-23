@@ -23,10 +23,10 @@ from employee.forms import MultipleFileField
 from employee.models import Employee
 from horilla import horilla_middlewares
 from horilla.horilla_middlewares import _thread_locals
-from horilla_views.generic.cbv.views import HorillaFormView
-from horilla_widgets.forms import HorillaForm, HorillaModelForm
-from horilla_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from horilla_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_views.generic.cbv.views import HorillaFormView
+from hr_widgets.forms import HorillaForm, HorillaModelForm
+from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
+from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
 from leave.methods import get_leave_day_attendance
 from leave.models import (
     AvailableLeave,
@@ -159,7 +159,7 @@ class LeaveTypeAdminForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         if f := self.fields.get("company_id"):
-            from horilla_widgets.forms import default_select_option_template
+            from hr_widgets.forms import default_select_option_template
 
             w = getattr(f.widget, "widget", f.widget)
             if isinstance(w, forms.Select):

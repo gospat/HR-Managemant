@@ -22,7 +22,7 @@ def block_unblock_disciplinary():
     """
     from base.models import EmployeeShiftSchedule
     from employee.models import DisciplinaryAction
-    from horilla_auth.models import HorillaUser
+    from hr_auth.models import HorillaUser
 
     today = date.today()
     now = datetime.now().time()

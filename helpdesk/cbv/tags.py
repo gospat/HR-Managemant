@@ -15,8 +15,8 @@ from base.forms import TagsForm
 from base.models import Tags
 from helpdesk.filter import TagsFilter
 from helpdesk.forms import TicketTypeForm
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

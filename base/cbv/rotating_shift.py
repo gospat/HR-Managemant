@@ -14,8 +14,8 @@ from base.decorators import manager_can_enter
 from base.filters import RotatingShiftFilter
 from base.forms import RotatingShiftForm
 from base.models import RotatingShift
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaFormView,
     HorillaListView,
     HorillaNavView,

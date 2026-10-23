@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 
+from django.conf import settings
 from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -61,7 +62,10 @@ def _export_meta(request, definition, filters, slug: str) -> dict:
     company = company_letterhead(request, company_id=filters.company_id)
     filters_pairs = filters.summary_pairs()
     return {
-        "product_name": "Horilla HR · Standard Reports",
+        "product_name": (
+            f"{getattr(settings, 'BRAND_FALLBACK_NAME', 'Bells University of Technology')}"
+            " · Standard Reports"
+        ),
         "company": company,
         "user": getattr(request.user, "get_full_name", lambda: "")()
         or getattr(request.user, "username", ""),

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from base.models import Company, Department, EmployeeShift, WorkType
 from employee.models import Employee, EmployeeWorkInformation
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 
 def make_company(name: str = "Test Corp", **overrides) -> Company:

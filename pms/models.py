@@ -18,9 +18,9 @@ from base.models import Company, Department, JobPosition
 from employee.models import BonusPoint, Employee
 from horilla.horilla_middlewares import _thread_locals
 from horilla.models import HorillaModel
-from horilla_audit.methods import get_diff
-from horilla_audit.models import HorillaAuditInfo, HorillaAuditLog
-from horilla_views.cbv_methods import render_template
+from hr_audit.methods import get_diff
+from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from hr_views.cbv_methods import render_template
 
 """Objectives and key result section"""
 

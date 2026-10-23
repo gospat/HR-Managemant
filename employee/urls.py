@@ -31,7 +31,7 @@ from employee.cbv import (
 )
 from employee.forms import DisciplinaryActionForm
 from employee.models import DisciplinaryAction, Employee, EmployeeTag
-from horilla_documents.models import DocumentRequest
+from hr_documents.models import DocumentRequest
 
 urlpatterns = [
     path(

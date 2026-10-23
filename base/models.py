@@ -21,9 +21,9 @@ from horilla import horilla_middlewares
 from horilla.horilla_middlewares import _thread_locals
 from horilla.methods import get_horilla_model_class
 from horilla.models import HorillaModel, NoPermissionModel, upload_path
-from horilla_audit.models import HorillaAuditInfo, HorillaAuditLog
-from horilla_auth.models import HorillaUser
-from horilla_views.cbv_methods import render_template
+from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from hr_auth.models import HorillaUser
+from hr_views.cbv_methods import render_template
 
 # Create your models here.
 WEEKS = [
@@ -939,7 +939,7 @@ class EmployeeShiftSchedule(HorillaModel):
         blank=True,
         verbose_name=_("Automatic Check Out Time"),
         help_text=_(
-            "Time at which the horilla will automatically check out the employee attendance if they forget."
+            "Time at which the system will automatically check out the employee attendance if they forget."
         ),
     )
 
@@ -2054,6 +2054,10 @@ class HorillaMailTemplate(HorillaModel):
         verbose_name=_("Company"),
     )
     objects = HorillaCompanyManager(related_company_field="company_id")
+
+    class Meta:
+        verbose_name = _("Mail Template")
+        verbose_name_plural = _("Mail Templates")
 
     def __str__(self) -> str:
         return f"{self.title}"

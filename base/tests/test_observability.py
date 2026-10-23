@@ -271,7 +271,7 @@ class MetricsEndpointTests(TestCase):
     def setUp(self):
         from base.models import Company
         from horilla.testkit import make_employee
-        from horilla_auth.models import HorillaUser
+        from hr_auth.models import HorillaUser
 
         company = Company.objects.create(company="Metrics Co", hq=True)
         self.staff = HorillaUser.objects.create_user(

@@ -580,7 +580,7 @@
     rather than including generic/filter_tags.html, so it doesn't get that
     template's Save button or its saved-filter modal for free -- both
     added here instead, reusing the same generic SavedFilter backend
-    (horilla_views.views.SavedFilter) everything else already saves to.
+    (hr_views.views.SavedFilter) everything else already saves to.
     {% endcomment %}
     <div class="oh-modal" id="msSavedFilterModal" role="dialog" aria-labelledby="msSavedFilterModal" aria-hidden="true">
       <div class="oh-modal__dialog" style="max-width: 550px" id="msSavedFilterFormTarget"></div>
@@ -735,7 +735,7 @@ function msRenderFilterTags() {
 }
 
 // Reuses the same generic SavedFilter backend every other list page saves
-// to (horilla_views.views.SavedFilter) -- it only needs a path and a GET
+// to (hr_views.views.SavedFilter) -- it only needs a path and a GET
 // querystring, neither of which is specific to the CBV filter system. The
 // querystring has to be built from the form's live field values rather
 // than location.search, same reason msRenderFilterTags does: this form

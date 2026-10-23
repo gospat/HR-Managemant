@@ -5,8 +5,8 @@ this page is handling the cbv methods of the candidate documents tab
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaListView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaListView
 from recruitment.cbv_decorators import all_manager_can_enter
 from recruitment.filters import CandidateDocumentFilter
 from recruitment.models import Candidate, CandidateDocument

@@ -16,8 +16,8 @@ from django.utils.translation import gettext_noop
 
 from employee.models import Employee
 from horilla.http.response import HorillaRedirect
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaDetailedView, HorillaFormView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaDetailedView, HorillaFormView
 from notifications.signals import notify
 from onboarding.cbv_decorators import (
     recruitment_manager_can_enter,

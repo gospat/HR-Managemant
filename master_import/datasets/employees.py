@@ -32,7 +32,7 @@ from employee.methods.methods import (
     set_initial_password,
 )
 from employee.models import Employee, EmployeeBankDetails, EmployeeWorkInformation
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 from payroll.models.models import SalaryStructure
 
 from .base import Checked, Context, Dataset, Field

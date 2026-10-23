@@ -18,8 +18,8 @@ from base.methods import filtersubordinates
 from employee.filters import DisciplinaryActionFilter
 from employee.forms import ActiontypeForm, DisciplinaryActionForm
 from employee.models import Actiontype, DisciplinaryAction
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import (
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

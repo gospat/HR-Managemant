@@ -25,7 +25,7 @@ from employee.models import Employee
 from horilla import horilla_middlewares
 from horilla.horilla_middlewares import _thread_locals
 from horilla.models import HorillaModel, upload_path
-from horilla_views.cbv_methods import render_template
+from hr_views.cbv_methods import render_template
 
 # Create your models here.
 

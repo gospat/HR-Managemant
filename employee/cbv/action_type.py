@@ -15,8 +15,8 @@ from employee.cbv.disciplinary_actions import DynamicActionTypeFormView
 from employee.filters import ActionTypeFilter
 from employee.forms import ActiontypeForm
 from employee.models import Actiontype
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import HorillaListView, HorillaNavView
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import HorillaListView, HorillaNavView
 
 
 @method_decorator(login_required, name="dispatch")

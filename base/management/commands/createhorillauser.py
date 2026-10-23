@@ -7,7 +7,7 @@ import uuid
 from django.core.management.base import BaseCommand, CommandError
 
 from employee.models import Employee
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 
 class Command(BaseCommand):
@@ -59,10 +59,10 @@ class Command(BaseCommand):
             employee.phone = phone
             employee.save()
 
-            bot = HorillaUser.objects.filter(username="Horilla Bot").first()
+            bot = HorillaUser.objects.filter(username="Bells Bot").first()
             if bot is None:
                 HorillaUser.objects.create_user(
-                    username="Horilla Bot",
+                    username="Bells Bot",
                     password=str(uuid.uuid4()),
                 )
 

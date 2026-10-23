@@ -20,8 +20,8 @@ from base.models import Announcement, AnnouncementView
 from employee.filters import EmployeeWorkInformationFilter
 from employee.forms import EmployeeWorkInformationUpdateForm
 from employee.models import EmployeeWorkInformation
-from horilla_views.cbv_methods import login_required, permission_required
-from horilla_views.generic.cbv.views import HorillaFormView, HorillaListView
+from hr_views.cbv_methods import login_required, permission_required
+from hr_views.generic.cbv.views import HorillaFormView, HorillaListView
 
 
 @method_decorator(login_required, name="dispatch")

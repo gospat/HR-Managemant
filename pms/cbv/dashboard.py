@@ -11,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import filtersubordinates
 from horilla.decorators import hx_request_required
-from horilla_views.cbv_methods import login_required
-from horilla_views.generic.cbv.views import HorillaListView
+from hr_views.cbv_methods import login_required
+from hr_views.generic.cbv.views import HorillaListView
 from pms.cbv.feedback import RequestedFeedbackTab
 from pms.filters import EmployeeObjectiveFilter, KeyResultFilter
 from pms.models import EmployeeKeyResult, EmployeeObjective

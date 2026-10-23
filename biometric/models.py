@@ -17,7 +17,7 @@ from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company
 from employee.models import Employee
 from horilla.models import HorillaModel
-from horilla_views.cbv_methods import render_template
+from hr_views.cbv_methods import render_template
 
 
 def validate_schedule_time_format(value):

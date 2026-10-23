@@ -32,7 +32,7 @@ def candidate_convert():
     """
     Converts candidates to a "converted" state if they already exist as users.
     """
-    from horilla_auth.models import HorillaUser
+    from hr_auth.models import HorillaUser
     from recruitment.models import Candidate
 
     mails = list(

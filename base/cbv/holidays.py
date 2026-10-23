@@ -15,12 +15,12 @@ from base.filters import HolidayFilter
 from base.forms import HolidayForm, HolidaysColumnExportForm
 from base.methods import has_export_access
 from base.models import Holidays
-from horilla_views.cbv_methods import (
+from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
-from horilla_views.generic.cbv.views import (
+from hr_views.generic.cbv.views import (
     HorillaDetailedView,
     HorillaFormView,
     HorillaListView,

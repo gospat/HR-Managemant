@@ -117,7 +117,7 @@ def load_ldap_settings():
     try:
         from django.db import connection
 
-        from horilla_ldap.models import LDAPSettings
+        from hr_ldap.models import LDAPSettings
 
         # Ensure DB is ready before querying
         if not connection.introspection.table_names():

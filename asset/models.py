@@ -18,7 +18,7 @@ from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company
 from employee.models import Employee
 from horilla.models import HorillaModel, upload_path
-from horilla_views.cbv_methods import render_template
+from hr_views.cbv_methods import render_template
 
 
 class AssetCategory(HorillaModel):

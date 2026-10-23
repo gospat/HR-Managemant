@@ -6,7 +6,7 @@ from base.models import Company
 from employee.models import Employee
 from horilla import horilla_middlewares
 from horilla.models import HorillaModel
-from horilla_auth.models import HorillaUser
+from hr_auth.models import HorillaUser
 
 
 class ReportTemplate(HorillaModel):

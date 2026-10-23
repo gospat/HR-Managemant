@@ -22,7 +22,14 @@ class ProductionBoundaryMiddleware:
                 return response
         response = self.get_response(request)
         if path.startswith(
-            ("/university-api/", "/admin/", "/login", "/change-password", "/media/")
+            (
+                "/university-api/",
+                "/university-dynamic/",
+                "/admin/",
+                "/login",
+                "/change-password",
+                "/media/",
+            )
         ):
             response["Cache-Control"] = "private, no-store"
         response["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"

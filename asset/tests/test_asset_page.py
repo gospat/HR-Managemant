@@ -9,6 +9,7 @@ category is picked, or created, in the asset form itself.
 """
 
 import re
+from html import unescape
 
 from django.test import TestCase
 from django.urls import reverse
@@ -91,11 +92,14 @@ class AssetPageTests(TestCase):
         self.assertEqual(asset.asset_category_id, category)
 
     def test_a_category_can_be_created_from_the_asset_form(self):
-        self.client.get(reverse("asset-creation-new"), **HX)  # registers the route
-        route = "dynamic-path-asset_category_id-" + self.client.session.session_key
-        # By path, as the form's own button does: reverse() does not see a route that was
-        # appended to the URL list after its cache was built.
-        url = "/" + route + "?dynamic_field=asset_category_id"
+        response = self.client.get(reverse("asset-creation-new"), **HX)
+        html = response.content.decode()
+        self.assertNotIn(self.client.session.session_key, html)
+        match = re.search(
+            r'id="modalButtonasset_category_idForm"\s+hx-get="([^"]+)"', html
+        )
+        self.assertIsNotNone(match)
+        url = unescape(match.group(1))
         self.client.post(
             url,
             {

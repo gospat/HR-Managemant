@@ -63,6 +63,13 @@ class TaxBracket(HorillaModel):
     )
     objects = models.Manager()
 
+    def save(self, *args, **kwargs):
+        # NULL is the portable representation of an unbounded final bracket.
+        # Some legacy forms and tax packs still supply positive infinity.
+        if self.max_income == math.inf:
+            self.max_income = None
+        return super().save(*args, **kwargs)
+
     def __str__(self):
         if self.max_income != math.inf:
             return (
@@ -117,6 +124,8 @@ class TaxBracket(HorillaModel):
         return reverse("tax-bracket-delete", kwargs={"tax_bracket_id": self.pk})
 
     def clean(self):
+        if self.max_income == math.inf:
+            self.max_income = None
         super().clean()
 
         existing_bracket = TaxBracket.objects.filter(

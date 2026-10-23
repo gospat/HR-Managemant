@@ -216,3 +216,8 @@ not a completed production university HR system.
 ### University governance templates
 
 After migrations, run `DJANGO_SETTINGS_MODULE=university.settings .venv/bin/python manage.py seed_university_policies --company INSTITUTION_ID` for the correct existing company ID. See [production readiness](PRODUCTION-READINESS.md#provisional-university-policy-templates-and-promotion-operations) for roles, policy review/adoption and `/promotions`. Seeding creates provisional drafts, not Registrar approval. Leave/attendance templates require separate operational module configuration; promotion policy is enforced by the new workflow. Salary/statutory tables must be configured from validated sources.
+
+
+### Broader HR validation
+
+Run `bash scripts/test-university-modules.sh` for inherited HR modules, reports, audit and bulk imports on MySQL, separately from the browser suite. Generic modal/import/bulk callbacks require authenticated shared Redis in production; their opaque session-bound links expire after 30 minutes. Reopen expired forms. Leave email delivery starts after commit and requires configured SMTP plus operational monitoring.

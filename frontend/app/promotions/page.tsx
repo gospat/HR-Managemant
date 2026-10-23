@@ -7,6 +7,7 @@ type Policy = {
   module: string;
   version: string;
   active: boolean;
+  adopted_at: string | null;
   provisional: boolean;
   configuration: Record<string, unknown>;
 };
@@ -328,7 +329,11 @@ export default function PromotionsPage() {
             {p.module} · {p.version}
           </h3>
           <p>
-            {p.active ? "Adopted" : "Awaiting adoption"}
+            {p.active
+              ? "Adopted"
+              : p.adopted_at
+                ? "Retired"
+                : "Awaiting adoption"}
             {p.provisional ? " · Provisional template" : ""}
           </p>
           <details>
@@ -346,7 +351,7 @@ export default function PromotionsPage() {
               ))}
             </dl>
           </details>
-          {canAdopt && !p.active && (
+          {canAdopt && !p.adopted_at && (
             <button
               disabled={busy}
               onClick={() =>

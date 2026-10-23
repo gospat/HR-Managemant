@@ -23,10 +23,11 @@ work-info record yet made every caller's `or` chain pass for anyone.
 """
 
 from datetime import date
-from unittest import mock
+from unittest import mock, skipUnless, skipIf
 from unittest.mock import MagicMock, patch
 
-from django.test import Client, TestCase
+from django.apps import apps
+from django.test import Client, TestCase, SimpleTestCase
 from django.urls import reverse
 
 from attendance.methods.utils import (
@@ -73,6 +74,7 @@ class GetClientIpTests(TestCase):
         self.assertEqual(get_client_ip(request), "10.20.30.7")
 
 
+@skipUnless(apps.is_installed("geofencing"), "Optional geofencing app is disabled.")
 class GeofenceDenialWebTests(TestCase):
     def setUp(self):
         set_selected_company(None)
@@ -213,3 +215,11 @@ class RevalidateAttendanceRegressionTests(TestCase):
         client.get(reverse("revalidate-this-attendance", args=[self.attendance.pk]))
         self.attendance.refresh_from_db()
         self.assertTrue(self.attendance.attendance_validated)
+
+
+@skipIf(apps.is_installed("geofencing"), "Checks the standalone configuration.")
+class OptionalGeofenceTests(SimpleTestCase):
+    def test_disabled_optional_app_does_not_break_web_attendance(self):
+        self.assertIsNone(
+            geofence_denial_web(type("Request", (), {"GET": {}})(), object())
+        )

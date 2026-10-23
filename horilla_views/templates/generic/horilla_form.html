@@ -26,7 +26,7 @@
         {% endwith %}
 
         <form hidden id="modalButton{{ field_tuple.0 }}Form"
-            hx-get="/dynamic-path-{{ field_tuple.0 }}-{{ request.session.session_key }}?dynamic_field={{ field_tuple.0 }}"
+            hx-get="/{{ dynamic_field_urls|get_item:field_tuple.0 }}?dynamic_field={{ field_tuple.0 }}"
             hx-target="#dynamicModal{{ field_tuple.0 }}Body">
             <input type="text" name="dynamic_initial" data-dynamic-field="{{ field_tuple.0 }}">
             <input type="text" name="view_id" value="{{ view_id }}">

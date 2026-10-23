@@ -186,9 +186,8 @@ class BoundaryTests(SimpleTestCase):
         )
 
     def test_sensitive_responses_are_not_cached(self):
-        self.assertEqual(
-            self.request("/university-api/staff/")["Cache-Control"], "private, no-store"
-        )
+        for path in ("/university-api/staff/", "/university-dynamic/example/"):
+            self.assertEqual(self.request(path)["Cache-Control"], "private, no-store")
 
     @patch("university.operations.health.connection")
     @patch("university.operations.health.cache")

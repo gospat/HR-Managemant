@@ -1,5 +1,6 @@
 from django.urls import include, path
 from horilla.urls import urlpatterns as upstream_patterns
+from university.operations.dynamic_routes import dispatch as dynamic_dispatch
 from university.people.views import (
     SessionView,
     StaffView,
@@ -9,9 +10,15 @@ from university.people.views import (
     StaffHistoryView,
 )
 
-from university.governance.views import PolicyView, PolicyAdoptView, PromotionView, PromotionActionView
+from university.governance.views import (
+    PolicyView,
+    PolicyAdoptView,
+    PromotionView,
+    PromotionActionView,
+)
 
 urlpatterns = [
+    path("university-dynamic/<slug:token>/", dynamic_dispatch),
     path("university-api/policies/", PolicyView.as_view()),
     path("university-api/policies/<int:pk>/adopt/", PolicyAdoptView.as_view()),
     path("university-api/promotions/", PromotionView.as_view()),

@@ -84,13 +84,19 @@ def model_has_audit_tracking(model) -> bool:
     )
 
 
-def register_dynamic_url(route: str, view, name: str = None) -> None:
+def register_dynamic_url(route: str, view, name: str = None) -> str:
     """
     Register a dynamic URL route once,
     skipping duplicates since re-adding them would grow the resolver unbounded.
     """
+    from django.conf import settings
+
+    if settings.ROOT_URLCONF == "university.urls":
+        from university.operations.dynamic_routes import register
+
+        return register(route, view)
     if route in _dynamic_url_routes_registered:
-        return
+        return route
     _dynamic_url_routes_registered.add(route)
     from horilla.urls import path, urlpatterns
 
@@ -98,6 +104,10 @@ def register_dynamic_url(route: str, view, name: str = None) -> None:
         urlpatterns.append(path(route, view, name=name))
     else:
         urlpatterns.append(path(route, view))
+    from django.urls import clear_url_caches
+
+    clear_url_caches()
+    return route
 
 
 @method_decorator(hx_request_required, name="dispatch")
@@ -225,6 +235,8 @@ class HorillaListView(ListView):
             self.kwargs = kwargs
             return self.dispatch(request, *args, **kwargs)
 
+        view.view_class = cls
+        view.view_initkwargs = initkwargs
         return view
 
     def __init__(self, **kwargs: Any) -> None:
@@ -626,8 +638,12 @@ class HorillaListView(ListView):
             post_import_sheet_path = (
                 f"post-import-sheet-{self.view_id}-{self.request.session.session_key}/"
             )
-            register_dynamic_url(get_import_sheet_path, self.serve_import_sheet)
-            register_dynamic_url(post_import_sheet_path, self.import_records)
+            get_import_sheet_path = register_dynamic_url(
+                get_import_sheet_path, self.serve_import_sheet
+            )
+            post_import_sheet_path = register_dynamic_url(
+                post_import_sheet_path, self.import_records
+            )
 
             session_key = self.request.session.session_key
 
@@ -641,9 +657,11 @@ class HorillaListView(ListView):
             post_bulk_path = (
                 f"post-bulk-update-{self.view_id}-{self.request.session.session_key}/"
             )
+            post_bulk_path = register_dynamic_url(
+                post_bulk_path, self.handle_bulk_submission
+            )
             self.post_bulk_path = post_bulk_path
-            register_dynamic_url(get_bulk_path, self.serve_bulk_form)
-            register_dynamic_url(post_bulk_path, self.handle_bulk_submission)
+            get_bulk_path = register_dynamic_url(get_bulk_path, self.serve_bulk_form)
             context["bulk_update_fields"] = self.bulk_update_fields
             context["bulk_path"] = get_bulk_path
         context["export_formats"] = self.export_formats
@@ -705,16 +723,14 @@ class HorillaListView(ListView):
             messages.success(request, _("Selected Records updated"))
 
             script_id = get_short_uuid(length=3, prefix="bulk")
-            return HttpResponse(
-                f"""
+            return HttpResponse(f"""
                 <script id="{script_id}">
                     $("#{script_id}").closest(".oh-modal--show").removeClass("oh-modal--show");
                     $("#{self.selected_instances_key_id}").attr("data-ids", "[]");
                     $(".reload-record").click()
                     $("#reloadMessagesButton").click()
                 </script>
-                """
-            )
+                """)
         if not instance_ids:
             messages.info(request, _("No records selected"))
         # Same title as the form first opened with, and keep the selection.
@@ -1464,6 +1480,8 @@ class HorillaSectionView(TemplateView):
             self.kwargs = kwargs
             return self.dispatch(request, *args, **kwargs)
 
+        view.view_class = cls
+        view.view_initkwargs = initkwargs
         return view
 
 
@@ -1628,6 +1646,8 @@ class HorillaTabView(TemplateView):
             self.kwargs = kwargs
             return self.dispatch(request, *args, **kwargs)
 
+        view.view_class = cls
+        view.view_initkwargs = initkwargs
         return view
 
     def __init__(self, **kwargs: Any) -> None:
@@ -1910,6 +1930,8 @@ class HorillaCardView(ListView):
             self.kwargs = kwargs
             return self.dispatch(request, *args, **kwargs)
 
+        view.view_class = cls
+        view.view_initkwargs = initkwargs
         return view
 
 
@@ -2082,6 +2104,13 @@ class HorillaFormView(FormView):
         )
 
         context["dynamic_create_fields"] = self.dynamic_create_fields
+        context["dynamic_field_urls"] = {
+            item[0]: register_dynamic_url(
+                f"dynamic-path-{item[0]}-{self.request.session.session_key}",
+                item[1].as_view(),
+            )
+            for item in self.dynamic_create_fields
+        }
         context["form_class_path"] = self.form_class_path
         context["view_id"] = self.view_id
         context["hx_confirm"] = self.hx_confirm
@@ -2176,14 +2205,6 @@ class HorillaFormView(FormView):
                         },
                     )
 
-                    dynamic_path_route = (
-                        f"dynamic-path-{field}-{self.request.session.session_key}"
-                    )
-                    register_dynamic_url(
-                        dynamic_path_route,
-                        view.as_view(),
-                        name=dynamic_path_route,
-                    )
                     queryset = form.fields[field].queryset
                     choices = [(instance.id, instance) for instance in queryset]
                     choices.insert(0, ("", "Select option"))
@@ -2202,8 +2223,7 @@ class HorillaFormView(FormView):
                             not in data_field_attr.get("onchange", "")
                         ):
                             data_field_attr["onchange"] = (
-                                data_field_attr.get("onchange", "")
-                                + f"""
+                                data_field_attr.get("onchange", "") + f"""
                                 if(this.value != 'dynamic_create'){{
                                 $('#modalButton{field}Form [name={data_field}]').val(this.value);
                                 }}
@@ -2277,6 +2297,8 @@ class HorillaFormView(FormView):
             self.kwargs = kwargs
             return self.dispatch(request, *args, **kwargs)
 
+        view.view_class = cls
+        view.view_initkwargs = initkwargs
         return view
 
 
@@ -2532,6 +2554,8 @@ class HorillaNavView(TemplateView):
             self.kwargs = kwargs
             return self.dispatch(request, *args, **kwargs)
 
+        view.view_class = cls
+        view.view_initkwargs = initkwargs
         return view
 
 
@@ -2621,6 +2645,8 @@ class HorillaProfileView(DetailView):
             self.kwargs = kwargs
             return self.dispatch(request, *args, **kwargs)
 
+        view.view_class = cls
+        view.view_initkwargs = initkwargs
         return view
 
     def get_context_data(self, **kwargs: Any) -> dict:

@@ -52,7 +52,8 @@ class TestHourAccountRebuild(HolidayFixtureMixin, TestCase):
             ]
         )
 
-        edited = Attendance.objects.get(pk=created[0].pk)
+        # MySQL bulk inserts do not return generated primary keys.
+        edited = Attendance.objects.get(employee_id=self.emp_a, attendance_date=start)
         edited.attendance_worked_hour = "07:49"
         edited.save()
 

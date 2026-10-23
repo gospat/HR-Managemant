@@ -6,6 +6,7 @@ from threading import Thread
 from django.contrib import messages
 from django.contrib.staticfiles import finders
 from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.db import close_old_connections, connections, transaction
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
@@ -16,6 +17,11 @@ logger = logging.getLogger(__name__)
 
 
 class LeaveMailSendThread(Thread):
+
+    def start(self):
+        # A second connection cannot see uncommitted requests or employees.
+        # Rolled-back changes must never send a misleading notification.
+        transaction.on_commit(super().start)
 
     def __init__(self, request, leave_request, type):
         Thread.__init__(self)
@@ -137,6 +143,13 @@ class LeaveMailSendThread(Thread):
             email.send()
 
     def run(self) -> None:
+        close_old_connections()
+        try:
+            self._run_notifications()
+        finally:
+            connections.close_all()
+
+    def _run_notifications(self) -> None:
         super().run()
         if self.type == "request":
             owner = self.leave_request.employee_id

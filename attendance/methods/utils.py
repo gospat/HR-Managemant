@@ -8,6 +8,7 @@ import calendar
 from datetime import date, datetime, time, timedelta
 
 import pandas as pd
+from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
@@ -199,12 +200,11 @@ def geofence_denial_web(request, company):
     Returns an error message to show the employee, or None if the punch may
     proceed.
     """
+    if company is None or not apps.is_installed("geofencing"):
+        return None
     from geopy.distance import geodesic
-
     from geofencing.models import GeoFencing
 
-    if company is None:
-        return None
     fence = GeoFencing.objects.filter(company_id=company).first()
     if fence is None or not fence.start:
         return None

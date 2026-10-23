@@ -16,6 +16,7 @@ from itertools import chain
 import pandas as pd
 from django.conf import settings
 from django.contrib import messages
+from django.db import connection
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -852,11 +853,16 @@ def build_monthly_summary(from_date, to_date, employee_qs):
 
     # Bulk-upsert computed hours (only for non-manually-edited records)
     if hours_upsert:
+        # MySQL infers the conflict target from the table's unique indexes;
+        # PostgreSQL/SQLite require the explicit composite key instead.
+        conflict_target = {}
+        if connection.features.supports_update_conflicts_with_target:
+            conflict_target["unique_fields"] = ["employee_id", "from_date", "to_date"]
         AttendanceSummaryHours.objects.bulk_create(
             hours_upsert,
             update_conflicts=True,
-            unique_fields=["employee_id", "from_date", "to_date"],
             update_fields=["hours_second"],
+            **conflict_target,
         )
 
     # Stated totals win over counted ones. Applied last, over the finished

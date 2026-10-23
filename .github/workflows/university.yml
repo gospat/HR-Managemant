@@ -66,6 +66,8 @@ jobs:
           fi
       - name: MySQL regression tests and frontend build
         run: bash scripts/test-university.sh
+      - name: Inherited HR module regressions on MySQL
+        run: bash scripts/test-university-modules.sh
       - name: Frontend dependency audit
         run: npm --prefix frontend audit --omit=dev --audit-level=moderate
   images:

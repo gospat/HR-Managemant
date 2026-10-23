@@ -10,7 +10,7 @@ from django.utils.safestring import mark_safe
 from base.methods import get_pagination
 from base.models import MultipleApprovalManagers
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.menu.settings_menu import get_settings_menu
+from core.menu.settings_menu import get_settings_menu
 
 register = template.Library()
 
@@ -553,7 +553,7 @@ def settings_search_index():
     """
     import json
 
-    from horilla.menu.settings_menu import settings_registry
+    from core.menu.settings_menu import settings_registry
 
     entries = []
     seen = set()  # (text_lower, url) pairs — prevents exact duplicates

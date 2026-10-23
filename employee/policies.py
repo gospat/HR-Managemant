@@ -34,8 +34,8 @@ from employee.models import (
     Policy,
     PolicyMultipleFile,
 )
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.http.response import HorillaRedirect
+from core.decorators import hx_request_required, login_required, permission_required
+from core.http.response import HorillaRedirect
 from hr_auth.models import HorillaUser
 from notifications.signals import notify
 

@@ -21,7 +21,7 @@ from base.models import (
     WorkType,
     WorkTypeRequest,
 )
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 
 
 class CompanySerializer(serializers.ModelSerializer):

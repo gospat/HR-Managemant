@@ -14,7 +14,7 @@ doing nothing will see it start applying.
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.component_engine import component_applies_to, condition_holds
 from payroll.models.models import Allowance, MultipleCondition
 

@@ -2,7 +2,7 @@ from datetime import date
 from django.db import IntegrityError, connection, transaction
 from django.test import TestCase
 from base.models import DefaultExportPermission, Holidays
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from employee.models import Employee
 
 

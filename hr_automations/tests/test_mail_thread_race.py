@@ -12,7 +12,7 @@ from unittest.mock import MagicMock, patch
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from hr_automations.signals import send_mail
 from leave.models import LeaveRequest, LeaveType
 

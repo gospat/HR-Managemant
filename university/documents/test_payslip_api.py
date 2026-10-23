@@ -2,8 +2,8 @@ from datetime import date
 from django.contrib.auth.models import Permission
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory, force_authenticate
-from horilla.testkit import make_company, make_employee
-from horilla.testkit.factories import make_payslip
+from core.testkit import make_company, make_employee
+from core.testkit.factories import make_payslip
 from hr_api.api_views.payroll.views import PayslipPDFAPIView
 from payroll.models.tax_models import PayrollSettings
 
@@ -96,7 +96,7 @@ class PayslipExportAPITests(TestCase):
             payslip_pdf(request, self.payslip.pk)
 
     def test_api_administrator_does_not_need_an_employee_profile(self):
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("export-admin", is_superuser=True)
         self.assertEqual(self.request(user).status_code, 200)

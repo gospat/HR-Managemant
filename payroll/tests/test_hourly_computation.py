@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.methods import compute_salary_on_period, hourly_computation
 from payroll.models.models import Contract
 from payroll.tests.factories_payroll import make_active_contract
@@ -142,7 +142,7 @@ class HourlyWithNoAttendanceTests(TestCase):
     """
 
     def setUp(self):
-        from horilla.testkit import make_company, make_employee
+        from core.testkit import make_company, make_employee
         from payroll.models.models import Contract
 
         company = make_company("Hourly Zero Co")

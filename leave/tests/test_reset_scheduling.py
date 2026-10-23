@@ -43,7 +43,7 @@ class ResetSchedulerTests(TestCase):
     """leave.scheduler.leave_reset()."""
 
     def setUp(self):
-        from horilla.testkit import make_company, make_employee
+        from core.testkit import make_company, make_employee
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Reset Scheduler Co")

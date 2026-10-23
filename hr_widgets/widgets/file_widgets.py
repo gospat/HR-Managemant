@@ -2,7 +2,7 @@
 file_widgets.py
 
 Patches Django's ClearableFileInput so every FileField upload widget across
-Horilla shows a clean display name instead of horilla.models.upload_path's
+Horilla shows a clean display name instead of core.models.upload_path's
 full storage path (app_label/model_name/field_name/slug-uuid.ext).
 """
 

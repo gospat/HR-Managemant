@@ -62,4 +62,4 @@ select = [
 
 [tool.ruff.lint.per-file-ignores]
 # Settings modules legitimately re-export via star imports.
-"horilla/settings/*.py" = ["F403", "F405"]
+"core/settings/*.py" = ["F403", "F405"]

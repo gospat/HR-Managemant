@@ -1,5 +1,5 @@
 """
-horilla_widget/urls.py
+hr_widgets/urls.py
 """
 
 from django.urls import path
@@ -11,6 +11,6 @@ urlpatterns = [
     path(
         "ajax-choices/<str:field_key>/",
         views.ajax_select_choices,
-        name="horilla-ajax-choices",
+        name="ajax-choices",
     ),
 ]

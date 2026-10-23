@@ -34,13 +34,13 @@ from employee.models import (
     EmployeeWorkInformation,
     Policy,
 )
-from horilla.filters import (
+from core.filters import (
     FilterSet,
     HorillaFilterSet,
     filter_by_name,
     filter_name_or_badge_terms,
 )
-from horilla.horilla_middlewares import _thread_locals
+from core.horilla_middlewares import _thread_locals
 from hr_documents.models import Document, DocumentRequest
 from hr_views.templatetags.generic_template_filters import getattribute
 from hr_widgets.generic_ajax import register_ajax_field
@@ -566,7 +566,7 @@ class EmployeeFilter(HorillaFilterSet):
                 entry["ajax"] = {
                     # reverse_lazy, not reverse: this can run at class-body
                     # time (EmployeeNav.filter_instance = EmployeeFilter(),
-                    # in employee/cbv/employees.py) while horilla/urls.py
+                    # in employee/cbv/employees.py) while core/urls.py
                     # is still mid-import -- resolving now would deadlock
                     # as a circular import. json_script's DjangoJSONEncoder
                     # stringifies this lazily-resolved value correctly
@@ -575,7 +575,7 @@ class EmployeeFilter(HorillaFilterSet):
                     # actually resolves at real per-request render time,
                     # same reasoning as HorillaFilterSet._apply_ajax_fields.
                     "url": reverse_lazy(
-                        "horilla-ajax-choices", args=[ajax_config["key"]]
+                        "ajax-choices", args=[ajax_config["key"]]
                     ),
                     "placeholder": str(ajax_config["placeholder"]),
                 }
@@ -583,7 +583,7 @@ class EmployeeFilter(HorillaFilterSet):
 
     def _apply_ajax_selects(self):
         """
-        Fixes up the "Name or Badge ID" placeholder: horilla.filters.
+        Fixes up the "Name or Badge ID" placeholder: core.filters.
         FilterSet.__init__ (the base class, already run via
         super().__init__() above) unconditionally overwrites every
         TextInput's native "placeholder" attr with the field's label, so
@@ -701,7 +701,7 @@ class EmployeeFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Modern filter panel's unified "Name or Badge ID" search (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by AttendanceFilters).
         """
@@ -759,7 +759,7 @@ class DocumentRequestFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as EmployeeFilter.name_or_badge; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -869,7 +869,7 @@ class DocumentRequestFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters).
         """
@@ -959,7 +959,7 @@ class DisciplinaryActionFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as EmployeeFilter.name_or_badge; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -1057,7 +1057,7 @@ class DisciplinaryActionFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters).
         """

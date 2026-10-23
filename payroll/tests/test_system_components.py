@@ -13,7 +13,7 @@ cannot be deleted out from under them.
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.forms.component_forms import AllowanceForm, DeductionForm
 from payroll.models.models import Allowance, Deduction, LoanAccount
 from payroll.system_components import (

@@ -8,7 +8,7 @@ from django.test import TestCase, override_settings
 
 class LeaveLedgerBuildTests(TestCase):
     def setUp(self):
-        from horilla.testkit import make_company, make_employee
+        from core.testkit import make_company, make_employee
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Ledger Co")
@@ -352,7 +352,7 @@ class LeaveLedgerBuildTests(TestCase):
 
 class ForecastNextResetTests(TestCase):
     def setUp(self):
-        from horilla.testkit import make_company, make_employee
+        from core.testkit import make_company, make_employee
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Forecast Co")
@@ -442,7 +442,7 @@ class ForecastNextResetTests(TestCase):
 
 class LeaveLedgerViewTests(TestCase):
     def setUp(self):
-        from horilla.testkit import make_company, make_employee, make_user
+        from core.testkit import make_company, make_employee, make_user
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Ledger View Co")

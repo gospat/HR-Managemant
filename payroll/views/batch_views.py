@@ -31,8 +31,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import paginator_qry
 from employee.models import Employee
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.http.response import HorillaRedirect
+from core.decorators import hx_request_required, login_required, permission_required
+from core.http.response import HorillaRedirect
 from payroll.forms.batch_forms import PayPeriodSettingsForm, PayrollBatchScopeForm
 from payroll.methods import batch_run
 from payroll.models.models import (

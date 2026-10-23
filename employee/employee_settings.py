@@ -7,7 +7,7 @@ Employee Configuration landing page with tabbed shift, schedule, work type, and 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from horilla.decorators import hx_request_required
+from core.decorators import hx_request_required
 
 
 @login_required

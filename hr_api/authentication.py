@@ -39,7 +39,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from horilla.horilla_middlewares import set_selected_company
+from core.horilla_middlewares import set_selected_company
 
 logger = logging.getLogger(__name__)
 

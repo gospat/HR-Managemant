@@ -11,7 +11,7 @@ from django_filters import filters
 from base.filters import FilterSet
 from base.models import Company
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet
+from core.filters import HorillaFilterSet
 from onboarding.models import (
     CandidateStage,
     CandidateTask,

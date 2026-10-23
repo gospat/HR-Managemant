@@ -76,9 +76,9 @@ from base.models import (
 from base.widgets import CustomModelChoiceWidget
 from employee.filters import EmployeeFilter
 from employee.models import Employee, EmployeeTag
-from horilla import horilla_middlewares
-from horilla.horilla_middlewares import _thread_locals
-from horilla.methods import get_horilla_model_class
+from core import horilla_middlewares
+from core.horilla_middlewares import _thread_locals
+from core.methods import get_horilla_model_class
 from hr_audit.models import AuditTag
 from hr_auth.models import HorillaUser
 from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
@@ -479,7 +479,7 @@ class AssignUserGroup(Form):
             {"data-placeholder": _("Search employees...")}
         )
         from base.auth_backends import company_scoped_active, get_assigned_company_ids
-        from horilla.horilla_middlewares import _thread_locals
+        from core.horilla_middlewares import _thread_locals
 
         self._grantable_company_ids = None
         if not company_scoped_active():

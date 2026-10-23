@@ -14,7 +14,7 @@ from django.test import TestCase
 from attendance.models import AttendanceConflictResolution
 from attendance.views.summary import build_monthly_summary
 from employee.models import Employee
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 
 WEDNESDAY = datetime.date(2026, 9, 2)
 
@@ -75,7 +75,7 @@ class HalfAbsentResolutionTests(HalfDayResolutionTests):
     def test_it_is_a_choice_on_the_resolution_and_is_accepted_by_the_resolve_view(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("hr-half", is_superuser=True)
         make_employee(
@@ -108,7 +108,7 @@ class HalfAbsentResolutionTests(HalfDayResolutionTests):
     def test_the_day_popover_keeps_its_head_outside_the_scrolling_part(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("hr-half2", is_superuser=True)
         make_employee(
@@ -179,7 +179,7 @@ class SplitDayTests(HalfDayResolutionTests):
     def test_the_resolve_view_saves_a_valid_split_and_refuses_a_bad_one(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("hr-split", is_superuser=True)
         make_employee(
@@ -219,7 +219,7 @@ class SplitDayTests(HalfDayResolutionTests):
     def test_the_popover_has_the_split_controls_with_the_current_halves_chosen(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         self._row("split:UL+A")
         user = make_user("hr-split2", is_superuser=True)
@@ -410,7 +410,7 @@ class HalfDayLeaveNaturalTests(TestCase):
     def test_absent_popover_lists_the_half_absent_day(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         self._leave()
         user = make_user("hr-natural", is_superuser=True)
@@ -494,7 +494,7 @@ class PopoverStatusTests(HalfDayLeaveNaturalTests):
     def _panel(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         if not getattr(self, "_hr_logged_in", False):
             user = make_user("hr-status", is_superuser=True)
@@ -564,7 +564,7 @@ class ShortHalfTests(HalfDayLeaveNaturalTests):
     def test_partial_hours_is_no_longer_offered_and_short_hours_are_not_changed(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("hr-short", is_superuser=True)
         make_employee(

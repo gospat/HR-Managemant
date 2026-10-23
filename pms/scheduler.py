@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from apscheduler.triggers.cron import CronTrigger
 
-from horilla.scheduling import register_job
+from core.scheduling import register_job
 from notifications.signals import notify
 
 

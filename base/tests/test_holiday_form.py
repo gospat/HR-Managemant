@@ -7,7 +7,7 @@ from django.test import TestCase
 
 from base.forms import HolidayForm
 from base.models import Department, Holidays
-from horilla.testkit import make_company
+from core.testkit import make_company
 
 
 class HolidayFormTests(TestCase):
@@ -100,7 +100,7 @@ class HolidayFormTests(TestCase):
 class HolidayViewTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        from horilla.testkit import make_employee, make_user
+        from core.testkit import make_employee, make_user
 
         cls.company = make_company("View Corp")
         cls.user = make_user("holiday_admin", is_superuser=True)

@@ -40,8 +40,8 @@ jobs:
 
       - name: Ensure local_settings stub exists
         run: |
-          if [ ! -f horilla/settings/local_settings.py ]; then
-            printf '%s\n' '# Ephemeral for CI' > horilla/settings/local_settings.py
+          if [ ! -f core/settings/local_settings.py ]; then
+            printf '%s\n' '# Ephemeral for CI' > core/settings/local_settings.py
           fi
 
       # Ruff runs over the whole repo, unlike the Black/isort steps below --
@@ -52,20 +52,20 @@ jobs:
         run: ruff check .
 
       - name: Black (settings + urls)
-        run: black --check horilla/settings horilla/urls.py
+        run: black --check core/settings core/urls.py
 
       - name: isort (settings + urls)
-        run: isort --check-only --profile black horilla/settings horilla/urls.py
+        run: isort --check-only --profile black core/settings core/urls.py
 
       - name: Django system checks (SQLite defaults)
         env:
-          DJANGO_SETTINGS_MODULE: horilla.settings
+          DJANGO_SETTINGS_MODULE: core.settings
           DEBUG: "True"
           SECRET_KEY: ci-dev-not-for-production
           ALLOWED_HOSTS: localhost,127.0.0.1
         run: |
           python manage.py check
-          python manage.py check --fail-level WARNING --tag horilla.tenancy
+          python manage.py check --fail-level WARNING --tag core.tenancy
 
   dependency-audit:
     # Dependency CVEs were only ever caught by the container image scan, which
@@ -174,13 +174,13 @@ jobs:
 
       - name: Ensure local_settings stub exists
         run: |
-          if [ ! -f horilla/settings/local_settings.py ]; then
-            printf '%s\n' '# Ephemeral for CI' > horilla/settings/local_settings.py
+          if [ ! -f core/settings/local_settings.py ]; then
+            printf '%s\n' '# Ephemeral for CI' > core/settings/local_settings.py
           fi
 
       - name: Reject insecure production defaults
         env:
-          DJANGO_SETTINGS_MODULE: horilla.settings
+          DJANGO_SETTINGS_MODULE: core.settings
           DEBUG: "False"
           SECRET_KEY: django-insecure-default-key
           ALLOWED_HOSTS: "*"

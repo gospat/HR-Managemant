@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from base.models import Company
 from helpdesk.models import FAQ, FAQCategory
-from horilla.testkit import make_employee, make_user
+from core.testkit import make_employee, make_user
 
 
 class FAQViewEscapesQuestionsTests(TestCase):

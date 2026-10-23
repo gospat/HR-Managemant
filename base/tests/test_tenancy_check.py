@@ -58,7 +58,7 @@ class TenancyCheckTests(SimpleTestCase):
 
         self.assertEqual(len(problems), 1)
         self.assertIsInstance(problems[0], CheckWarning)
-        self.assertEqual(problems[0].id, "horilla.tenancy.W001")
+        self.assertEqual(problems[0].id, "core.tenancy.W001")
 
     def test_a_scoped_company_model_is_not_reported(self):
         class Meta:

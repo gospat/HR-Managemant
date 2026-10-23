@@ -24,8 +24,8 @@ from employee.models import (
     EmployeeBankDetails,
     EmployeeWorkInformation,
 )
-from horilla.horilla_middlewares import _thread_locals, set_selected_company
-from horilla.methods import get_horilla_model_class
+from core.horilla_middlewares import _thread_locals, set_selected_company
+from core.methods import get_horilla_model_class
 from hr_documents.models import DocumentRequest
 
 CACHE_KEY = "horilla_company_models_cache_key"

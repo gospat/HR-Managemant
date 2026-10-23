@@ -15,7 +15,7 @@ from base.forms import AnnouncementForm
 from base.methods import closest_numbers
 from base.models import Announcement, AnnouncementView, Attachment
 from employee.models import Employee
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
@@ -157,7 +157,7 @@ class AnnouncementDetailView(HorillaDetailedView):
     def get_context_data(self, **kwargs):
         import ast
 
-        from horilla.horilla_middlewares import _thread_locals
+        from core.horilla_middlewares import _thread_locals
 
         context = super().get_context_data(**kwargs)
 

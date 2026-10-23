@@ -26,7 +26,7 @@ from django.template.base import Lexer, TokenType
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
 
-from horilla.models import has_xss
+from core.models import has_xss
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +38,8 @@ from base.models import (
     Holidays,
 )
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.export_safety import safe_cell
-from horilla.horilla_middlewares import _thread_locals
+from core.export_safety import safe_cell
+from core.horilla_middlewares import _thread_locals
 
 CHART_CONFIG = {
     "offline_employees": {
@@ -1135,7 +1135,7 @@ def export_data(request, model, form_class, filter_class, file_name, perm=None):
     }
     employee = request.user.employee_get
 
-    from horilla.http.response import HorillaRedirect
+    from core.http.response import HorillaRedirect
 
     if not has_export_access(request, model):
         return HorillaRedirect(
@@ -1439,7 +1439,7 @@ def get_pagination(default=20):
     falling back to their "All Companies" preference, then the
     caller-supplied `default`.
     """
-    from horilla.horilla_middlewares import _thread_locals
+    from core.horilla_middlewares import _thread_locals
 
     request = getattr(_thread_locals, "request", None)
     user = request.user

@@ -34,7 +34,7 @@ def session_digest(request):
 
 
 def register(route, view):
-    from horilla.horilla_middlewares import _thread_locals
+    from core.horilla_middlewares import _thread_locals
 
     request = getattr(_thread_locals, "request", None)
     if (

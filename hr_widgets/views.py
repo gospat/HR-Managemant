@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
-from horilla.decorators import hx_request_required, login_required
+from core.decorators import hx_request_required, login_required
 from hr_widgets.generic_ajax import (
     build_ajax_choices_response,
     get_ajax_field_config,
@@ -45,7 +45,7 @@ def get_filter_form(request):
 def ajax_select_choices(request, field_key):
     """
     Single, generic search endpoint backing every HorillaAjaxSelectWidget
-    field in the app -- see horilla.filters.HorillaFilterSet.ajax_fields
+    field in the app -- see core.filters.HorillaFilterSet.ajax_fields
     for how a FilterSet opts a field into this (declaratively; no new
     view or URL needed for a new field, in this app or any other).
 

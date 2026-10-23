@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from horilla.scheduling import register_job
-from horilla.signals import post_scheduler, pre_scheduler
+from core.scheduling import register_job
+from core.signals import post_scheduler, pre_scheduler
 
 
 def leave_reset():

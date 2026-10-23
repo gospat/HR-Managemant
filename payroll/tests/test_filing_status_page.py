@@ -14,7 +14,7 @@ which looks exactly like a low earner until somebody reconciles a return.
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.models.models import Contract, FilingStatus
 from payroll.models.tax_models import TaxBracket
 from payroll.tests.factories_payroll import make_active_contract

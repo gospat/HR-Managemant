@@ -18,7 +18,7 @@ from django.utils.translation import gettext_lazy as _
 
 from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company
-from horilla.models import HorillaModel
+from core.models import HorillaModel
 from hr_auth.models import HorillaUser
 
 

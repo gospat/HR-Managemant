@@ -26,7 +26,7 @@ from django.urls import reverse
 from attendance.models import AttendanceSummaryOverride
 from attendance.views.summary import build_monthly_summary
 from employee.models import Employee
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 FROM_DATE = datetime.date(2026, 4, 1)
 TO_DATE = datetime.date(2026, 4, 30)

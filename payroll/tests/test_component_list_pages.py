@@ -23,7 +23,7 @@ import re
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.cbv.allowances import AllowanceNavView
 from payroll.cbv.deduction import DeductionNav
 from payroll.models.models import Allowance, Deduction

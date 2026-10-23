@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from accessibility.methods import check_is_accessible
-from horilla.horilla_middlewares import _thread_locals
+from core.horilla_middlewares import _thread_locals
 from hr_views.cbv_methods import decorator_with_arguments
 
 

@@ -20,7 +20,7 @@ from base.filters import FilterSet
 from base.methods import reload_queryset
 from base.models import Company, Department, EmployeeShift, JobPosition, WorkType
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet
+from core.filters import HorillaFilterSet
 from pms.models import (
     AnonymousFeedback,
     BonusPointSetting,

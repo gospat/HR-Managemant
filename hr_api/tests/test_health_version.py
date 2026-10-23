@@ -14,7 +14,7 @@ apply to it. That is what the second test guards.
 
 from django.test import TestCase
 
-from horilla.__version__ import API_VERSION, __version__
+from core.__version__ import API_VERSION, __version__
 
 
 class HealthVersionTests(TestCase):

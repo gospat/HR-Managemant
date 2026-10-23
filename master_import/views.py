@@ -16,7 +16,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from base.methods import get_session_company
-from horilla.decorators import login_required
+from core.decorators import login_required
 
 from .datasets import DATASETS, default_dataset, get_dataset
 from .datasets.base import Context

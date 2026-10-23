@@ -6,7 +6,7 @@ import json
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 
 class ExistingIdsTests(TestCase):
@@ -78,7 +78,7 @@ class BulkDeleteWiringTests(TestCase):
         from django.http import HttpResponse
         from django.test import RequestFactory
 
-        from horilla.horilla_middlewares import BulkDeleteSummaryMiddleware
+        from core.horilla_middlewares import BulkDeleteSummaryMiddleware
 
         def view(request):
             messages.error(request, "You cannot delete X.")

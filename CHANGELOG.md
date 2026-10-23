@@ -12,7 +12,7 @@ here — they predate this convention and back-filling them would misrepresent h
 were recorded at the time.
 
 Each released version corresponds to a git tag of the same name (bare semver, no `v`
-prefix) and to the Docker tag `horilla/horilla-hr:<version>`. `horilla/__version__.py`
+prefix) and to the Docker tag `horilla/horilla-hr:<version>`. `core/__version__.py`
 is the single source of truth; the release workflow refuses to publish an image whose
 tag disagrees with it.
 
@@ -388,7 +388,7 @@ until now.
   after a v1→v2 migration; it affects every 2.1.x install, migrated or not.
 
 - **Horilla would not start on a Windows console.** A warning in
-  `horilla/config.py` contained an emoji, printed during `django.setup()` from
+  `core/config.py` contained an emoji, printed during `django.setup()` from
   `horilla_ldap`'s `AppConfig.ready()`. On a cp1252 console — the Windows
   default — encoding it raised `UnicodeEncodeError`, which propagated out of
   startup and killed the process. Any database predating the LDAP app triggers

@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError, PermissionDenied
 from django.core.management import call_command
 from django.test import TestCase, Client
 from django.utils import timezone
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from employee.models import EmployeeWorkInformation
 from university.people.models import StaffProfile, StaffChange
 from .defaults import DEFAULTS, POLICY_VERSION

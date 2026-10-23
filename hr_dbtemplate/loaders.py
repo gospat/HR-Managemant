@@ -49,7 +49,7 @@ class Loader(BaseLoader):
     def _get_request(self):
         """Retrieve the current request from thread-local storage."""
         try:
-            from horilla.horilla_middlewares import _thread_locals
+            from core.horilla_middlewares import _thread_locals
 
             return getattr(_thread_locals, "request", None)
         except ImportError:

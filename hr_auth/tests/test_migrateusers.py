@@ -36,7 +36,7 @@ class MigrateUsersWithoutLegacyTablesTests(TestCase):
         self.assertIn("Nothing to migrate", out.getvalue())
 
     def test_command_does_not_touch_existing_users(self):
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         make_user("already_here", password="secret123")
         before = self.user_model().objects.count()

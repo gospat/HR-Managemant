@@ -10,7 +10,7 @@ import tempfile
 from django.test import TestCase, override_settings
 
 from base.models import Company
-from horilla.testkit import make_employee, make_user
+from core.testkit import make_employee, make_user
 
 
 class HiddenMediaPathsTests(TestCase):

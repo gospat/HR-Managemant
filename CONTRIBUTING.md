@@ -103,7 +103,7 @@ Reviewing a diff that looks far larger than the change: `git diff
 | Workflow | What it checks |
 |----------|----------------|
 | `Docker CI` | Image build, migrate, collectstatic, `/health/`, `/ready/` |
-| `Quality` | `ruff check .` over the whole repo, Black/isort on `horilla/settings` + `horilla/urls.py`, `manage.py check`, production settings gate |
+| `Quality` | `ruff check .` over the whole repo, Black/isort on `core/settings` + `core/urls.py`, `manage.py check`, production settings gate |
 
 `ruff`'s enabled rule set is scoped to what the codebase already passes, so
 the gate is green from day one; `pyproject.toml` records the remaining

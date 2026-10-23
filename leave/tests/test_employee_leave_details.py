@@ -12,7 +12,7 @@ from datetime import date, timedelta
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from leave.models import AvailableLeave, LeaveType
 
 

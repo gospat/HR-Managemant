@@ -65,8 +65,8 @@ These systems are complementary: the checklist drives first-time HR configuratio
 
 #### App registration
 
-- Installed app: `hr_tour` (`horilla/settings/base.py`)
-- URLs: `path("", include("hr_tour.urls"))` in `horilla/urls.py`
+- Installed app: `hr_tour` (`core/settings/base.py`)
+- URLs: `path("", include("hr_tour.urls"))` in `core/urls.py`
 - Context processor: `hr_tour.context_processors.pending_tours_flag`
   - Exposes `tour_launcher_enabled`, `tour_has_pending` for the header Help button
 - Settings menu: `hr_tour/sidebar.py` → “Product Tours / Manage Tours”

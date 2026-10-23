@@ -1,5 +1,5 @@
 """
-horilla/generic/views.py
+core/generic/views.py
 """
 
 import json
@@ -36,14 +36,14 @@ from base.methods import (
     humanize_filter_tags,
 )
 
-# from horilla.http import HorillaRedirect
-from horilla.filters import FilterSet
-from horilla.group_by import group_by_queryset
-from horilla.horilla_middlewares import _thread_locals, get_selected_company
-from horilla.http.response import HorillaRedirect
-from horilla.models import HorillaModel
-from horilla.nested_group_by import nested_group_by_queryset
-from horilla.signals import post_generic_import, pre_generic_import
+# from core.http import HorillaRedirect
+from core.filters import FilterSet
+from core.group_by import group_by_queryset
+from core.horilla_middlewares import _thread_locals, get_selected_company
+from core.http.response import HorillaRedirect
+from core.models import HorillaModel
+from core.nested_group_by import nested_group_by_queryset
+from core.signals import post_generic_import, pre_generic_import
 from hr_views import models
 from hr_views.cbv_methods import (  # update_initial_cache,
     assign_related,
@@ -98,7 +98,7 @@ def register_dynamic_url(route: str, view, name: str = None) -> str:
     if route in _dynamic_url_routes_registered:
         return route
     _dynamic_url_routes_registered.add(route)
-    from horilla.urls import path, urlpatterns
+    from core.urls import path, urlpatterns
 
     if name:
         urlpatterns.append(path(route, view, name=name))
@@ -2395,7 +2395,7 @@ class HorillaNavView(TemplateView):
                             continue
                         except Exception as e:
                             pass
-                    # Fallback: walk each dotted segment's related_model, matching horilla/group_by.py's resolution.
+                    # Fallback: walk each dotted segment's related_model, matching core/group_by.py's resolution.
                     if "__" in field:
                         try:
                             current_model = model_class_ref

@@ -10,8 +10,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.templatetags.horillafilters import is_asset_fine_enabled
 from employee.models import Employee
-from horilla.http.response import HorillaRedirect
-from horilla.methods import get_horilla_model_class
+from core.http.response import HorillaRedirect
+from core.methods import get_horilla_model_class
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import HorillaFormView
 from payroll.forms.component_forms import AssetFineForm, LoanAccountForm

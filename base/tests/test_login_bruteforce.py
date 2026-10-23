@@ -13,7 +13,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from base.models import Company
-from horilla.testkit import make_employee
+from core.testkit import make_employee
 from hr_auth.models import HorillaUser
 
 AXES_LIMIT = 3

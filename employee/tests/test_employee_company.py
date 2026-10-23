@@ -3,7 +3,7 @@
 from django.test import TestCase
 
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.testkit import CompanyFilterTestMixin, make_company, make_employee
+from core.testkit import CompanyFilterTestMixin, make_company, make_employee
 
 
 class EmployeeCreateTests(TestCase):

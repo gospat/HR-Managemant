@@ -6,7 +6,7 @@ outlook_auth/scheduler.py
 import logging
 import sys
 
-from horilla.scheduling import register_job
+from core.scheduling import register_job
 
 logger = logging.getLogger(__name__)
 

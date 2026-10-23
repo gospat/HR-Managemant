@@ -9,8 +9,8 @@ from django.utils.translation import gettext as _
 from django.views.generic import DetailView
 from simple_history.utils import get_history_model_for_model
 
-from horilla.horilla_middlewares import _thread_locals
-from horilla.http.response import HorillaRedirect
+from core.horilla_middlewares import _thread_locals
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import HorillaFormView
 from hr_views.history_methods import get_diff

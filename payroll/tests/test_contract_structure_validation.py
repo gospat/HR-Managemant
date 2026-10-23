@@ -11,7 +11,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.batch_run import BLOCKING, _exceptions_for
 from payroll.models.models import Allowance, Contract, Deduction, SalaryStructure
 

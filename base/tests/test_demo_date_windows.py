@@ -17,7 +17,7 @@ from base.demo_data.dates import (
     weekdays_inclusive,
 )
 from base.models import EmployeeShift
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 
 
 class DemoDateWindowTests(SimpleTestCase):

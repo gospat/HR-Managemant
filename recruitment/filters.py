@@ -36,7 +36,7 @@ def _filter_recruitment_by_obj_id(qs, name, value):
 from base.filters import FilterSet
 from base.models import Company, Department, JobPosition
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet, filter_by_name
+from core.filters import HorillaFilterSet, filter_by_name
 from recruitment.models import (
     Candidate,
     CandidateDocument,
@@ -611,7 +611,7 @@ class RecruitmentFilter(HorillaFilterSet):
     obj_id = django_filters.CharFilter(method=_filter_recruitment_by_obj_id)
 
     # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
-    # see horilla.filters.HorillaFilterSet for the full explanation) --
+    # see core.filters.HorillaFilterSet for the full explanation) --
     # Recruitment Managers and Company opt into AJAX-searched comboboxes
     # instead of pre-rendering their whole queryset as <option> tags.
     ajax_fields = {

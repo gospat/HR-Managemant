@@ -23,9 +23,9 @@
 # --- Deployment and runtime configuration ---
 # Settings decide DEBUG, ALLOWED_HOSTS, the security gate, storage backends
 # and the auth stack. A wrong edit here is a production incident, not a bug.
-/horilla/settings/              @horilla-opensource
-/horilla/observability.py       @horilla-opensource
-/horilla/scheduling.py          @horilla-opensource
+/core/settings/              @horilla-opensource
+/core/observability.py       @horilla-opensource
+/core/scheduling.py          @horilla-opensource
 
 # Container and process configuration: how many workers run, which process
 # owns the scheduled jobs, what the entrypoint does on boot.
@@ -50,7 +50,7 @@
 /base/middleware.py               @horilla-opensource
 /base/auth_backends.py            @horilla-opensource
 /hr_api/authentication.py         @horilla-opensource
-/horilla/decorators.py            @horilla-opensource
+/core/decorators.py            @horilla-opensource
 
 # --- Payroll ---
 # Money. Changes here have legal consequences for employees.

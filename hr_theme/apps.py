@@ -25,7 +25,7 @@ class HorillaThemeConfig(AppConfig):
             # Auto-register this app's URLs and add to installed apps
             from django.urls import include, path
 
-            from horilla.urls import urlpatterns
+            from core.urls import urlpatterns
 
             settings.APPS.append(("horilla_theme"))
             # Add app URLs to main urlpatterns

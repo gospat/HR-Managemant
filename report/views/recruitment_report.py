@@ -10,7 +10,7 @@ if apps.is_installed("recruitment"):
 
     from base.methods import has_export_access
     from base.models import Company
-    from horilla.decorators import login_required, permission_required
+    from core.decorators import login_required, permission_required
     from recruitment.filters import CandidateFilter, RecruitmentFilter
     from recruitment.models import Candidate, Recruitment
     from report.dynamic_filter_utils import (

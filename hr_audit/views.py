@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_audit.forms import (
     AuditModelConfigForm,
     AuditModelFieldsForm,

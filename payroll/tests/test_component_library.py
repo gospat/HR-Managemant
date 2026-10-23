@@ -14,7 +14,7 @@ from unittest.mock import patch
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.component_library import COMPONENT_LIBRARY, library_rows, load_components
 from payroll.methods.payroll_run import payroll_calculation
 from payroll.models.models import Allowance, Contract, Deduction

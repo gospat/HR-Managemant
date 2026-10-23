@@ -29,7 +29,7 @@ from base.filters import FilterSet
 from base.models import Company, Department, EmployeeShift, JobPosition, WorkType
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet, filter_by_name, filter_name_or_badge_terms
+from core.filters import HorillaFilterSet, filter_by_name, filter_name_or_badge_terms
 
 
 class DurationInSecondsFilter(django_filters.CharFilter):
@@ -149,7 +149,7 @@ class LateComeEarlyOutFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as AttendanceFilters.name_or_badge and
-    # AttendanceActivityFilter.name_or_badge; see horilla.filters.
+    # AttendanceActivityFilter.name_or_badge; see core.filters.
     # filter_name_or_badge_terms for the shared matching logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -397,7 +397,7 @@ class LateComeEarlyOutFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter and
         AttendanceFilters).
@@ -471,7 +471,7 @@ class AttendanceActivityFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as AttendanceFilters.name_or_badge and
-    # EmployeeFilter.name_or_badge; see horilla.filters.
+    # EmployeeFilter.name_or_badge; see core.filters.
     # filter_name_or_badge_terms for the shared matching logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -628,7 +628,7 @@ class AttendanceActivityFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter and
         AttendanceFilters).
@@ -676,7 +676,7 @@ class AttendanceFilters(HorillaFilterSet):
     # AJAX employee_id picker above rather than instead of it -- e.g.
     # "PEP01, PEP02, jane" matches any attendance whose employee's name
     # or badge matches ANY one of those terms. Same field/behavior as
-    # EmployeeFilter.name_or_badge; see horilla.filters.
+    # EmployeeFilter.name_or_badge; see core.filters.
     # filter_name_or_badge_terms for the shared matching logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -1051,7 +1051,7 @@ class AttendanceFilters(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter).
         """

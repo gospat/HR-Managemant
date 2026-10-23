@@ -9,7 +9,7 @@ class OffboardingConfig(AppConfig):
     def ready(self):
         from django.urls import include, path
 
-        from horilla.urls import urlpatterns
+        from core.urls import urlpatterns
 
         settings.APPS.append("offboarding")
         urlpatterns.append(

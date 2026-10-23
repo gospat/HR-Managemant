@@ -51,7 +51,7 @@ urlpatterns = [
         name="generic-delete",
     ),
     path(
-        "horilla-history-revert/<int:pk>/<int:history_id>/",
+        "history-revert/<int:pk>/<int:history_id>/",
         history.HorillaHistoryView.as_view(),
         name="history-revert",
     ),

@@ -12,7 +12,7 @@ from django.core.management import call_command
 from django.test import SimpleTestCase
 from django.utils.module_loading import module_has_submodule
 
-from horilla.scheduling import (
+from core.scheduling import (
     ScheduledJob,
     clear_registry,
     get_registered_jobs,
@@ -107,7 +107,7 @@ class NoSchedulerStartsAtImportTests(SimpleTestCase):
             offenders,
             [],
             "Scheduler started at import time -- this runs once per gunicorn "
-            "worker. Register the job with horilla.scheduling.register_job "
+            "worker. Register the job with core.scheduling.register_job "
             "instead; run_scheduler owns execution.",
         )
 

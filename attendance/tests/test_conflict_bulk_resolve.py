@@ -12,8 +12,8 @@ from django.test import TestCase
 from django.urls import reverse
 
 from attendance.models import Attendance, AttendanceConflictResolution
-from horilla.testkit import make_company, make_employee, make_user
-from horilla.testkit.factories import make_attendance
+from core.testkit import make_company, make_employee, make_user
+from core.testkit.factories import make_attendance
 
 FROM_DATE = datetime.date(2026, 9, 1)
 TO_DATE = datetime.date(2026, 9, 30)

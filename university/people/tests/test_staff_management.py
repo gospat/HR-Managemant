@@ -4,7 +4,7 @@ from django.contrib.auth.models import Permission
 from django.test import Client, RequestFactory, TestCase
 from base.models import Department
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from university.people.models import Faculty, StaffChange, StaffProfile
 
 

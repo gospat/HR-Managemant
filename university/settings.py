@@ -2,7 +2,7 @@
 
 import os
 
-from horilla.settings import *  # noqa: F403
+from core.settings import *  # noqa: F403
 
 TIME_ZONE = "Africa/Lagos"
 USE_TZ = True

@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from base.methods import filter_own_records
-from horilla.methods import handle_no_permission
+from core.methods import handle_no_permission
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
     HorillaDetailedView,

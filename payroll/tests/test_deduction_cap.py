@@ -25,7 +25,7 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.payroll_run import payroll_calculation
 from payroll.methods.payslip_calc import calculate_taxable_gross_pay
 from payroll.models.models import Allowance, Contract, Deduction

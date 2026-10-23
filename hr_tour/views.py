@@ -23,7 +23,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_GET, require_POST
 
-from horilla.decorators import permission_required
+from core.decorators import permission_required
 from hr_tour.filters import TourFilter
 from hr_tour.forms import TourForm, TourStepForm
 from hr_tour.models import Tour, TourProgress, TourStep

@@ -1,7 +1,7 @@
 """
 Home-dashboard role resolution and chart preference defaults.
 
-Locked decisions (plans/horilla-hr-main-dashboard-redesign.md):
+Locked decisions:
 - Leadership = superuser/staff OR (employee + leave + recruitment view)
 - HR = employee.view_employee ∧ leave.view_leaverequest
 - Manager = reporting manager and not HR/Leadership

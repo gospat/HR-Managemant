@@ -27,8 +27,8 @@ from xhtml2pdf import pisa
 
 from base.methods import has_export_access
 from employee.forms import BulkUpdateFieldForm
-from horilla.horilla_middlewares import _thread_locals
-from horilla.http.response import HorillaRedirect
+from core.horilla_middlewares import _thread_locals
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import (
     export_xlsx,
     hx_request_required,

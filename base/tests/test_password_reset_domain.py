@@ -22,7 +22,7 @@ Reported as https://github.com/horilla/horilla-hr/issues/1241 by @KerelOlivier.
 from django.test import RequestFactory, TestCase, override_settings
 
 from base.forms import PassWordResetForm
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 
 
 class _CapturingResetForm(PassWordResetForm):

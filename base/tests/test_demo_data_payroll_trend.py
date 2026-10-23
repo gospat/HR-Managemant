@@ -8,7 +8,7 @@ from base.demo_data.modules.payroll_trend import (
     _target_periods,
     backfill_payroll_coverage,
 )
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.models.models import Contract, Payslip
 from payroll.tests.factories_payroll import make_active_contract
 

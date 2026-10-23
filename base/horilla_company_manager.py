@@ -10,8 +10,8 @@ from django.db import models
 from django.db.models import Q
 from django.db.models.query import QuerySet
 
-from horilla.horilla_middlewares import _thread_locals, get_selected_company
-from horilla.signals import (
+from core.horilla_middlewares import _thread_locals, get_selected_company
+from core.signals import (
     post_bulk_update,
     post_model_clean,
     pre_bulk_update,

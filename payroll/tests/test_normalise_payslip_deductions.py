@@ -13,7 +13,7 @@ from io import StringIO
 from django.core.management import call_command
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods import batch_run
 from payroll.models.models import Contract, PayrollBatch, Payslip
 from payroll.tests.factories_payroll import make_active_contract

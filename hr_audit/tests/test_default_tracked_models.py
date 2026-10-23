@@ -84,7 +84,7 @@ class PayrollChangeIsLoggedTests(TestCase):
 
     def test_editing_a_contract_writes_a_log_entry(self):
         from base.models import Company
-        from horilla.testkit import make_employee
+        from core.testkit import make_employee
         from payroll.models.models import Contract
 
         company = Company.objects.create(company="Acme", hq=True)

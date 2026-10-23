@@ -20,7 +20,7 @@ from unittest.mock import patch
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.methods import payslip_edit
 from payroll.methods.methods import payslip_fields, save_payslip
 from payroll.methods.payroll_run import payroll_calculation

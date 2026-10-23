@@ -35,7 +35,7 @@ EXEMPT = {
         "Attachment reached via its scoped parent claim."
     ),
     "pms.AnonymousFeedback": "Anonymity is the point; scoping would deanonymise.",
-    "horilla.HorillaModel": "Abstract base.",
+    "core.HorillaModel": "Abstract base.",
     # Per-company settings singletons. These are always looked up by an
     # explicit company_id (a settings row for company X, fetched deliberately),
     # never listed under ambient scope, so the manager filter would add nothing.
@@ -57,7 +57,7 @@ EXEMPT = {
 }
 
 
-@register("horilla.tenancy")
+@register("core.tenancy")
 def check_company_scoped_managers(app_configs, **kwargs):
     """Warn when a model has a company FK but no company-scoped manager."""
     from django.apps import apps
@@ -97,7 +97,7 @@ def check_company_scoped_managers(app_configs, **kwargs):
                     "add it to base.checks.EXEMPT with the reason it is global."
                 ),
                 obj=model,
-                id="horilla.tenancy.W001",
+                id="core.tenancy.W001",
             )
         )
 

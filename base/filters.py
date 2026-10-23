@@ -38,7 +38,7 @@ from base.models import (
     WorkTypeRequest,
 )
 from employee.models import Employee
-from horilla.filters import (
+from core.filters import (
     FilterSet,
     HorillaFilterSet,
     filter_by_name,
@@ -78,7 +78,7 @@ class ShiftRequestFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as EmployeeFilter.name_or_badge/AttendanceFilters.
-    # name_or_badge; see horilla.filters.filter_name_or_badge_terms for
+    # name_or_badge; see core.filters.filter_name_or_badge_terms for
     # the shared matching logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=__("Name or Badge ID")
@@ -216,7 +216,7 @@ class ShiftRequestFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters).
         """
@@ -260,7 +260,7 @@ class WorkTypeRequestFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as ShiftRequestFilter.name_or_badge; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=__("Name or Badge ID")
@@ -397,7 +397,7 @@ class WorkTypeRequestFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters/
         ShiftRequestFilter).
@@ -427,7 +427,7 @@ class RotatingShiftAssignFilters(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as ShiftRequestFilter.name_or_badge; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=__("Name or Badge ID")
@@ -559,7 +559,7 @@ class RotatingShiftAssignFilters(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters/
         ShiftRequestFilter).
@@ -589,7 +589,7 @@ class RotatingWorkTypeAssignFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as RotatingShiftAssignFilters.name_or_badge; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=__("Name or Badge ID")
@@ -721,7 +721,7 @@ class RotatingWorkTypeAssignFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters/
         ShiftRequestFilter/RotatingShiftAssignFilters).
@@ -1211,7 +1211,7 @@ class RosterFilter(HorillaFilterSet):
         label=__("To Date"),
         widget=forms.DateInput(attrs={"type": "date", "class": "oh-input w-100"}),
     )
-    # NOT the shared horilla.filters.filter_by_name -- that helper assumes
+    # NOT the shared core.filters.filter_by_name -- that helper assumes
     # an "employee_id"-named FK (Coalesce("employee_id__employee_first_
     # name", ...)), but Roster's own FK field is named "employee" (see
     # base/models.py), so that lookup path doesn't resolve on this model
@@ -1224,7 +1224,7 @@ class RosterFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee picker above rather than instead of it -- same
     # field/behavior as EmployeeFilter.name_or_badge/AttendanceFilters.
-    # name_or_badge; see horilla.filters.filter_name_or_badge_terms for
+    # name_or_badge; see core.filters.filter_name_or_badge_terms for
     # the shared matching logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=__("Name or Badge ID")
@@ -1263,7 +1263,7 @@ class RosterFilter(HorillaFilterSet):
         """
         Name-only search box (inline_nav.html's own "search" field) --
         see this field's own comment above for why it can't reuse the
-        shared horilla.filters.filter_by_name.
+        shared core.filters.filter_by_name.
         """
         if self.data.get("search_field"):
             return queryset
@@ -1280,7 +1280,7 @@ class RosterFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters).
         """

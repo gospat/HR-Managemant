@@ -19,10 +19,10 @@ from base.models import (
 )
 from base.urls import urlpatterns
 from employee.models import EmployeeGeneralSetting, ProfileEditFeature
-from horilla.__version__ import __version__
-from horilla.decorators import hx_request_required, login_required
-from horilla.http.response import HorillaRedirect
-from horilla.methods import get_horilla_model_class
+from core.__version__ import __version__
+from core.decorators import hx_request_required, login_required
+from core.http.response import HorillaRedirect
+from core.methods import get_horilla_model_class
 
 
 class AllCompany:
@@ -483,7 +483,7 @@ def horilla_version(request):
     """
     Expose the running product version to every template.
 
-    Until now `horilla/__version__.py` was read only by the build -- the Docker
+    Until now `core/__version__.py` was read only by the build -- the Docker
     label, and the CI check that the tag matches it. Nothing showed it to the
     people running the product, so "which version are you on?" could not be
     answered from the screen. Support threads answered it with a branch name,

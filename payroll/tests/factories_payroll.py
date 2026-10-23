@@ -7,7 +7,7 @@ tests fake their components, which is why none of them catch the parallel-list
 ``zip()`` misattribution in ``calculate_post_tax_deduction`` — that bug only
 shows up when several real components are gathered and re-paired.
 
-Layered over ``horilla.testkit.factories``, which already provides
+Layered over ``core.testkit.factories``, which already provides
 ``make_company`` / ``make_employee`` / ``make_contract``.
 """
 

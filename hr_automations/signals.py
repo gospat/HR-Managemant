@@ -18,9 +18,9 @@ from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
 
 from base.methods import build_safe_template_request, sanitize_mail_template_body
-from horilla.horilla_middlewares import _thread_locals
-from horilla.models import has_xss
-from horilla.signals import post_bulk_update, pre_bulk_update
+from core.horilla_middlewares import _thread_locals
+from core.models import has_xss
+from core.signals import post_bulk_update, pre_bulk_update
 from notifications.signals import notify
 
 logger = logging.getLogger(__name__)

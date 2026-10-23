@@ -15,9 +15,9 @@ from base.methods import (
     sanitize_mail_template_body,
 )
 from employee.models import Employee
-from horilla import horilla_middlewares
-from horilla.decorators import login_required, owner_can_enter, permission_required
-from horilla.methods import handle_no_permission
+from core import horilla_middlewares
+from core.decorators import login_required, owner_can_enter, permission_required
+from core.methods import handle_no_permission
 from hr_views.generic.cbv import views
 from pms import models
 from pms.filters import BonusPointSettingFilter, EmployeeBonusPointFilter

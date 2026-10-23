@@ -2,14 +2,14 @@
 Settings-menu registration for the tour engine.
 
 Adds a "Product Tours" section to the Settings sidebar (the modern
-``horilla.menu.settings_menu`` registry). Imported from ``apps.py`` ready()
+``core.menu.settings_menu`` registry). Imported from ``apps.py`` ready()
 so the registration runs at startup.
 """
 
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
-from horilla.menu import settings_menu
+from core.menu import settings_menu
 
 
 def tour_settings_accessibility(

@@ -2681,7 +2681,7 @@ class Command(ExtrasMixin, BaseCommand):
             EmployeeShiftDay,
             EmployeeShiftSchedule,
         )
-        from horilla.testkit import make_company
+        from core.testkit import make_company
 
         name = company_spec["name"]
         overrides = {k: v for k, v in company_spec.items() if k != "name"}
@@ -2738,7 +2738,7 @@ class Command(ExtrasMixin, BaseCommand):
         can log in to isn't actually usable, so it's recreated here rather
         than left for whoever runs this command to notice is missing.
         """
-        from horilla.testkit import make_employee, make_user
+        from core.testkit import make_employee, make_user
 
         user = make_user(
             "admin",
@@ -2918,7 +2918,7 @@ class Command(ExtrasMixin, BaseCommand):
         shape exists.
         """
         from employee.models import Employee, EmployeeWorkInformation
-        from horilla.testkit import make_employee
+        from core.testkit import make_employee
         from payroll.models.models import Contract, FilingStatus
 
         # Income tax is only worked out for a contract with a filing status; one
@@ -4943,7 +4943,7 @@ def _as_request():
     """
     from django.contrib.auth import get_user_model
 
-    from horilla.horilla_middlewares import _thread_locals
+    from core.horilla_middlewares import _thread_locals
 
     User = get_user_model()
     user = User.objects.filter(is_superuser=True).first()

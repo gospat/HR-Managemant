@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from asset.filters import AssetBatchNoFilter
 from asset.forms import AssetBatchForm
 from asset.models import AssetLot
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
     HorillaDetailedView,

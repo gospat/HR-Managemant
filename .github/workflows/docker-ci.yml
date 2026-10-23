@@ -32,8 +32,8 @@ jobs:
 
       - name: Ensure local_settings exists
         run: |
-          if [ ! -f horilla/settings/local_settings.py ]; then
-            printf '%s\n' '# Ephemeral for CI — allows settings import' > horilla/settings/local_settings.py
+          if [ ! -f core/settings/local_settings.py ]; then
+            printf '%s\n' '# Ephemeral for CI — allows settings import' > core/settings/local_settings.py
           fi
 
       - name: Start db and redis

@@ -60,16 +60,16 @@ from base.methods import (
 from base.models import EmailLog, HorillaMailTemplate, JobPosition, clear_messages
 from employee.models import Employee, EmployeeWorkInformation
 from employee.views import get_content_type
-from horilla import settings
-from horilla.decorators import (
+from core import settings
+from core.decorators import (
     any_permission_required,
     hx_request_required,
     logger,
     login_required,
     permission_required,
 )
-from horilla.group_by import group_by_queryset
-from horilla.http import HorillaRedirect
+from core.group_by import group_by_queryset
+from core.http import HorillaRedirect
 from hr_auth.models import HorillaUser
 from hr_documents.models import Document
 from notifications.signals import notify

@@ -64,7 +64,7 @@ from base.methods import (
 from base.models import Company, EmployeeShift
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
 from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
 
@@ -1349,7 +1349,7 @@ class BulkAttendanceRequestForm(BaseModelForm):
         from_date = cleaned_data.get("from_date")
         to_date = cleaned_data.get("to_date")
         shift_id = cleaned_data.get("shift_id")
-        from horilla.horilla_middlewares import _thread_locals
+        from core.horilla_middlewares import _thread_locals
 
         request = _thread_locals.request
         attendance_clock_in = cleaned_data.get("attendance_clock_in")

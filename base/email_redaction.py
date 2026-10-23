@@ -64,7 +64,7 @@ def get_current_company():
     NULL is the honest answer there -- better than guessing a tenant.
     """
     from base.models import Company
-    from horilla.horilla_middlewares import get_selected_company
+    from core.horilla_middlewares import get_selected_company
 
     company_id = get_selected_company()
     if not company_id or company_id == "all":

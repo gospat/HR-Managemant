@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from attendance.filters import AttendanceBreakpointFilter
 from attendance.forms import AttendanceValidationConditionForm
 from attendance.models import AttendanceValidationCondition
-from horilla.decorators import permission_required
+from core.decorators import permission_required
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
     HorillaFormView,

@@ -14,7 +14,7 @@ from django.urls import reverse
 
 from base.models import Company
 from employee.models import Employee
-from horilla.horilla_middlewares import set_selected_company
+from core.horilla_middlewares import set_selected_company
 from hr_auth.models import HorillaUser
 from hr_tour.models import Tour, TourProgress, TourStep
 
@@ -264,7 +264,7 @@ class TourCompanyIsolationTests(TestCase):
     def setUp(self):
         # Clear any thread-local request left over from prior tests so
         # HorillaModel.save() doesn't stamp modified_by with a stale user id.
-        from horilla.horilla_middlewares import _thread_locals
+        from core.horilla_middlewares import _thread_locals
 
         _thread_locals.request = None
 

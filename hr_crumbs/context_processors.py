@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 
 from base.context_processors import white_labelling_company
 from employee.models import Employee
-from horilla.urls import urlpatterns
+from core.urls import urlpatterns
 
 logger = logging.getLogger(__name__)
 
@@ -391,7 +391,7 @@ def breadcrumbs_legacy(request):
         menus = getattr(request, "MENUS", None)
         if menus is None:
             try:
-                from horilla.config import sidebar as _build_sidebar_menus
+                from core.config import sidebar as _build_sidebar_menus
 
                 _build_sidebar_menus(request)
                 menus = getattr(request, "MENUS", [])
@@ -591,7 +591,7 @@ def build_breadcrumbs(request):
     menus = getattr(request, "MENUS", None)
     if menus is None:
         try:
-            from horilla.config import sidebar as _build_sidebar_menus
+            from core.config import sidebar as _build_sidebar_menus
 
             _build_sidebar_menus(request)
             menus = getattr(request, "MENUS", [])

@@ -6,7 +6,7 @@ from django.db import IntegrityError
 from django.urls import reverse
 from django.utils.translation import gettext_noop
 
-from horilla.scheduling import register_job
+from core.scheduling import register_job
 from notifications.signals import notify
 
 logger = logging.getLogger(__name__)

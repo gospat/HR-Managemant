@@ -7,7 +7,7 @@ import os
 from django import forms
 from django.utils.safestring import SafeText, mark_safe
 
-from horilla import settings
+from core import settings
 
 
 def _static_file_version(*rel_path_parts):

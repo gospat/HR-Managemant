@@ -13,7 +13,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 
-from horilla.decorators import login_required
+from core.decorators import login_required
 from project.cbv.cbv_decorators import is_projectmanager_or_member_or_perms
 
 PIPELINE_STAGES = (

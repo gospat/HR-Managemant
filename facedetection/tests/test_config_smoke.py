@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from facedetection.models import FaceDetection
-from horilla.testkit import make_company
+from core.testkit import make_company
 
 
 class FaceDetectionConfigTests(TestCase):

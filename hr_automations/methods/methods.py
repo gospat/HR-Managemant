@@ -13,7 +13,7 @@ from django.http import QueryDict
 
 from base.templatetags.horillafilters import app_installed
 from employee.models import Employee
-from horilla.models import HorillaModel
+from core.models import HorillaModel
 
 REFRESH_PENDING_KEY = "mail_automations_refresh_pending"
 

@@ -4,7 +4,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from base.models import Department, JobPosition
-from horilla.testkit import make_company
+from core.testkit import make_company
 from recruitment.models import Candidate, Recruitment, Stage
 
 

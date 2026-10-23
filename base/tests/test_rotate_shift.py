@@ -6,7 +6,7 @@ from django.test import TestCase
 
 from base.models import EmployeeShift, RotatingShift, RotatingShiftAssign
 from base.scheduler import rotate_shift
-from horilla.testkit.factories import make_company, make_employee
+from core.testkit.factories import make_company, make_employee
 
 
 class TestRotateShift(TestCase):

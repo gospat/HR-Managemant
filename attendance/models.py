@@ -36,8 +36,8 @@ from base.models import Company, EmployeeShift, EmployeeShiftDay, WorkType
 from employee.models import Employee
 
 # Create your models here.
-from horilla.methods import get_horilla_model_class
-from horilla.models import HorillaModel, upload_path
+from core.methods import get_horilla_model_class
+from core.models import HorillaModel, upload_path
 from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
 from hr_views.cbv_methods import render_template
 

@@ -22,8 +22,8 @@ from django.views import View
 
 from base.context_processors import intial_notice_period
 from base.methods import eval_validate
-from horilla.http.response import HorillaRedirect
-from horilla.methods import get_horilla_model_class
+from core.http.response import HorillaRedirect
+from core.methods import get_horilla_model_class
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,

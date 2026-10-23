@@ -14,7 +14,7 @@ omit =
     */test_*.py
     # Vendored django-notifications, carrying upstream's own tests.
     notifications/*
-    horilla/settings/*
+    core/settings/*
     manage.py
     */apps.py
     */__init__.py

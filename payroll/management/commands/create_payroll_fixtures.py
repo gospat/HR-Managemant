@@ -680,7 +680,7 @@ def _as_request():
     """
     from django.contrib.auth import get_user_model
 
-    from horilla.horilla_middlewares import _thread_locals
+    from core.horilla_middlewares import _thread_locals
 
     # A real user row, because HorillaModel.save() assigns request.user to
     # created_by and that has to be a HorillaUser. Where there is no superuser

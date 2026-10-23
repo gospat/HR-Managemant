@@ -21,7 +21,7 @@ from asset.cbv.asset_category import (
     DynamicCreateAssetCategory,
 )
 from asset.models import Asset, AssetCategory
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 HX = {"HTTP_HX_REQUEST": "true"}
 

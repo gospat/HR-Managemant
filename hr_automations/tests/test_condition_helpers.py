@@ -4,7 +4,7 @@ from django.test import Client, SimpleTestCase, TestCase
 from django.urls import reverse
 
 from employee.models import Employee
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from hr_automations.methods.methods import (
     evaluate_condition,
     generate_choices,

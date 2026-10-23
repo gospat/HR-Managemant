@@ -4,7 +4,7 @@ from datetime import date, timedelta
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from leave.methods import decide_leave_cancellation, request_leave_cancellation
 from leave.models import AvailableLeave, LeaveRequest, LeaverequestComment, LeaveType
 

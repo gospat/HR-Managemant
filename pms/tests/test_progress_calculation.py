@@ -19,7 +19,7 @@ from datetime import date, timedelta
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from pms.models import EmployeeKeyResult, EmployeeObjective, KeyResult, Objective
 
 

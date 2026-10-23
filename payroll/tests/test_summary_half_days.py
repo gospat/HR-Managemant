@@ -10,7 +10,7 @@ from django.test import TestCase
 
 from attendance.methods.utils import get_employee_attendance_summary
 from attendance.models import Attendance, AttendanceConflictResolution
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from leave.models import LeaveRequest, LeaveType
 from payroll.methods.methods import compute_salary_on_period
 from payroll.models.models import Contract

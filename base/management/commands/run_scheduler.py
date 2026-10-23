@@ -2,7 +2,7 @@
 Run Horilla's background jobs in one dedicated process.
 
 Deploy this as its own service with **exactly one replica**. Jobs used to start
-inside every gunicorn worker (see ``horilla.scheduling``), so payroll runs and
+inside every gunicorn worker (see ``core.scheduling``), so payroll runs and
 database backups fired once per worker per interval.
 
     python manage.py run_scheduler
@@ -22,7 +22,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django_apscheduler.jobstores import DjangoJobStore
 
-from horilla.scheduling import get_registered_jobs
+from core.scheduling import get_registered_jobs
 
 logger = logging.getLogger(__name__)
 

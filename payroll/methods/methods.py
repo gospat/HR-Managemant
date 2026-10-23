@@ -24,7 +24,7 @@ from base.methods import (
     get_working_days,
 )
 from base.models import CompanyLeaves, Holidays
-from horilla.methods import get_horilla_model_class
+from core.methods import get_horilla_model_class
 from payroll.methods.component_formula import ComponentFormulaError
 from payroll.methods.employer_cost import employer_amount
 from payroll.models.models import Contract, Deduction, Payslip

@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
-from horilla.http import HorillaRedirect
+from core.http import HorillaRedirect
 from project.methods import any_project_manager, any_task_manager, any_task_member
 
 from .models import Project, ProjectStage, Task

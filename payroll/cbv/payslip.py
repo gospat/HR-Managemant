@@ -16,7 +16,7 @@ from django.utils.translation import gettext_noop
 from base.methods import has_export_access
 from employee import views as employee_view
 from employee.cbv.employee_profile import EmployeeProfileView
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,

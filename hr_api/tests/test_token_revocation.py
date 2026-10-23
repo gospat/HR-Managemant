@@ -18,8 +18,8 @@ one that has to be turned on:
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from horilla.horilla_middlewares import set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
+from core.horilla_middlewares import set_selected_company
+from core.testkit import make_company, make_employee, make_user
 
 LOGIN_URL = "/api/v1/auth/login/"
 # Any authenticated endpoint will do; this one only needs a valid token.

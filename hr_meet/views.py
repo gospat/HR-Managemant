@@ -11,12 +11,12 @@ from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 
 from base.backends import logger
-from horilla.decorators import (
+from core.decorators import (
     check_integration_enabled,
     login_required,
     permission_required,
 )
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_meet.methods import get_google_credentials
 from hr_meet.models import *
 

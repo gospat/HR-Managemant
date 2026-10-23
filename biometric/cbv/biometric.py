@@ -24,7 +24,7 @@ from biometric.views import (
     str_time_seconds,
     zk_biometric_attendance_scheduler,
 )
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
     HorillaCardView,

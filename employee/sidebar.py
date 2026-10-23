@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 from accessibility.methods import check_is_accessible
 from base.templatetags.basefilters import is_reportingmanager
-from horilla.horilla_middlewares import _thread_locals
+from core.horilla_middlewares import _thread_locals
 
 request = getattr(_thread_locals, "request", None)
 MENU = _("Employee")

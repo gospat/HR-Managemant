@@ -8,7 +8,7 @@ from django.test import TestCase
 
 class LeaveRequestCleanGateTests(TestCase):
     def setUp(self):
-        from horilla.testkit import make_company, make_employee
+        from core.testkit import make_company, make_employee
         from leave.models import LeaveType
 
         company = make_company("Leave Clean Co")
@@ -70,7 +70,7 @@ class LeaveAllocationBulkFormCleanTests(TestCase):
     """
 
     def setUp(self):
-        from horilla.testkit import make_company, make_employee
+        from core.testkit import make_company, make_employee
         from leave.models import LeaveType
 
         company = make_company("Bulk Alloc Co")

@@ -25,7 +25,7 @@ one silently hides fields with nothing in the console to point at.
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.filters import AllowanceFilter, DeductionFilter
 from payroll.forms.component_forms import AllowanceForm, DeductionForm
 from payroll.forms.component_layout import (

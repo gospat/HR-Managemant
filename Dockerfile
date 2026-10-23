@@ -124,7 +124,7 @@ RUN mkdir -p staticfiles media \
 
 USER appuser
 
-# Build metadata. VERSION should match horilla/__version__.py and the release
+# Build metadata. VERSION should match core/__version__.py and the release
 # tag; the publish workflow passes all three and fails if they disagree.
 ARG VERSION=dev
 ARG VCS_REF=unknown
@@ -146,4 +146,4 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:8000/health/ || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["gunicorn", "horilla.wsgi:application", "--config", "docker/gunicorn.conf.py"]
+CMD ["gunicorn", "core.wsgi:application", "--config", "docker/gunicorn.conf.py"]

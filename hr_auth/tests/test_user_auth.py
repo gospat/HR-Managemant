@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django.test import Client, RequestFactory, TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from hr_auth.models import HorillaUser
 
 

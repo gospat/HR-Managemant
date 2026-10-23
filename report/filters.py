@@ -1,6 +1,6 @@
 import django_filters
 
-from horilla.filters import FilterSet
+from core.filters import FilterSet
 from report.models import ReportRunLog
 
 

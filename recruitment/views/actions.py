@@ -25,10 +25,10 @@ from base.methods import (
 )
 from base.models import HorillaMailTemplate
 from employee.models import Employee
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.group_by import group_by_queryset
-from horilla.http import HorillaRedirect
-from horilla.http.response import with_bulk_result
+from core.decorators import hx_request_required, login_required, permission_required
+from core.group_by import group_by_queryset
+from core.http import HorillaRedirect
+from core.http.response import with_bulk_result
 from notifications.signals import notify
 from recruitment.decorators import (
     candidate_login_required,

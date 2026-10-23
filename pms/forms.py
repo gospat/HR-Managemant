@@ -27,7 +27,7 @@ from base.methods import (
 )
 from base.models import Company
 from employee.filters import EmployeeFilter
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
 from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
 from pms.models import (

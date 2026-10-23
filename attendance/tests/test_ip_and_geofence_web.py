@@ -37,8 +37,8 @@ from attendance.methods.utils import (
 )
 from attendance.models import Attendance
 from employee.models import EmployeeWorkInformation
-from horilla.horilla_middlewares import set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
+from core.horilla_middlewares import set_selected_company
+from core.testkit import make_company, make_employee, make_user
 
 
 class GetClientIpTests(TestCase):

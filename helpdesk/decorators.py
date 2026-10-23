@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 
 from base.methods import check_manager
 from helpdesk.models import Ticket
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 
 decorator_with_arguments = (
     lambda decorator: lambda *args, **kwargs: lambda func: decorator(

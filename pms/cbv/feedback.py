@@ -17,7 +17,7 @@ from base.decorators import manager_can_enter
 from base.methods import is_reportingmanager
 from employee.cbv.employee_profile import EmployeeProfileView
 from employee.models import Employee
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (

@@ -14,7 +14,7 @@ when you want to stop one, and only two of them are a contract's to change.
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.models.models import Allowance, Contract, Deduction, SalaryStructure
 from payroll.tests.factories_payroll import make_active_contract
 

@@ -6,9 +6,9 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 
 from employee.models import EmployeeWorkInformation
-from horilla.horilla_middlewares import _thread_locals
-from horilla.http.response import HorillaRedirect
-from horilla.methods import handle_no_permission
+from core.horilla_middlewares import _thread_locals
+from core.http.response import HorillaRedirect
+from core.methods import handle_no_permission
 
 from .models import MultipleApprovalManagers, ShiftRequest, WorkTypeRequest
 

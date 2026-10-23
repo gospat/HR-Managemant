@@ -28,10 +28,10 @@ from base.models import (
     clear_messages,
 )
 from employee.models import Employee, EmployeeWorkInformation
-from horilla import horilla_middlewares
-from horilla.horilla_middlewares import _thread_locals
-from horilla.methods import get_horilla_model_class
-from horilla.models import HorillaModel, upload_path
+from core import horilla_middlewares
+from core.horilla_middlewares import _thread_locals
+from core.methods import get_horilla_model_class
+from core.models import HorillaModel, upload_path
 from hr_audit.methods import get_diff
 from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
 from hr_views.cbv_methods import render_template

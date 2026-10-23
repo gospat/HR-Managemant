@@ -183,7 +183,7 @@ from employee.models import (
     EmployeeWorkInformation,
     ProfileEditFeature,
 )
-from horilla.decorators import (
+from core.decorators import (
     any_permission_required,
     database_init_required,
     delete_permission,
@@ -194,10 +194,10 @@ from horilla.decorators import (
     permission_required,
     superuser_required,
 )
-from horilla.group_by import group_by_queryset
-from horilla.http.response import HorillaRedirect, with_bulk_result
-from horilla.menu import get_settings_menu
-from horilla.methods import get_horilla_model_class, remove_dynamic_url
+from core.group_by import group_by_queryset
+from core.http.response import HorillaRedirect, with_bulk_result
+from core.menu import get_settings_menu
+from core.methods import get_horilla_model_class, remove_dynamic_url
 from hr_audit.forms import HistoryTrackingFieldsForm
 from hr_audit.models import AccountBlockUnblock, AuditTag, HistoryTrackingFields
 from hr_auth.models import HorillaUser
@@ -1394,10 +1394,8 @@ class SettingsView(LoginRequiredMixin, RedirectView):
 def _permission_app_label(app_name):
     """
     Human label for permission UI module nav.
-    Uses AppConfig.verbose_name and drops a leading "Horilla" product prefix.
+    Uses AppConfig.verbose_name.
     """
-    import re
-
     from django.apps import apps as django_apps
 
     try:
@@ -1405,7 +1403,6 @@ def _permission_app_label(app_name):
     except LookupError:
         label = app_name.replace("_", " ")
 
-    label = re.sub(r"(?i)^horilla[\s_\-]*", "", label).strip()
     label = label.replace("_", " ").strip()
     if not label:
         label = app_name.replace("_", " ")
@@ -1875,7 +1872,7 @@ def object_delete(request, obj_id, **kwargs):
                       message indicating that the object is in use.
     """
     if kwargs.get("superuser_only") and not request.user.is_superuser:
-        from horilla.methods import handle_no_permission
+        from core.methods import handle_no_permission
 
         return handle_no_permission(request)
 
@@ -4099,7 +4096,7 @@ def employee_permission_assign(request, pk=None):
     - Employee profile tab: employee self, reporting manager, or superadmin.
     """
     from employee.cbv.accessibility import can_edit_employee_permissions
-    from horilla.methods import handle_no_permission
+    from core.methods import handle_no_permission
 
     context = {}
     template = "base/auth/permission.html"
@@ -4181,7 +4178,7 @@ def employee_permission_search(request, codename=None, uid=None):
         can_edit_employee_permissions,
         can_view_employee_permissions,
     )
-    from horilla.methods import handle_no_permission
+    from core.methods import handle_no_permission
 
     context = {}
     template = "base/auth/permission_lines.html"
@@ -4226,7 +4223,7 @@ def update_permission(
     This method is used to remove user permission.
     """
     from employee.cbv.accessibility import can_edit_employee_permissions
-    from horilla.methods import handle_no_permission
+    from core.methods import handle_no_permission
 
     try:
         data = json.loads(request.body)

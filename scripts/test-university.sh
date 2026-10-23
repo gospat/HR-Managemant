@@ -23,7 +23,7 @@ export DJANGO_SETTINGS_MODULE=university.settings
   university.operations.tests \
   university.people.tests.test_scale \
   base.tests.test_pdf_xss_guard \
-  horilla.tests.test_has_xss_bypass \
+  core.tests.test_has_xss_bypass \
   --keepdb --noinput
 npm --prefix frontend run build
 npm --prefix frontend run typecheck

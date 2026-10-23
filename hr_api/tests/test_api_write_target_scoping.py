@@ -19,8 +19,8 @@ from rest_framework.test import APIClient
 from attendance.models import Attendance
 from base.models import RotatingWorkType, RotatingWorkTypeAssign, WorkType
 from employee.models import EmployeeWorkInformation
-from horilla.testkit import make_company, make_employee, make_user
-from horilla.testkit.factories import make_attendance
+from core.testkit import make_company, make_employee, make_user
+from core.testkit.factories import make_attendance
 from hr_documents.models import Document
 
 VALIDATE = "/api/v1/attendance/attendance-validate/{}"

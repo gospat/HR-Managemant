@@ -21,7 +21,7 @@ from simple_history.signals import (  # pre_create_historical_m2m_records,; post
 )
 
 # from employee.models import Employee
-from horilla.models import HorillaModel
+from core.models import HorillaModel
 from hr_audit.methods import remove_duplicate_history
 
 logger = logging.getLogger(__name__)

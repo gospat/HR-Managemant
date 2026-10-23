@@ -17,7 +17,7 @@ from django.http import JsonResponse
 DEFAULT_PAGE_SIZE = 20
 
 # Populated only from FilterSet class bodies at import time (see
-# horilla.filters.HorillaFilterSet.ajax_fields / __init_subclass__), never
+# core.filters.HorillaFilterSet.ajax_fields / __init_subclass__), never
 # from client input -- horilla_widgets.views.ajax_select_choices looks up
 # a client-supplied "key" here, so a key that was never registered here
 # simply can't resolve to a queryset, regardless of what a client sends.

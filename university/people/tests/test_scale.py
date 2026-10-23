@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.test.utils import CaptureQueriesContext
 from rest_framework.test import APIRequestFactory, force_authenticate
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from university.people.models import StaffProfile
 from university.people.views import StaffView
 

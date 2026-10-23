@@ -17,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import View
 
 from base.models import HorillaMailTemplate
-from horilla.decorators import hx_request_required, login_required, permission_required
+from core.decorators import hx_request_required, login_required, permission_required
 from hr_automations import models
 from hr_automations.filters import AutomationFilter
 from hr_automations.forms import AutomationForm

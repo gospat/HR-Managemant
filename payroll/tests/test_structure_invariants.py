@@ -23,7 +23,7 @@ from unittest.mock import patch
 
 from django.test import SimpleTestCase, TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.payroll_run import StructureConfigurationError, payroll_calculation
 from payroll.methods.structure_rules import structure_problems
 from payroll.models.models import Allowance, Contract, Deduction, SalaryStructure

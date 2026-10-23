@@ -12,7 +12,7 @@ from attendance.methods.utils import strtime_seconds
 from attendance.models import Attendance, AttendanceGeneralSetting, WorkRecords
 from base.models import Company, PenaltyAccounts
 from employee.models import Employee
-from horilla.methods import get_horilla_model_class
+from core.methods import get_horilla_model_class
 
 logger = logging.getLogger(__name__)
 

@@ -20,7 +20,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.utils import timezone
 
-from horilla.export_safety import FORMULA_TRIGGERS, neutralize_formula
+from core.export_safety import FORMULA_TRIGGERS, neutralize_formula
 
 logger = logging.getLogger(__name__)
 
@@ -124,7 +124,7 @@ def _company_from_meta(meta: Optional[dict]) -> dict[str, Any]:
     }
 
 
-# The guard lives in horilla.export_safety so the repo's other spreadsheet
+# The guard lives in core.export_safety so the repo's other spreadsheet
 # writers share one definition instead of each growing its own copy (or, as
 # was the case, going without). Re-exported under the old private names so
 # existing call sites in this module keep reading naturally.

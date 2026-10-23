@@ -19,7 +19,7 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from employee.models import Employee
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.models.models import Contract
 
 User = get_user_model()

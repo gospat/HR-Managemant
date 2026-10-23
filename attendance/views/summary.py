@@ -47,7 +47,7 @@ from base.models import (
 )
 from employee.filters import EmployeeFilter
 from employee.models import Employee, EmployeeTag
-from horilla.decorators import hx_request_required, login_required, manager_can_enter
+from core.decorators import hx_request_required, login_required, manager_can_enter
 
 # ---------------------------------------------------------------------------
 # Internal helpers

@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
     HorillaDetailedView,

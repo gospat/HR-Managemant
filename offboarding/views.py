@@ -20,17 +20,17 @@ from base.methods import closest_numbers, eval_validate, paginator_qry, sortby
 from base.models import Department, JobPosition
 from base.views import general_settings
 from employee.models import Employee
-from horilla import horilla_middlewares
-from horilla.decorators import (
+from core import horilla_middlewares
+from core.decorators import (
     hx_request_required,
     login_required,
     manager_can_enter,
     owner_can_enter,
     permission_required,
 )
-from horilla.group_by import group_by_queryset as group_by
-from horilla.http.response import HorillaRedirect
-from horilla.methods import get_horilla_model_class
+from core.group_by import group_by_queryset as group_by
+from core.http.response import HorillaRedirect
+from core.methods import get_horilla_model_class
 from hr_auth.models import HorillaUser
 from hr_views.generic.cbv.views import HorillaFormView
 from notifications.signals import notify

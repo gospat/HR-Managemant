@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from base.methods import filtersubordinates
-from horilla.decorators import check_manager
+from core.decorators import check_manager
 from hr_api.api_methods.base.methods import reject_reason_from
 from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
 from hr_api.api_serializers.leave.serializers import *

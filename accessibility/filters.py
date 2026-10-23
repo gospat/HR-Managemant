@@ -11,8 +11,8 @@ from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
 
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet
-from horilla.horilla_middlewares import _thread_locals
+from core.filters import HorillaFilterSet
+from core.horilla_middlewares import _thread_locals
 
 
 def _filter_form_structured(self):

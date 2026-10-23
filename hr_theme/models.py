@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from base.models import Company
-from horilla.models import HorillaModel
+from core.models import HorillaModel
 
 THEMES_DATA = [
     {

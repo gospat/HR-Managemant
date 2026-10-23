@@ -11,9 +11,9 @@ from django.utils.translation import gettext_lazy as _
 from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company, Department, JobPosition, Tags
 from employee.models import Employee
-from horilla import horilla_middlewares
-from horilla.horilla_middlewares import _thread_locals
-from horilla.models import HorillaModel, upload_path
+from core import horilla_middlewares
+from core.horilla_middlewares import _thread_locals
+from core.models import HorillaModel, upload_path
 from hr_audit.methods import get_diff
 from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
 from hr_views.cbv_methods import render_template

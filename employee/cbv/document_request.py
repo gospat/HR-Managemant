@@ -26,8 +26,8 @@ from base.methods import (
 )
 from employee.filters import DocumentPipelineFilter, DocumentRequestFilter
 from employee.models import Employee
-from horilla.decorators import manager_can_enter
-from horilla.http.response import HorillaRedirect
+from core.decorators import manager_can_enter
+from core.http.response import HorillaRedirect
 from hr_documents.forms import DocumentForm
 from hr_documents.forms import DocumentRejectCbvForm as RejectForm
 from hr_documents.forms import DocumentRequestForm, DocumentUpdateForm

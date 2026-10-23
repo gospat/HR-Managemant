@@ -11,7 +11,7 @@ from typing import Any
 
 from django.utils.decorators import method_decorator
 
-from horilla.decorators import hx_request_required
+from core.decorators import hx_request_required
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import TemplateView
 

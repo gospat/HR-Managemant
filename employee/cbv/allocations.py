@@ -28,9 +28,9 @@ from base.views import get_models_in_app
 from employee.cbv.accessibility import allocation_accessibility
 from employee.models import Employee, EmployeeBankDetails, EmployeeWorkInformation
 from employee.models import models as django_models
-from horilla.horilla_middlewares import _thread_locals
-from horilla.http import HorillaRedirect
-from horilla.methods import handle_no_permission
+from core.horilla_middlewares import _thread_locals
+from core.http import HorillaRedirect
+from core.methods import handle_no_permission
 from hr_views.cbv_methods import (
     allocation_manager_can_enter,
     hx_request_required,

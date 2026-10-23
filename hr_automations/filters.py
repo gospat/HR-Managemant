@@ -2,7 +2,7 @@
 horilla_automations/filters.py
 """
 
-from horilla.filters import HorillaFilterSet, django_filters
+from core.filters import HorillaFilterSet, django_filters
 from hr_automations.models import MailAutomation
 
 

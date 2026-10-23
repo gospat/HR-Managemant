@@ -20,7 +20,7 @@ from base.models import (
     WorkType,
 )
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet, filter_name_or_badge_terms
+from core.filters import HorillaFilterSet, filter_name_or_badge_terms
 from offboarding.models import (
     EmployeeTask,
     Offboarding,
@@ -43,7 +43,7 @@ class LetterFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as every other modernized panel this session; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -170,7 +170,7 @@ class LetterFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic.
         """

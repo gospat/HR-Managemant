@@ -8,9 +8,9 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from horilla.config import logger
-from horilla.decorators import login_required, permission_required
-from horilla.http.response import HorillaRedirect
+from core.config import logger
+from core.decorators import login_required, permission_required
+from core.http.response import HorillaRedirect
 from recruitment.models import LinkedInAccount
 
 

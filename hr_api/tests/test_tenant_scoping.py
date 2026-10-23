@@ -15,8 +15,8 @@ company's rows are absent, and does so symmetrically.
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from horilla.horilla_middlewares import get_selected_company, set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
+from core.horilla_middlewares import get_selected_company, set_selected_company
+from core.testkit import make_company, make_employee, make_user
 
 # Real routes, read off the URL conf. The unversioned paths guessed
 # earlier 404d, which made the end-to-end assertions skip -- i.e. the two

@@ -9,8 +9,8 @@ from django.db import models
 from django.shortcuts import render
 from django.utils.translation import gettext as _
 
-from horilla.decorators import apply_decorators
-from horilla.http.response import HorillaRedirect
+from core.decorators import apply_decorators
+from core.http.response import HorillaRedirect
 from hr_auth.models import HorillaUser
 
 

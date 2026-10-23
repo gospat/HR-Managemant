@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from employee.cbv.employee_profile import EmployeeProfileView
-from horilla import settings
+from core import settings
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import HorillaListView, HorillaProfileView
 from recruitment.cbv import skill_zone

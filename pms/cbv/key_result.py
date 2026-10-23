@@ -15,8 +15,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views import View
 
 from base.methods import closest_numbers
-from horilla.decorators import manager_can_enter
-from horilla.http.response import HorillaRedirect
+from core.decorators import manager_can_enter
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.history import HorillaHistoryView
 from hr_views.generic.cbv.views import (

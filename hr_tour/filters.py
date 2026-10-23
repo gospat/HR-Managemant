@@ -2,7 +2,7 @@
 
 import django_filters
 
-from horilla.filters import HorillaFilterSet
+from core.filters import HorillaFilterSet
 from hr_tour.models import Tour
 
 

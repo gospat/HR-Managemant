@@ -8,7 +8,7 @@ from django.test import TestCase
 
 class LeaveAllocationApproveTests(TestCase):
     def setUp(self):
-        from horilla.testkit import make_company, make_employee
+        from core.testkit import make_company, make_employee
         from leave.models import LeaveType
 
         company = make_company("Alloc Co")

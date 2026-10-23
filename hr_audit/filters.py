@@ -1,7 +1,7 @@
 """
 filters.py
 
-This page is used to register filter for horilla audit  models
+This page is used to register filter for audit models
 
 """
 

@@ -18,7 +18,7 @@ from base.views import (
     DEMO_PAYROLL_RENAMED_PREFIX,
     normalize_demo_payslips,
 )
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.models.models import Contract, Payslip
 from payroll.tests.factories_payroll import make_active_contract
 

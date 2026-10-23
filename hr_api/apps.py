@@ -22,7 +22,7 @@ class HorillaApiConfig(AppConfig):
         # Import here to avoid circular imports
         from django.urls import include, path
 
-        from horilla.urls import urlpatterns
+        from core.urls import urlpatterns
 
         # Mount the API under an explicit version AND keep the unversioned
         # path working.

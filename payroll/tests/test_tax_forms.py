@@ -8,7 +8,7 @@ Python mode enabled with no code — was accepted at save time.
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.forms.tax_forms import FilingStatusForm
 from payroll.methods import federal_tax
 

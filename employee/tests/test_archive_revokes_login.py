@@ -29,7 +29,7 @@ from django.contrib.auth import authenticate
 from django.test import RequestFactory, TestCase
 
 from employee.models import Employee
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 
 
 class ArchiveRevokesLoginTests(TestCase):

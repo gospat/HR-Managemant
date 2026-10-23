@@ -8,7 +8,7 @@ from django.test import RequestFactory, TestCase
 from accessibility.methods import check_is_accessible
 from accessibility.middlewares import AccessibilityMiddleware
 from accessibility.models import DefaultAccessibility
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 
 class CheckIsAccessibleTests(TestCase):

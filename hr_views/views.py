@@ -33,10 +33,10 @@ from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from xhtml2pdf import pisa
 
 from base.methods import eval_validate, has_export_access
-from horilla.decorators import login_required as func_login_required
-from horilla.export_safety import safe_cell
-from horilla.http.response import HorillaRedirect
-from horilla.signals import post_generic_delete, pre_generic_delete
+from core.decorators import login_required as func_login_required
+from core.export_safety import safe_cell
+from core.http.response import HorillaRedirect
+from core.signals import post_generic_delete, pre_generic_delete
 from hr_views import models
 from hr_views.cbv_methods import (
     get_nested_field,
@@ -401,7 +401,7 @@ class HorillaDeleteConfirmationView(View):
         """
         GET method
         """
-        from horilla.urls import path, urlpatterns
+        from core.urls import path, urlpatterns
 
         pk = self.request.GET.get("pk")
         try:

@@ -43,7 +43,7 @@ from helpdesk.models import (
     Ticket,
     TicketType,
 )
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 
 
 class TicketTypeForm(ModelForm):

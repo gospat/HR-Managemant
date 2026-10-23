@@ -77,12 +77,12 @@ jobs:
           # 2.0.0-rc1 legitimately carries __version__ == "2.0.0".
           # Import it rather than regex it: no nested-quoting hazard, and it
           # reads the same value the image will report at runtime.
-          MOD=$(python3 -c 'import horilla; print(horilla.__version__)')
+          MOD=$(python3 -c 'import core; print(core.__version__)')
           BASE="${{ steps.v.outputs.version }}"
           BASE="${BASE%%-*}"
           if [ "$MOD" != "$BASE" ]; then
-            echo "::error::horilla/__version__.py is '$MOD' but the tag resolves to '$BASE'."
-            echo "Update horilla/__version__.py, or tag the version it already declares."
+            echo "::error::core/__version__.py is '$MOD' but the tag resolves to '$BASE'."
+            echo "Update core/__version__.py, or tag the version it already declares."
             exit 1
           fi
           echo "Version check OK: __version__=$MOD, tag base=$BASE"
@@ -127,7 +127,7 @@ jobs:
           # before it would exec this command. Overriding CMD alone is not
           # enough -- the entrypoint still runs and the wait loop exits 1.
           IMG_VERSION=$(docker run --rm --entrypoint python horilla-hr:smoketest \
-            -c "import horilla; print(horilla.__version__)")
+            -c "import core; print(core.__version__)")
           echo "Image reports __version__=$IMG_VERSION"
 
           docker network create horilla-smoke

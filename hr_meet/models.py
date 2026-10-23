@@ -13,8 +13,8 @@ from google.oauth2.credentials import Credentials
 from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company
 from employee.models import Employee
-from horilla.horilla_middlewares import _thread_locals
-from horilla.models import HorillaModel, NoPermissionModel
+from core.horilla_middlewares import _thread_locals
+from core.models import HorillaModel, NoPermissionModel
 from hr_views.cbv_methods import render_template
 from recruitment.models import Candidate
 

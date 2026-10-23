@@ -12,7 +12,7 @@ from django.test import TestCase, override_settings
 
 from base.email_redaction import REDACTED, redact_credential_body
 from base.models import Company, EmailLog
-from horilla.horilla_middlewares import set_selected_company
+from core.horilla_middlewares import set_selected_company
 
 
 class RedactionTests(TestCase):

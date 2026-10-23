@@ -13,7 +13,7 @@ from datetime import date
 from django.test import TestCase
 
 from base.demo_data.modules.payroll_features import backfill_payroll_feature_coverage
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.payroll_run import payroll_calculation
 from payroll.models.models import Allowance, Contract, Deduction, SalaryStructure
 from payroll.tests.factories_payroll import make_active_contract

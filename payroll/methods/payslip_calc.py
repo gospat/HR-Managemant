@@ -11,7 +11,7 @@ import operator
 from django.apps import apps
 
 # from attendance.models import Attendance
-from horilla.methods import get_horilla_model_class
+from core.methods import get_horilla_model_class
 from payroll.methods.component_engine import (
     EARNED,
     accumulate,

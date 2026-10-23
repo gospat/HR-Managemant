@@ -171,7 +171,7 @@ def deliver_subscription(
     # though it had already been delivered.
     #
     # Duplicate execution across workers is now prevented upstream: jobs
-    # register with horilla.scheduling and exactly one process
+    # register with core.scheduling and exactly one process
     # (manage.py run_scheduler) owns execution, rather than every gunicorn
     # worker starting its own BackgroundScheduler at import.
     #

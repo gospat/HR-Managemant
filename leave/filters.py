@@ -28,7 +28,7 @@ from base.models import (
     WorkType,
 )
 from employee.models import Employee
-from horilla.filters import (
+from core.filters import (
     FilterSet,
     HorillaFilterSet,
     filter_by_name,
@@ -97,7 +97,7 @@ class AssignedLeaveFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as LeaveRequestFilter.name_or_badge; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -160,7 +160,7 @@ class AssignedLeaveFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic.
         """
@@ -232,7 +232,7 @@ class LeaveRequestFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as EmployeeFilter.name_or_badge/AttendanceFilters.
-    # name_or_badge; see horilla.filters.filter_name_or_badge_terms for the
+    # name_or_badge; see core.filters.filter_name_or_badge_terms for the
     # shared matching logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -445,7 +445,7 @@ class LeaveRequestFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter and AttendanceFilters).
         """
@@ -547,7 +547,7 @@ class UserLeaveRequestFilter(FilterSet):
 
     def __init__(self, data=None, queryset=None, *, request=None, prefix=None):
         super().__init__(data=data, queryset=queryset, request=request, prefix=prefix)
-        from horilla.horilla_middlewares import _thread_locals
+        from core.horilla_middlewares import _thread_locals
 
         request = getattr(_thread_locals, "request", None)
         leave_requests = request.user.employee_get.leaverequest_set.all()
@@ -579,7 +579,7 @@ class LeaveAllocationRequestFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as LeaveRequestFilter.name_or_badge; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -638,7 +638,7 @@ class LeaveAllocationRequestFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic (also used by EmployeeFilter/AttendanceFilters/
         LeaveRequestFilter).

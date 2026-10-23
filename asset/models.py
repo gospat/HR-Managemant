@@ -17,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company
 from employee.models import Employee
-from horilla.models import HorillaModel, upload_path
+from core.models import HorillaModel, upload_path
 from hr_views.cbv_methods import render_template
 
 

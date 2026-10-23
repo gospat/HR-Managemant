@@ -11,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import is_reportingmanager
 from employee.models import Employee
-from horilla.decorators import hx_request_required, login_required
-from horilla.methods import handle_no_permission
+from core.decorators import hx_request_required, login_required
+from core.methods import handle_no_permission
 from leave.cbv.my_leave_request import MainParentListView, MyLeaveRequestListView
 
 

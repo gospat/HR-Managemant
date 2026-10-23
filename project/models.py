@@ -22,9 +22,9 @@ from base.horilla_company_manager import HorillaCompanyManager
 from base.models import Company
 from employee.methods.duration_methods import format_time, strtime_seconds
 from employee.models import Employee
-from horilla import horilla_middlewares
-from horilla.horilla_middlewares import _thread_locals
-from horilla.models import HorillaModel, upload_path
+from core import horilla_middlewares
+from core.horilla_middlewares import _thread_locals
+from core.models import HorillaModel, upload_path
 from hr_views.cbv_methods import render_template
 
 # Create your models here.

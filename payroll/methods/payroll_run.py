@@ -20,7 +20,7 @@ import logging
 
 from django.apps import apps
 
-from horilla.methods import get_horilla_model_class
+from core.methods import get_horilla_model_class
 from payroll.methods.basic_pay_source import COMPONENT as BASIC_FROM_COMPONENT
 from payroll.methods.basic_pay_source import CONTRACT as BASIC_FROM_CONTRACT
 from payroll.methods.basic_pay_source import NEITHER as BASIC_FROM_NEITHER

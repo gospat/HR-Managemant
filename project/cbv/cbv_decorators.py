@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
-from horilla.horilla_middlewares import _thread_locals
-from horilla.http import HorillaRedirect
+from core.horilla_middlewares import _thread_locals
+from core.http import HorillaRedirect
 from project.methods import (
     any_project_manager,
     any_task_manager,

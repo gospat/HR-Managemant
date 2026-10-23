@@ -10,7 +10,7 @@ import django_filters
 
 from base.filters import FilterSet
 from biometric.models import BiometricDevices
-from horilla.filters import HorillaFilterSet
+from core.filters import HorillaFilterSet
 
 
 class BiometricDeviceFilter(HorillaFilterSet):

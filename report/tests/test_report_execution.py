@@ -18,8 +18,8 @@ from datetime import date, timedelta
 from django.apps import apps
 from django.test import TestCase
 
-from horilla.testkit.company import clear_selected_company
-from horilla.testkit.factories import (
+from core.testkit.company import clear_selected_company
+from core.testkit.factories import (
     get_hired_stage,
     make_attendance,
     make_available_leave,
@@ -717,7 +717,7 @@ class SharedFormulaGuardTests(TestCase):
     """
 
     def test_triggers_are_neutralized(self):
-        from horilla.export_safety import neutralize_formula
+        from core.export_safety import neutralize_formula
 
         for payload in (
             '=HYPERLINK("http://evil.test","x")',
@@ -736,7 +736,7 @@ class SharedFormulaGuardTests(TestCase):
             self.assertTrue(guarded.startswith("'"), f"not neutralized: {payload!r}")
 
     def test_ordinary_text_and_numbers_pass_through(self):
-        from horilla.export_safety import neutralize_formula, safe_cell
+        from core.export_safety import neutralize_formula, safe_cell
 
         self.assertEqual(neutralize_formula("Ann Smith"), "Ann Smith")
         self.assertEqual(neutralize_formula(""), "")
@@ -748,7 +748,7 @@ class SharedFormulaGuardTests(TestCase):
         self.assertEqual(safe_cell(None), "")
 
     def test_report_export_uses_the_shared_guard(self):
-        from horilla.export_safety import neutralize_formula
+        from core.export_safety import neutralize_formula
         from report.export import _neutralize_formula
 
         self.assertEqual(_neutralize_formula("=cmd"), neutralize_formula("=cmd"))
@@ -1145,7 +1145,7 @@ class CohortActiveFilterTests(TestCase):
 
 class TemplateShadowingTests(TestCase):
     """
-    horilla/settings/base.py puts the theme filesystem loader ahead of
+    core/settings/base.py puts the theme filesystem loader ahead of
     app_directories, so report/templates/report/*.html could never render --
     4,165 lines of it were being maintained alongside the live theme copies
     that actually shadow them.

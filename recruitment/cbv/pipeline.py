@@ -13,8 +13,8 @@ from django.utils.decorators import method_decorator
 from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
 
-from horilla.decorators import hx_request_required
-from horilla.http.response import HorillaRedirect
+from core.decorators import hx_request_required
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.kanban import HorillaKanbanView
 from hr_views.generic.cbv.views import (

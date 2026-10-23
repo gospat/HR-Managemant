@@ -24,7 +24,7 @@ from base.methods import (
 )
 from base.models import RotatingWorkTypeAssign
 from employee.models import Employee
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import (
     HorillaDetailedView,

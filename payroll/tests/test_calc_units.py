@@ -7,7 +7,7 @@ from unittest.mock import patch
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.limits import compute_limit
 from payroll.methods.methods import compute_net_pay, get_total_days
 from payroll.methods.payslip_calc import (

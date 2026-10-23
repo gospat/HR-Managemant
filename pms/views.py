@@ -38,7 +38,7 @@ from base.methods import (
 )
 from base.models import Company
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.decorators import (
+from core.decorators import (
     check_manager,
     hx_request_required,
     login_required,
@@ -47,9 +47,9 @@ from horilla.decorators import (
     owner_can_enter,
     permission_required,
 )
-from horilla.group_by import group_by_queryset
-from horilla.http.response import HorillaRedirect, with_bulk_result
-from horilla.methods import handle_no_permission
+from core.group_by import group_by_queryset
+from core.http.response import HorillaRedirect, with_bulk_result
+from core.methods import handle_no_permission
 from hr_auth.models import HorillaUser
 from hr_automations.methods.methods import generate_choices
 from hr_automations.methods.serialize import serialize_form

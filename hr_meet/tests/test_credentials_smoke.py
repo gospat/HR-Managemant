@@ -2,7 +2,7 @@
 
 from django.test import TestCase
 
-from horilla.testkit import make_company
+from core.testkit import make_company
 from hr_meet.models import GoogleCloudCredential
 
 

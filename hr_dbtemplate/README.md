@@ -11,7 +11,7 @@ Use this document when extending behaviour, debugging cache issues, or onboardin
 | Requirement | Notes |
 |-------------|------|
 | **`django.contrib.sites`** | `Site` rows drive host → template scope. `sites` M2M on `Template` links overrides to one or more sites. |
-| **`horilla.contrib.utils.middlewares`** | Loader reads `request` from `_thread_local`; ensure that middleware runs before template rendering where DB resolution is needed. |
+| **`core.contrib.utils.middlewares`** | Loader reads `request` from `_thread_local`; ensure that middleware runs before template rendering where DB resolution is needed. |
 | **`auditlog`** | `Template.history` uses `AuditlogHistoryField`. |
 | **Template engine** | Register the custom loader (see below) **before** filesystem loaders if DB should win when both exist. |
 

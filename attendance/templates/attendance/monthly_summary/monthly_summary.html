@@ -270,7 +270,7 @@
                    session: primary/most-used search, shouldn't be hidden
                    behind a click. Comma-separated multi-term search, handled
                    for free by EmployeeFilter.name_or_badge (see
-                   horilla.filters.filter_name_or_badge_terms) since
+                   core.filters.filter_name_or_badge_terms) since
                    attendance_monthly_summary_table/_export already build
                    EmployeeFilter(request.GET) from this same form. -->
               <div class="oh-input-group">
@@ -296,7 +296,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Employee" %}</label>
                     <select name="employee_id" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-picker' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-picker' %}"
                             data-placeholder="{% trans 'Search employee...' %}">
                       {% for emp in selected_employees %}
                         <option value="{{ emp.pk }}" selected>{{ emp.get_full_name }}</option>
@@ -306,7 +306,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Department" %}</label>
                     <select name="department_id" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-department' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-department' %}"
                             data-placeholder="{% trans 'Select department...' %}">
                       {% for dept in selected_departments %}
                         <option value="{{ dept.pk }}" selected>{{ dept.department }}</option>
@@ -316,7 +316,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Job Position" %}</label>
                     <select name="job_position_id" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-job-position' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-job-position' %}"
                             data-placeholder="{% trans 'Select job position...' %}">
                       {% for jp in selected_job_positions %}
                         <option value="{{ jp.pk }}" selected>{{ jp.job_position }}</option>
@@ -326,7 +326,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Shift" %}</label>
                     <select name="shift_id" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-shift' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-shift' %}"
                             data-placeholder="{% trans 'Select shift...' %}">
                       {% for shift in selected_shifts %}
                         <option value="{{ shift.pk }}" selected>{{ shift.employee_shift }}</option>
@@ -336,7 +336,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Work Type" %}</label>
                     <select name="work_type_id" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-work-type' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-work-type' %}"
                             data-placeholder="{% trans 'Select work type...' %}">
                       {% for wt in selected_work_types %}
                         <option value="{{ wt.pk }}" selected>{{ wt.work_type }}</option>
@@ -357,7 +357,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Company" %}</label>
                     <select name="employee_work_info__company_id" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-company' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-company' %}"
                             data-placeholder="{% trans 'Select company...' %}">
                       {% for company in selected_companies %}
                         <option value="{{ company.pk }}" selected>{{ company.company }}</option>
@@ -367,7 +367,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Reporting Manager" %}</label>
                     <select name="employee_work_info__reporting_manager_id" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-reporting-manager' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-reporting-manager' %}"
                             data-placeholder="{% trans 'Search employee...' %}">
                       {% for manager in selected_reporting_managers %}
                         <option value="{{ manager.pk }}" selected>{{ manager.get_full_name }}</option>
@@ -377,7 +377,7 @@
                   <div class="oh-input-group">
                     <label class="oh-label">{% trans "Employee Tag" %}</label>
                     <select name="employee_work_info__tags" multiple class="oh-select-ajax w-100"
-                            data-ajax-url="{% url 'horilla-ajax-choices' 'employee-tag' %}"
+                            data-ajax-url="{% url 'ajax-choices' 'employee-tag' %}"
                             data-placeholder="{% trans 'Select employee tag...' %}">
                       {% for tag in selected_tags %}
                         <option value="{{ tag.pk }}" selected>{{ tag.title }}</option>

@@ -7,7 +7,7 @@ from django.conf import settings
 from django.http import HttpResponse
 
 from base.import_template_data import write_import_xlsx
-from horilla.methods import remove_dynamic_url
+from core.methods import remove_dynamic_url
 
 
 def handle_attendance_errors(error_list):

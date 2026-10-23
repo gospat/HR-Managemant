@@ -1,6 +1,6 @@
 from datetime import date, datetime, time, timedelta
 
-from horilla.scheduling import register_job
+from core.scheduling import register_job
 
 
 def update_experience():

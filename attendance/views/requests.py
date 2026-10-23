@@ -44,13 +44,13 @@ from base.methods import (
 )
 from base.models import EmployeeShift, EmployeeShiftDay
 from employee.models import Employee
-from horilla.decorators import (
+from core.decorators import (
     hx_request_required,
     login_required,
     manager_can_enter,
     permission_required,
 )
-from horilla.http.response import HorillaRedirect, with_bulk_result
+from core.http.response import HorillaRedirect, with_bulk_result
 from notifications.signals import notify
 
 

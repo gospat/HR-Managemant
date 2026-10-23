@@ -14,7 +14,7 @@ from io import StringIO
 from django.core.management import call_command
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.management.commands.normalise_payslip_basic_pay import duplicate_row_index
 from payroll.models.models import Allowance, Contract, Payslip
 

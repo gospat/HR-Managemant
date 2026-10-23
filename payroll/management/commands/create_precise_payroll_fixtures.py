@@ -186,7 +186,7 @@ class Command(BaseCommand):
             EmployeeShiftDay,
             EmployeeShiftSchedule,
         )
-        from horilla.testkit import make_company
+        from core.testkit import make_company
 
         company = make_company("Precise Payroll Co")
 
@@ -320,7 +320,7 @@ class Command(BaseCommand):
         exactly why PF and Professional Tax were silently absent from every
         payslip this command produced before.
         """
-        from horilla.testkit import make_employee
+        from core.testkit import make_employee
         from payroll.models.models import Contract
 
         employees = []

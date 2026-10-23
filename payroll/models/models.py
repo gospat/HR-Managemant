@@ -34,9 +34,9 @@ from base.models import (
 )
 from employee.methods.duration_methods import strtime_seconds
 from employee.models import BonusPoint, Employee, EmployeeWorkInformation
-from horilla import horilla_middlewares
-from horilla.horilla_middlewares import _thread_locals
-from horilla.models import HorillaModel, upload_path
+from core import horilla_middlewares
+from core.horilla_middlewares import _thread_locals
+from core.models import HorillaModel, upload_path
 from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
 from hr_views.cbv_methods import render_template
 from payroll.methods.proration import BASIS_CHOICES

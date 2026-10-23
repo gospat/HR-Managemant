@@ -9,7 +9,7 @@ from datetime import date, timedelta
 
 from dateutil.relativedelta import relativedelta
 
-from horilla.scheduling import register_job
+from core.scheduling import register_job
 from payroll.methods.methods import payslip_fields, save_payslip
 from payroll.methods.payroll_run import payroll_calculation
 from payroll.methods.tax_calc import TaxComputationError

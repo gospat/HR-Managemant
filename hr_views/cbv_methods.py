@@ -1,5 +1,5 @@
 """
-horilla/cbv_methods.py
+core/cbv_methods.py
 """
 
 import json
@@ -46,10 +46,10 @@ from openpyxl.drawing.image import Image
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from horilla.config import logger
-from horilla.export_safety import safe_cell
-from horilla.horilla_middlewares import _thread_locals
-from horilla.methods import handle_no_permission
+from core.config import logger
+from core.export_safety import safe_cell
+from core.horilla_middlewares import _thread_locals
+from core.methods import handle_no_permission
 from hr_views.templatetags.generic_template_filters import getattribute
 
 FIELD_WIDGET_MAP = {
@@ -227,8 +227,8 @@ def owner_can_enter(
     If manager_access:True then all the managers can enter.
     """
     from employee.models import Employee, EmployeeWorkInformation
-    from horilla.decorators import check_manager
-    from horilla.http import HorillaRedirect
+    from core.decorators import check_manager
+    from core.http import HorillaRedirect
 
     def _function(self, *args, **kwargs):
         request = getattr(_thread_locals, "request")

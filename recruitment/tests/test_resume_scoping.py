@@ -11,7 +11,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from base.models import Department, JobPosition
-from horilla.testkit import make_company
+from core.testkit import make_company
 from recruitment.models import Recruitment, Resume
 
 PDF = b"%PDF-1.4 fake resume bytes"

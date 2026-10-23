@@ -18,8 +18,8 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 
 from employee.models import ProfileEditFeature
-from horilla.horilla_middlewares import set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
+from core.horilla_middlewares import set_selected_company
+from core.testkit import make_company, make_employee, make_user
 
 
 def url(employee):

@@ -11,7 +11,7 @@ from datetime import date
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.methods.tax_calc import TaxComputationError, calculate_taxable_amount
 from payroll.models.models import Contract
 from payroll.tests.factories_payroll import make_active_contract, make_filing_status

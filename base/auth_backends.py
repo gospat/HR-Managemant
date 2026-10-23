@@ -25,7 +25,7 @@ from django.conf import settings
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import Permission
 
-from horilla.horilla_middlewares import _thread_locals, get_selected_company
+from core.horilla_middlewares import _thread_locals, get_selected_company
 
 
 class CompanyScopedBackend(ModelBackend):

@@ -1,5 +1,5 @@
 from django.urls import include, path
-from horilla.urls import urlpatterns as upstream_patterns
+from core.urls import urlpatterns as upstream_patterns
 from university.operations.dynamic_routes import dispatch as dynamic_dispatch
 from university.people.views import (
     SessionView,

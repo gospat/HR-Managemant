@@ -27,10 +27,10 @@ from base.methods import (
     has_export_access,
 )
 from base.views import generate_error_report
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.http import HorillaRedirect
-from horilla.http.response import with_bulk_result
-from horilla.methods import handle_no_permission
+from core.decorators import hx_request_required, login_required, permission_required
+from core.http import HorillaRedirect
+from core.http.response import with_bulk_result
+from core.methods import handle_no_permission
 from notifications.signals import notify
 from project.methods import (
     generate_colors,

@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
-from horilla.decorators import login_required
+from core.decorators import login_required
 from report.models import ReportSavedView
 from report.personalization import saved_views_for_user, session_company_id
 

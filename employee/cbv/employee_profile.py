@@ -28,8 +28,8 @@ from employee.history import (
     get_employee_model_history,
 )
 from employee.models import Employee
-from horilla import settings
-from horilla.http.response import HorillaRedirect
+from core import settings
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import HorillaDetailedView, HorillaProfileView
 
@@ -411,7 +411,7 @@ class GroupAssignView(View):
         return can_edit_employee_permissions(request, employee)
 
     def get(self, request, *args, **kwargs):
-        from horilla.methods import handle_no_permission
+        from core.methods import handle_no_permission
 
         employee_id = request.GET.get("employee")
         try:
@@ -436,7 +436,7 @@ class GroupAssignView(View):
         )
 
     def post(self, request, *args, **kwargs):
-        from horilla.methods import handle_no_permission
+        from core.methods import handle_no_permission
 
         form = AddToUserGroupForm(request.POST)
         employee_id = request.POST.get("employee")

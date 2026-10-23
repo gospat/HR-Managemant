@@ -28,7 +28,7 @@ from employee.models import (
     ProfileEditFeature,
 )
 from employee.views import can_access_document, work_info_export, work_info_import
-from horilla.decorators import check_manager
+from core.decorators import check_manager
 from hr_api.api_decorators.base.decorators import permission_required
 from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
 from hr_api.api_methods.employee.methods import get_next_badge_id

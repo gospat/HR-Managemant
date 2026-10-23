@@ -49,7 +49,7 @@ from base.methods import (
 )
 from base.models import CompanyLeaves, Holidays, PenaltyAccounts
 from employee.models import Employee
-from horilla.decorators import (
+from core.decorators import (
     hx_request_required,
     logger,
     login_required,
@@ -57,9 +57,9 @@ from horilla.decorators import (
     owner_can_enter,
     permission_required,
 )
-from horilla.group_by import group_by_queryset
-from horilla.http.response import HorillaRedirect, with_bulk_result
-from horilla.methods import (
+from core.group_by import group_by_queryset
+from core.http.response import HorillaRedirect, with_bulk_result
+from core.methods import (
     get_horilla_model_class,
     handle_no_permission,
     remove_dynamic_url,

@@ -8,7 +8,7 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from helpdesk.models import Ticket, TicketType
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 
 class TicketViewAuthorizationTests(TestCase):

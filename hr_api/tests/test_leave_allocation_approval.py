@@ -28,7 +28,7 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 
 from employee.models import EmployeeWorkInformation
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from leave.models import AvailableLeave, LeaveAllocationRequest, LeaveType
 
 APPROVE = "/api/v1/leave/allocation-approve/{}/"

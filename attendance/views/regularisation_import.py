@@ -31,7 +31,7 @@ from base.import_template_data import write_import_xlsx
 from base.methods import filtersubordinatesemployeemodel
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from horilla.decorators import login_required, manager_can_enter
+from core.decorators import login_required, manager_can_enter
 
 # Sheet column -> model field. Only these four are editable: week off and
 # holiday come from the roster and the company calendar, not from anybody's

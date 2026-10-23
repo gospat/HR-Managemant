@@ -25,7 +25,7 @@ from base.models import (
     WorkType,
 )
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet, filter_by_name, filter_name_or_badge_terms
+from core.filters import HorillaFilterSet, filter_by_name, filter_name_or_badge_terms
 from payroll.models.models import (
     Allowance,
     Contract,
@@ -85,7 +85,7 @@ class ContractFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as every other modernized panel this session; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -195,7 +195,7 @@ class ContractFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic.
         """
@@ -432,7 +432,7 @@ class PayslipFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as every other modernized panel this session; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -453,7 +453,7 @@ class PayslipFilter(HorillaFilterSet):
 
     def filter_by_name(self, queryset, name, value):
         """
-        Delegates to the shared horilla.filters.filter_by_name, except when
+        Delegates to the shared core.filters.filter_by_name, except when
         search_field is set (field-scoped search takes over instead -- see
         HorillaFilterSet.search_in).
         """
@@ -621,7 +621,7 @@ class PayslipFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic.
         """
@@ -667,7 +667,7 @@ class LoanAccountFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as every other modernized panel this session; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -719,7 +719,7 @@ class LoanAccountFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic.
         """
@@ -822,7 +822,7 @@ class ReimbursementFilter(HorillaFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX employee_id picker below rather than instead of it -- same
     # field/behavior as every other modernized panel this session; see
-    # horilla.filters.filter_name_or_badge_terms for the shared matching
+    # core.filters.filter_name_or_badge_terms for the shared matching
     # logic.
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
@@ -890,7 +890,7 @@ class ReimbursementFilter(HorillaFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic.
         """

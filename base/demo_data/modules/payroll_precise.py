@@ -197,7 +197,7 @@ def _ensure_employees(company, shift, gross_up, ctc_down, name_offset):
     employees again instead of piling up duplicates each time.
     """
     from employee.models import Employee, EmployeeWorkInformation
-    from horilla.testkit import make_employee
+    from core.testkit import make_employee
     from payroll.models.models import Contract
 
     employees = []

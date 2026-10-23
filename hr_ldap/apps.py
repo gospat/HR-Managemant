@@ -13,8 +13,8 @@ class HorillaLdapConfig(AppConfig):
     def ready(self):
         from django.urls import include, path
 
-        from horilla import config
-        from horilla.urls import urlpatterns
+        from core import config
+        from core.urls import urlpatterns
 
         settings.APPS.append("horilla_ldap")
         urlpatterns.append(

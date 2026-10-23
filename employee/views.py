@@ -117,7 +117,7 @@ from employee.models import (
     NoteFiles,
 )
 from employee.threading import InvitationMailSendThread
-from horilla.decorators import (
+from core.decorators import (
     hx_request_required,
     logger,
     login_required,
@@ -125,10 +125,10 @@ from horilla.decorators import (
     owner_can_enter,
     permission_required,
 )
-from horilla.filters import HorillaPaginator
-from horilla.group_by import group_by_queryset
-from horilla.http.response import HorillaRedirect, with_bulk_result
-from horilla.methods import dynamic_attr, get_horilla_model_class
+from core.filters import HorillaPaginator
+from core.group_by import group_by_queryset
+from core.http.response import HorillaRedirect, with_bulk_result
+from core.methods import dynamic_attr, get_horilla_model_class
 from hr_audit.models import AccountBlockUnblock, HistoryTrackingFields
 from hr_auth.methods import generate_random_password
 from hr_auth.models import HorillaUser

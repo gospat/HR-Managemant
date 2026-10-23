@@ -32,16 +32,16 @@ from attendance.models import AttendanceActivity
 from attendance.views.clock_in_out import clock_in, clock_out
 from base.methods import get_key_instances, get_pagination
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.decorators import (
+from core.decorators import (
     hx_request_required,
     install_required,
     login_required,
     permission_required,
 )
-from horilla.filters import HorillaPaginator
-from horilla.http.response import HorillaRedirect
-from horilla.scheduling import register_job
-from horilla.settings import TIME_ZONE
+from core.filters import HorillaPaginator
+from core.http.response import HorillaRedirect
+from core.scheduling import register_job
+from core.settings import TIME_ZONE
 
 from .anviz import CrossChexCloudAPI
 from .cosec import COSECBiometric
@@ -1833,7 +1833,7 @@ def add_biometric_user(request, device_id):
 @hx_request_required
 def map_biometric_users(request, device_id):
     """
-    Maps an horilla employee to a biometric user on a specified biometric device.
+    Maps an employee to a biometric user on a specified biometric device.
     """
     device = BiometricDevices.find(device_id)
     form = MapBioUsers(request.POST or None)

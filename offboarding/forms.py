@@ -16,7 +16,7 @@ from django.utils.translation import gettext_noop
 from base.forms import ModelForm
 from employee.forms import MultipleFileField
 from employee.models import Employee
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 from notifications.signals import notify
 from offboarding.models import (
     EmployeeTask,

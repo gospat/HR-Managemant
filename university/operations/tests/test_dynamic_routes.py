@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.test import Client, RequestFactory, TestCase, override_settings
 from django.views import View
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from university.operations.dynamic_routes import PREFIX, register
 
 
@@ -61,7 +61,7 @@ class DynamicCallbackSecurityTests(TestCase):
         owner.view_id = "synthetic-list"
         view = getattr(owner, method) if method else SyntheticPopupView.as_view()
         with patch(
-            "horilla.horilla_middlewares._thread_locals",
+            "core.horilla_middlewares._thread_locals",
             SimpleNamespace(request=request),
         ):
             url = "/" + register("synthetic-" + request.session.session_key, view)
@@ -136,7 +136,7 @@ class DynamicCallbackSecurityTests(TestCase):
         request.user = self.root
         request.session = client.session
         with patch(
-            "horilla.horilla_middlewares._thread_locals",
+            "core.horilla_middlewares._thread_locals",
             SimpleNamespace(request=request),
         ):
             url = register_dynamic_url(

@@ -18,9 +18,9 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from employee.models import EmployeeWorkInformation
-from horilla.horilla_middlewares import set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
-from horilla.testkit.factories import make_available_leave, make_leave_type
+from core.horilla_middlewares import set_selected_company
+from core.testkit import make_company, make_employee, make_user
+from core.testkit.factories import make_available_leave, make_leave_type
 
 HX = {"HTTP_HX_REQUEST": "true", "HTTP_X_REQUESTED_WITH": "XMLHttpRequest"}
 

@@ -15,8 +15,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.http.response import HorillaRedirect
+from core.decorators import hx_request_required, login_required, permission_required
+from core.http.response import HorillaRedirect
 from payroll.methods.component_formula import (
     ComponentFormulaError,
     run_component_formula,

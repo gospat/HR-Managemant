@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from attendance.models import Attendance
 from base.models import EmployeeShift, EmployeeShiftDay, EmployeeShiftSchedule, Holidays
-from horilla.testkit.factories import (
+from core.testkit.factories import (
     make_company,
     make_employee,
     make_leave_request,

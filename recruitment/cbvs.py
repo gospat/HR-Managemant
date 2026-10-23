@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
-from horilla.decorators import login_required, permission_required
+from core.decorators import login_required, permission_required
 from hr_views.generic.cbv import views
 from recruitment import models
 from recruitment.filters import LinkedInAccountFilter

@@ -5,7 +5,7 @@ import base64
 from django.test import Client, TestCase
 from rest_framework.test import APIClient
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 
 class LoginAPITests(TestCase):

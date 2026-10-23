@@ -21,8 +21,8 @@ from django.utils.html import format_html, format_html_join
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
-from horilla.config import import_method
-from horilla.horilla_middlewares import _thread_locals
+from core.config import import_method
+from core.horilla_middlewares import _thread_locals
 from hr_views.related_link_registry import resolve_detail_link
 
 register = template.Library()

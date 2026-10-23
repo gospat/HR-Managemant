@@ -27,7 +27,7 @@ from base.filters import RosterFilter
 from base.forms import RosterCellUpdateForm
 from base.models import CompanyLeaves, EmployeeShift, Holidays, Roster, RosterPublishLog
 from employee.models import Employee
-from horilla.decorators import hx_request_required
+from core.decorators import hx_request_required
 from hr_views.cbv_methods import login_required, paginator_qry
 from hr_views.generic.cbv.views import HorillaCardView, HorillaNavView
 

@@ -14,7 +14,7 @@ import datetime
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 
-from horilla.decorators import login_required, permission_required
+from core.decorators import login_required, permission_required
 from payroll.methods import contributions
 from payroll.models.models import Deduction, PayPeriodSettings, Payslip
 

@@ -14,8 +14,8 @@ from accessibility.cbv_decorators import enter_if_accessible
 from base.filters import MailLogFilter
 from base.models import EmailLog
 from employee.models import Employee
-from horilla.decorators import check_manager
-from horilla.http.response import HorillaRedirect
+from core.decorators import check_manager
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import HorillaDetailedView, HorillaListView
 

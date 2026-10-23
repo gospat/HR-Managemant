@@ -38,9 +38,9 @@ from asset.models import (
 )
 from base.methods import filtersubordinates
 from employee.models import Employee
-from horilla.horilla_middlewares import _thread_locals
-from horilla.http.response import HorillaRedirect
-from horilla.methods import horilla_users_with_perms
+from core.horilla_middlewares import _thread_locals
+from core.http.response import HorillaRedirect
+from core.methods import horilla_users_with_perms
 from hr_views.cbv_methods import (
     login_required,
     owner_can_enter,

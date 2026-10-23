@@ -22,9 +22,9 @@ from base.methods import reload_queryset
 from base.models import Company
 from employee.filters import EmployeeFilter
 from employee.models import BonusPoint, Employee
-from horilla import horilla_middlewares
-from horilla.horilla_middlewares import _thread_locals
-from horilla.methods import get_horilla_model_class
+from core import horilla_middlewares
+from core.horilla_middlewares import _thread_locals
+from core.methods import get_horilla_model_class
 from hr_widgets.forms import HorillaForm, default_select_option_template
 from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
 from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget

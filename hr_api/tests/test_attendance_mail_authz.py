@@ -27,7 +27,7 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 
 from base.models import HorillaMailTemplate
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 CONVERT_URL = "/api/attendance/converted-mail-template"
 MAIL_TEMPLATES_URL = "/api/attendance/mail-templates"

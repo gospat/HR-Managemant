@@ -9,7 +9,7 @@ import logging
 
 from django.shortcuts import render
 
-from horilla.http.response import HorillaRedirect
+from core.http.response import HorillaRedirect
 
 logger = logging.getLogger(__name__)
 from datetime import date, datetime, timedelta
@@ -43,8 +43,8 @@ from base.context_processors import (
     timerunner_enabled,
 )
 from base.models import AttendanceAllowedIP, Company, EmployeeShiftDay
-from horilla.decorators import hx_request_required, login_required
-from horilla.horilla_middlewares import _thread_locals
+from core.decorators import hx_request_required, login_required
+from core.horilla_middlewares import _thread_locals
 
 
 def late_come_create(attendance):

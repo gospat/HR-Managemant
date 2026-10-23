@@ -25,7 +25,7 @@ Everything is read-only. No Payslip, no Contract, nothing is saved.
 from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 
-from horilla.decorators import hx_request_required, login_required, permission_required
+from core.decorators import hx_request_required, login_required, permission_required
 from payroll.methods.component_engine import accumulate, new_context, record
 from payroll.methods.component_formula import ComponentFormulaError
 from payroll.methods.employer_cost import employer_amount

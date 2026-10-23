@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from base.forms import AuditTagForm
-from horilla.decorators import permission_required
+from core.decorators import permission_required
 from hr_audit.filters import AudiTagFilter
 from hr_audit.models import AuditTag
 from hr_views.cbv_methods import login_required

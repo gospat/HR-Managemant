@@ -15,7 +15,7 @@ from base.decorators import manager_can_enter
 from base.filters import RotatingWorkTypeFilter
 from base.forms import RotatingWorkTypeForm
 from base.models import RotatingWorkType
-from horilla.decorators import permission_required
+from core.decorators import permission_required
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
     HorillaFormView,

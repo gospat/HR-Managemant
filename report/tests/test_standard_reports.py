@@ -7,7 +7,7 @@ from datetime import date
 from django.test import RequestFactory, SimpleTestCase, TestCase
 from django.utils.datastructures import MultiValueDict
 
-from horilla.testkit.factories import make_company, make_employee
+from core.testkit.factories import make_company, make_employee
 from report.engine import ReportFilters, month_bounds, month_offset, parse_period
 from report.export import export_csv, export_xlsx
 from report.pivot_limits import MAX_PIVOT_ROWS, capped_list
@@ -799,7 +799,7 @@ class SubscriptionDeliveryTests(SimpleTestCase):
         # Nothing starts at import now, so there is no argv to guard -- the job
         # is registered and run_scheduler owns execution.
         import report.scheduler  # noqa: F401
-        from horilla.scheduling import get_registered_jobs
+        from core.scheduling import get_registered_jobs
 
         job = next(
             (j for j in get_registered_jobs() if j.job_id == "report_subscriptions"),

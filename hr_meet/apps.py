@@ -13,7 +13,7 @@ class HorillaMeetConfig(AppConfig):
     def ready(self):
         from django.urls import include, path
 
-        from horilla.urls import urlpatterns
+        from core.urls import urlpatterns
         from hr_meet import signals
 
         settings.APPS.append("horilla_meet")

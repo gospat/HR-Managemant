@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from dateutil.relativedelta import relativedelta
 
-from horilla.scheduling import register_job
+from core.scheduling import register_job
 
 today = datetime.now()
 

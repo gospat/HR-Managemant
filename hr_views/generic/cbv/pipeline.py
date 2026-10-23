@@ -6,7 +6,7 @@ from django.db import models
 from django.views.generic import ListView
 from django_filters import FilterSet
 
-from horilla.horilla_middlewares import _thread_locals
+from core.horilla_middlewares import _thread_locals
 from hr_views.cbv_methods import get_short_uuid
 
 

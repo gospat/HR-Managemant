@@ -1,5 +1,5 @@
 from base.management.commands.run_scheduler import Command as SchedulerCommand
-from horilla.scheduling import register_job
+from core.scheduling import register_job
 from university.operations.health import scheduler_heartbeat
 
 

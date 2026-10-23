@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
-from horilla.decorators import login_required
+from core.decorators import login_required
 from report.access import company_id_from_request, user_can_subscribe_report
 from report.delivery import deliver_subscription
 from report.models import ReportSubscription

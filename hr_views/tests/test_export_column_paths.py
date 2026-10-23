@@ -6,7 +6,7 @@ be able to reach credentials through relations (employee_user_id__password).
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 
 
 class ExportColumnPathTests(TestCase):

@@ -73,17 +73,17 @@ from base.methods import (
 )
 from base.models import Company
 from employee.models import Employee, EmployeeWorkInformation
-from horilla import settings
-from horilla.decorators import (
+from core import settings
+from core.decorators import (
     hx_request_required,
     login_required,
     manager_can_enter,
     owner_can_enter,
     permission_required,
 )
-from horilla.group_by import group_by_queryset
-from horilla.http.response import HorillaRedirect
-from horilla.methods import horilla_users_with_perms
+from core.group_by import group_by_queryset
+from core.http.response import HorillaRedirect
+from core.methods import horilla_users_with_perms
 from notifications.signals import notify
 
 

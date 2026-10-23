@@ -5,7 +5,7 @@ from django import forms
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-from horilla.filters import (
+from core.filters import (
     FilterSet,
     HorillaFilterSet,
     filter_by_name,

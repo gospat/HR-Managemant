@@ -14,7 +14,7 @@ Both are now refused rather than offered.
 from django.http import QueryDict
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from payroll.forms.component_forms import SalaryStructureForm
 from payroll.methods.structure_rules import assignable_employees, unassignable_reason
 from payroll.models.models import Contract, SalaryStructure
@@ -175,7 +175,7 @@ class MissingBasicWarningTests(TestCase):
     """
 
     def setUp(self):
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("warnadmin", is_superuser=True)
         self.company = make_company("Warn Co")
@@ -273,7 +273,7 @@ class EmployeesTabLoadsOnDemandTests(TestCase):
     """
 
     def setUp(self):
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("lazyadmin", is_superuser=True)
         self.company = make_company("Lazy Co")
@@ -401,7 +401,7 @@ class HourlyContractBasicTests(TestCase):
         """
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("hourlyadmin", is_superuser=True)
         make_employee(company=self.company, email="hourlyadmin@test.horilla", user=user)
@@ -424,7 +424,7 @@ class HourlyContractBasicTests(TestCase):
         """A note about hourly pay on a wholly monthly structure is noise."""
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("monthlyadmin", is_superuser=True)
         make_employee(
@@ -481,7 +481,7 @@ class EmployeeSortingTests(TestCase):
     """
 
     def setUp(self):
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("sortadmin", is_superuser=True)
         self.company = make_company("Sort Co")
@@ -583,7 +583,7 @@ class ContractLinkTests(TestCase):
     """
 
     def setUp(self):
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         user = make_user("linkadmin", is_superuser=True)
         self.company = make_company("Link Co")
@@ -646,7 +646,7 @@ class ContractLinkTests(TestCase):
     def test_someone_who_cannot_change_a_contract_gets_no_edit_link(self):
         from django.urls import reverse
 
-        from horilla.testkit import make_user
+        from core.testkit import make_user
 
         plain = make_user("noedit")
         make_employee(company=self.company, email="noedit@test.horilla", user=plain)

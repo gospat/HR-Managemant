@@ -22,4 +22,4 @@ ENV HR_SOURCE_REVISION=$SOURCE_REVISION
 LABEL org.opencontainers.image.source=https://github.com/gospat/HR-Managemant org.opencontainers.image.licenses=LGPL-2.1 org.opencontainers.image.revision=$SOURCE_REVISION
 USER 10001:10001
 ENTRYPOINT ["sh", "/app/deploy/university/entrypoint.sh"]
-CMD ["gunicorn", "horilla.wsgi:application", "--config", "deploy/university/gunicorn.conf.py"]
+CMD ["gunicorn", "core.wsgi:application", "--config", "deploy/university/gunicorn.conf.py"]

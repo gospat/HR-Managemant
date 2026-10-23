@@ -9,8 +9,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.http.response import HorillaRedirect
+from core.decorators import hx_request_required, login_required, permission_required
+from core.http.response import HorillaRedirect
 from hr_automations.methods.methods import (
     clear_refresh_pending,
     generate_choices,

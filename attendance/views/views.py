@@ -15,8 +15,8 @@ import logging
 import uuid
 
 from base.import_template_data import import_template_frame, write_import_xlsx
-from horilla.http.response import HorillaRedirect, with_bulk_result
-from horilla.methods import remove_dynamic_url
+from core.http.response import HorillaRedirect, with_bulk_result
+from core.methods import remove_dynamic_url
 
 logger = logging.getLogger(__name__)
 
@@ -123,7 +123,7 @@ from base.models import (
 )
 from employee.filters import EmployeeFilter
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.decorators import (
+from core.decorators import (
     hx_request_required,
     install_required,
     login_required,

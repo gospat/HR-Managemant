@@ -23,8 +23,8 @@ from base.models import (
     Attachment,
 )
 from employee.models import Employee
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.http.response import HorillaRedirect
+from core.decorators import hx_request_required, login_required, permission_required
+from core.http.response import HorillaRedirect
 from hr_auth.models import HorillaUser
 from notifications.signals import notify
 
@@ -197,7 +197,7 @@ def delete_announcement(request, anoun_id):
     """
     This method is used to delete announcements.
     """
-    from horilla.horilla_middlewares import _thread_locals
+    from core.horilla_middlewares import _thread_locals
 
     announcement = Announcement.find(anoun_id)
     if announcement:

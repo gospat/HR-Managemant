@@ -14,8 +14,8 @@ from django.core.cache import cache
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from horilla.horilla_middlewares import set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
+from core.horilla_middlewares import set_selected_company
+from core.testkit import make_company, make_employee, make_user
 
 LOGIN_URL = "/api/v1/auth/login/"
 
@@ -62,7 +62,7 @@ class ThrottleConfigurationTests(TestCase):
         from django.conf import settings as dj_settings
 
         source = (
-            Path(dj_settings.BASE_DIR) / "horilla" / "settings" / "base.py"
+            Path(dj_settings.BASE_DIR) / "core" / "settings" / "base.py"
         ).read_text(encoding="utf-8")
         for scope in ("anon", "user", "login", "bulk"):
             with self.subTest(scope=scope):

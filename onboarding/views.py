@@ -47,10 +47,10 @@ from base.methods import (
 )
 from base.models import HorillaMailTemplate, JobPosition
 from employee.models import Employee, EmployeeBankDetails, EmployeeWorkInformation
-from horilla import settings
-from horilla.decorators import hx_request_required, login_required, permission_required
-from horilla.group_by import group_by_queryset as general_group_by
-from horilla.http.response import HorillaRedirect
+from core import settings
+from core.decorators import hx_request_required, login_required, permission_required
+from core.group_by import group_by_queryset as general_group_by
+from core.http.response import HorillaRedirect
 from hr_auth.models import HorillaUser
 from hr_documents.models import Document
 from notifications.signals import notify
@@ -1295,7 +1295,7 @@ def employee_creation(request, token):
             # This user was constructed directly from the portal's account-creation
             # form, never through authenticate(), so it has no `.backend` attribute.
             # login() requires one whenever more than one AUTHENTICATION_BACKENDS is
-            # configured (always true here -- see horilla/settings/base.py) and
+            # configured (always true here -- see core/settings/base.py) and
             # otherwise raises ValueError, hard-crashing the final onboarding step.
             user.backend = "base.auth_backends.CompanyScopedBackend"
             login(request, user)

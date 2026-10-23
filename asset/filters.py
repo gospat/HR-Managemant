@@ -13,7 +13,7 @@ from django_filters import FilterSet
 
 from base.methods import reload_queryset
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet, filter_name_or_badge_terms
+from core.filters import HorillaFilterSet, filter_name_or_badge_terms
 
 from .models import (
     Asset,
@@ -351,7 +351,7 @@ class AssetRequestFilter(CustomFilterSet):
     # Dedicated comma-separated "Name or Badge ID" search, alongside the
     # AJAX requested_employee_id picker below rather than instead of it --
     # same field/behavior as every other modernized panel this session;
-    # see horilla.filters.filter_name_or_badge_terms for the shared
+    # see core.filters.filter_name_or_badge_terms for the shared
     # matching logic. requested_employee_id is the only employee-role
     # field on this filter, so it has a clear single owner to search
     # against.
@@ -402,7 +402,7 @@ class AssetRequestFilter(CustomFilterSet):
     def filter_name_or_badge(self, queryset, name, value):
         """
         Filter panel's dedicated "Name or Badge ID" field (see
-        name_or_badge above) -- see horilla.filters.
+        name_or_badge above) -- see core.filters.
         filter_name_or_badge_terms for the shared comma-separated
         matching logic.
         """

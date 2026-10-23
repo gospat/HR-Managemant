@@ -28,9 +28,9 @@ from base.methods import (
 from base.models import HorillaMailTemplate
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from horilla import settings
-from horilla.decorators import hx_request_required, login_required, manager_can_enter
-from horilla.http.response import HorillaRedirect
+from core import settings
+from core.decorators import hx_request_required, login_required, manager_can_enter
+from core.http.response import HorillaRedirect
 
 
 def paginator_qry(qryset, page_number):

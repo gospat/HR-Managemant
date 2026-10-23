@@ -10,7 +10,7 @@ from django.views.generic import View
 
 from dynamic_fields import forms, models
 from dynamic_fields.methods import structured
-from horilla.decorators import login_required, permission_required
+from core.decorators import login_required, permission_required
 from hr_views.generic.cbv.views import HorillaFormView
 
 

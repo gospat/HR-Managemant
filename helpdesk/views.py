@@ -63,16 +63,16 @@ from helpdesk.models import (
     TicketType,
 )
 from helpdesk.threading import AddAssigneeThread, RemoveAssigneeThread, TicketSendThread
-from horilla.decorators import (
+from core.decorators import (
     hx_request_required,
     login_required,
     manager_can_enter,
     owner_can_enter,
     permission_required,
 )
-from horilla.group_by import group_by_queryset
-from horilla.http.response import HorillaRedirect, with_bulk_result
-from horilla.methods import handle_no_permission
+from core.group_by import group_by_queryset
+from core.http.response import HorillaRedirect, with_bulk_result
+from core.methods import handle_no_permission
 from notifications.signals import notify
 
 BLOCKED_EXTENSIONS = {

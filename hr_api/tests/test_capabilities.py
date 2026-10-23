@@ -13,8 +13,8 @@ that it grants anything; authorization stays with the endpoints.
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from horilla.horilla_middlewares import set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
+from core.horilla_middlewares import set_selected_company
+from core.testkit import make_company, make_employee, make_user
 from hr_api.api_methods.base.capabilities import build_capabilities
 
 LOGIN_URL = "/api/v1/auth/login/"

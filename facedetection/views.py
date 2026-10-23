@@ -12,8 +12,8 @@ from rest_framework.views import APIView
 
 from base.models import Company
 from facedetection.forms import FaceDetectionSetupForm
-from horilla.decorators import hx_request_required
-from horilla.http.response import HorillaRedirect
+from core.decorators import hx_request_required
+from core.http.response import HorillaRedirect
 
 from .serializers import *
 

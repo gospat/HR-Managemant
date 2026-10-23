@@ -6,9 +6,9 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_lazy as _trans
 
-from horilla.decorators import check_integration_enabled
-from horilla.decorators import login_required as func_login_required
-from horilla.decorators import permission_required
+from core.decorators import check_integration_enabled
+from core.decorators import login_required as func_login_required
+from core.decorators import permission_required
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
     HorillaFormView,

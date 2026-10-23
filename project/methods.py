@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import get_pagination, get_subordinates
 from employee.models import Employee
-from horilla.http import HorillaRedirect
+from core.http import HorillaRedirect
 from project.models import Project, Task, TimeSheet
 
 decorator_with_arguments = (

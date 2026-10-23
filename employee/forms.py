@@ -48,7 +48,7 @@ from employee.models import (
     Policy,
     PolicyMultipleFile,
 )
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 from hr_audit.models import AccountBlockUnblock
 from hr_auth.models import HorillaUser
 from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField

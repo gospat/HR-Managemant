@@ -15,7 +15,7 @@ from django_filters import CharFilter, DateFilter
 from base.models import Tags
 from employee.models import Employee
 from helpdesk.models import FAQ, DepartmentManager, FAQCategory, Ticket, TicketType
-from horilla.filters import FilterSet, HorillaFilterSet
+from core.filters import FilterSet, HorillaFilterSet
 
 
 class FAQFilter(FilterSet):

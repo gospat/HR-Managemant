@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee
+from core.testkit import make_company, make_employee
 from offboarding.dashboard import PIPELINE_STAGE_TYPES
 from offboarding.models import Offboarding, OffboardingEmployee, OffboardingStage
 

@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 
-from horilla.decorators import (
+from core.decorators import (
     check_integration_enabled,
     hx_request_required,
     login_required,

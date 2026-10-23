@@ -17,7 +17,7 @@ from django.conf import settings
 from django.test import LiveServerTestCase, override_settings
 from playwright.sync_api import sync_playwright, expect
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from employee.models import Employee
 from university.people.models import StaffChange, StaffProfile
 from university.governance.models import UniversityPolicy, PromotionRequest

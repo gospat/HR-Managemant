@@ -31,7 +31,7 @@ from employee.cbv.employee_profile import EmployeeProfileView
 from employee.cbv.employees import EmployeeCard, EmployeeNav, EmployeesList
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from horilla.filters import HorillaFilterSet
+from core.filters import HorillaFilterSet
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,

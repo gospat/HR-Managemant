@@ -27,7 +27,7 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 
 from employee.models import Employee
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from hr_documents.models import Document, DocumentRequest
 
 ENDPOINT = "/api/employee/documents/{}/"

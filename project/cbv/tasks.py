@@ -17,8 +17,8 @@ from django.utils.translation import gettext_lazy as _
 
 from base.methods import get_subordinates
 from employee.models import Employee
-from horilla.http import HorillaRedirect
-from horilla.methods import handle_no_permission
+from core.http import HorillaRedirect
+from core.methods import handle_no_permission
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.kanban import HorillaKanbanView
 from hr_views.generic.cbv.views import (

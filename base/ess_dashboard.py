@@ -66,7 +66,7 @@ def ess_dashboard(request):
     if not employee:
         from django.contrib import messages
 
-        from horilla.http.response import HorillaRedirect
+        from core.http.response import HorillaRedirect
 
         messages.error(request, _("Your account is not linked to an employee record."))
         return HorillaRedirect(request)

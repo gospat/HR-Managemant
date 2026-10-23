@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from employee.models import Employee
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 from leave.methods import calculate_requested_days
 from leave.models import *
 

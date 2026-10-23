@@ -19,8 +19,8 @@ from rest_framework.test import APIClient
 
 from attendance.models import Attendance
 from geofencing.models import GeoFencing
-from horilla.horilla_middlewares import set_selected_company
-from horilla.testkit import make_company, make_employee, make_user
+from core.horilla_middlewares import set_selected_company
+from core.testkit import make_company, make_employee, make_user
 
 CLOCK_IN_URL = "/api/v1/attendance/clock-in/"
 

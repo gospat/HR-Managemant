@@ -21,13 +21,13 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from base.methods import closest_numbers
-from horilla.decorators import (
+from core.decorators import (
     hx_request_required,
     is_recruitment_manager,
     login_required,
     permission_required,
 )
-from horilla.http import HorillaRedirect
+from core.http import HorillaRedirect
 from recruitment.filters import SurveyFilter
 from recruitment.forms import (
     AddQuestionForm,

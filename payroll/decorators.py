@@ -4,7 +4,7 @@ decorator functions for payroll
 
 from django.utils.translation import gettext_lazy as _
 
-from horilla.methods import handle_no_permission
+from core.methods import handle_no_permission
 from payroll.models.models import EncashmentGeneralSettings
 
 decorator_with_arguments = (

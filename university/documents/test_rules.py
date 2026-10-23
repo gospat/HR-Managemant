@@ -5,8 +5,8 @@ from django.contrib.auth.models import Permission
 from django.test import TestCase
 from unittest.mock import patch
 from types import SimpleNamespace
-from horilla.testkit import make_company, make_employee, make_user
-from horilla.testkit.factories import (
+from core.testkit import make_company, make_employee, make_user
+from core.testkit.factories import (
     make_contract,
     make_leave_type,
     make_leave_request,

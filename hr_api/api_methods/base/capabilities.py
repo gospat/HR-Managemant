@@ -23,7 +23,7 @@ access. Nothing here may be used as the basis for a security decision.
 from django.apps import apps
 
 from base.methods import is_reportingmanager
-from horilla.__version__ import __version__
+from core.__version__ import __version__
 
 # Optional apps the mobile client hides features for when absent. Each maps to
 # the app label; ``apps.is_installed`` is the whole check. Note that geofencing

@@ -15,7 +15,7 @@ worse than one that explains nothing: it would be believed.
 from django.test import TestCase
 from django.urls import reverse
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.models.models import Allowance, Deduction, FilingStatus, SalaryStructure
 
 

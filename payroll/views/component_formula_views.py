@@ -10,7 +10,7 @@ expression comes to.
 from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 
-from horilla.decorators import hx_request_required, login_required, permission_required
+from core.decorators import hx_request_required, login_required, permission_required
 from payroll.methods.component_formula import (
     ComponentFormulaError,
     run_component_formula,
@@ -358,7 +358,7 @@ def load_component_library(request):
     from django.contrib import messages
     from django.urls import reverse
 
-    from horilla.http.response import HorillaRedirect
+    from core.http.response import HorillaRedirect
     from payroll.component_library import load_components
 
     back = reverse(

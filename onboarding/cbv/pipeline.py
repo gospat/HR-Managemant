@@ -18,8 +18,8 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from base.methods import eval_validate
-from horilla.horilla_middlewares import _thread_locals
-from horilla.http.response import HorillaRedirect
+from core.horilla_middlewares import _thread_locals
+from core.http.response import HorillaRedirect
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,

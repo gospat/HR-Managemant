@@ -21,8 +21,8 @@ from base.models import CompanyLeaves, Holidays
 from employee.filters import EmployeeFilter
 from employee.forms import MultipleFileField
 from employee.models import Employee
-from horilla import horilla_middlewares
-from horilla.horilla_middlewares import _thread_locals
+from core import horilla_middlewares
+from core.horilla_middlewares import _thread_locals
 from hr_views.generic.cbv.views import HorillaFormView
 from hr_widgets.forms import HorillaForm, HorillaModelForm
 from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField

@@ -60,8 +60,8 @@ jobs:
 
       - name: Ensure local_settings stub exists
         run: |
-          if [ ! -f horilla/settings/local_settings.py ]; then
-            printf '%s\n' '# Ephemeral for CI' > horilla/settings/local_settings.py
+          if [ ! -f core/settings/local_settings.py ]; then
+            printf '%s\n' '# Ephemeral for CI' > core/settings/local_settings.py
           fi
 
       # Catches a model change merged without its migration. `migrate` cannot
@@ -70,7 +70,7 @@ jobs:
       # only surfaces as a runtime column error on someone else's database.
       - name: Check for missing migrations
         env:
-          DJANGO_SETTINGS_MODULE: horilla.settings
+          DJANGO_SETTINGS_MODULE: core.settings
           DEBUG: "True"
           SECRET_KEY: ci-dev-not-for-production
           ALLOWED_HOSTS: localhost,127.0.0.1
@@ -81,7 +81,7 @@ jobs:
 
       - name: Run smoke unit tests with coverage floor
         env:
-          DJANGO_SETTINGS_MODULE: horilla.settings
+          DJANGO_SETTINGS_MODULE: core.settings
           DEBUG: "True"
           SECRET_KEY: ci-dev-not-for-production
           ALLOWED_HOSTS: localhost,127.0.0.1

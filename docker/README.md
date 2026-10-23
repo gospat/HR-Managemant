@@ -216,7 +216,7 @@ The development setup mounts your local code into the container (`.:/app`), so c
 
 ```bash
 # Option 1: Set environment variable
-docker compose exec web env GUNICORN_RELOAD=true gunicorn horilla.wsgi:application --config docker/gunicorn.conf.py
+docker compose exec web env GUNICORN_RELOAD=true gunicorn core.wsgi:application --config docker/gunicorn.conf.py
 
 # Option 2: Use Django's development server instead
 docker compose exec web python manage.py runserver 0.0.0.0:8000
@@ -426,14 +426,14 @@ Horilla supports AWS S3 and Google Cloud Storage. Add to your environment:
 AWS_ACCESS_KEY_ID=your-key
 AWS_SECRET_ACCESS_KEY=your-secret
 AWS_STORAGE_BUCKET_NAME=your-bucket
-DEFAULT_FILE_STORAGE=horilla.horilla_backends.PrivateMediaStorage
+DEFAULT_FILE_STORAGE=core.horilla_backends.PrivateMediaStorage
 ```
 
 **Google Cloud Storage:**
 ```
 GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-credentials.json
 GS_BUCKET_NAME=your-bucket
-DEFAULT_FILE_STORAGE=horilla.horilla_backends_gcp.PrivateMediaStorage
+DEFAULT_FILE_STORAGE=core.horilla_backends_gcp.PrivateMediaStorage
 ```
 
 ---

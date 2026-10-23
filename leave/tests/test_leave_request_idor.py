@@ -22,7 +22,7 @@ from datetime import date, timedelta
 from django.contrib.auth.models import Permission
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from leave.models import LeaveRequest, LeaveType
 from leave.views import can_view_leave_request
 

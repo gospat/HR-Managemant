@@ -155,7 +155,7 @@ def backfill_company_recruitment_pipelines(today: date | None = None) -> int:
             )
 
             candidate, was_created = Candidate._base_manager.get_or_create(
-                email=f"{email_name}@horilla-demo.com",
+                email=f"{email_name}@demo.invalid",
                 defaults={
                     "name": name,
                     "gender": gender,

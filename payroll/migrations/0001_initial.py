@@ -2,7 +2,7 @@
 
 import base.models
 import django.db.models.deletion
-import horilla.models
+import core.models
 import payroll.models.models
 import simple_history.models
 from django.conf import settings
@@ -114,7 +114,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("file", models.FileField(upload_to=horilla.models.upload_path)),
+                ("file", models.FileField(upload_to=core.models.upload_path)),
             ],
         ),
         migrations.CreateModel(
@@ -129,7 +129,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("attachment", models.FileField(upload_to=horilla.models.upload_path)),
+                ("attachment", models.FileField(upload_to=core.models.upload_path)),
             ],
         ),
         migrations.CreateModel(
@@ -1022,7 +1022,7 @@ class Migration(migrations.Migration):
                 (
                     "contract_document",
                     models.FileField(
-                        blank=True, null=True, upload_to=horilla.models.upload_path
+                        blank=True, null=True, upload_to=core.models.upload_path
                     ),
                 ),
                 (
@@ -1982,7 +1982,7 @@ class Migration(migrations.Migration):
                 ("allowance_on", models.DateField()),
                 (
                     "attachment",
-                    models.FileField(null=True, upload_to=horilla.models.upload_path),
+                    models.FileField(null=True, upload_to=core.models.upload_path),
                 ),
                 (
                     "ad_to_encash",

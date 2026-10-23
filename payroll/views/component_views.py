@@ -43,7 +43,7 @@ from base.methods import (
 )
 from base.models import Company
 from employee.models import Employee, EmployeeWorkInformation
-from horilla.decorators import (
+from core.decorators import (
     handle_no_permission,
     hx_request_required,
     login_required,
@@ -51,9 +51,9 @@ from horilla.decorators import (
     owner_can_enter,
     permission_required,
 )
-from horilla.group_by import group_by_queryset
-from horilla.http.response import HorillaRedirect
-from horilla.methods import dynamic_attr, get_horilla_model_class, get_urlencode
+from core.group_by import group_by_queryset
+from core.http.response import HorillaRedirect
+from core.methods import dynamic_attr, get_horilla_model_class, get_urlencode
 
 # from leave.models import AvailableLeave
 from notifications.signals import notify

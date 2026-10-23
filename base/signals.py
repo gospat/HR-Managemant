@@ -23,7 +23,7 @@ from base.models import (
     PenaltyAccounts,
 )
 from employee.models import Employee, Policy
-from horilla.methods import get_horilla_model_class
+from core.methods import get_horilla_model_class
 
 
 @receiver(post_save, sender=Company)

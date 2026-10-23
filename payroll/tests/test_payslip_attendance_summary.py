@@ -15,7 +15,7 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from payroll.models.models import Contract
 from payroll.tests.factories_payroll import (
     PERIOD_END,

@@ -4,7 +4,7 @@ import base.models
 import django.core.validators
 import django.db.models.deletion
 import django.utils.timezone
-import horilla.models
+import core.models
 import simple_history.models
 from django.conf import settings
 from django.db import migrations, models
@@ -92,7 +92,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("file", models.FileField(upload_to=horilla.models.upload_path)),
+                ("file", models.FileField(upload_to=core.models.upload_path)),
             ],
         ),
         migrations.CreateModel(
@@ -130,7 +130,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("file", models.FileField(upload_to=horilla.models.upload_path)),
+                ("file", models.FileField(upload_to=core.models.upload_path)),
             ],
         ),
         migrations.CreateModel(
@@ -179,7 +179,7 @@ class Migration(migrations.Migration):
                 ("zip", models.CharField(max_length=20)),
                 (
                     "icon",
-                    models.FileField(null=True, upload_to=horilla.models.upload_path),
+                    models.FileField(null=True, upload_to=core.models.upload_path),
                 ),
                 ("date_format", models.CharField(blank=True, max_length=30, null=True)),
                 ("time_format", models.CharField(blank=True, max_length=20, null=True)),
@@ -1192,7 +1192,7 @@ class Migration(migrations.Migration):
             options={
                 "abstract": False,
             },
-            bases=(models.Model, horilla.models.NoPermissionModel),
+            bases=(models.Model, core.models.NoPermissionModel),
         ),
         migrations.CreateModel(
             name="JobPosition",

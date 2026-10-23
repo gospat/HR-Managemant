@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from base.models import Company, Department, JobPosition, JobRole
 from employee.models import Employee, EmployeeBankDetails
-from horilla.testkit import make_company, make_employee, make_user
+from core.testkit import make_company, make_employee, make_user
 from master_import.datasets import get_dataset
 from master_import.datasets.base import Context
 from master_import.models import ImportJob
@@ -1405,7 +1405,7 @@ class AssignedLeaveTests(TestCase):
     """Importing leave balances: Badge ID, Leave Type and days, nothing more."""
 
     def setUp(self):
-        from horilla.testkit.factories import make_leave_type
+        from core.testkit.factories import make_leave_type
 
         self.user = make_user("leaver", is_superuser=True)
         self.company = make_company("Acme Ltd")
@@ -1528,7 +1528,7 @@ class AssignedLeaveTests(TestCase):
         self.assertEqual(job.summary["counts"]["leave_types"], 1)
 
     def test_an_already_assigned_or_repeated_balance_is_refused(self):
-        from horilla.testkit.factories import make_available_leave
+        from core.testkit.factories import make_available_leave
 
         job = self.run_import([{"Badge ID": "E-1", "Leave Type": "Casual Leave"}] * 2)
         data = self.check(job)
@@ -1554,7 +1554,7 @@ class AssignedLeaveTests(TestCase):
         return job
 
     def assign(self, available=8, carry=1):
-        from horilla.testkit.factories import make_available_leave
+        from core.testkit.factories import make_available_leave
         from leave.models import AvailableLeave
 
         make_available_leave(
@@ -1609,7 +1609,7 @@ class AssignedLeaveTests(TestCase):
         self.assertEqual((data["valid"], data["error_count"]), (0, 0))
 
     def test_create_or_update_updates_existing_balances_and_assigns_the_rest(self):
-        from horilla.testkit.factories import make_leave_type
+        from core.testkit.factories import make_leave_type
         from leave.models import AvailableLeave, LeaveType
 
         self.assign(8, 0)

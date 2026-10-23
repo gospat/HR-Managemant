@@ -33,9 +33,9 @@ from base.methods import filtersubordinates, paginator_qry
 from base.models import Department
 from base.templatetags.basefilters import is_reportingmanager
 from employee.models import Employee
-from horilla import settings
-from horilla.decorators import hx_request_required, login_required
-from horilla.methods import get_horilla_model_class
+from core import settings
+from core.decorators import hx_request_required, login_required
+from core.methods import get_horilla_model_class
 
 
 def find_on_time(request, today, week_day, department=None):

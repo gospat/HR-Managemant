@@ -94,7 +94,7 @@ def _eligible_models():
     """Return concrete HorillaModel subclasses that can be audit-tracked."""
     from django.apps import apps as django_apps
 
-    from horilla.models import HorillaModel
+    from core.models import HorillaModel
 
     eligible = []
     for model in django_apps.get_models():

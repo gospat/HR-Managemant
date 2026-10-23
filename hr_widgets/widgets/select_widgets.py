@@ -1,14 +1,14 @@
 """
 select_widgets.py
 
-This module is used to write horilla form select widgets
+This module is used to write the form select widgets
 """
 
 import uuid
 
 from django import forms
 
-from horilla import horilla_middlewares
+from core import horilla_middlewares
 
 ALL_INSTANCES = {}
 
@@ -110,7 +110,7 @@ class HorillaAjaxSelectWidget(forms.SelectMultiple):
     pre-rendering the whole queryset as <option> tags -- for
     ModelMultipleChoiceFields whose option list is large/expensive (e.g.
     Permissions). SelectMultiple, not Select: FILTER_FOR_DBFIELD_DEFAULTS
-    (horilla/filters.py) makes every FK/M2M filter in this app a
+    (core/filters.py) makes every FK/M2M filter in this app a
     ModelMultipleChoiceField, whose value_from_datadict expects a
     multi-value widget -- pairing it with a single-value Select would
     silently misparse a submitted id as several single-character ids.
@@ -118,7 +118,7 @@ class HorillaAjaxSelectWidget(forms.SelectMultiple):
     The caller is responsible for trimming the field's queryset down to
     just the currently selected instance(s) (or none) before rendering,
     so the widget still displays correctly without an extra round trip --
-    see horilla.filters.HorillaFilterSet._apply_ajax_fields (the generic
+    see core.filters.HorillaFilterSet._apply_ajax_fields (the generic
     ajax_fields mechanism) for the pattern. Everything else is fetched on
     demand by the .oh-select-ajax initializer
     (hr_theme/static/hr_theme/assets/js/htmxSelect2.js).

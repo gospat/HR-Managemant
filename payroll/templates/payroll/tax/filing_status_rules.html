@@ -124,7 +124,7 @@
           <label class="oh-label" for="{{ rules_form.python_code.id_for_label }}">
             {{ rules_form.python_code.label }}
           </label>
-          {% comment %} Height is styled here, not via rows="": Bells Tech's .oh-input rule
+          {% comment %} Height is styled here, not via rows="": the theme's .oh-input rule
              fixes a single-line height and wins over the attribute, which
              collapsed the editor into a one-line box. {% endcomment %}
           {% render_field rules_form.python_code spellcheck="false" style="min-height:420px;width:100%;padding:10px;border:1px solid #dcdcdc;border-radius:6px;line-height:1.5;tab-size:4;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;overflow-wrap:normal;overflow-x:auto;" %}

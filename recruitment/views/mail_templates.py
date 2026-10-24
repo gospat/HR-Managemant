@@ -1,7 +1,7 @@
 """
 offerletter.py
 
-This module is related offerletter feature in Bells Tech
+This module relates to the offer letter feature in the system
 """
 
 from django import template

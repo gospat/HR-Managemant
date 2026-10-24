@@ -223,7 +223,7 @@ class COSECUserForm(Form):
 
 class DahuaUserForm(Form):
     """
-    This form is used to map a Bells Tech employee to a user entry on a Dahua biometric device.
+    This form is used to map an employee to a user entry on a Dahua biometric device.
     """
 
     CARD_STATUS_CHOICES = [
@@ -338,10 +338,10 @@ class DahuaUserForm(Form):
 
 class MapBioUsers(ModelForm):
     """
-    Form for mapping biometric users to Bells Tech employees.
+    Form for mapping biometric users to employees.
 
     This form is used to associate a biometric user (from a biometric device) with
-    an employee in the Bells Tech system.
+    an employee in the system.
     """
 
     class Meta:

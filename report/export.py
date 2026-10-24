@@ -1,7 +1,7 @@
 """
 Server-side Excel / CSV export for standard report payloads.
 
-Workbook layout (aligned with Bells Tech explorer exports):
+Workbook layout (aligned with the explorer exports):
   1. Cover   — company letterhead, report title, metadata, filters, KPIs
   2. Data    — letterhead + primary tabular result set, print-ready
   3. Charts  — native openpyxl chart objects + their source data (when present)

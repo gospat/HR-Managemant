@@ -1,4 +1,4 @@
-"""Standalone Nigerian university configuration on top of Bells Tech."""
+"""Standalone Nigerian university configuration on top of the core HR platform."""
 
 import os
 

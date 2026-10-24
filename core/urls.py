@@ -139,7 +139,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # django.contrib.auth.urls is here for the password_reset_* routes its forms
     # and mails reverse. Its /accounts/login/ renders registration/login.html,
-    # which Bells Tech does not ship, so that one URL 500s — send it to the real
+    # which this project does not ship, so that one URL 500s — send it to the real
     # login page instead. (The include was also listed twice.)
     path(
         "accounts/login/",

@@ -3,7 +3,7 @@
 `PassWordResetForm.save()` built the link from `get_current_site(request)`.
 That resolves through django.contrib.sites, and the only row a normal install
 has is the one the framework's own migration creates -- domain
-``example.com``. Nothing in Bells Tech ever updates it, so every reset mail sent
+``example.com``. Nothing in the codebase ever updates it, so every reset mail sent
 a link to
 
     http://example.com/reset/<uid>/<token>/

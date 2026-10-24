@@ -1,7 +1,7 @@
 """
 forms.py
 
-Bells Tech forms
+Form widgets.
 """
 
 from typing import Any, Dict

@@ -1,4 +1,4 @@
-"""Bells Tech views CBV helper smoke tests."""
+"""hr_views CBV helper smoke tests."""
 
 from django.test import SimpleTestCase
 

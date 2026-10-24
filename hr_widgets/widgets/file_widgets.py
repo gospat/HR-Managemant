@@ -1,8 +1,8 @@
 """
 file_widgets.py
 
-Patches Django's ClearableFileInput so every FileField upload widget across
-Bells Tech shows a clean display name instead of core.models.upload_path's
+Patches Django's ClearableFileInput so every FileField upload widget shows
+a clean display name instead of core.models.upload_path's
 full storage path (app_label/model_name/field_name/slug-uuid.ext).
 """
 
@@ -26,7 +26,7 @@ def pretty_file_name(value):
 def patch_clearable_file_input():
     """
     Patch ClearableFileInput.get_context to expose a clean display name and
-    point its template at the Bells Tech override.
+    point its template at the override below.
     """
     original_get_context = forms.ClearableFileInput.get_context
 

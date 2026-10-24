@@ -3339,7 +3339,7 @@ class PassWordResetForm(forms.Form):
         elif request is not None:
             # get_current_site() resolves through django.contrib.sites, whose
             # only row on a normal install is the one its own migration
-            # creates -- domain "example.com". Nothing in Bells Tech ever updates
+            # creates -- domain "example.com". Nothing in the codebase ever updates
             # it, so every reset link pointed at example.com while the rest of
             # the product was reachable on the real host. Leave-request mail
             # never had the problem because it takes the host straight off the

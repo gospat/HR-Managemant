@@ -2732,7 +2732,7 @@ class Command(ExtrasMixin, BaseCommand):
 
     def _superuser(self, company):
         """
-        Adam Admin -- the same name Bells Tech's own load_data/user_data.json
+        Adam Admin -- the same name as load_data/user_data.json
         seeds as pk=1 ("admin", is_superuser). ``flush`` wipes every
         HorillaUser along with everything else, and a demo dataset nobody
         can log in to isn't actually usable, so it's recreated here rather

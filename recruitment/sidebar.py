@@ -1,7 +1,7 @@
 """
 recruitment/sidebar.py
 
-To set Bells Tech sidebar for onboarding
+To set the sidebar for onboarding
 """
 
 from django.apps import apps

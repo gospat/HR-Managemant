@@ -92,7 +92,7 @@ class TestPyCodeEndpointTests(TestCase):
     """
 
     def setUp(self):
-        # Bells Tech's view decorators resolve the acting employee off the user,
+        # The view decorators resolve the acting employee off the user,
         # so a bare create_superuser is not enough to get past them (it answers
         # 204, not 200).
         user = make_user("taxadmin", is_superuser=True)

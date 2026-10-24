@@ -1,1 +1,1 @@
-"""University-specific extensions, kept separate from upstream Bells Tech."""
+"""University-specific extensions, kept separate from the upstream codebase."""

@@ -101,7 +101,7 @@ class HrAuditLog(HistoricalRecords):
 
     # def __init__(self, *args, bases=None, **kwargs):
     #     super(HrAuditLog, self).__init__(*args, **kwargs)
-    #     self.is_horilla_audit_log = True
+    #     self.is_hr_audit_log = True
 
     pass
 
@@ -109,9 +109,9 @@ class HrAuditLog(HistoricalRecords):
 
 
 @receiver(pre_create_historical_record)
-def pre_create_horilla_audit_log(sender, instance, *args, **kwargs):
+def pre_create_hr_audit_log(sender, instance, *args, **kwargs):
     """
-    Pre create horill audit log method
+    Pre create audit log method
     """
     try:
         history_instance = kwargs["history_instance"]
@@ -136,9 +136,9 @@ def pre_create_horilla_audit_log(sender, instance, *args, **kwargs):
 
 
 @receiver(post_create_historical_record)
-def post_create_horilla_audit_log(sender, instance, *_args, **kwargs):
+def post_create_hr_audit_log(sender, instance, *_args, **kwargs):
     """
-    Post create horill audit log method
+    Post create audit log method
     """
     try:
         history_instance = kwargs["history_instance"]

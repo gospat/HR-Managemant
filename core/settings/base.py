@@ -444,7 +444,7 @@ DJANGO_NOTIFICATIONS_CONFIG = {
 }
 
 # ========================================
-# HORILLA-SPECIFIC SETTINGS
+# HR-SPECIFIC SETTINGS
 # ========================================
 WHITE_LABELLING = False
 NESTED_SUBORDINATE_VISIBILITY = False

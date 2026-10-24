@@ -12,7 +12,7 @@ from django.contrib.auth.models import Permission
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from core.horilla_middlewares import set_selected_company
+from core.hr_middlewares import set_selected_company
 from core.testkit import make_company, make_employee, make_user
 
 EMPLOYEE_LIST_URL = "/api/v1/employee/list/employees/"

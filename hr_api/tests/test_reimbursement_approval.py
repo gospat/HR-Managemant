@@ -57,7 +57,7 @@ class ReimbursementApprovalIntegrityTests(TestCase):
         # is the case where save() leaves employee_id alone.
         from django.test import RequestFactory
 
-        from core.horilla_middlewares import _thread_locals
+        from core.hr_middlewares import _thread_locals
 
         request = RequestFactory().post("/")
         request.user = type(self.approver_user).objects.get(pk=self.approver_user.pk)

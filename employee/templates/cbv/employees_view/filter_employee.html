@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load static %}
-{% load horillafilters %}
+{% load hrfilters %}
 
 <div class="oh-dropdown__filter-body">
     {% comment %}
@@ -178,7 +178,7 @@
         less often than what's above. Registry: EmployeeFilter.
         _build_custom_filter_fields; applied server-side by
         EmployeeFilter._apply_custom_filters. Row markup/JS are generic
-        (initCustomFilterBuilder, horilla_nav.html) -- any other FilterSet
+        (initCustomFilterBuilder, hr_nav.html) -- any other FilterSet
         can opt in the same way by setting its own custom_filter_fields.
         Its own accordion, separate from Work Info, since it's a
         different kind of thing (a builder for ad-hoc filters) rather

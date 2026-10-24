@@ -1,5 +1,5 @@
 """
-horilla_api/urls/attendance/urls.py
+hr_api/urls/attendance/urls.py
 """
 
 from django.urls import path

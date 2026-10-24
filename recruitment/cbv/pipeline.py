@@ -927,7 +927,7 @@ class PipelineNav(HrNavView):
     apply_first_filter = False
     modern_filter = True
     # Just the Create button here -- no Search box, no Filter dropdown.
-    # search_url still has to be set (below): horilla_nav.html only renders
+    # search_url still has to be set (below): hr_nav.html only renders
     # this whole bar -- Create included -- under `{% if search_url %}`.
     hide_search = True
 

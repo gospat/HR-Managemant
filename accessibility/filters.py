@@ -12,7 +12,7 @@ from django.utils.translation import gettext as _
 
 from employee.models import Employee
 from core.filters import HrFilterSet
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 
 
 def _filter_form_structured(self):

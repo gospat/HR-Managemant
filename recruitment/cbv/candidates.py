@@ -27,7 +27,7 @@ from xhtml2pdf import pisa
 
 from base.methods import has_export_access
 from employee.forms import BulkUpdateFieldForm
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.http.response import HrRedirect
 from hr_views.cbv_methods import (
     export_xlsx,
@@ -780,7 +780,7 @@ class CandidateNav(HrNavView):
     filter_body_template = "cbv/candidates/filter.html"
     filter_form_context_name = "form"
     search_swap_target = "#listContainer"
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. CandidateFilter.ajax_fields carries the
     # AJAX-loaded comboboxes this needs.

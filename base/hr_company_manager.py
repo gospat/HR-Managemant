@@ -1,5 +1,5 @@
 """
-horilla_company_manager.py
+hr_company_manager.py
 """
 
 import logging
@@ -10,7 +10,7 @@ from django.db import models
 from django.db.models import Q
 from django.db.models.query import QuerySet
 
-from core.horilla_middlewares import _thread_locals, get_selected_company
+from core.hr_middlewares import _thread_locals, get_selected_company
 from core.signals import (
     post_bulk_update,
     post_model_clean,

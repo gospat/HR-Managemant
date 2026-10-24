@@ -1,7 +1,7 @@
 """CBV decorators for offboarding permission checks."""
 
 from core.decorators import decorator_with_arguments
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.methods import handle_no_permission
 from offboarding.models import (
     Offboarding,

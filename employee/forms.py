@@ -48,10 +48,10 @@ from employee.models import (
     Policy,
     PolicyMultipleFile,
 )
-from core import horilla_middlewares
+from core import hr_middlewares
 from hr_audit.models import AccountBlockUnblock
 from hr_auth.models import HorillaUser
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 logger = logging.getLogger(__name__)
@@ -67,7 +67,7 @@ class ModelForm(forms.ModelForm):
 
         reload_queryset(self.fields)
 
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
 
         today = date.today()
         now = datetime.now()

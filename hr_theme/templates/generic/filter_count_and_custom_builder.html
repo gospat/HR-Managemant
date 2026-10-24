@@ -2,7 +2,7 @@
 {% comment %}
     Shared with any HrNavView-rendered template that opts into the
     modern slide-over filter panel (modern_filter=True) -- currently
-    horilla_nav.html and inline_nav.html. Two self-contained pieces:
+    hr_nav.html and inline_nav.html. Two self-contained pieces:
 
     1. The "N filters applied" badge counter (updateFilterCountBadge) --
        recomputed client-side since the Nav is only fetched once
@@ -11,7 +11,7 @@
        right after load regardless, so a server-rendered count alone would
        go stale the instant the user touches anything. Requires the
        template using this include to give its badge <span>s a
-       "js-filter-count-badge" class (horilla_nav.html's own copies do;
+       "js-filter-count-badge" class (hr_nav.html's own copies do;
        mirror that in any other consumer).
     2. The custom filter builder ("+ Add filter", Advanced section) --
        generic across any FilterSet that sets its own custom_filter_fields

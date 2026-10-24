@@ -51,7 +51,7 @@ class CandidateDocumentListView(HrListView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # Fixed (not auto-random) so pagination/sort/search requests -
-        # which all hx-target="#{{view_id}}" from generic/horilla_list_table.html -
+        # which all hx-target="#{{view_id}}" from generic/hr_list_table.html -
         # can be recognized below and answered with just that fragment. Without
         # this, every such request re-renders the full tab (header + Create
         # button included) and htmx's outerHTML swap dumps that whole response
@@ -60,7 +60,7 @@ class CandidateDocumentListView(HrListView):
 
     def get_template_names(self):
         if self.request.headers.get("HX-Target") == self.view_id:
-            return ["generic/horilla_list_table.html"]
+            return ["generic/hr_list_table.html"]
         return [self.template_name]
 
     def get_queryset(self):

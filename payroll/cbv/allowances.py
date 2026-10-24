@@ -274,7 +274,7 @@ class AllowanceNavView(HrNavView):
     # embedded me already fetched the content", so nothing did -- the list
     # stayed blank until a save or a filter happened to trigger a reload.
     apply_first_filter = False
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. AllowanceFilter has no FK/M2M fields, so no
     # ajax_fields are needed here.

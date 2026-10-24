@@ -31,10 +31,10 @@ from django.utils.html import format_html
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company, JobPosition
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.models import HrModel, upload_path
 from hr_audit.methods import get_diff
 from hr_audit.models import HorillaAuditInfo, HrAuditLog

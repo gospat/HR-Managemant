@@ -1636,7 +1636,7 @@ input[type="checkbox"].custom-checkbox:hover {
    report/standard_report.html but was never actually defined anywhere the
    theme loads — those cards were rendering with zero border/shadow/padding.
    Tokens match the theme's own real card component
-   (horilla_theme/templates/generic/horilla_card.html) for visual
+   (hr_theme/templates/generic/hr_card.html) for visual
    consistency with the Standard Reports catalog grid fixed earlier. */
 .oh-card {
   background-color: hsl(0, 0%, 100%);

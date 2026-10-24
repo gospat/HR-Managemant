@@ -1,5 +1,5 @@
 """
-horilla_views/forms.py
+hr_views/forms.py
 """
 
 import os
@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.safestring import SafeText
 from django.utils.translation import gettext_lazy as _
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_views import models
 from hr_views.cbv_methods import (
     BOOLEAN_CHOICES,
@@ -54,7 +54,7 @@ class ToggleColumnForm(forms.Form):
             if columns and column == columns[0]:
                 initial = True
             # column[0] doubles as the actual <th> header content (rendered
-            # unescaped in horilla_list_table.html), so for a column whose
+            # unescaped in hr_list_table.html), so for a column whose
             # header is a whole HTML button/icon rather than plain text
             # (e.g. a per-stage "+ Task" action column), it is NOT a usable
             # checkbox label as-is -- stripping tags isn't enough either,
@@ -178,7 +178,7 @@ class DynamicBulkUpdateForm(forms.Form):
                         required=False,
                     )
                     self.fields[key].widget.option_template_name = (
-                        "horilla_widgets/select_option.html",
+                        "hr_widgets/select_option.html",
                     )
                     continue
                 elif not getattribute(val, "related_model"):
@@ -193,7 +193,7 @@ class DynamicBulkUpdateForm(forms.Form):
                             required=False,
                         )
                         self.fields[key].widget.option_template_name = (
-                            "horilla_widgets/select_option.html",
+                            "hr_widgets/select_option.html",
                         )
                         continue
                     self.fields[key] = field(
@@ -202,7 +202,7 @@ class DynamicBulkUpdateForm(forms.Form):
                         required=False,
                     )
                     self.fields[key].widget.option_template_name = (
-                        "horilla_widgets/select_option.html",
+                        "hr_widgets/select_option.html",
                     )
                     continue
                 queryset = val.related_model.objects.all()
@@ -213,7 +213,7 @@ class DynamicBulkUpdateForm(forms.Form):
                     required=False,
                 )
                 self.fields[key].widget.option_template_name = (
-                    "horilla_widgets/select_option.html",
+                    "hr_widgets/select_option.html",
                 )
         for key in self.required_fields:
             if key in self.fields:

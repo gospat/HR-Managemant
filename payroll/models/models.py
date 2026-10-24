@@ -21,7 +21,7 @@ from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.methods import get_next_month_same_date
 from base.models import (
     Company,
@@ -34,8 +34,8 @@ from base.models import (
 )
 from employee.methods.duration_methods import strtime_seconds
 from employee.models import BonusPoint, Employee, EmployeeWorkInformation
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
 from core.models import HrModel, upload_path
 from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_views.cbv_methods import render_template
@@ -3902,7 +3902,7 @@ class Reimbursement(HrModel):
         ordering = ["-id"]
 
     def save(self, *args, **kwargs) -> None:
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         amount_for_leave = (
             EncashmentGeneralSettings.objects.first().leave_amount
             if EncashmentGeneralSettings.objects.first()
@@ -3950,7 +3950,7 @@ class Reimbursement(HrModel):
                         bonus_points.save()
                     else:
                         request = getattr(
-                            horilla_middlewares._thread_locals, "request", None
+                            hr_middlewares._thread_locals, "request", None
                         )
                         if request:
                             messages.info(
@@ -3976,7 +3976,7 @@ class Reimbursement(HrModel):
                             assigned_leave.save()
                         else:
                             request = getattr(
-                                horilla_middlewares._thread_locals, "request", None
+                                hr_middlewares._thread_locals, "request", None
                             )
                             if request:
                                 messages.info(
@@ -4039,7 +4039,7 @@ class Reimbursement(HrModel):
                     self.allowance_id.delete()
 
     def delete(self, *args, **kwargs):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         if self.status == "approved":
             message = messages.info(
                 request,

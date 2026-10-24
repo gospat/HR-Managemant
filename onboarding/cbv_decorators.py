@@ -1,5 +1,5 @@
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.methods import handle_no_permission
 from hr_views.cbv_methods import decorator_with_arguments
 from onboarding.models import OnboardingStage, OnboardingTask

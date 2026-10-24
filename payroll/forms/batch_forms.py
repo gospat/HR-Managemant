@@ -18,7 +18,7 @@ from base.forms import ModelForm
 from employee.filters import EmployeeFilter
 from employee.models import Employee
 from hr_widgets.forms import HrForm
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from payroll.models.models import PayPeriodSettings
 

@@ -574,7 +574,7 @@ def payroll_reimbursement_summary(request):
 @permission_required("payroll.view_payslip")
 def payroll_pending_requests_by_type(request):
     """Pending reimbursement and encashment requests per type for the selected period."""
-    from base.templatetags.horillafilters import currency_symbol_position
+    from base.templatetags.hrfilters import currency_symbol_position
     from payroll.decorators import leave_encashment_visible_to
     from payroll.models.models import Reimbursement
 

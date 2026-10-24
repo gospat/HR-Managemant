@@ -1,5 +1,5 @@
 """
-horilla_automations/filters.py
+hr_automations/filters.py
 """
 
 from core.filters import HrFilterSet, django_filters

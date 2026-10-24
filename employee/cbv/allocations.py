@@ -23,12 +23,12 @@ from django.views.generic import View
 
 from base.forms import AddToUserGroupForm, ModelForm, forms
 from base.methods import paginator_qry
-from base.templatetags.horillafilters import app_installed
+from base.templatetags.hrfilters import app_installed
 from base.views import get_models_in_app
 from employee.cbv.accessibility import allocation_accessibility
 from employee.models import Employee, EmployeeBankDetails, EmployeeWorkInformation
 from employee.models import models as django_models
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.http import HrRedirect
 from core.methods import handle_no_permission
 from hr_views.cbv_methods import (

@@ -1,12 +1,12 @@
 <div>
-    {% include 'generic/horilla_nav.html' %}
+    {% include 'generic/hr_nav.html' %}
 </div>
 
 <script>
     {% comment %}
         Was `[name=field]` (the classic single-field group-by input) before
         nested_group_by_fields was added to this page -- adding it hides
-        that classic input entirely (see horilla_nav.html's
+        that classic input entirely (see hr_nav.html's
         "group_by_fields and not nested_group_by_fields" condition), so
         setting it here would silently no-op and the page would load flat
         instead of pre-grouped. `[name=nested_fields]` is the nested

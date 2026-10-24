@@ -1,5 +1,5 @@
 """
-horilla_api/api_views/offboarding/views.py
+hr_api/api_views/offboarding/views.py
 """
 
 from django.contrib.auth.models import AnonymousUser

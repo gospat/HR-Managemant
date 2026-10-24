@@ -64,8 +64,8 @@ from base.methods import (
 from base.models import Company, EmployeeShift
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from core import horilla_middlewares
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from core import hr_middlewares
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 logger = logging.getLogger(__name__)
@@ -597,7 +597,7 @@ class AttendanceValidationConditionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        active_company_id = horilla_middlewares.get_selected_company()
+        active_company_id = hr_middlewares.get_selected_company()
         if active_company_id and not active_company_id == "all":
             self.fields["company_id"].queryset = Company.objects.filter(
                 id=active_company_id
@@ -1277,7 +1277,7 @@ class BulkAttendanceRequestForm(BaseModelForm):
         )
 
     def __init__(self, *args, **kwargs):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         employee = request.user.employee_get
         super().__init__(*args, **kwargs)
         if employee and hasattr(employee, "employee_work_info"):
@@ -1349,7 +1349,7 @@ class BulkAttendanceRequestForm(BaseModelForm):
         from_date = cleaned_data.get("from_date")
         to_date = cleaned_data.get("to_date")
         shift_id = cleaned_data.get("shift_id")
-        from core.horilla_middlewares import _thread_locals
+        from core.hr_middlewares import _thread_locals
 
         request = _thread_locals.request
         attendance_clock_in = cleaned_data.get("attendance_clock_in")

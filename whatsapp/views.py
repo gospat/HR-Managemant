@@ -19,7 +19,7 @@ from django.views.decorators.csrf import csrf_exempt
 from base.models import Announcement, IntegrationApps
 from employee.models import Employee
 from core.decorators import check_integration_enabled, login_required
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from notifications.signals import notify
 from whatsapp.flows import (
     get_asset_category_flow_json,

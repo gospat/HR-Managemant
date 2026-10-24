@@ -464,7 +464,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
         return TemplateResponse(
             request,
-            "admin/horilla_dbtemplate/template/restore_version.html",
+            "admin/hr_dbtemplate/template/restore_version.html",
             context,
         )
 
@@ -528,7 +528,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
         return TemplateResponse(
             request,
-            "admin/horilla_dbtemplate/template/diff.html",
+            "admin/hr_dbtemplate/template/diff.html",
             context,
         )
 
@@ -577,7 +577,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
         return TemplateResponse(
             request,
-            "admin/horilla_dbtemplate/template/preview.html",
+            "admin/hr_dbtemplate/template/preview.html",
             context,
         )
 

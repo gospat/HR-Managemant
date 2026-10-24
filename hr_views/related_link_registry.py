@@ -1,5 +1,5 @@
 """
-horilla_views/related_link_registry.py
+hr_views/related_link_registry.py
 
 Framework-level registry mapping models to their detail-view URL builders, used to
 auto-linkify related-object values shown in list/detail views (see the `linkify`

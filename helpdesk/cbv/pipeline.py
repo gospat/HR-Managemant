@@ -38,7 +38,7 @@ class _TicketTabNavBase(HrNavView):
     filter_body_template = "cbv/pipeline/ticket_filter_form.html"
     filter_instance = TicketFilter()
     filter_form_context_name = "form"
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. TicketFilter.ajax_fields carries the
     # AJAX-loaded comboboxes this needs.

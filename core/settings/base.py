@@ -202,7 +202,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "simple_history.middleware.HistoryRequestMiddleware",
-    "core.horilla_middlewares.DefaultLanguageMiddleware",
+    "core.hr_middlewares.DefaultLanguageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -213,10 +213,10 @@ MIDDLEWARE = [
     "base.middleware.ForcePasswordChangeMiddleware",
     "base.middleware.TwoFactorAuthMiddleware",
     "accessibility.middlewares.AccessibilityMiddleware",
-    "core.horilla_middlewares.MethodNotAllowedMiddleware",
-    "core.horilla_middlewares.SVGSecurityMiddleware",
-    "core.horilla_middlewares.MissingParameterMiddleware",
-    "core.horilla_middlewares.BulkDeleteSummaryMiddleware",
+    "core.hr_middlewares.MethodNotAllowedMiddleware",
+    "core.hr_middlewares.SVGSecurityMiddleware",
+    "core.hr_middlewares.MissingParameterMiddleware",
+    "core.hr_middlewares.BulkDeleteSummaryMiddleware",
     "auditlog.middleware.AuditlogMiddleware",
     # Last: needs request.user from AuthenticationMiddleware, and
     # converts a PermissionDenied from the Axes backend into the
@@ -340,7 +340,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 # Horilla dynamic context processors
                 "core.config.get_MENUS",
-                "base.context_processors.horilla_version",
+                "base.context_processors.hr_version",
                 "base.context_processors.get_companies",
                 "base.context_processors.white_labelling_company",
                 "base.context_processors.doc_base_url",

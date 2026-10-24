@@ -1,5 +1,5 @@
 """
-horilla_tour/models.py
+hr_tour/models.py
 
 Data model for the enterprise product-tour engine.
 
@@ -16,7 +16,7 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company
 from core.models import HrModel
 from hr_auth.models import HorillaUser

@@ -8,10 +8,10 @@ from typing import Any, Dict
 
 from django import forms
 
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 
 default_select_option_template = forms.Select.option_template_name
-forms.Select.option_template_name = "horilla_widgets/horilla_select_option.html"
+forms.Select.option_template_name = "hr_widgets/hr_select_option.html"
 
 
 class HrForm(forms.Form):

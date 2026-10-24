@@ -6,7 +6,7 @@ and local-file exfiltration -- and there is no upstream fix. Every call site
 passes `enable-local-file-access` (needed for local CSS and images), which is
 the exact configuration the advisory describes.
 
-horilla_automations/signals.py already checked its own rendered body before
+hr_automations/signals.py already checked its own rendered body before
 calling generate_pdf. Four other callers did not, so the guard lives in
 generate_pdf where all five route through.
 """

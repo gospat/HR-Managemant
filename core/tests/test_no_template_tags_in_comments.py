@@ -7,7 +7,7 @@ describing where the real tag lives, is parsed and executed like any other tag.
 
 That shipped. `modern_filter_panel.html` carried
 
-    /* The Group By accordion (appended in horilla_nav.html, right after
+    /* The Group By accordion (appended in hr_nav.html, right after
        {% include filter_body_template %}) is never a true DOM sibling ... */
 
 inside a `<style>` block. `filter_body_template` is set as a class attribute by
@@ -129,7 +129,7 @@ class TemplateTagsInCommentsTests(unittest.TestCase):
         planted = (
             "<style>\n"
             ".x {\n"
-            "    /* appended in horilla_nav.html, right after\n"
+            "    /* appended in hr_nav.html, right after\n"
             "       {% include filter_body_template %}) is never a sibling */\n"
             "    margin-top: 4px;\n"
             "}\n"

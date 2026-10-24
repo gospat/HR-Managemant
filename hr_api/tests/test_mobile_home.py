@@ -14,7 +14,7 @@ from django.utils import timezone
 from rest_framework.test import APIClient
 
 from attendance.models import AttendanceActivity
-from core.horilla_middlewares import set_selected_company
+from core.hr_middlewares import set_selected_company
 from core.testkit import make_company, make_employee, make_user
 
 HOME_URL = "/api/v1/mobile/home/"

@@ -31,7 +31,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company
 from core.models import HrModel
 

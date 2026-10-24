@@ -28,7 +28,7 @@ def _subscription_actions():
     Edit/Send now/Pause-Activate/Delete action buttons, shared verbatim
     between the subscriptions list row and the detail-view modal footer -
     both render a dict-based `actions` list the same way (see
-    horilla_detailed_view.html and horilla_list_table.html, both do
+    hr_detailed_view.html and hr_list_table.html, both do
     `{{action.attrs|format:object_or_instance}}`), so one shared list keeps
     them from drifting out of sync.
     """
@@ -117,7 +117,7 @@ class ReportSubscriptionsListView(HrListView):
     # True (not False) is what actually unlocks the checkbox column that
     # both the colored row_status_class border-div and the
     # row_status_indications pills below render inside of — see
-    # horilla_views/templates/generic/horilla_list_table.html lines 32-34 /
+    # hr_views/templates/generic/hr_list_table.html lines 32-34 /
     # 131-155. It does not add any bulk-delete/bulk-update UI on its own
     # (those are separately gated by bulk_path/quick_export, both unset
     # here), matching payroll's Payslip list, whose own status pills use

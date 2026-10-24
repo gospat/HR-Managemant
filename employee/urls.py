@@ -7,7 +7,7 @@ This module is used to map url path with view methods.
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
-from base.templatetags.horillafilters import app_installed
+from base.templatetags.hrfilters import app_installed
 from base.views import object_delete, object_duplicate
 from employee import dashboard as emp_dashboard
 from employee import (

@@ -621,20 +621,20 @@ class PayslipHelpTextTests(Fixture):
     """
 
     SUMMARY = pathlib.Path(
-        "horilla_theme/templates/payroll/payslip/individual_payslip_summery.html"
+        "hr_theme/templates/payroll/payslip/individual_payslip_summery.html"
     )
     # The Loss of Pay row is a shared include -- lop_reflected_in_basic
     # decides which of the two columns actually renders it -- so its markup
     # lives here now, not inline in SUMMARY. Combined so the checks below
     # don't have to know which file a given string ended up in.
     LOP_ROW = pathlib.Path(
-        "horilla_theme/templates/payroll/payslip/_loss_of_pay_row.html"
+        "hr_theme/templates/payroll/payslip/_loss_of_pay_row.html"
     )
 
     # The icon and its breakdown popover are a partial shared by that row and
     # the Salary Adjustments table, so they live in their own file as well.
     LOP_POPOVER = pathlib.Path(
-        "horilla_theme/templates/payroll/payslip/_loss_of_pay_popover.html"
+        "hr_theme/templates/payroll/payslip/_loss_of_pay_popover.html"
     )
 
     def source(self):

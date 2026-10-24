@@ -301,7 +301,7 @@ class _ObjectivesTabNavBase(HrNavView):
     filter_instance = ActualObjectiveFilter()
     filter_form_context_name = "form"
     filter_body_template = "cbv/objectives/filter.html"
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch, inherited by ObjectiveTemplateNav's
     # generic/inline_nav.html too) -- same treatment as every other
     # panel this session. ActualObjectiveFilter.ajax_fields carries the

@@ -1,5 +1,5 @@
 
-{% load i18n static basefilters horillafilters employee_filter %}
+{% load i18n static basefilters hrfilters employee_filter %}
 
 <span name="" id="filterEmployee" style="display: none" hx-get="{% url 'employee-filter-view' %}?{{pd}}" hx-target="#view-container"></span>
 <div class="d-flex flex-row-reverse m-2">

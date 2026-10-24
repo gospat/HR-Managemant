@@ -1,5 +1,5 @@
 """
-horilla_automations/views/cbvs.py
+hr_automations/views/cbvs.py
 """
 
 import json
@@ -47,7 +47,7 @@ class AutomationSectionView(views.HrSectionView):
         "/automation/automation.js",
     ]
 
-    template_name = "horilla_automations/section_view.html"
+    template_name = "hr_automations/section_view.html"
 
     def get(self, request, *args, **kwargs):
         return redirect("mail-automations-view")
@@ -116,7 +116,7 @@ class AutomationFormView(views.HrFormView):
     form_class = AutomationForm
     model = models.MailAutomation
     new_display_title = _("New Automation")
-    template_name = "horilla_automations/automation_form.html"
+    template_name = "hr_automations/automation_form.html"
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -226,7 +226,7 @@ class AutomationDetailedView(views.HrDetailedView):
     permission_required("horilla_automations.add_mailautomation"), name="dispatch"
 )
 class LoadAutomationsView(View):
-    template_name = "horilla_automations/load_automation.html"
+    template_name = "hr_automations/load_automation.html"
     template_file = os.path.join(settings.BASE_DIR, "load_data", "mail_templates.json")
     automation_file = os.path.join(
         settings.BASE_DIR, "load_data", "mail_automations.json"

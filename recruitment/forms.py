@@ -20,9 +20,9 @@ from base.methods import reload_queryset
 from base.widgets import CustomTextInputWidget
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from recruitment import widgets
 from recruitment.models import (
@@ -59,7 +59,7 @@ class ModelForm(forms.ModelForm):
 
         reload_queryset(self.fields)
 
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
 
         today = date.today()
         now = datetime.now()
@@ -284,7 +284,7 @@ class RecruitmentCreationForm(BaseModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
     def __init__(self, *args, **kwargs):
@@ -1474,7 +1474,7 @@ class CandidateDocumentForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
 

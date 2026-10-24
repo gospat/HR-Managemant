@@ -1,4 +1,4 @@
-{% load i18n horillafilters %}
+{% load i18n hrfilters %}
 {% get_company as theme_obj %}
 <div id="{{section_id}}">
     <style>
@@ -190,13 +190,13 @@
             >
                 <div class="oh-wrapper">
                     <!-- Nav -->
-                    {% include "horilla_widgets/multiselect_components/nav.html" %}
+                    {% include "hr_widgets/multiselect_components/nav.html" %}
                     <!-- Filter Tags -->
-                    {% include "horilla_widgets/multiselect_components/filter_tags.html" %}
+                    {% include "hr_widgets/multiselect_components/filter_tags.html" %}
                     <!-- Sticky Table -->
-                    {% include "horilla_widgets/multiselect_components/table.html" %}
+                    {% include "hr_widgets/multiselect_components/table.html" %}
                     <!-- Pagination -->
-                    {% include "horilla_widgets/multiselect_components/pagination.html" %}
+                    {% include "hr_widgets/multiselect_components/pagination.html" %}
                     <div class="d-flex flex-row-reverse">
                         <a
                             class="oh-btn oh-btn--secondary oh-btn--shadow pr-3 pl-3"

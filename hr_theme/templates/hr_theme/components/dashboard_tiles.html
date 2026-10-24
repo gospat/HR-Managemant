@@ -4,7 +4,7 @@ Modern analytics home is templates/dashboard.html via base.dashboard.main_dashbo
 (`/dashboard/`) and does NOT include this file. Prefer Customize on the modern home;
 do not dual-write modern DashboardEmployeeCharts prefs from these toggles.
 {% endcomment %}
-{% load static i18n horillafilters basefilters accessibility_filters i18n %}
+{% load static i18n hrfilters basefilters accessibility_filters i18n %}
 
 {% for chart in charts %}
     {% if chart == "gender_chart" and 'gender_chart'|feature_is_accessible:request and "gender_chart" in charts %}

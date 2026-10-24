@@ -18,7 +18,7 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from base.methods import eval_validate
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.http.response import HrRedirect
 from hr_views.cbv_methods import (
     hx_request_required,
@@ -73,7 +73,7 @@ class PipelineNav(HrNavView):
     filter_instance = onboarding_filters.RecruitmentFilter()
     # filter_instance_context_name = "filter"
     filter_form_context_name = "form"
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. onboarding_filters.RecruitmentFilter inherits
     # recruitment.filters.RecruitmentFilter.ajax_fields (Managers,

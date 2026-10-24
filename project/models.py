@@ -18,12 +18,12 @@ from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from attendance.methods.utils import validate_time_format
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company
 from employee.methods.duration_methods import format_time, strtime_seconds
 from employee.models import Employee
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
 from core.models import HrModel, upload_path
 from hr_views.cbv_methods import render_template
 
@@ -235,7 +235,7 @@ class Project(HrModel):
 
     def save(self, *args, **kwargs):
         is_new, request = self.pk is None, getattr(
-            horilla_middlewares._thread_locals, "request", None
+            hr_middlewares._thread_locals, "request", None
         )
         if (
             is_new

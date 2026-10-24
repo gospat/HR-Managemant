@@ -16,7 +16,7 @@ from django.utils.datastructures import MultiValueDict
 from asset.models import AssetCategory
 from base.models import Company, EmployeeShift, WorkType
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from whatsapp.models import WhatsappCredientials, WhatsappFlowDetails
 
 

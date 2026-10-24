@@ -10,10 +10,10 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from google.oauth2.credentials import Credentials
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.models import HrModel, NoPermissionModel
 from hr_views.cbv_methods import render_template
 from recruitment.models import Candidate

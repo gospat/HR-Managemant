@@ -1,5 +1,5 @@
 """
-horilla_automations/methods/methods.py
+hr_automations/methods/methods.py
 
 """
 
@@ -11,7 +11,7 @@ from django.core.exceptions import FieldDoesNotExist
 from django.db import models as django_models
 from django.http import QueryDict
 
-from base.templatetags.horillafilters import app_installed
+from base.templatetags.hrfilters import app_installed
 from employee.models import Employee
 from core.models import HrModel
 

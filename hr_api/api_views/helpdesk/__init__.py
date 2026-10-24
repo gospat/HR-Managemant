@@ -1,3 +1,3 @@
 """
-horilla_api/api_views/helpdesk/__init__.py
+hr_api/api_views/helpdesk/__init__.py
 """

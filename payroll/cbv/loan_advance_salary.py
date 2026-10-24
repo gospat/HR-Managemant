@@ -220,7 +220,7 @@ class _LoanTabNavBase(HrNavView):
              data-toggle="oh-modal-toggle"
          """
 
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. LoanAccountFilter.ajax_fields carries the
     # AJAX-loaded comboboxes this needs.

@@ -11,7 +11,7 @@ class HrPageNumberPagination(PageNumberPagination):
     through DRF's generic machinery, and each one used a stock
     ``PageNumberPagination``. That class has no ``page_size_query_param``, so
     ``?page_size=`` was silently ignored and every page was 20 rows -- despite
-    the Swagger parameter list advertising it (``horilla_api/docs.py``). A
+    the Swagger parameter list advertising it (``hr_api/docs.py``). A
     client wanting 50 rows had to make three round trips and could not tell
     why.
 

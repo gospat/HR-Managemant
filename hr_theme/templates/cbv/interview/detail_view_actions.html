@@ -1,4 +1,4 @@
-{% load basefilters i18n static horillafilters %}
+{% load basefilters i18n static hrfilters %}
 <div class="flex items-center gap-2 flex-wrap">
     {% if "horilla_meet"|app_installed and "horilla_meet"|integration_installed %}
         {% if perms.recruitment.change_interviewschedule or request.user.employee_get in instance.employee_id.all %}

@@ -78,7 +78,7 @@ class BulkDeleteWiringTests(TestCase):
         from django.http import HttpResponse
         from django.test import RequestFactory
 
-        from core.horilla_middlewares import BulkDeleteSummaryMiddleware
+        from core.hr_middlewares import BulkDeleteSummaryMiddleware
 
         def view(request):
             messages.error(request, "You cannot delete X.")

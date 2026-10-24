@@ -1,6 +1,6 @@
 {% load static %}
 {% load i18n %}
-{% load horillafilters %}
+{% load hrfilters %}
 {% get_company as theme_obj %}
 <!DOCTYPE html>
 <html class="{% if request.session.theme == 'dark' %}dark{% endif %}">
@@ -41,7 +41,7 @@
            before other content loads) -- it doesn't change what gets
            styled. {% endcomment %}
         <script src='{% static "hr_theme/assets/js/tailwindcdn.js" %}' defer></script>
-        {% include "horilla_theme/components/header_scripts.html" %}
+        {% include "hr_theme/components/header_scripts.html" %}
 
         <link
             rel="stylesheet"
@@ -313,7 +313,7 @@
         </button>
 
         <!-- Include Sidebar (sidebar.html owns id="sidebar" itself) -->
-        {% include "horilla_theme/components/sidebar.html" %}
+        {% include "hr_theme/components/sidebar.html" %}
 
         <div id="floating-buttons">
             {% include "floating_button.html" %}
@@ -338,12 +338,12 @@
             <div>
                 <!-- Include Header -->
                 <div id="header">
-                    {% include "horilla_theme/components/header.html" %}
+                    {% include "hr_theme/components/header.html" %}
                 </div>
 
                 <div id="ohMainContent" class="p-6 pt-24">
                     {% block content %}
-                        {% include "horilla_theme/components/dashboard.html" %}
+                        {% include "hr_theme/components/dashboard.html" %}
                     {% endblock %}
 
                     <div id="imagePreview" style="display: none; position: absolute; z-index: 9999">
@@ -405,7 +405,7 @@
             </div>
         </div>
         {% include "generic/components.html" %}
-        {% include "horilla_theme/components/footer_scripts.html" %}
+        {% include "hr_theme/components/footer_scripts.html" %}
         <script>
             document.body.addEventListener("showMessages", function () {
                 var b = document.getElementById("reloadMessagesButton");

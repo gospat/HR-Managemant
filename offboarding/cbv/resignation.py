@@ -202,7 +202,7 @@ class ResinationLettersNav(HrNavView):
     filter_body_template = "cbv/resignation/filter.html"
     search_swap_target = "#listContainer"
     apply_first_filter = False
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. LetterFilter.ajax_fields carries the
     # AJAX-loaded comboboxes this needs.

@@ -18,7 +18,7 @@
     </div>
 
     {% if not request.GET.card_only %}
-        {% include 'generic/horilla_list_table.html' %}
+        {% include 'generic/hr_list_table.html' %}
     {% elif not queryset.exists %}
         <button
             class="group px-4 py-2 border border-[green] text-[green] rounded-md text-xs font-medium flex items-center gap-2 hover:text-white hover:bg-[green] transition duration-300"

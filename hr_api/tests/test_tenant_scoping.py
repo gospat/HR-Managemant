@@ -15,7 +15,7 @@ company's rows are absent, and does so symmetrically.
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from core.horilla_middlewares import get_selected_company, set_selected_company
+from core.hr_middlewares import get_selected_company, set_selected_company
 from core.testkit import make_company, make_employee, make_user
 
 # Real routes, read off the URL conf. The unversioned paths guessed

@@ -479,7 +479,7 @@ def navbar_languages(request):
     return {"navbar_languages": [], "show_language_switcher": False}
 
 
-def horilla_version(request):
+def hr_version(request):
     """
     Expose the running product version to every template.
 
@@ -494,4 +494,4 @@ def horilla_version(request):
     and publicly reachable, and a version string there hands any scanner the
     exact set of advisories that apply.
     """
-    return {"horilla_version": __version__}
+    return {"hr_version": __version__}

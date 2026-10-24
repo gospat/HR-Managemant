@@ -1,5 +1,5 @@
 {% load i18n %}
-{% include "generic/horilla_form.html" %}
+{% include "generic/hr_form.html" %}
 
 {% if form.instance.pk %}
     <div id="attachmentContainer" class="d-none">
@@ -22,7 +22,7 @@
 
     {% if form.instance.pk %}
     (function () {
-        // Rendered after the form card by default (generic/horilla_form.html
+        // Rendered after the form card by default (generic/hr_form.html
         // builds fields from a loop we can't inject into), so move it next
         // to the Attachments field itself instead of leaving it as a
         // separate section outside the form's own border.

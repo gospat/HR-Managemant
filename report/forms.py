@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from base.forms import ModelForm
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from report.delivery import compute_schedule_anchor
 from report.models import ReportSubscription

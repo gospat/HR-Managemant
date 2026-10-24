@@ -16,7 +16,7 @@ from django.utils.translation import gettext_noop
 from base.forms import ModelForm
 from employee.forms import MultipleFileField
 from employee.models import Employee
-from core import horilla_middlewares
+from core import hr_middlewares
 from notifications.signals import notify
 from offboarding.models import (
     EmployeeTask,
@@ -282,7 +282,7 @@ class ResignationLetterForm(ModelForm):
                 self.instance.employee_id.get_full_name() + "'s Resignation Letter"
             )
 
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         if request and not request.user.has_perm("offboarding.add_resignationletter"):
             exclude = exclude + ["status"]
             self.fields["employee_id"].queryset = Employee.objects.filter(
@@ -300,7 +300,7 @@ class ResignationLetterForm(ModelForm):
             del self.fields[field]
 
     def save(self, commit: bool = ...) -> Any:
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         instance = self.instance
         if (
             not request.user.has_perm("offboarding.add_resignationletter")

@@ -212,7 +212,7 @@ class TheRenderedPayslipTests(TestCase):
     """
     Asserted against the template that actually renders.
 
-    horilla_theme/templates/ shadows payroll/templates/ for this file, so
+    hr_theme/templates/ shadows payroll/templates/ for this file, so
     editing the app copy changed nothing on screen. Rendering through the view
     is the only check that cannot be fooled by that.
     """
@@ -374,7 +374,7 @@ class CurrencyWithoutSettingsTests(TestCase):
     """
 
     def test_the_filter_survives_no_settings_row(self):
-        from base.templatetags.horillafilters import currency_symbol_position
+        from base.templatetags.hrfilters import currency_symbol_position
         from payroll.models.tax_models import PayrollSettings
 
         PayrollSettings._base_manager.all().delete()
@@ -382,7 +382,7 @@ class CurrencyWithoutSettingsTests(TestCase):
         self.assertEqual(currency_symbol_position("100.00"), "$ 100.00")
 
     def test_it_uses_the_row_when_there_is_one(self):
-        from base.templatetags.horillafilters import currency_symbol_position
+        from base.templatetags.hrfilters import currency_symbol_position
         from payroll.models.tax_models import PayrollSettings
 
         PayrollSettings._base_manager.all().delete()

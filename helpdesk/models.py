@@ -8,11 +8,11 @@ from django.urls import reverse_lazy
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company, Department, JobPosition, Tags
 from employee.models import Employee
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
 from core.models import HrModel, upload_path
 from hr_audit.methods import get_diff
 from hr_audit.models import HorillaAuditInfo, HrAuditLog

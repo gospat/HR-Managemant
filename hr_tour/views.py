@@ -1,5 +1,5 @@
 """
-horilla_tour/views.py
+hr_tour/views.py
 
 Two surfaces:
 
@@ -184,7 +184,7 @@ def tour_progress(request):
 @permission_required("horilla_tour.view_tour")
 def tour_settings_page(request):
     """Render the Tour Management page inside the Settings shell."""
-    return render(request, "horilla_tour/tour_settings.html")
+    return render(request, "hr_tour/tour_settings.html")
 
 
 @method_decorator(login_required, name="dispatch")
@@ -317,7 +317,7 @@ class TourFormView(HrFormView):
 def _render_steps_panel(request, tour):
     return render(
         request,
-        "horilla_tour/steps_panel.html",
+        "hr_tour/steps_panel.html",
         {
             "tour": tour,
             "steps": tour.steps.all(),
@@ -356,7 +356,7 @@ def tour_step_form(request):
         # Invalid: re-render the form into its slot only (keep the panel).
         resp = render(
             request,
-            "horilla_tour/step_form.html",
+            "hr_tour/step_form.html",
             {"form": form, "tour": tour, "step": step},
         )
         resp["HX-Retarget"] = "#tourStepFormSlot"
@@ -370,7 +370,7 @@ def tour_step_form(request):
     form = TourStepForm(instance=step, initial=initial)
     return render(
         request,
-        "horilla_tour/step_form.html",
+        "hr_tour/step_form.html",
         {"form": form, "tour": tour, "step": step},
     )
 

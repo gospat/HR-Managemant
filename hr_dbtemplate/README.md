@@ -70,7 +70,7 @@ flowchart LR
 
 ## Package layout and file roles
 
-Paths are relative to **`horilla_dbtemplate/`**.
+Paths are relative to **`hr_dbtemplate/`**.
 
 | Path | Role |
 |------|------|
@@ -86,7 +86,7 @@ Paths are relative to **`horilla_dbtemplate/`**.
 | **`utils/template.py`** | **`check_template_syntax`** for admin bulk action. |
 | **`utils/__init__.py`** | Package marker for utilities. |
 | **`migrations/`** | Schema for `Template`, `TemplateVersion`, M2M; keep in sync with models. |
-| **`templates/admin/horilla_dbtemplate/template/*.html`** | Admin UI: **`restore_version.html`**, **`diff.html`**, **`preview.html`**. |
+| **`templates/admin/hr_dbtemplate/template/*.html`** | Admin UI: **`restore_version.html`**, **`diff.html`**, **`preview.html`**. |
 
 ---
 

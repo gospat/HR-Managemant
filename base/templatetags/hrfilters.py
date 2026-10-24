@@ -1,5 +1,5 @@
 """
-horillafilters.py
+hrfilters.py
 
 This module is used to write custom template filters.
 
@@ -17,7 +17,7 @@ from django.utils.translation import gettext as _
 
 from base.models import Company, EmployeeShiftSchedule, IntegrationApps
 from employee.methods.duration_methods import strtime_seconds
-from core.horilla_middlewares import _thread_locals, get_selected_company
+from core.hr_middlewares import _thread_locals, get_selected_company
 from core.methods import get_horilla_model_class
 from hr_theme.models import CompanyTheme, HorillaColorTheme
 

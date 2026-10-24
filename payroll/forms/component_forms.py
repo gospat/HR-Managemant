@@ -22,11 +22,11 @@ from base.methods import reload_queryset
 from base.models import Company
 from employee.filters import EmployeeFilter
 from employee.models import BonusPoint, Employee
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
 from hr_widgets.forms import HrForm, default_select_option_template
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from notifications.signals import notify
 from payroll.models import tax_models as models
@@ -1295,7 +1295,7 @@ class ReimbursementForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.request = getattr(horilla_middlewares._thread_locals, "request", None)
+        self.request = getattr(hr_middlewares._thread_locals, "request", None)
         self.employee = self.get_employee()  # 819
 
         if not self.instance.pk:
@@ -1567,7 +1567,7 @@ class PayslipAutoGenerateForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        active_company_id = horilla_middlewares.get_selected_company()
+        active_company_id = hr_middlewares.get_selected_company()
         if active_company_id and active_company_id != "all":
             self.fields["company_id"].queryset = Company.objects.filter(
                 id=active_company_id

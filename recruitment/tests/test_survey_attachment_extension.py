@@ -6,7 +6,7 @@ uploader chose. MEDIA_ROOT sits under the app's own working directory
 (a namespace package, no __init__.py), so a saved ``pwn.py`` was importable
 by anything that later did a dotted-path import against it -- which
 get_to_field()'s ``model`` query param did, until that sink was fixed
-separately (horilla_automations/methods/methods.py).
+separately (hr_automations/methods/methods.py).
 
 This is defense in depth for the same chain: reject server-executable
 extensions outright at the upload itself, regardless of what any other

@@ -2,7 +2,7 @@ import json
 
 from django.db import models
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.models import HrModel
 from hr_auth.models import HorillaUser
 

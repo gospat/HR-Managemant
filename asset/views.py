@@ -83,7 +83,7 @@ from core.decorators import (
 )
 from core.group_by import group_by_queryset
 from core.http.response import HrRedirect
-from core.methods import horilla_users_with_perms
+from core.methods import hr_users_with_perms
 from notifications.signals import notify
 
 
@@ -948,7 +948,7 @@ def asset_allocate_return_request(request, asset_id):
     asset_assign.save()
     message = _("Return request for {} initiated.").format(asset_assign.asset_id)
     messages.success(request, message)
-    permed_users = horilla_users_with_perms("asset.change_assetassignment")
+    permed_users = hr_users_with_perms("asset.change_assetassignment")
     notify.send(
         request.user.employee_get,
         recipient=permed_users,

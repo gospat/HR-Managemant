@@ -185,7 +185,7 @@ class ReloadField(View):
             required=field.required,
         )
         parent_form.fields[cache_field].widget.option_template_name = (
-            "horilla_widgets/select_option.html",
+            "hr_widgets/select_option.html",
         )
         parent_form.fields[cache_field].widget.attrs = field.widget.attrs
         parent_form.fields[cache_field].initial = value

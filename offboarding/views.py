@@ -20,7 +20,7 @@ from base.methods import closest_numbers, eval_validate, paginator_qry, sortby
 from base.models import Department, JobPosition
 from base.views import general_settings
 from employee.models import Employee
-from core import horilla_middlewares
+from core import hr_middlewares
 from core.decorators import (
     hx_request_required,
     login_required,
@@ -85,7 +85,7 @@ def any_manager(employee: Employee):
 
 def pipeline_grouper(filters={}, offboardings=[]):
     groups = []
-    request = getattr(horilla_middlewares._thread_locals, "request", None)
+    request = getattr(hr_middlewares._thread_locals, "request", None)
     for offboarding in offboardings:
         employees = []
         stages = PipelineStageFilter(

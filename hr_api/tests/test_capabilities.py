@@ -13,7 +13,7 @@ that it grants anything; authorization stays with the endpoints.
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from core.horilla_middlewares import set_selected_company
+from core.hr_middlewares import set_selected_company
 from core.testkit import make_company, make_employee, make_user
 from hr_api.api_methods.base.capabilities import build_capabilities
 
@@ -102,7 +102,7 @@ class CapabilitiesTests(TestCase):
 
     def test_features_report_installed_apps_explicitly(self):
         features = build_capabilities(self.user)["features"]
-        # geofencing/facedetection are installed from horilla_api/__init__.py,
+        # geofencing/facedetection are installed from hr_api/__init__.py,
         # not settings -- the manifest must still report them as present.
         self.assertTrue(features["geofencing"])
         self.assertTrue(features["facedetection"])

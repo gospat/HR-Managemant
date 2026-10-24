@@ -29,7 +29,7 @@ from base.forms import ModelForm
 from base.methods import reload_queryset
 from employee.forms import MultipleFileField
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 
 
 def set_date_field_initial(instance):

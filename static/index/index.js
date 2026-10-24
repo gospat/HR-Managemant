@@ -433,7 +433,7 @@ function syncBulkSelectAllCheckbox(viewId) {
 // The preference is still persisted server-side via the existing hx-get
 // (unchanged), but the visual change now applies instantly client-side, and
 // the reload that follows is skipped (see window.__skipNextToggleReload,
-// checked in horilla_list_table.html / group_by_table.html's
+// checked in hr_list_table.html / group_by_table.html's
 // hx-on::after-request). Column *reordering* (drag-and-drop) still reloads
 // normally, since re-ordering actual table cells isn't a simple show/hide.
 function toggleColumnVisibility(checkboxEl, fieldName, visible) {
@@ -1158,7 +1158,7 @@ function htmxLoadFailIndicator(e, evt) {
  * this look inside that one pane (its nearest `.oh-tabs__content` ancestor)
  * instead of the whole document, so each tab resolves its own target.
  *
- * A per-tab shell (generic/horilla_tab_content_shell.html,
+ * A per-tab shell (generic/hr_tab_content_shell.html,
  * cbv/work_shift_tab/profile_tab_shell.html) renders `selector`'s container
  * with a ".animated-background" skeleton div already inside it, before its
  * Nav has even loaded -- so on a genuine first load the container already

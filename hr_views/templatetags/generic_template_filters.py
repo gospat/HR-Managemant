@@ -1,5 +1,5 @@
 """
-horilla_views/templatetags/generic_template_filters.py
+hr_views/templatetags/generic_template_filters.py
 
 This module is used to write custom template filters.
 
@@ -22,7 +22,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from core.config import import_method
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_views.related_link_registry import resolve_detail_link
 
 register = template.Library()

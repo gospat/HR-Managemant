@@ -7,8 +7,8 @@
     .sr-tabs-row-top .oh-btn { flex-shrink: 0; }
 
     /* Browse/Audit/Subscriptions — chip-pill tabs with a count badge each,
-       matching HrTabView's real look (horilla_theme/templates/generic/
-       horilla_tabs.html: .oh-tabs__tab / .oh-tabs__tab--active / the coral
+       matching HrTabView's real look (hr_theme/templates/generic/
+       hr_tabs.html: .oh-tabs__tab / .oh-tabs__tab--active / the coral
        count-circle). Values copied from that component; kept as our own
        .sr-tab classes rather than swapping in HrTabView itself, since
        that component's JS drives its own htmx-per-tab-url/localStorage-free
@@ -98,7 +98,7 @@
     .dark .sr-search input { background: hsl(0, 0%, 15%); border-color: hsl(0, 0%, 30%); }
 
     /* Sort/Recent triggers match HrNavView's real Filter-button look
-       (horilla_theme/templates/generic/horilla_nav.html: white bg + a
+       (hr_theme/templates/generic/hr_nav.html: white bg + a
        coral-tinted border, not oh-btn--light-bkg's grey fill -- see
        markup); only the dropdown-content panels below are page-specific. */
     .sr-sort-menu { min-width: 180px; padding: 6px; right: 0; }
@@ -371,13 +371,13 @@
     /* Grid view — same .sr-row elements/data, restyled via CSS Grid instead
        of duplicate markup. Tokens (border #ebebeb, .shadow-card box-shadow,
        text-sm/text-xs sizing) are copied from the theme's own card
-       component — horilla_theme/templates/generic/horilla_card.html, which
+       component — hr_theme/templates/generic/hr_card.html, which
        is what HrCardView (e.g. the Employees grid) actually renders. */
     /* 320px floor rather than 260px: at 260 the old four-across
        "check | icon | body | actions" band left the description roughly
        130px wide, which wrapped it to ~7 words a line and stretched cards
        to ~490px tall for ~30 words. The theme's own card grid
-       (generic/horilla_card.html) uses a fixed grid-cols-4, so this tracks
+       (generic/hr_card.html) uses a fixed grid-cols-4, so this tracks
        the same density while still collapsing on narrow screens. */
     .sr-sections.sr-view--grid .sr-rows {
         display: grid;

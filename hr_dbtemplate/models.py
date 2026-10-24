@@ -24,7 +24,7 @@ from django.template import TemplateSyntaxError
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 
 from .conf import AUTO_POPULATE_CONTENT
 

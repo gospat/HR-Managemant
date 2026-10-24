@@ -243,7 +243,7 @@ class MyLeaveRequestNavView(HrNavView):
 
     filter_form_context_name = "form"
     search_swap_target = "#listContainer"
-    # Modern slide-over filter panel (horilla_nav.html's .oh-filter-modern
+    # Modern slide-over filter panel (hr_nav.html's .oh-filter-modern
     # styles) -- same treatment as Attendance/Late Arrival/Check-in Log/
     # Monthly Summary this session. Safe alongside UserLeaveRequestFilter
     # staying a plain FilterSet (not HrFilterSet): modern_filter only
@@ -261,7 +261,7 @@ class MyLeaveRequestNavView(HrNavView):
         ("requested_days", _("Requested Days")),
     ]
     # Takes precedence over group_by_fields above in the filter panel's own
-    # "Group By" section (horilla_nav.html: `{% if nested_group_by_fields %}`
+    # "Group By" section (hr_nav.html: `{% if nested_group_by_fields %}`
     # renders the new multi-level picker and suppresses the old single-select
     # one) -- group_by_fields is left in place regardless, same as every
     # other page in this session/codebase that has both.

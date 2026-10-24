@@ -44,7 +44,7 @@ from base.context_processors import (
 )
 from base.models import AttendanceAllowedIP, Company, EmployeeShiftDay
 from core.decorators import hx_request_required, login_required
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 
 
 def late_come_create(attendance):

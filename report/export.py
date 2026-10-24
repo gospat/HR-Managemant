@@ -203,7 +203,7 @@ def _looks_money_header(header: str) -> bool:
 
 def _currency_format() -> tuple[str, str]:
     """(symbol, position) from PayrollSettings — same convention as
-    base/templatetags/horillafilters.py::currency_symbol_position, with the
+    base/templatetags/hrfilters.py::currency_symbol_position, with the
     same "$"/prefix fallback used app-wide when payroll isn't installed or
     no settings row exists yet."""
     try:

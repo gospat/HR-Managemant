@@ -1,4 +1,4 @@
-{% load static i18n horillafilters %}
+{% load static i18n hrfilters %}
 {% get_company as theme_obj %}
 <style>
     #sidebar,
@@ -631,7 +631,7 @@
             role="navigation"
             aria-label="{% trans 'Main navigation' %}"
         >
-            {% include "horilla_theme/components/sidebar/top_menu.html" %}
+            {% include "hr_theme/components/sidebar/top_menu.html" %}
             {% for menues in sidebar %}
                 <div class="sidebar-item">
                     <button
@@ -679,7 +679,7 @@
                 </div>
             {% endfor %}
             {% comment %} {{ request.active_company }} {% endcomment %}
-            {% comment %} {% include "horilla_theme/components/sidebar/bottom_menu.html" %} {% endcomment %}
+            {% comment %} {% include "hr_theme/components/sidebar/bottom_menu.html" %} {% endcomment %}
         </nav>
         {% comment %}
             Version marker. Every support thread starts with "which version are
@@ -690,9 +690,9 @@
             Collapses to just the number when the sidebar is unpinned.
         {% endcomment %}
         <div class="sidebar-version px-4 pt-3 pb-6 border-t border-t-dark-50 text-[11px] leading-none text-[#999] select-text"
-             title="{% trans 'Version' %} {{ horilla_version }}">
+             title="{% trans 'Version' %} {{ hr_version }}">
             <span class="sidebar-version__label">{% trans "Version" %}</span>
-            <span class="font-medium">{{ horilla_version }}</span>
+            <span class="font-medium">{{ hr_version }}</span>
         </div>
     </div>
     <!-- Flyout panel: populated and positioned by JS on hover -->

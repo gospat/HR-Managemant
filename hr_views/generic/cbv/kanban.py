@@ -1,5 +1,5 @@
 """
-horilla_views/generic/cbv/kanban.py
+hr_views/generic/cbv/kanban.py
 """
 
 import json
@@ -17,7 +17,7 @@ from hr_views.generic.cbv.views import HrCardView
 class HrKanbanView(HrCardView):
     group_key: str = ""
     group_filter_class = None
-    template_name: str = "generic/horilla_kanban_view.html"
+    template_name: str = "generic/hr_kanban_view.html"
     kanban_attrs: str = ""
     instance_order_by: str = "sequence"
     group_order_by: str = "sequence"

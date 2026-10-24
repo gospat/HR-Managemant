@@ -2705,7 +2705,7 @@ def question_template_related_view(request, template_id, **kwargs):
     Read-only detail view for a question template, showing each question's
     type, text, and options (for multiple-choice questions). Used when the
     template is opened via a related-object link (see
-    horilla_views/related_link_registry.py), so it renders as a modal
+    hr_views/related_link_registry.py), so it renders as a modal
     fragment without the question-creation form or edit/delete actions.
     """
 

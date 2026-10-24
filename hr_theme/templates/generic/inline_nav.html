@@ -1,6 +1,6 @@
 {% load static i18n %}
 {% comment %}
-    Compact card-header variant of horilla_nav.html for settings sub-lists:
+    Compact card-header variant of hr_nav.html for settings sub-lists:
     title on the left, optional search, actions and create on the right.
     Uses the same context as HrNavView.
 
@@ -276,7 +276,7 @@
                                                 $(this).find('.ngb-level-badge').text(i + 1);
                                             });
                                         }
-                                        // ngbDisableOtherGroupBySource is defined in horilla_nav.html,
+                                        // ngbDisableOtherGroupBySource is defined in hr_nav.html,
                                         // which may not be on the page.
                                         function ngbDisableOtherGroupBySourceIfPresent(exceptContainerId) {
                                             if (typeof ngbDisableOtherGroupBySource === "function") {

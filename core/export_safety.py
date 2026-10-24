@@ -9,8 +9,8 @@ neighbouring cells to a remote host, and the recipient of an HR export is
 exactly the sort of person whose spreadsheet is worth reading.
 
 This lives outside any one app because the codebase has four separate
-spreadsheet writers (report/export.py, horilla_views/cbv_methods.py,
-horilla_views/views.py, base/methods.py) and only the first one guarded its
+spreadsheet writers (report/export.py, hr_views/cbv_methods.py,
+hr_views/views.py, base/methods.py) and only the first one guarded its
 cells. Rather than let each grow its own copy, they share this.
 """
 

@@ -1,5 +1,5 @@
 """
-horilla_views/generic/cbv/history.py
+hr_views/generic/cbv/history.py
 """
 
 from django.apps import apps
@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.views.generic import DetailView
 from simple_history.utils import get_history_model_for_model
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.http.response import HrRedirect
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import HrFormView
@@ -23,7 +23,7 @@ class HrHistoryView(DetailView):
     GenericHorillaHistoryView
     """
 
-    template_name = "generic/horilla_history_view.html"
+    template_name = "generic/hr_history_view.html"
     has_perm_to_revert = False
     fields: list = []
     history_related_name = "history"

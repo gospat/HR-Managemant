@@ -8,7 +8,7 @@ import uuid
 
 from django import forms
 
-from core import horilla_middlewares
+from core import hr_middlewares
 
 ALL_INSTANCES = {}
 
@@ -49,7 +49,7 @@ class HrMultiSelectWidget(forms.Widget):
         self.help_text = help_text
         super().__init__()
 
-    template_name = "horilla_widgets/horilla_multiselect_widget.html"
+    template_name = "hr_widgets/hr_multiselect_widget.html"
 
     def value_from_datadict(self, data, files, name):
         # forms.Widget's default returns data.get(name) -- a single scalar,
@@ -65,9 +65,9 @@ class HrMultiSelectWidget(forms.Widget):
         context = super().get_context(name, value, attrs)
         # Django form widget templates don't receive `request` in their
         # context by default, which breaks the {% get_company %} templatetag
-        # (theme lookup) used inside horilla_multiselect_widget.html. Pull it
+        # (theme lookup) used inside hr_multiselect_widget.html. Pull it
         # from the thread-local set by ThreadLocalMiddleware instead.
-        context["request"] = horilla_middlewares._thread_locals.request
+        context["request"] = hr_middlewares._thread_locals.request
         # Add your custom data to the context
         queryset = self.choices.queryset
         field = self.choices.field
@@ -96,7 +96,7 @@ class HrMultiSelectWidget(forms.Widget):
         uid = get_short_uuid(5)
         context["section_id"] = uid
         context[self.filter_instance_context_name] = self.filter_class
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         ALL_INSTANCES[str(request.user.id)] = self
 
         return context

@@ -1,5 +1,5 @@
 """
-horilla_automations/urls.py
+hr_automations/urls.py
 """
 
 from django.urls import path

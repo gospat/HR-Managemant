@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_meet.methods import create_calendar_event, update_calendar_event
 from hr_meet.models import GoogleMeeting
 

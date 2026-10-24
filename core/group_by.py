@@ -3,7 +3,7 @@ from collections import defaultdict
 from django.core.paginator import Paginator
 from django.db.models.fields.related_descriptors import ForwardManyToOneDescriptor
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 
 
 def _get_field_val(obj, field_path):

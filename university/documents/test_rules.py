@@ -68,7 +68,7 @@ class UploadRuleTests(TestCase):
         self.assertFalse(can_read_media(user, contract.contract_document.name))
         model = apps.get_model("payroll.Reimbursement")
         with patch(
-            "payroll.models.models.horilla_middlewares._thread_locals",
+            "payroll.models.models.hr_middlewares._thread_locals",
             SimpleNamespace(
                 request=SimpleNamespace(user=self.root, session={}, POST={})
             ),

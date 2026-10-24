@@ -6,7 +6,7 @@ from django.db.models.fields.related_descriptors import ForwardManyToOneDescript
 from django.utils.translation import gettext as _
 
 from core.group_by import _page_from_list, _page_of_groupers, _resolve_fk_groupers
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 
 
 def _ordered_keep_none(values):

@@ -1,5 +1,5 @@
 {% extends 'settings.html' %}
-{% block settings %}{% load i18n %}{% load horillafilters %}{% load static %}
+{% block settings %}{% load i18n %}{% load hrfilters %}{% load static %}
     <div class="mb-4">
         <h4 class="text-base font-semibold text-[#333]">{% trans "System Preferences" %}</h4>
         <p class="text-xs text-gray-500 mt-1">
@@ -95,7 +95,7 @@
                 <div>
                     <p class="text-sm text-[#333]">
                         {{ white_label_company_name }}
-                        <span class="font-semibold select-text">{{ horilla_version }}</span>
+                        <span class="font-semibold select-text">{{ hr_version }}</span>
                     </p>
                     <p class="text-xs text-gray-500 mt-1">
                         {% trans "Quote this version when reporting a problem." %}

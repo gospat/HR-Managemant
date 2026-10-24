@@ -40,7 +40,7 @@ class HrAutomationConfig(AppConfig):
             return ready
         try:
 
-            from base.templatetags.horillafilters import app_installed
+            from base.templatetags.hrfilters import app_installed
             from employee.models import Employee
             from hr_automations.methods.methods import get_related_models
             from hr_automations.models import MODEL_CHOICES

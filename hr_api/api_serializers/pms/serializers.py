@@ -1,5 +1,5 @@
 """
-horilla_api/api_serializers/pms/serializers.py
+hr_api/api_serializers/pms/serializers.py
 """
 
 from rest_framework import serializers

@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
-from base.templatetags.horillafilters import is_asset_fine_enabled
+from base.templatetags.hrfilters import is_asset_fine_enabled
 from employee.models import Employee
 from core.http.response import HrRedirect
 from core.methods import get_horilla_model_class

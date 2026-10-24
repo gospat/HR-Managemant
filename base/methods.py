@@ -39,7 +39,7 @@ from base.models import (
 )
 from employee.models import Employee, EmployeeWorkInformation
 from core.export_safety import safe_cell
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 
 CHART_CONFIG = {
     "offline_employees": {
@@ -1439,7 +1439,7 @@ def get_pagination(default=20):
     falling back to their "All Companies" preference, then the
     caller-supplied `default`.
     """
-    from core.horilla_middlewares import _thread_locals
+    from core.hr_middlewares import _thread_locals
 
     request = getattr(_thread_locals, "request", None)
     user = request.user

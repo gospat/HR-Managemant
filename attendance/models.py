@@ -30,7 +30,7 @@ from attendance.methods.utils import (
     validate_time_format,
     validate_time_in_minutes,
 )
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.methods import is_company_leave, is_holiday
 from base.models import Company, EmployeeShift, EmployeeShiftDay, WorkType
 from employee.models import Employee

@@ -248,7 +248,7 @@ class AssignedLeaveNavView(HrNavView):
     filter_body_template = "cbv/assigned_leave/assigned_filter.html"
     search_swap_target = "#listContainer"
     # Modern slide-over filter panel -- nav_fixed_filter.html just
-    # includes generic/horilla_nav.html, which already has the
+    # includes generic/hr_nav.html, which already has the
     # {% if modern_filter %} branch, so no template change is needed
     # here. AssignedLeaveFilter.ajax_fields carries the AJAX-loaded
     # comboboxes this needs.

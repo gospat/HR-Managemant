@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 
 from employee.models import EmployeeWorkInformation
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.http.response import HrRedirect
 from core.methods import handle_no_permission
 

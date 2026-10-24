@@ -21,7 +21,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.inherit.model_inherit import EXTENSION_REGISTRY, HrModelBase
 from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import render_template

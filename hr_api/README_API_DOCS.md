@@ -57,7 +57,7 @@ For paginated list views:
 - Documentation automatically updates when API endpoints change
 - Security schemes (Bearer/JWT) are configured in `rest_conf.py`
 - Basic authentication has been removed across all interfaces`
-- Module tags are defined in `horilla_api/docs.py`
+- Module tags are defined in `hr_api/docs.py`
 
 ## Testing Documentation
 
@@ -70,7 +70,7 @@ For paginated list views:
 ## Troubleshooting
 
 If endpoints are not appearing in documentation:
-- Ensure the URL is included in the `patterns` list in `horilla_api/urls.py`
+- Ensure the URL is included in the `patterns` list in `hr_api/urls.py`
 - Check that the view is using proper decorators
 - Verify the serializer is correctly defined
 

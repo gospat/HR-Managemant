@@ -39,7 +39,7 @@ from base.methods import (
 # from core.http import HrRedirect
 from core.filters import FilterSet
 from core.group_by import group_by_queryset
-from core.horilla_middlewares import _thread_locals, get_selected_company
+from core.hr_middlewares import _thread_locals, get_selected_company
 from core.http.response import HrRedirect
 from core.models import HrModel
 from core.nested_group_by import nested_group_by_queryset
@@ -119,7 +119,7 @@ class HrListView(ListView):
     filter_class: FilterSet = None
 
     view_id: str = """"""
-    template_name: str = "generic/horilla_list_table.html"
+    template_name: str = "generic/hr_list_table.html"
     context_object_name = "queryset"
     verbose_name: str = ""
 
@@ -576,7 +576,7 @@ class HrListView(ListView):
                     )
                 )
             except Exception:
-                self.template_name = "generic/horilla_list_table.html"
+                self.template_name = "generic/hr_list_table.html"
                 context["queryset"] = paginator_qry(
                     queryset, self._saved_filters.get("page"), self.records_per_page
                 )
@@ -596,7 +596,7 @@ class HrListView(ListView):
                     records_per_page=10,
                 )
             except Exception:
-                self.template_name = "generic/horilla_list_table.html"
+                self.template_name = "generic/hr_list_table.html"
                 context["queryset"] = paginator_qry(
                     queryset, self._saved_filters.get("page"), self.records_per_page
                 )
@@ -1458,7 +1458,7 @@ class HrSectionView(TemplateView):
     script_static_paths: list = []
     style_static_paths: list = []
 
-    template_name = "generic/horilla_section.html"
+    template_name = "generic/hr_section.html"
 
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
@@ -1492,7 +1492,7 @@ class HrDetailedView(DetailView):
     """
 
     title = _("Detailed View")
-    template_name = "generic/horilla_detailed_view.html"
+    template_name = "generic/hr_detailed_view.html"
     header: dict = {
         "title": "Bells Tech",
         "subtitle": "Detailed View",
@@ -1624,7 +1624,7 @@ class HrTabView(TemplateView):
     """
 
     view_id: str = ""
-    template_name = "generic/horilla_tabs.html"
+    template_name = "generic/hr_tabs.html"
     show_filter_tags = False
     # Tabs pass the page they were opened from on as "referrer", which lets a
     # saved filter (and a default one) made in one tab show up in its sibling
@@ -1669,7 +1669,7 @@ class HrTabView(TemplateView):
                 context["active_target"] = active_tab.tab_target
 
         # ?open_tab=<1-based index> forces a tab open on first load, overriding the last-active tab.
-        # No tag name in the selector: the tab is a <li> in horilla_tabs.html but a <button> in the theme override.
+        # No tag name in the selector: the tab is a <li> in hr_tabs.html but a <button> in the theme override.
         open_tab = self.request.GET.get("open_tab")
         if open_tab and open_tab.isdigit():
             context["active_target"] = f'[data-target="#{self.view_id}{open_tab}"]'
@@ -1710,7 +1710,7 @@ class HrTabContentShell(TemplateView):
     Per-tab shell: each tab gets its own Nav plus list container.
     """
 
-    template_name = "generic/horilla_tab_content_shell.html"
+    template_name = "generic/hr_tab_content_shell.html"
     nav_url_name = ""
     container_id = ""
     tabs_root_id = ""
@@ -1735,7 +1735,7 @@ class HrCardView(ListView):
 
     view_id: str = None
 
-    template_name = "generic/horilla_card.html"
+    template_name = "generic/hr_card.html"
     context_object_name = "queryset"
 
     search_url: str = ""
@@ -2039,7 +2039,7 @@ class HrFormView(FormView):
     view_id: str = get_short_uuid(4)
     hx_confirm: str = ""
     form_class: forms.ModelForm = None
-    template_name = "generic/horilla_form.html"
+    template_name = "generic/hr_form.html"
     ids_key: str = "instance_ids"
     form_disaply_attr: str = ""
     new_display_title: str = "Add New"
@@ -2236,7 +2236,7 @@ class HrFormView(FormView):
                         required=form.fields[field].required,
                     )
                     form.fields[field].widget.option_template_name = (
-                        "horilla_widgets/select_option.html",
+                        "hr_widgets/select_option.html",
                     )
                     form.fields[field].widget.attrs = attrs
                     form.initial[field] = value
@@ -2310,7 +2310,7 @@ class HrNavView(TemplateView):
     filter form submit button id: applyFilter
     """
 
-    template_name = "generic/horilla_nav.html"
+    template_name = "generic/hr_nav.html"
 
     nav_title: str = ""
     search_url: str = ""
@@ -2335,7 +2335,7 @@ class HrNavView(TemplateView):
     hide_search: bool = False
     apply_first_filter = True
     default_group_by: str = ""
-    # Opt-in redesign of the Filter dropdown's accordion sections (see horilla_nav.html's .oh-filter-modern styles).
+    # Opt-in redesign of the Filter dropdown's accordion sections (see hr_nav.html's .oh-filter-modern styles).
     modern_filter: bool = False
 
     def __init__(self, **kwargs: Any) -> None:
@@ -2565,7 +2565,7 @@ class HrProfileView(DetailView):
     GenericHorillaProfileView
     """
 
-    template_name = "generic/horilla_profile_view.html"
+    template_name = "generic/hr_profile_view.html"
     view_id: str = None
     filter_class: FilterSet = None
     push_url: str = None

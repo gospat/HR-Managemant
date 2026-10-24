@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from dynamic_fields.df_not_allowed_models import DF_NOT_ALLOWED_MODELS
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_automations.methods.methods import get_model_class
 
 logger = logging.getLogger(__name__)

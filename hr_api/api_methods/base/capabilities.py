@@ -27,7 +27,7 @@ from core.__version__ import __version__
 
 # Optional apps the mobile client hides features for when absent. Each maps to
 # the app label; ``apps.is_installed`` is the whole check. Note that geofencing
-# and facedetection are installed from horilla_api/__init__.py rather than
+# and facedetection are installed from hr_api/__init__.py rather than
 # settings, so a settings grep will wrongly suggest they are missing.
 OPTIONAL_APPS = (
     "asset",

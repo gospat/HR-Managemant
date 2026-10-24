@@ -17,7 +17,7 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
 from base.models import Company
-from core.horilla_middlewares import set_selected_company
+from core.hr_middlewares import set_selected_company
 
 
 def _fresh_user(user_id):

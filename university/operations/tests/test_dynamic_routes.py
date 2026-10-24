@@ -61,7 +61,7 @@ class DynamicCallbackSecurityTests(TestCase):
         owner.view_id = "synthetic-list"
         view = getattr(owner, method) if method else SyntheticPopupView.as_view()
         with patch(
-            "core.horilla_middlewares._thread_locals",
+            "core.hr_middlewares._thread_locals",
             SimpleNamespace(request=request),
         ):
             url = "/" + register("synthetic-" + request.session.session_key, view)
@@ -136,7 +136,7 @@ class DynamicCallbackSecurityTests(TestCase):
         request.user = self.root
         request.session = client.session
         with patch(
-            "core.horilla_middlewares._thread_locals",
+            "core.hr_middlewares._thread_locals",
             SimpleNamespace(request=request),
         ):
             url = register_dynamic_url(

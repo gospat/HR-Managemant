@@ -1,5 +1,5 @@
 """
-horilla_automations/forms.py
+hr_automations/forms.py
 """
 
 from typing import Any
@@ -13,7 +13,7 @@ from employee.models import Employee
 from hr_automations.methods.methods import generate_choices
 from hr_automations.models import MODEL_CHOICES, MailAutomation
 from hr_widgets.forms import default_select_option_template
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 

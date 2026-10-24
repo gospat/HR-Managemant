@@ -38,9 +38,9 @@ from asset.models import (
 )
 from base.methods import filtersubordinates
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.http.response import HrRedirect
-from core.methods import horilla_users_with_perms
+from core.methods import hr_users_with_perms
 from hr_views.cbv_methods import (
     login_required,
     owner_can_enter,
@@ -584,7 +584,7 @@ class AssetNav(HrNavView):
     filter_instance = CustomAssetFilter()
     filter_form_context_name = "form"
     filter_body_template = "cbv/request_and_allocation/asset_filter.html"
-    # Modern slide-over filter panel (generic/horilla_nav.html's {% if modern_filter %} branch).
+    # Modern slide-over filter panel (generic/hr_nav.html's {% if modern_filter %} branch).
     modern_filter = True
 
     group_by_fields = [
@@ -1041,7 +1041,7 @@ class AssetServiceRequestCreateForm(HrFormView):
             messages.success(self.request, _("Service request raised successfully."))
             notify.send(
                 instance.requested_employee_id,
-                recipient=horilla_users_with_perms("asset.change_assetassignment"),
+                recipient=hr_users_with_perms("asset.change_assetassignment"),
                 verb=gettext_noop(
                     "Service request for %(asset_id)s raised by %(employee)s"
                 ),

@@ -2,7 +2,7 @@
 <!-- Dashboard deep-link params (stage_type/stage_type_exclude/employee_id/
      exit_reason) have no dedicated widget here -- these hidden inputs are
      what makes them survive past the very first page load: htmx's own
-     request-building (horilla_nav.html's htmx:configRequest handler) only
+     request-building (hr_nav.html's htmx:configRequest handler) only
      keeps a query param baked into #filterForm's hx-get when it ISN'T also
      a named form field, so anything without one gets silently dropped the
      moment the user touches any other filter. Being real [name] fields
@@ -76,7 +76,7 @@
         <!-- Registry: PipelineEmployeeFilter._build_custom_filter_fields
              (offboarding/filters.py); applied server-side by
              HrFilterSet._apply_custom_filters. Row markup/JS are
-             generic (initCustomFilterBuilder, horilla_nav.html); context
+             generic (initCustomFilterBuilder, hr_nav.html); context
              wiring in HrNavView.get_context_data via this Nav's own
              filter_instance (single-filterset Nav, unlike the page-level
              OffboardingPipelineNav's combined panel). -->

@@ -16,19 +16,19 @@ so it is asserted here rather than left to be "tidied up" later.
 
 from django.test import SimpleTestCase, TestCase
 
-from base.context_processors import horilla_version
+from base.context_processors import hr_version
 from core.__version__ import __version__
 
 
 class VersionContextProcessorTests(SimpleTestCase):
     def test_it_reports_the_real_version(self):
-        self.assertEqual(horilla_version(None), {"horilla_version": __version__})
+        self.assertEqual(hr_version(None), {"hr_version": __version__})
 
     def test_it_is_registered(self):
         from django.conf import settings
 
         self.assertIn(
-            "base.context_processors.horilla_version",
+            "base.context_processors.hr_version",
             settings.TEMPLATES[0]["OPTIONS"]["context_processors"],
         )
 

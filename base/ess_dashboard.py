@@ -14,7 +14,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils.translation import gettext as _
 
-from base.templatetags.horillafilters import is_check_in_enabled
+from base.templatetags.hrfilters import is_check_in_enabled
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 

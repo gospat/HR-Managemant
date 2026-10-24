@@ -273,7 +273,7 @@ def history_tracking(request, obj_id, **kwargs):
         }
         return render(
             request,
-            "horilla_audit/history_tracking.html",
+            "hr_audit/history_tracking.html",
             context,
         )
 

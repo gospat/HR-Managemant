@@ -62,7 +62,7 @@ def check_company_scoped_managers(app_configs, **kwargs):
     """Warn when a model has a company FK but no company-scoped manager."""
     from django.apps import apps
 
-    from base.horilla_company_manager import HrCompanyManager
+    from base.hr_company_manager import HrCompanyManager
 
     problems = []
     models = (

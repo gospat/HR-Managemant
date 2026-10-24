@@ -1,6 +1,6 @@
 {% load static i18n generic_template_filters %}
 
-{# ── Dynamic create modals (same as horilla_form.html) ── #}
+{# ── Dynamic create modals (same as hr_form.html) ── #}
 <div id="{{ view_id }}">
     {% for field_tuple in dynamic_create_fields %}
         <div class="oh-modal" id="dynamicModal{{ field_tuple.0 }}" role="dialog"
@@ -23,7 +23,7 @@
 
 </form>
 
-{# ── Dynamic field scripts (same as horilla_form.html) ── #}
+{# ── Dynamic field scripts (same as hr_form.html) ── #}
 {% for field_tuple in dynamic_create_fields %}
     <div>
         <script class="dynamic_{{ field_tuple.0 }}_scripts">

@@ -16,7 +16,7 @@ from django.utils.translation import gettext_lazy as _
 
 from base.backends import ConfiguredEmailBackend
 from base.context_processors import AllCompany, AllMyCompanies
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company, ShiftRequest, WorkTypeRequest
 from employee.models import (
     DisciplinaryAction,
@@ -24,7 +24,7 @@ from employee.models import (
     EmployeeBankDetails,
     EmployeeWorkInformation,
 )
-from core.horilla_middlewares import _thread_locals, set_selected_company
+from core.hr_middlewares import _thread_locals, set_selected_company
 from core.methods import get_horilla_model_class
 from hr_documents.models import DocumentRequest
 

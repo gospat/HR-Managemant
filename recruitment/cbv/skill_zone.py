@@ -110,7 +110,7 @@ class SkillZoneProfileListView(HrListView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # Fixed (not auto-random) so pagination/sort/search requests - which
-        # all hx-target="#{{view_id}}" from generic/horilla_list_table.html -
+        # all hx-target="#{{view_id}}" from generic/hr_list_table.html -
         # can be recognized in get_template_names() below and answered with
         # just that fragment. Without this, every such request re-renders the
         # full tab (header + Add button included) and htmx's outerHTML swap
@@ -120,7 +120,7 @@ class SkillZoneProfileListView(HrListView):
 
     def get_template_names(self):
         if self.request.headers.get("HX-Target") == self.view_id:
-            return ["generic/horilla_list_table.html"]
+            return ["generic/hr_list_table.html"]
         return [self.template_name]
 
     def get_queryset(self):

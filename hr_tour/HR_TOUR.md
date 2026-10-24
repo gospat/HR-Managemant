@@ -270,13 +270,13 @@ Banner classes (`hcl-banner`, `hcl-progress-*`, `hcl-circle-*`, `hcl-action`, â€
 ## Quick reference â€” important paths
 
 ```
-horilla_tour/
+hr_tour/
   models.py              Tour, TourStep, TourProgress
   views.py               API + Settings CRUD
   urls.py                tour-active, tour-progress, settings routes
   context_processors.py  launcher flag
   sidebar.py             Settings menu
-  templates/horilla_tour/
+  templates/hr_tour/
 
 static/build/js/tourController.js
 

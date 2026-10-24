@@ -9,7 +9,7 @@ from django.forms import ValidationError
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from employee.models import Employee
 from core.models import HrModel, upload_path
 from hr_views.cbv_methods import render_template

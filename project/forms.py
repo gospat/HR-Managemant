@@ -13,7 +13,7 @@ from base.auth_backends import (
 from base.forms import ModelForm
 from base.models import Company
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from project.methods import employees_for_project
 
 from .models import *

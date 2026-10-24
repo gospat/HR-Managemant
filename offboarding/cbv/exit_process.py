@@ -422,7 +422,7 @@ class OffboardingPipelineNav(HrNavView):
     search_url = reverse_lazy("get-offboarding-tab")
     filter_body_template = "cbv/exit_process/pipeline_filter.html"
     apply_first_filter = False
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. PipelineEmployeeFilter/PipelineFilter/
     # PipelineStageFilter each carry their own ajax_fields for the FK
@@ -463,7 +463,7 @@ class OffboardingPipelineNav(HrNavView):
 
         context = super().get_context_data(**kwargs)
         # Bound to self.request.GET: this form's own hx-trigger="load"
-        # auto-submits it on every load (see horilla_nav.html), serializing
+        # auto-submits it on every load (see hr_nav.html), serializing
         # its current field values as the query string. Left unbound, every
         # field (including "Stage > Status") always renders blank, so that
         # auto-submit silently wipes out any filter (e.g. ?type=archived)
@@ -718,7 +718,7 @@ class OffboardingPipelineTabNav(HrNavView):
     filter_form_context_name = "form"
     filter_body_template = "cbv/exit_process/pipeline_tab_filter.html"
     filter_instance = PipelineEmployeeFilter()
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as the page-level
     # OffboardingPipelineNav/pipeline_filter.html. PipelineEmployeeFilter
     # already carries ajax_fields for the FK pickers this panel renders.

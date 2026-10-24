@@ -14,11 +14,11 @@ from django.utils.timesince import timesince
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company
 from employee.models import Employee
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
 from core.models import HrModel, upload_path
 from hr_audit.models import HorillaAuditInfo, HrAuditLog
@@ -685,7 +685,7 @@ class OffboardingNote(HrModel):
         ordering = ["-created_at"]
 
     def save(self, *args, **kwargs):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         if request:
             updated_by = request.user.employee_get
             self.note_by = updated_by

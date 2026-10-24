@@ -1,5 +1,5 @@
 """
-horilla_middlewares.py
+hr_middlewares.py
 
 This module is used to register this project's middlewares without affecting core/settings.py
 """

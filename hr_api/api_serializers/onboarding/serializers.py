@@ -1,5 +1,5 @@
 """
-horilla_api/api_serializers/onboarding/serializers.py
+hr_api/api_serializers/onboarding/serializers.py
 """
 
 from rest_framework import serializers

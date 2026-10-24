@@ -3665,7 +3665,7 @@ def employee_history_sidebar(request, pk):
     with the #historySidebar's own header chrome (close chevron + title) --
     for opening it directly from the employee list's History column, the
     same way HrModel-based lists open their auto-added History column
-    (see generic/history_col.html / horilla_history_view.html).
+    (see generic/history_col.html / hr_history_view.html).
     """
     employee_obj = Employee.objects.filter(id=pk).first()
     if not employee_obj:

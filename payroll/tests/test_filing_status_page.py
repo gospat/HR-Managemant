@@ -468,7 +468,7 @@ class PageTests(Fixture):
         import pathlib
 
         shadow = pathlib.Path(
-            "horilla_theme/templates/payroll/tax/filing_status_view.html"
+            "hr_theme/templates/payroll/tax/filing_status_view.html"
         )
         self.assertFalse(shadow.exists(), "the theme shadow is back")
 

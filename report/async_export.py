@@ -50,7 +50,7 @@ def queue_export_email(
         try:
             import report.metrics  # noqa: F401
             from base.backends import ConfiguredEmailBackend
-            from core.horilla_middlewares import set_selected_company
+            from core.hr_middlewares import set_selected_company
             from report.engine import filters_from_dict
             from report.export import export_csv, export_pdf, export_xlsx
             from report.registry import get_report, run_report

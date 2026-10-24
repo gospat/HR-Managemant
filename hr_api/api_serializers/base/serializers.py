@@ -21,7 +21,7 @@ from base.models import (
     WorkType,
     WorkTypeRequest,
 )
-from core import horilla_middlewares
+from core import hr_middlewares
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -339,7 +339,7 @@ class WorkTypeRequestSerializer(serializers.ModelSerializer):
         read_only_fields = ("approved", "canceled", "work_type_changed")
 
     def validate(self, attrs):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         # Check if the user is not a superuser
         requested_date = attrs.get("requested_date", None)
 

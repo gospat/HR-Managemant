@@ -51,7 +51,7 @@ class HistoryForm(forms.Form):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_audit/horilla_audit_log.html", context)
+        table_html = render_to_string("hr_audit/hr_audit_log.html", context)
         return table_html
 
 

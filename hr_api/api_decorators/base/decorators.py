@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from base.models import MultipleApprovalManagers
 from employee.models import Employee, EmployeeWorkInformation
 from core.decorators import check_manager
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_views.cbv_methods import decorator_with_arguments
 
 

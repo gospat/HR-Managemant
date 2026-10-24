@@ -61,7 +61,7 @@ class LetterFilter(HrFilterSet):
     # (see _build_custom_filter_fields below), but that mechanism submits
     # gte/lte as two rows sharing the same custom_field/custom_lookup/
     # custom_value <select> names -- fine for the builder's own UI, but the
-    # generic filter-tag chip bar (horilla_views/templates/generic/
+    # generic filter-tag chip bar (hr_views/templates/generic/
     # filter_tags.html) has no way to tell those rows apart and renders
     # garbled tags ("Custom field: Created at" / "Custom lookup: GteLte").
     # A uniquely-named field per direction (same "_from"/"_till" convention

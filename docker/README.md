@@ -426,14 +426,14 @@ Horilla supports AWS S3 and Google Cloud Storage. Add to your environment:
 AWS_ACCESS_KEY_ID=your-key
 AWS_SECRET_ACCESS_KEY=your-secret
 AWS_STORAGE_BUCKET_NAME=your-bucket
-DEFAULT_FILE_STORAGE=core.horilla_backends.PrivateMediaStorage
+DEFAULT_FILE_STORAGE=core.hr_backends.PrivateMediaStorage
 ```
 
 **Google Cloud Storage:**
 ```
 GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-credentials.json
 GS_BUCKET_NAME=your-bucket
-DEFAULT_FILE_STORAGE=core.horilla_backends_gcp.PrivateMediaStorage
+DEFAULT_FILE_STORAGE=core.hr_backends_gcp.PrivateMediaStorage
 ```
 
 ---

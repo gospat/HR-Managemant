@@ -17,7 +17,7 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 
 from accessibility.models import DefaultAccessibility
-from core.horilla_middlewares import set_selected_company
+from core.hr_middlewares import set_selected_company
 from core.testkit import make_company, make_employee, make_user
 
 LIST_URL = "/api/v1/employee/list/employees/"

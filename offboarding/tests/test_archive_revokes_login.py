@@ -16,7 +16,7 @@ These drive the real view, not a reimplementation of it, so that reaching for
 from django.test import TestCase
 from django.urls import reverse
 
-from core.horilla_middlewares import set_selected_company
+from core.hr_middlewares import set_selected_company
 from core.testkit import make_company, make_employee, make_user
 from offboarding.models import Offboarding, OffboardingEmployee, OffboardingStage
 

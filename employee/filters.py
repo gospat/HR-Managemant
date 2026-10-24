@@ -40,7 +40,7 @@ from core.filters import (
     filter_by_name,
     filter_name_or_badge_terms,
 )
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_documents.models import Document, DocumentRequest
 from hr_views.templatetags.generic_template_filters import getattribute
 from hr_widgets.generic_ajax import register_ajax_field

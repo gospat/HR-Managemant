@@ -138,6 +138,6 @@ def edit_audit_model_fields(request, pk):
 
     return render(
         request,
-        "horilla_audit/audit_model_fields_form.html",
+        "hr_audit/audit_model_fields_form.html",
         {"form": form, "config": config},
     )

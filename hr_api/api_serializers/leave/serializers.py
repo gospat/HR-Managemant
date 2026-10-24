@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from employee.models import Employee
-from core import horilla_middlewares
+from core import hr_middlewares
 from leave.methods import calculate_requested_days
 from leave.models import *
 
@@ -68,7 +68,7 @@ def leave_Validations(self, data):
         )
 
     # Past-date restriction -- mirrors LeaveRequest.clean() on the web
-    request = getattr(horilla_middlewares._thread_locals, "request", None)
+    request = getattr(hr_middlewares._thread_locals, "request", None)
     if request and not request.user.is_superuser:
         emp_company = getattr(
             getattr(employee, "employee_work_info", None), "company_id", None

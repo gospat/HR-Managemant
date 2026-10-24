@@ -1,10 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import Company
 from employee.models import Employee
-from core import horilla_middlewares
+from core import hr_middlewares
 from core.models import HrModel
 from hr_auth.models import HorillaUser
 
@@ -52,7 +52,7 @@ class ReportTemplate(HrModel):
         return f"{self.name} ({self.report_slug})"
 
     def save(self, *args, **kwargs):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         selected_company = request.session.get("selected_company") if request else None
         if (
             not self.id
@@ -190,7 +190,7 @@ class ReportSubscription(HrModel):
         return reverse("report-subscription-view", args=[self.pk])
 
     def save(self, *args, **kwargs):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         selected_company = request.session.get("selected_company") if request else None
         if (
             not self.id
@@ -308,7 +308,7 @@ class ReportFilterPreset(HrModel):
         return f"{self.name} ({self.report_slug})"
 
     def save(self, *args, **kwargs):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         selected_company = request.session.get("selected_company") if request else None
         if (
             not self.id

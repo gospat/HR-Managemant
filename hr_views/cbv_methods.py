@@ -48,7 +48,7 @@ from openpyxl.utils import get_column_letter
 
 from core.config import logger
 from core.export_safety import safe_cell
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.methods import handle_no_permission
 from hr_views.templatetags.generic_template_filters import getattribute
 

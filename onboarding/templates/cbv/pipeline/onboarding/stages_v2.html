@@ -1,5 +1,5 @@
 {% load i18n recruitmentfilters generic_template_filters %}
-{# Mirrors horilla_theme/templates/cbv/pipeline/stages.html (the template  #}
+{# Mirrors hr_theme/templates/cbv/pipeline/stages.html (the template  #}
 {# actually rendered by /recruitment/cbv-pipeline/): shared .oh-tabs__movable #}
 {# card framing (border, tinted background) and the header dropdown moved   #}
 {# out in favour of the per-stage "Actions" button inside this stage's own   #}
@@ -72,7 +72,7 @@
       var VIEW_ID = "{{view_id}}";
 
       // ── Job tab's own badge: total across every stage below ─────────────
-      // The tab bar (horilla_tabs.html) is rendered once, so its badge is
+      // The tab bar (hr_tabs.html) is rendered once, so its badge is
       // patched here, found via the tab button whose data-target points at
       // this content div's id. It is the sum of the stage counts, refreshed
       // whenever a stage count changes (add / move / delete).

@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from base.forms import Form, ModelForm
 from base.methods import reload_queryset
 from employee.models import Employee
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_widgets.forms import default_select_option_template
 
 from .models import BiometricDevices, BiometricEmployees

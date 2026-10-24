@@ -76,12 +76,12 @@ from base.models import (
 from base.widgets import CustomModelChoiceWidget
 from employee.filters import EmployeeFilter
 from employee.models import Employee, EmployeeTag
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
 from hr_audit.models import AuditTag
 from hr_auth.models import HorillaUser
-from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 # your form here
@@ -195,7 +195,7 @@ class ModelForm(forms.ModelForm):
 
         reload_queryset(self.fields)
 
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
 
         today = date.today()
         now = datetime.now()
@@ -479,7 +479,7 @@ class AssignUserGroup(Form):
             {"data-placeholder": _("Search employees...")}
         )
         from base.auth_backends import company_scoped_active, get_assigned_company_ids
-        from core.horilla_middlewares import _thread_locals
+        from core.hr_middlewares import _thread_locals
 
         self._grantable_company_ids = None
         if not company_scoped_active():
@@ -1643,7 +1643,7 @@ class EmployeeShiftScheduleUpdateForm(ModelForm):
         """
 
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
     def clean(self):
@@ -1731,7 +1731,7 @@ class EmployeeShiftScheduleForm(ModelForm):
         """
 
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
     def clean(self):
@@ -2276,7 +2276,7 @@ class ShiftRequestForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
     def clean(self):
@@ -2373,7 +2373,7 @@ class ShiftAllocationForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
     def save(self, commit: bool = ...):
@@ -2425,7 +2425,7 @@ class WorkTypeRequestForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
     def save(self, commit: bool = ...):
@@ -2736,7 +2736,7 @@ class TagsForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
 
@@ -2820,7 +2820,7 @@ class DynamicMailConfForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
 
@@ -3689,7 +3689,7 @@ class CompanyLeaveForm(ModelForm):
         choices = [("", "All")] + list(self.fields["based_on_week"].choices[1:])
         self.fields["based_on_week"].choices = choices
         self.fields["based_on_week"].widget.option_template_name = (
-            "horilla_widgets/select_option.html"
+            "hr_widgets/select_option.html"
         )
 
 

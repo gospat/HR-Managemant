@@ -58,7 +58,7 @@ class ProjectsNavView(HrNavView):
     group_by_fields = ["status", "is_active"]
     template_name = "cbv/projects/project_nav.html"
     filter_body_template = "cbv/projects/filter.html"
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. ProjectFilter.ajax_fields carries the
     # AJAX-loaded managers combobox this needs.

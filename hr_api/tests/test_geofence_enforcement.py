@@ -14,7 +14,7 @@ shifts, schedules and work-info fixtures that prove nothing extra here.
 
 Note that ``geofencing`` *is* installed, though not from settings -- it is
 appended to INSTALLED_APPS as an import side effect in
-``horilla_api/__init__.py``. The enforcement path this covers is live.
+``hr_api/__init__.py``. The enforcement path this covers is live.
 """
 
 from types import SimpleNamespace

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from core.http import HrRedirect
 from project.methods import (
     any_project_manager,

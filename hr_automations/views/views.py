@@ -1,5 +1,5 @@
 """
-horilla_automation/views/views.py
+hr_automations/views/views.py
 """
 
 from django import forms
@@ -86,7 +86,7 @@ def mail_automations_settings_view(request):
     """
     return render(
         request,
-        "horilla_automations/mail_automations_settings.html",
+        "hr_automations/mail_automations_settings.html",
         {"refresh_pending": is_refresh_pending()},
     )
 

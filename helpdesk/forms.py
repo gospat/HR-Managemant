@@ -43,7 +43,7 @@ from helpdesk.models import (
     Ticket,
     TicketType,
 )
-from core import horilla_middlewares
+from core import hr_middlewares
 
 
 class TicketTypeForm(ModelForm):
@@ -61,7 +61,7 @@ class TicketTypeForm(ModelForm):
         prefix = cleaned_data.get("prefix")
         instance = self.instance
 
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         from base.auth_backends import resolve_company_id_for_new_record
 
         company_id = resolve_company_id_for_new_record(request)
@@ -93,7 +93,7 @@ class TicketTypeForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
 
@@ -162,7 +162,7 @@ class TicketForm(ModelForm):
         Render the form fields as HTML table rows with Bootstrap styling.
         """
         context = {"form": self}
-        table_html = render_to_string("horilla_form.html", context)
+        table_html = render_to_string("hr_form.html", context)
         return table_html
 
     def __init__(self, *args, **kwargs):
@@ -173,7 +173,7 @@ class TicketForm(ModelForm):
             self.fields["attachment"] = MultipleFileField(
                 label="Attachements", required=False
             )
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         if self.instance and self.instance.pk:
             is_manager = self.instance.can_manage_priority()
         else:
@@ -218,7 +218,7 @@ class TicketForm(ModelForm):
         cleaned_data = super().clean(*args, **kwargs)
         deadline = cleaned_data.get("deadline")
         today = datetime.today().date()
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         user = getattr(request, "user", None)
 
         if deadline and deadline < today:
@@ -260,7 +260,7 @@ class TicketTagForm(ModelForm):
         If an instance is provided, sets the initial value for the form's .
         """
         super().__init__(*args, **kwargs)
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         if is_reportingmanager(request) or request.user.has_perm("base.add_tags"):
             self.fields["tags"].choices = list(self.fields["tags"].choices)
             self.fields["tags"].choices.append(("create_new_tag", "Create new tag"))

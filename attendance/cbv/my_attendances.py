@@ -204,14 +204,14 @@ class MyAttendancestNav(HrNavView):
     search_swap_target = "#listContainer"
     search_input_attrs = """ hidden """
     # Opts into the same modern slide-over filter panel built for
-    # Employee/Attendance (horilla_nav.html's .oh-filter-modern styles).
+    # Employee/Attendance (hr_nav.html's .oh-filter-modern styles).
     modern_filter = True
 
     # Mirrors MyAttendanceList.nested_group_by_fields above -- List and Nav
     # are separate classes/templates (see employee/cbv/employees.py's
     # EmployeesList/EmployeeNav for the same split), so the "Group By"
     # section rendered inside this page's own filter panel
-    # (horilla_nav.html) needs this here too, not just the List view.
+    # (hr_nav.html) needs this here too, not just the List view.
     nested_group_by_fields = [
         ("attendance_date", _("Attendance Date")),
         ("attendance_day", _("Attendance Day")),

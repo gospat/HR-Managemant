@@ -1,5 +1,5 @@
 """
-horilla_mail/filters.py
+hr_meet/filters.py
 """
 
 from django import forms

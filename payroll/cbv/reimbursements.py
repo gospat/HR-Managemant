@@ -332,7 +332,7 @@ class _ReimbursementTabNavBase(HrNavView):
     filter_instance = ReimbursementFilter()
     filter_form_context_name = "form"
     filter_body_template = "cbv/reimbursements/filter.html"
-    # Modern slide-over filter panel (generic/horilla_nav.html's own
+    # Modern slide-over filter panel (generic/hr_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as every other
     # panel this session. ReimbursementFilter.ajax_fields carries the
     # AJAX-loaded comboboxes this needs.

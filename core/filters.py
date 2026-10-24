@@ -16,7 +16,7 @@ from django.utils.translation import gettext_lazy as _
 from django_filters.filterset import FILTER_FOR_DBFIELD_DEFAULTS
 
 from base.methods import reload_queryset
-from core.horilla_middlewares import _thread_locals
+from core.hr_middlewares import _thread_locals
 from hr_views.templatetags.generic_template_filters import getattribute
 from hr_widgets.generic_ajax import register_ajax_field
 from hr_widgets.widgets.select_widgets import HrAjaxSelectWidget
@@ -425,7 +425,7 @@ class HrFilterSet(FilterSet):
         Field/lookup/value triples currently applied via the Advanced
         section's custom-filter builder, for the client to restore its
         row UI from (see custom_filter_rows in the nav context and
-        initCustomFilterBuilder in horilla_nav.html). Same parsing/
+        initCustomFilterBuilder in hr_nav.html). Same parsing/
         validation as _apply_custom_filters, just returning the rows
         instead of filtering a queryset with them.
         """

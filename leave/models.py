@@ -17,7 +17,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HrCompanyManager
+from base.hr_company_manager import HrCompanyManager
 from base.models import (
     Company,
     CompanyLeaves,
@@ -28,8 +28,8 @@ from base.models import (
     clear_messages,
 )
 from employee.models import Employee, EmployeeWorkInformation
-from core import horilla_middlewares
-from core.horilla_middlewares import _thread_locals
+from core import hr_middlewares
+from core.hr_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
 from core.models import HrModel, upload_path
 from hr_audit.methods import get_diff
@@ -1788,7 +1788,7 @@ class LeaveRequest(HrModel):
         attachment = getattr(self, "attachment", None)
         requ_days = set(self.requested_dates())
         restricted_leaves = RestrictLeave.objects.all()
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
 
         # Check if leave type is assigned to employee
         if not AvailableLeave.objects.filter(
@@ -2030,7 +2030,7 @@ class LeaveRequest(HrModel):
         return result
 
     def is_approved(self):
-        request = getattr(horilla_middlewares._thread_locals, "request", None)
+        request = getattr(hr_middlewares._thread_locals, "request", None)
         if request:
             if not hasattr(request.user, "_horilla_employee_cache"):
                 request.user._horilla_employee_cache = Employee.objects.filter(
@@ -2058,7 +2058,7 @@ class LeaveRequest(HrModel):
             # Update the leave clashes count for all relevant leave requests
             self.update_leave_clashes_count()
         else:
-            request = getattr(horilla_middlewares._thread_locals, "request", None)
+            request = getattr(hr_middlewares._thread_locals, "request", None)
             if request:
                 clear_messages(request)
                 messages.warning(

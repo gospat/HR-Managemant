@@ -6,10 +6,32 @@ import resource
 import sys
 from xml.sax.saxutils import escape
 
+# Resolved at render time instead of pinned to one distribution's path: the
+# container image ships Debian's DejaVu, whereas macOS workstations only have
+# Arial Unicode. Ordering keeps the container's font in front so production
+# output is unchanged. Only broad-coverage faces are listed - a narrower font
+# would silently drop glyphs (the naira sign, for instance) rather than fail.
+FONT_CANDIDATES = (
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",  # Debian / Ubuntu
+    "/usr/share/fonts/dejavu/DejaVuSans.ttf",  # Fedora / openSUSE
+    "/usr/share/fonts/TTF/DejaVuSans.ttf",  # Arch
+    "/usr/local/share/fonts/DejaVuSans.ttf",  # manual install
+    "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",  # macOS
+    "/Library/Fonts/Arial Unicode.ttf",  # macOS (shared)
+)
+
 
 def main():
     resource.setrlimit(resource.RLIMIT_CPU, (10, 10))
-    resource.setrlimit(resource.RLIMIT_AS, (512 * 1024 * 1024,) * 2)
+    try:
+        resource.setrlimit(resource.RLIMIT_AS, (512 * 1024 * 1024,) * 2)
+    except (ValueError, OSError):
+        # Darwin refuses to lower an address-space limit below the space the
+        # interpreter has already mapped, so this cap is simply unenforceable
+        # on macOS. Rendering stays bounded regardless: the CPU budget above,
+        # the 2 MiB input cap, the 100-page cap and the 10 MiB output cap are
+        # all still applied, and the parent kills the worker at 20 seconds.
+        pass
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     resource.setrlimit(resource.RLIMIT_NOFILE, (64, 64))
     from bs4 import BeautifulSoup, NavigableString, Tag
@@ -45,8 +67,8 @@ def main():
         ]
     ):
         node.decompose()
-    font = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
-    if not font.is_file():
+    font = next((Path(p) for p in FONT_CANDIDATES if Path(p).is_file()), None)
+    if font is None:
         raise ValueError("Required Unicode export font is not installed")
     pdfmetrics.registerFont(TTFont("DocumentSans", str(font)))
     styles = getSampleStyleSheet()

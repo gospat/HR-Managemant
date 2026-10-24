@@ -35,18 +35,18 @@ class AssignableEmployeeTests(TestCase):
         return employee
 
     def test_an_employee_with_a_free_active_contract_is_offered(self):
-        free = self._employee("free@test.horilla")
+        free = self._employee("free@test.bells")
         self.assertIn(free, assignable_employees(self.structure))
         self.assertIsNone(unassignable_reason(free, self.structure))
 
     def test_an_employee_with_no_active_contract_is_not_offered(self):
         """There is nothing to write the structure onto."""
-        none = self._employee("none@test.horilla", active=False)
+        none = self._employee("none@test.bells", active=False)
         self.assertNotIn(none, assignable_employees(self.structure))
         self.assertEqual(unassignable_reason(none, self.structure), "no_contract")
 
     def test_an_employee_on_another_structure_is_not_offered(self):
-        taken = self._employee("taken@test.horilla", salary_structure_id=self.other)
+        taken = self._employee("taken@test.bells", salary_structure_id=self.other)
         self.assertNotIn(taken, assignable_employees(self.structure))
         self.assertEqual(unassignable_reason(taken, self.structure), self.other)
 
@@ -55,12 +55,12 @@ class AssignableEmployeeTests(TestCase):
         Otherwise editing a structure would offer to remove everyone on it and
         never offer to keep them.
         """
-        mine = self._employee("mine@test.horilla", salary_structure_id=self.structure)
+        mine = self._employee("mine@test.bells", salary_structure_id=self.structure)
         self.assertIn(mine, assignable_employees(self.structure))
         self.assertIsNone(unassignable_reason(mine, self.structure))
 
     def test_a_draft_contract_does_not_make_someone_assignable(self):
-        employee = make_employee(company=self.company, email="draft@test.horilla")
+        employee = make_employee(company=self.company, email="draft@test.bells")
         Contract.objects.filter(employee_id=employee).delete()
         make_active_contract(employee, contract_status="draft")
         self.assertNotIn(employee, assignable_employees(self.structure))
@@ -70,7 +70,7 @@ class AssignableEmployeeTests(TestCase):
         Both conditions have to hold on the SAME contract. An old ended
         contract naming another structure says nothing about today.
         """
-        employee = make_employee(company=self.company, email="both@test.horilla")
+        employee = make_employee(company=self.company, email="both@test.bells")
         Contract.objects.filter(employee_id=employee).delete()
         make_active_contract(
             employee,
@@ -88,7 +88,7 @@ class AssignableEmployeeTests(TestCase):
         .save() refuses a second ACTIVE contract per employee, so the reachable
         case is an active one alongside an ended one.
         """
-        employee = make_employee(company=self.company, email="dupe@test.horilla")
+        employee = make_employee(company=self.company, email="dupe@test.bells")
         Contract.objects.filter(employee_id=employee).delete()
         make_active_contract(
             employee, contract_name="Old", contract_status="terminated"
@@ -125,9 +125,9 @@ class StructureFormEmployeeTests(TestCase):
         return data
 
     def test_the_field_offers_only_assignable_employees(self):
-        free = self._employee("formfree@test.horilla")
-        taken = self._employee("formtaken@test.horilla", salary_structure_id=self.other)
-        none = self._employee("formnone@test.horilla", active=False)
+        free = self._employee("formfree@test.bells")
+        taken = self._employee("formtaken@test.bells", salary_structure_id=self.other)
+        none = self._employee("formnone@test.bells", active=False)
 
         offered = (
             SalaryStructureForm(instance=self.structure).fields["employees"].queryset
@@ -142,7 +142,7 @@ class StructureFormEmployeeTests(TestCase):
         that knows nothing of this rule, so the offered list is not the last
         word on what can be submitted.
         """
-        taken = self._employee("posttaken@test.horilla", salary_structure_id=self.other)
+        taken = self._employee("posttaken@test.bells", salary_structure_id=self.other)
 
         form = SalaryStructureForm(data=self._post(taken), instance=self.structure)
         self.assertFalse(form.is_valid())
@@ -151,14 +151,14 @@ class StructureFormEmployeeTests(TestCase):
         self.assertIn(str(self.other), message)
 
     def test_submitting_someone_with_no_active_contract_is_refused(self):
-        none = self._employee("postnone@test.horilla", active=False)
+        none = self._employee("postnone@test.bells", active=False)
 
         form = SalaryStructureForm(data=self._post(none), instance=self.structure)
         self.assertFalse(form.is_valid())
         self.assertIn("no active contract", " ".join(form.errors["employees"]))
 
     def test_an_assignable_employee_passes(self):
-        free = self._employee("postfree@test.horilla")
+        free = self._employee("postfree@test.bells")
 
         form = SalaryStructureForm(data=self._post(free), instance=self.structure)
         self.assertTrue(form.is_valid(), form.errors)
@@ -179,7 +179,7 @@ class MissingBasicWarningTests(TestCase):
 
         user = make_user("warnadmin", is_superuser=True)
         self.company = make_company("Warn Co")
-        make_employee(company=self.company, email="warnadmin@test.horilla", user=user)
+        make_employee(company=self.company, email="warnadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
         self.structure = SalaryStructure.objects.create(title="Warned")
@@ -194,12 +194,12 @@ class MissingBasicWarningTests(TestCase):
         return {str(row["employee"]): row for row in self.structure.employee_rows}
 
     def test_a_zero_wage_with_nothing_else_is_flagged(self):
-        self._employee("zero@test.horilla", wage=0)
+        self._employee("zero@test.bells", wage=0)
         self.assertEqual(self.structure.employees_missing_basic, 1)
         self.assertTrue(list(self._rows().values())[0]["no_basic"])
 
     def test_a_paid_wage_is_not_flagged(self):
-        self._employee("paid@test.horilla", wage=30000)
+        self._employee("paid@test.bells", wage=30000)
         self.assertEqual(self.structure.employees_missing_basic, 0)
         self.assertFalse(list(self._rows().values())[0]["no_basic"])
 
@@ -209,7 +209,7 @@ class MissingBasicWarningTests(TestCase):
         """
         from payroll.models.models import Allowance
 
-        self._employee("covered@test.horilla", wage=0)
+        self._employee("covered@test.bells", wage=0)
         self.structure.allowances.add(
             Allowance.objects.create(
                 title="Basic Pay",
@@ -227,9 +227,9 @@ class MissingBasicWarningTests(TestCase):
         The summary bar counts without resolving the rows, so the two could
         drift apart and tell the user different numbers.
         """
-        self._employee("a@test.horilla", wage=0)
-        self._employee("b@test.horilla", wage=30000)
-        self._employee("c@test.horilla", wage=0)
+        self._employee("a@test.bells", wage=0)
+        self._employee("b@test.bells", wage=30000)
+        self._employee("c@test.bells", wage=0)
 
         flagged = sum(1 for row in self.structure.employee_rows if row["no_basic"])
         self.assertEqual(self.structure.employees_missing_basic, flagged)
@@ -242,7 +242,7 @@ class MissingBasicWarningTests(TestCase):
         """
         self.structure.structure_mode = "ctc_down"
         self.structure.save()
-        self._employee("pot@test.horilla", wage=30000)
+        self._employee("pot@test.bells", wage=30000)
 
         self.assertEqual(self.structure.employees_missing_basic, 1)
         self.assertTrue(list(self._rows().values())[0]["no_basic"])
@@ -250,7 +250,7 @@ class MissingBasicWarningTests(TestCase):
     def test_the_warning_reaches_the_page(self):
         from django.urls import reverse
 
-        self._employee("shown@test.horilla", wage=0)
+        self._employee("shown@test.bells", wage=0)
 
         modal = self.client.get(
             reverse("salary-structure-detail-view", kwargs={"pk": self.structure.pk}),
@@ -278,7 +278,7 @@ class EmployeesTabLoadsOnDemandTests(TestCase):
         user = make_user("lazyadmin", is_superuser=True)
         self.company = make_company("Lazy Co")
         self.employee = make_employee(
-            company=self.company, email="lazyadmin@test.horilla", user=user
+            company=self.company, email="lazyadmin@test.bells", user=user
         )
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
@@ -357,7 +357,7 @@ class HourlyContractBasicTests(TestCase):
         return self.structure.employee_rows[0]
 
     def test_an_hourly_rate_is_a_basic_pay_source(self):
-        self._hourly("rate@test.horilla", wage=0, hourly_wage=10.0)
+        self._hourly("rate@test.bells", wage=0, hourly_wage=10.0)
 
         self.assertEqual(self.structure.employees_missing_basic, 0)
         row = self._row()
@@ -369,18 +369,18 @@ class HourlyContractBasicTests(TestCase):
         The period's basic pay is the hours worked times the rate, so a figure
         here would be one payroll never produces.
         """
-        self._hourly("figure@test.horilla", wage=0, hourly_wage=10.0)
+        self._hourly("figure@test.bells", wage=0, hourly_wage=10.0)
         self.assertIsNone(self._row()["basic_amount"])
 
     def test_an_hourly_contract_with_no_rate_is_still_flagged(self):
-        self._hourly("norate@test.horilla", wage=0, hourly_wage=0)
+        self._hourly("norate@test.bells", wage=0, hourly_wage=0)
 
         self.assertEqual(self.structure.employees_missing_basic, 1)
         self.assertTrue(self._row()["no_basic"])
 
     def test_the_count_matches_the_flagged_rows_for_hourly_too(self):
-        self._hourly("ok@test.horilla", wage=0, hourly_wage=10.0)
-        employee = make_employee(company=self.company, email="bad@test.horilla")
+        self._hourly("ok@test.bells", wage=0, hourly_wage=10.0)
+        employee = make_employee(company=self.company, email="bad@test.bells")
         Contract.objects.filter(employee_id=employee).delete()
         make_active_contract(
             employee,
@@ -404,9 +404,9 @@ class HourlyContractBasicTests(TestCase):
         from core.testkit import make_user
 
         user = make_user("hourlyadmin", is_superuser=True)
-        make_employee(company=self.company, email="hourlyadmin@test.horilla", user=user)
+        make_employee(company=self.company, email="hourlyadmin@test.bells", user=user)
         self.client.force_login(user)
-        self._hourly("hint@test.horilla", wage=0, hourly_wage=10.0)
+        self._hourly("hint@test.bells", wage=0, hourly_wage=10.0)
 
         panel = self.client.get(
             reverse("salary-structure-employees", kwargs={"pk": self.structure.pk}),
@@ -428,11 +428,11 @@ class HourlyContractBasicTests(TestCase):
 
         user = make_user("monthlyadmin", is_superuser=True)
         make_employee(
-            company=self.company, email="monthlyadmin@test.horilla", user=user
+            company=self.company, email="monthlyadmin@test.bells", user=user
         )
         self.client.force_login(user)
 
-        employee = make_employee(company=self.company, email="monthly@test.horilla")
+        employee = make_employee(company=self.company, email="monthly@test.bells")
         Contract.objects.filter(employee_id=employee).delete()
         make_active_contract(employee, salary_structure_id=self.structure, wage=30000)
 
@@ -456,7 +456,7 @@ class HourlyContractBasicTests(TestCase):
         """
         from payroll.models.models import Allowance
 
-        self._hourly("wins@test.horilla", wage=0, hourly_wage=10.0)
+        self._hourly("wins@test.bells", wage=0, hourly_wage=10.0)
         self.structure.allowances.add(
             Allowance.objects.create(
                 title="Basic Pay",
@@ -485,14 +485,14 @@ class EmployeeSortingTests(TestCase):
 
         user = make_user("sortadmin", is_superuser=True)
         self.company = make_company("Sort Co")
-        make_employee(company=self.company, email="sortadmin@test.horilla", user=user)
+        make_employee(company=self.company, email="sortadmin@test.bells", user=user)
         self.client.force_login(user)
         self.structure = SalaryStructure.objects.create(title="Sorted")
 
     def _employee(self, first_name, wage):
         employee = make_employee(
             company=self.company,
-            email=f"{first_name.lower()}@test.horilla",
+            email=f"{first_name.lower()}@test.bells",
             first_name=first_name,
         )
         Contract.objects.filter(employee_id=employee).delete()
@@ -587,11 +587,11 @@ class ContractLinkTests(TestCase):
 
         user = make_user("linkadmin", is_superuser=True)
         self.company = make_company("Link Co")
-        make_employee(company=self.company, email="linkadmin@test.horilla", user=user)
+        make_employee(company=self.company, email="linkadmin@test.bells", user=user)
         self.client.force_login(user)
 
         self.structure = SalaryStructure.objects.create(title="Linked")
-        self.employee = make_employee(company=self.company, email="linked@test.horilla")
+        self.employee = make_employee(company=self.company, email="linked@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, salary_structure_id=self.structure)
 
@@ -649,7 +649,7 @@ class ContractLinkTests(TestCase):
         from core.testkit import make_user
 
         plain = make_user("noedit")
-        make_employee(company=self.company, email="noedit@test.horilla", user=plain)
+        make_employee(company=self.company, email="noedit@test.bells", user=plain)
         self.client.force_login(plain)
 
         contract = Contract.objects.get(employee_id=self.employee)

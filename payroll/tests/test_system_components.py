@@ -137,7 +137,7 @@ class UndeletableTests(TestCase):
     def test_the_view_refuses_and_says_so(self):
         user = make_user("delsys", is_superuser=True)
         company = make_company("Del Co")
-        make_employee(company=company, email="delsys@test.horilla", user=user)
+        make_employee(company=company, email="delsys@test.bells", user=user)
         self.client.force_login(user)
 
         template = Allowance.objects.entire().get(system_key="reimbursement")
@@ -164,7 +164,7 @@ class NotPayableTests(TestCase):
 
     def setUp(self):
         self.company = make_company("Pay Co")
-        self.employee = make_employee(company=self.company, email="pay@test.horilla")
+        self.employee = make_employee(company=self.company, email="pay@test.bells")
 
     def test_no_template_is_eligible_for_anyone(self):
         from payroll.methods.component_engine import eligible_allowances
@@ -212,7 +212,7 @@ class GeneratorsReadTheTemplateTests(TestCase):
 
     def setUp(self):
         self.company = make_company("Gen Co")
-        self.employee = make_employee(company=self.company, email="gen@test.horilla")
+        self.employee = make_employee(company=self.company, email="gen@test.bells")
 
     def _loan(self, **kwargs):
         from datetime import date
@@ -347,7 +347,7 @@ class LossOfPayReachesTheEngineTests(TestCase):
         from payroll.models.models import Contract
 
         company = make_company("LOP Engine Co")
-        self.employee = make_employee(company=company, email="lopengine@test.horilla")
+        self.employee = make_employee(company=company, email="lopengine@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = None
 

@@ -17,9 +17,9 @@ class BulkValidateAttendanceTests(TestCase):
         company = make_company("Validate Co")
         cls.user = make_user("validate-admin", is_superuser=True)
         make_employee(
-            company=company, email="validate-admin@test.horilla", user=cls.user
+            company=company, email="validate-admin@test.bells", user=cls.user
         )
-        cls.staff = make_employee(company=company, email="validate-staff@test.horilla")
+        cls.staff = make_employee(company=company, email="validate-staff@test.bells")
 
     def _attendance(self, days_ago, **extra):
         date = datetime.date.today() - datetime.timedelta(days=days_ago)

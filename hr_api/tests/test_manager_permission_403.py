@@ -18,7 +18,7 @@ class ManagerPermission403Tests(TestCase):
         self.user = make_user("api_mgr403", password="secret123")
         make_employee(
             company=company,
-            email="api_mgr403@test.horilla",
+            email="api_mgr403@test.bells",
             user=self.user,
         )
 

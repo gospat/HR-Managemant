@@ -94,8 +94,8 @@ def readiness_check(request):
 
     if getattr(settings, "REDIS_URL", None):
         try:
-            cache.set("horilla_ready_probe", "1", timeout=5)
-            if cache.get("horilla_ready_probe") != "1":
+            cache.set("hr_ready_probe", "1", timeout=5)
+            if cache.get("hr_ready_probe") != "1":
                 raise RuntimeError("cache readback failed")
             checks["cache"] = "ok"
         except Exception as exc:
@@ -139,7 +139,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # django.contrib.auth.urls is here for the password_reset_* routes its forms
     # and mails reverse. Its /accounts/login/ renders registration/login.html,
-    # which Horilla does not ship, so that one URL 500s — send it to the real
+    # which Bells Tech does not ship, so that one URL 500s — send it to the real
     # login page instead. (The include was also listed twice.)
     path(
         "accounts/login/",

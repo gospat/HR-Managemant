@@ -52,14 +52,14 @@ class LeaveAllocationApprovalTests(TestCase):
         self.attacker_user = make_user("alloc_attacker", password="secret123")
         self.attacker = make_employee(
             company=company,
-            email="alloc_attacker@test.horilla",
+            email="alloc_attacker@test.bells",
             user=self.attacker_user,
             phone="3000001",
         )
         self.victim_user = make_user("alloc_victim", password="secret123")
         self.victim = make_employee(
             company=company,
-            email="alloc_victim@test.horilla",
+            email="alloc_victim@test.bells",
             user=self.victim_user,
             phone="3000002",
         )
@@ -67,7 +67,7 @@ class LeaveAllocationApprovalTests(TestCase):
         # themselves. This single row is what the old check accepted.
         self.subordinate = make_employee(
             company=company,
-            email="alloc_subordinate@test.horilla",
+            email="alloc_subordinate@test.bells",
             phone="3000003",
         )
         _set_reporting_manager(self.subordinate, self.attacker)

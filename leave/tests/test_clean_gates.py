@@ -12,7 +12,7 @@ class LeaveRequestCleanGateTests(TestCase):
         from leave.models import LeaveType
 
         company = make_company("Leave Clean Co")
-        self.employee = make_employee(company=company, email="clean@test.horilla")
+        self.employee = make_employee(company=company, email="clean@test.bells")
         self.leave_type = LeaveType.objects.create(
             name="Casual Clean Gate",
             total_days=10,
@@ -74,7 +74,7 @@ class LeaveAllocationBulkFormCleanTests(TestCase):
         from leave.models import LeaveType
 
         company = make_company("Bulk Alloc Co")
-        self.employee = make_employee(company=company, email="bulk-alloc@test.horilla")
+        self.employee = make_employee(company=company, email="bulk-alloc@test.bells")
         self.leave_type = LeaveType.objects.create(
             name="Casual Bulk Alloc", total_days=10
         )

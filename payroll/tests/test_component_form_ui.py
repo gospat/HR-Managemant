@@ -271,7 +271,7 @@ class ComponentFormRenderTests(TestCase):
     def setUp(self):
         user = make_user("componentadmin", is_superuser=True)
         company = make_company("Component Co")
-        make_employee(company=company, email="componentadmin@test.horilla", user=user)
+        make_employee(company=company, email="componentadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
@@ -456,7 +456,7 @@ class ComponentFormSaveTests(TestCase):
     def setUp(self):
         user = make_user("saveadmin", is_superuser=True)
         company = make_company("Save Co")
-        make_employee(company=company, email="saveadmin@test.horilla", user=user)
+        make_employee(company=company, email="saveadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
@@ -532,7 +532,7 @@ class UpdateCompensationHiddenTests(TestCase):
     def setUp(self):
         user = make_user("compadmin", is_superuser=True)
         company = make_company("Comp Co")
-        make_employee(company=company, email="compadmin@test.horilla", user=user)
+        make_employee(company=company, email="compadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 

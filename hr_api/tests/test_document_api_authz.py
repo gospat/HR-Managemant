@@ -41,14 +41,14 @@ class DocumentApiAuthorizationTests(TestCase):
         self.attacker_user = make_user("doc_attacker", password="secret123")
         self.attacker = make_employee(
             company=company,
-            email="doc_attacker@test.horilla",
+            email="doc_attacker@test.bells",
             user=self.attacker_user,
             phone="2000001",
         )
         self.victim_user = make_user("doc_victim", password="secret123")
         self.victim = make_employee(
             company=company,
-            email="doc_victim@test.horilla",
+            email="doc_victim@test.bells",
             user=self.victim_user,
             phone="2000002",
         )

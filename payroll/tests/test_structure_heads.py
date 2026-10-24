@@ -23,7 +23,7 @@ class ExampleHeadTests(TestCase):
     def setUp(self):
         user = make_user("headadmin", is_superuser=True)
         company = make_company("Head Co")
-        make_employee(company=company, email="headadmin@test.horilla", user=user)
+        make_employee(company=company, email="headadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
         self.structure = SalaryStructure.objects.create(title="Heads")
@@ -182,7 +182,7 @@ class TaxBaseTests(TestCase):
     def setUp(self):
         user = make_user("baseadmin", is_superuser=True)
         company = make_company("Base Co")
-        make_employee(company=company, email="baseadmin@test.horilla", user=user)
+        make_employee(company=company, email="baseadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
         self.structure = SalaryStructure.objects.create(title="Base")
@@ -277,7 +277,7 @@ class DetailModalStructureTests(TestCase):
         user = make_user("modaladmin", is_superuser=True)
         company = make_company("Modal Co")
         self.employee = make_employee(
-            company=company, email="modaladmin@test.horilla", user=user
+            company=company, email="modaladmin@test.bells", user=user
         )
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
@@ -475,7 +475,7 @@ class LossOfPayLineTests(TestCase):
     def setUp(self):
         user = make_user("lopadmin", is_superuser=True)
         company = make_company("LOP Co")
-        make_employee(company=company, email="lopadmin@test.horilla", user=user)
+        make_employee(company=company, email="lopadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
         self.structure = SalaryStructure.objects.create(title="LOP")

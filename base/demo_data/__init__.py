@@ -1,5 +1,5 @@
 """
-Enterprise demo-data seeder for Horilla HR.
+Enterprise demo-data seeder for Bells Tech HR.
 
 Keeps the people layer (users/employees/avatars) from fixtures and
 standardizes org taxonomy, module catalogs, media, and dynamic copy.

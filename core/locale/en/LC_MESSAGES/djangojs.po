@@ -166,7 +166,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-msgid "Horilla dashboard section"
+msgid "Bells Tech dashboard section"
 msgstr ""
 
 msgid "Mark Attendance"
@@ -208,7 +208,7 @@ msgstr ""
 msgid "Dashboard Tiles"
 msgstr ""
 
-msgid "Horilla Dashboard Tiles"
+msgid "Bells Tech Dashboard Tiles"
 msgstr ""
 
 msgid "Dashboard Actions"
@@ -238,7 +238,7 @@ msgstr ""
 msgid "App"
 msgstr ""
 
-msgid "Horilla Hr Apps. eg Dashboard"
+msgid "Bells Tech Hr Apps. eg Dashboard"
 msgstr ""
 
 msgid "Pipeline"

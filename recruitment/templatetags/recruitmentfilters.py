@@ -27,7 +27,7 @@ def is_stagemanager(user):
     This method is used to check the employee is stage or recruitment manager
     """
     try:
-        cached = getattr(user, "_horilla_is_stagemanager", None)
+        cached = getattr(user, "_hr_is_stagemanager", None)
         if cached is not None:
             return cached
         employee_obj = user.employee_get
@@ -35,7 +35,7 @@ def is_stagemanager(user):
             employee_obj.stage_set.filter(is_active=True).exists()
             or employee_obj.recruitment_set.exists()
         )
-        setattr(user, "_horilla_is_stagemanager", result)
+        setattr(user, "_hr_is_stagemanager", result)
         return result
     except Exception:
         return False
@@ -47,7 +47,7 @@ def is_any_manager(request):
     This method is used to check the employee is stage or recruitment manager
     """
     user = request.user
-    cached = getattr(user, "_horilla_is_any_manager", None)
+    cached = getattr(user, "_hr_is_any_manager", None)
     if cached is not None:
         return cached
     employee = user.employee_get
@@ -57,7 +57,7 @@ def is_any_manager(request):
         or employee.onboardingstage_set.exists()
         or employee.onboarding_task.exists()
     )
-    setattr(user, "_horilla_is_any_manager", result)
+    setattr(user, "_hr_is_any_manager", result)
     return result
 
 
@@ -67,12 +67,12 @@ def is_recruitmentmangers(user):
     This method is used to check the employee is recruitment manager
     """
     try:
-        cached = getattr(user, "_horilla_is_recruitmentmanager", None)
+        cached = getattr(user, "_hr_is_recruitmentmanager", None)
         if cached is not None:
             return cached
         employee_obj = user.employee_get
         result = employee_obj.recruitment_set.exists()
-        setattr(user, "_horilla_is_recruitmentmanager", result)
+        setattr(user, "_hr_is_recruitmentmanager", result)
         return result
     except Exception:
         return False

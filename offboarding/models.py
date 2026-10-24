@@ -19,7 +19,7 @@ from base.models import Company
 from employee.models import Employee
 from core import hr_middlewares
 from core.hr_middlewares import _thread_locals
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from core.models import HrModel, upload_path
 from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_views.cbv_methods import render_template
@@ -543,7 +543,7 @@ class ResignationLetter(HrModel):
             .first()
         )
         default_notice_end = (
-            get_horilla_model_class(
+            get_hr_model_class(
                 app_label="payroll", model="payrollgeneralsetting"
             ).objects.first()
             if apps.is_installed("payroll")

@@ -118,7 +118,7 @@ class SafeTaxCodeTests(TestCase):
 class PayslipValidationTests(TestCase):
     def setUp(self):
         company = make_company("Payroll Co")
-        self.employee = make_employee(company=company, email="pay@test.horilla")
+        self.employee = make_employee(company=company, email="pay@test.bells")
 
     def test_end_before_start_raises(self):
         today = date.today()

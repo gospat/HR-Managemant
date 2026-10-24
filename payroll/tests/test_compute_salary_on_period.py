@@ -25,7 +25,7 @@ EMPTY_LEAVES = {
 class ComputeSalaryOnPeriodTests(TestCase):
     def setUp(self):
         company = make_company("Salary Co")
-        self.employee = make_employee(company=company, email="salary@test.horilla")
+        self.employee = make_employee(company=company, email="salary@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.start = date(2024, 1, 1)
         self.end = date(2024, 1, 31)

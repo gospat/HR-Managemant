@@ -423,7 +423,7 @@ THEMES_DATA = [
 
 class HorillaColorTheme(HrModel):
     """
-    Model to store predefined color themes for Horilla
+    Model to store predefined color themes for Bells Tech
     """
 
     name = models.CharField(max_length=100, unique=True, verbose_name=_("Name"))

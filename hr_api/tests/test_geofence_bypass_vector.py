@@ -33,7 +33,7 @@ class GeofenceBypassVectorTests(TestCase):
         self.user = make_user("fenced_user", password="secret123")
         self.employee = make_employee(
             company=self.company,
-            email="fenced@test.horilla",
+            email="fenced@test.bells",
             first_name="Fen",
             user=self.user,
         )

@@ -34,7 +34,7 @@ class TokenRevocationTests(TestCase):
         self.user = make_user("revoke_user", password="secret123")
         self.employee = make_employee(
             company=self.company,
-            email="revoke@test.horilla",
+            email="revoke@test.bells",
             user=self.user,
         )
 

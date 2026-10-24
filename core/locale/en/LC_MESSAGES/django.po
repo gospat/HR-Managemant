@@ -70,7 +70,7 @@ msgstr ""
 msgid "Default Accessibility"
 msgstr ""
 
-msgid "Limit default view access to horilla feature"
+msgid "Limit default view access to Bells Tech feature"
 msgstr ""
 
 msgid "Actions"
@@ -4835,8 +4835,8 @@ msgstr ""
 msgid "Mail Server"
 msgstr ""
 
-msgid "Configure an outgoing mail server so Horilla can send emails."
-msgstr "Configure an outgoing mail server so Horilla can send emails."
+msgid "Configure an outgoing mail server so Bells Tech can send emails."
+msgstr "Configure an outgoing mail server so Bells Tech can send emails."
 
 msgid "First Employee"
 msgstr "First Employee"
@@ -5262,7 +5262,7 @@ msgid "Enable this to trigger automatic check out."
 msgstr ""
 
 msgid ""
-"Time at which the horilla will automatically check out the employee "
+"Time at which the Bells Tech will automatically check out the employee "
 "attendance if they forget."
 msgstr ""
 
@@ -6413,8 +6413,8 @@ msgid "Forgot password"
 msgstr ""
 
 #, fuzzy
-#| msgid "horilla-theme"
-msgid "Horilla"
+#| msgid "hr-theme"
+msgid "Bells Tech"
 msgstr "Theme Customization"
 
 msgid "Assign"
@@ -7109,8 +7109,8 @@ msgid "About"
 msgstr ""
 
 #, fuzzy
-#| msgid "horilla-theme"
-msgid "Horilla HR"
+#| msgid "hr-theme"
+msgid "Bells Tech HR"
 msgstr "Theme Customization"
 
 msgid "Quote this version when reporting a problem."
@@ -7124,8 +7124,8 @@ msgstr "Employee"
 msgid "HR setup checklist"
 msgstr ""
 
-msgid "Get started with Horilla HR"
-msgstr "Get started with Horilla HR"
+msgid "Get started with Bells Tech HR"
+msgstr "Get started with Bells Tech HR"
 
 #, python-format
 msgid ""
@@ -8393,7 +8393,7 @@ msgstr "Settings"
 msgid "gdrive"
 msgstr "Gdrive Backup"
 
-msgid "horilla-theme"
+msgid "hr-theme"
 msgstr "Theme Customization"
 
 msgid "color-settings"
@@ -8734,7 +8734,7 @@ msgstr ""
 msgid "%(model__meta_verbose_name)s object does not exist."
 msgstr "Recruitment"
 
-msgid "Test mail from Horilla"
+msgid "Test mail from Bells Tech"
 msgstr ""
 
 msgid "Something went wrong :"
@@ -13364,8 +13364,8 @@ msgid "Yesterday"
 msgstr ""
 
 #, fuzzy
-#| msgid "horilla-theme"
-msgid "Horilla Bot"
+#| msgid "hr-theme"
+msgid "Bells Tech Bot"
 msgstr "Theme Customization"
 
 #, fuzzy
@@ -13515,8 +13515,8 @@ msgid "Tracked fields updated for %(model)s."
 msgstr ""
 
 #, fuzzy
-#| msgid "horilla-theme"
-msgid "Horilla Auth"
+#| msgid "hr-theme"
+msgid "Bells Tech Auth"
 msgstr "Theme Customization"
 
 msgid "Users"
@@ -14171,10 +14171,10 @@ msgstr "Configuration"
 msgid "Enable Google meet"
 msgstr ""
 
-msgid "Enable this to integrate Google meet to Horilla."
+msgid "Enable this to integrate Google meet to Bells Tech."
 msgstr ""
 
-msgid "Schedule and join Google Meet video calls directly from Horilla."
+msgid "Schedule and join Google Meet video calls directly from Bells Tech."
 msgstr ""
 
 #, fuzzy
@@ -16044,8 +16044,8 @@ msgid "Main navigation"
 msgstr "Onboarding"
 
 #, fuzzy
-#| msgid "horilla-theme"
-msgid "Horilla HR version"
+#| msgid "hr-theme"
+msgid "Bells Tech HR version"
 msgstr "Theme Customization"
 
 #, fuzzy
@@ -16308,7 +16308,7 @@ msgstr ""
 msgid "Please login to access the dashboard."
 msgstr ""
 
-msgid "e.g. adam.luis@horilla.com"
+msgid "e.g. adam.luis@bells.edu.ng"
 msgstr ""
 
 msgid "Sign In"
@@ -17802,11 +17802,11 @@ msgstr "Shift Requests"
 msgid "Enable Linkedin"
 msgstr "Recruitment"
 
-msgid "Enable this to integrate linkedin to Horilla."
+msgid "Enable this to integrate linkedin to Bells Tech."
 msgstr ""
 
 msgid ""
-"Post job openings directly to LinkedIn and manage applicants from Horilla."
+"Post job openings directly to LinkedIn and manage applicants from Bells Tech."
 msgstr ""
 
 msgid "Prefix added to every auto-generated employee badge ID (e.g. PEP0001)."
@@ -26407,7 +26407,7 @@ msgid "Error occurred while deleting candidate rejection"
 msgstr ""
 
 #, python-format
-msgid "Horilla report ready: %(name)s"
+msgid "Bells Tech report ready: %(name)s"
 msgstr ""
 
 #, python-format
@@ -26419,7 +26419,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Horilla report export failed: %(name)s"
+msgid "Bells Tech report export failed: %(name)s"
 msgstr ""
 
 #, python-format
@@ -26488,7 +26488,7 @@ msgstr "Update"
 msgid "Comparison"
 msgstr ""
 
-msgid "Attached is your scheduled Horilla report:"
+msgid "Attached is your scheduled Bells Tech report:"
 msgstr ""
 
 #, python-format
@@ -27113,7 +27113,7 @@ msgstr ""
 msgid "Document Expiry Aging"
 msgstr ""
 
-msgid "Overdue and upcoming horilla_documents expiry buckets (90-day horizon)."
+msgid "Overdue and upcoming document expiry buckets (90-day horizon)."
 msgstr ""
 
 msgid "Headcount Bridge"
@@ -29041,8 +29041,8 @@ msgid "Download Error File"
 msgstr ""
 
 #, fuzzy
-#| msgid "horilla-theme"
-msgid "Horilla HRMS"
+#| msgid "hr-theme"
+msgid "Bells Tech HRMS"
 msgstr "Theme Customization"
 
 msgid "Sign Up"
@@ -29055,10 +29055,10 @@ msgid "Go To Home"
 msgstr ""
 
 msgid ""
-"Authenticate with your password to initialize the Horilla HRMS database."
+"Authenticate with your password to initialize the Bells Tech HRMS database."
 msgstr ""
 
-msgid "Please sign up to access the Horilla HRMS."
+msgid "Please sign up to access the Bells Tech HRMS."
 msgstr ""
 
 msgid "e.g. Adam"
@@ -29270,7 +29270,7 @@ msgstr ""
 
 msgid ""
 "Meta app secret, used to verify the X-Hub-Signature-256 header on incoming "
-"webhook calls. Without it Horilla cannot tell a real delivery from a forged "
+"webhook calls. Without it Bells Tech cannot tell a real delivery from a forged "
 "one, so unsigned payloads are rejected. Find it under App Settings > Basic "
 "in the Meta developer console."
 msgstr ""
@@ -29278,7 +29278,7 @@ msgstr ""
 msgid "WhatsApp Integration"
 msgstr ""
 
-msgid "Enable this to integrate WhatsApp to Horilla."
+msgid "Enable this to integrate WhatsApp to Bells Tech."
 msgstr ""
 
 msgid ""
@@ -30189,7 +30189,7 @@ msgstr "Shift Requests"
 #~ msgstr "Leave Types"
 
 #, fuzzy
-#~ msgid "Horilla - Open Recruitments"
+#~ msgid "Bells Tech - Open Recruitments"
 #~ msgstr "Recruitment"
 
 #, fuzzy

@@ -12,7 +12,7 @@ class LeaveAllocationApproveTests(TestCase):
         from leave.models import LeaveType
 
         company = make_company("Alloc Co")
-        self.employee = make_employee(company=company, email="alloc@test.horilla")
+        self.employee = make_employee(company=company, email="alloc@test.bells")
         self.leave_type = LeaveType.objects.create(
             name="Allocation Leave Type",
             total_days=10,

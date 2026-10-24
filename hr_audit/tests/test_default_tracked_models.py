@@ -88,7 +88,7 @@ class PayrollChangeIsLoggedTests(TestCase):
         from payroll.models.models import Contract
 
         company = Company.objects.create(company="Acme", hq=True)
-        employee = make_employee(company=company, email="pay@test.horilla")
+        employee = make_employee(company=company, email="pay@test.bells")
         contract = Contract.objects.create(
             contract_name="Initial",
             employee_id=employee,

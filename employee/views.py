@@ -128,7 +128,7 @@ from core.decorators import (
 from core.filters import HrPaginator
 from core.group_by import group_by_queryset
 from core.http.response import HrRedirect, with_bulk_result
-from core.methods import dynamic_attr, get_horilla_model_class
+from core.methods import dynamic_attr, get_hr_model_class
 from hr_audit.models import AccountBlockUnblock, HistoryTrackingFields
 from hr_auth.methods import generate_random_password
 from hr_auth.models import HorillaUser
@@ -455,7 +455,7 @@ def allowances_deductions_tab(request, pk):
     employee_deductions = []
     if basic_pay:
         # Find the applicable allowances for the employee
-        Allowance = get_horilla_model_class(app_label="payroll", model="allowance")
+        Allowance = get_hr_model_class(app_label="payroll", model="allowance")
         specific_allowances = Allowance.objects.filter(specific_employees=employee)
         conditional_allowances = Allowance.objects.filter(
             is_condition_based=True
@@ -485,7 +485,7 @@ def allowances_deductions_tab(request, pk):
                     employee_allowances.remove(allowance)
 
         # Find the applicable deductions for the employee
-        Deduction = get_horilla_model_class(app_label="payroll", model="deduction")
+        Deduction = get_hr_model_class(app_label="payroll", model="deduction")
         specific_deductions = Deduction.objects.filter(
             specific_employees=employee, is_pretax=True, is_tax=False
         )
@@ -2651,7 +2651,7 @@ def replace_employee(request, emp_id):
                     and field_name == "recruitment_managers"
                     and str(emp_id) != replace_emp_id
                 ):
-                    Recruitment = get_horilla_model_class(
+                    Recruitment = get_hr_model_class(
                         app_label="recruitment", model="recruitment"
                     )
                     recruitment_query = Recruitment.objects.filter(
@@ -2666,7 +2666,7 @@ def replace_employee(request, emp_id):
                     and field_name == "recruitment_stage_managers"
                     and str(emp_id) != replace_emp_id
                 ):
-                    Stage = get_horilla_model_class(
+                    Stage = get_hr_model_class(
                         app_label="recruitment", model="stage"
                     )
                     recruitment_stage_query = Stage.objects.filter(
@@ -2681,7 +2681,7 @@ def replace_employee(request, emp_id):
                     and field_name == "onboarding_stage_manager"
                     and str(emp_id) != replace_emp_id
                 ):
-                    OnboardingStage = get_horilla_model_class(
+                    OnboardingStage = get_hr_model_class(
                         app_label="onboarding", model="onboardingstage"
                     )
                     onboarding_stage_query = OnboardingStage.objects.filter(
@@ -2696,7 +2696,7 @@ def replace_employee(request, emp_id):
                     and field_name == "onboarding_task_manager"
                     and str(emp_id) != replace_emp_id
                 ):
-                    OnboardingTask = get_horilla_model_class(
+                    OnboardingTask = get_hr_model_class(
                         app_label="onboarding", model="onboardingtask"
                     )
                     onboarding_task_query = OnboardingTask.objects.filter(
@@ -3434,7 +3434,7 @@ def total_employees_count(request):
 def joining_today_count(request):
     newbies_today = 0
     if apps.is_installed("recruitment"):
-        Candidate = get_horilla_model_class(app_label="recruitment", model="candidate")
+        Candidate = get_hr_model_class(app_label="recruitment", model="candidate")
         newbies_today = Candidate.objects.filter(
             joining_date__range=[date.today(), date.today() + timedelta(days=1)],
             is_active=True,
@@ -3447,7 +3447,7 @@ def joining_today_count(request):
 def joining_week_count(request):
     newbies_week = 0
     if apps.is_installed("recruitment"):
-        Candidate = get_horilla_model_class(app_label="recruitment", model="candidate")
+        Candidate = get_hr_model_class(app_label="recruitment", model="candidate")
         newbies_week = Candidate.objects.filter(
             joining_date__range=[
                 date.today() - timedelta(days=date.today().weekday()),
@@ -3464,7 +3464,7 @@ def joining_week_count(request):
 def leave_today_count(request):
     leave_today = 0
     if apps.is_installed("leave"):
-        LeaveRequest = get_horilla_model_class(app_label="leave", model="leaverequest")
+        LeaveRequest = get_hr_model_class(app_label="leave", model="leaverequest")
         leave_today = LeaveRequest.objects.filter(
             Q(start_date__lte=date.today(), end_date__gte=date.today()),
             status__in=["approved", "cancel_requested"],
@@ -3833,7 +3833,7 @@ def _bonus_points_context(employee_obj, page_number):
     try:
         points = BonusPoint.objects.get(employee_id=employee_obj.id)
         if apps.is_installed("payroll"):
-            Reimbursement = get_horilla_model_class(
+            Reimbursement = get_hr_model_class(
                 app_label="payroll", model="reimbursement"
             )
             requested_bonus_points = Reimbursement.objects.filter(
@@ -4029,7 +4029,7 @@ def redeem_points(request, emp_id):
 
     amount_for_bonus_point = 0
     if apps.is_installed("payroll"):
-        EncashmentGeneralSettings = get_horilla_model_class(
+        EncashmentGeneralSettings = get_hr_model_class(
             app_label="payroll", model="encashmentgeneralsettings"
         )
         amount_for_bonus_point = (
@@ -4045,7 +4045,7 @@ def redeem_points(request, emp_id):
             points = form.cleaned_data["points"]
             amount = amount_for_bonus_point * points
             if apps.is_installed("payroll"):
-                Reimbursement = get_horilla_model_class(
+                Reimbursement = get_hr_model_class(
                     app_label="payroll", model="reimbursement"
                 )
                 Reimbursement.objects.create(
@@ -4250,7 +4250,7 @@ def encashment_condition_create(request):
     if apps.is_installed("payroll"):
         from payroll.forms.forms import EncashmentGeneralSettingsForm
 
-        EncashmentGeneralSettings = get_horilla_model_class(
+        EncashmentGeneralSettings = get_hr_model_class(
             app_label="payroll", model="encashmentgeneralsettings"
         )
         instance = (
@@ -4296,7 +4296,7 @@ def toggle_leave_encashment(request):
     if not apps.is_installed("payroll"):
         return HttpResponse("", status=400)
 
-    EncashmentGeneralSettings = get_horilla_model_class(
+    EncashmentGeneralSettings = get_hr_model_class(
         app_label="payroll", model="encashmentgeneralsettings"
     )
     instance = EncashmentGeneralSettings.objects.first()
@@ -4325,7 +4325,7 @@ def toggle_encashment_apply_to_all(request):
     if not apps.is_installed("payroll"):
         return HttpResponse("", status=400)
 
-    EncashmentGeneralSettings = get_horilla_model_class(
+    EncashmentGeneralSettings = get_hr_model_class(
         app_label="payroll", model="encashmentgeneralsettings"
     )
     instance = EncashmentGeneralSettings.objects.first()
@@ -4356,7 +4356,7 @@ def encashment_eligibility_settings(request):
 
     from payroll.forms.forms import EncashmentEligibilityForm
 
-    EncashmentGeneralSettings = get_horilla_model_class(
+    EncashmentGeneralSettings = get_hr_model_class(
         app_label="payroll", model="encashmentgeneralsettings"
     )
     instance = EncashmentGeneralSettings.objects.first()

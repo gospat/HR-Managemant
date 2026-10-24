@@ -1,4 +1,4 @@
-# Coverage config for the Horilla HR test suite.
+# Coverage config for the Bells Tech HR test suite.
 #
 # The Makefile's COV_FAIL_UNDER used to be 5 while real coverage was 36% -- a
 # gate 31 points below reality cannot fail, which is worse than no gate because

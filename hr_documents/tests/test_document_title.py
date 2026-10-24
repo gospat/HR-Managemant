@@ -10,7 +10,7 @@ from hr_documents.models import Document
 class DocumentTitleTests(TestCase):
     def setUp(self):
         company = make_company("Docs Co")
-        self.employee = make_employee(company=company, email="docs@test.horilla")
+        self.employee = make_employee(company=company, email="docs@test.bells")
 
     def test_short_title_rejected(self):
         doc = Document(title="ab", employee_id=self.employee)

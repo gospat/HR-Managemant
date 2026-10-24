@@ -35,7 +35,7 @@ class EmployeeSelfEditTests(TestCase):
         self.user = make_user("selfedit_user")
         self.employee = make_employee(
             company=self.company,
-            email="selfedit@test.horilla",
+            email="selfedit@test.bells",
             first_name="Sam",
             user=self.user,
         )
@@ -69,14 +69,14 @@ class EmployeeSelfEditTests(TestCase):
             {
                 "badge_id": "HACKED-1",
                 "employee_first_name": "Renamed",
-                "email": "elsewhere@test.horilla",
+                "email": "elsewhere@test.bells",
             },
             format="json",
         )
         self.employee.refresh_from_db()
         self.assertEqual(self.employee.badge_id, original_badge)
         self.assertEqual(self.employee.employee_first_name, "Sam")
-        self.assertEqual(self.employee.email, "selfedit@test.horilla")
+        self.assertEqual(self.employee.email, "selfedit@test.bells")
 
     def test_profile_edit_toggle_is_honoured(self):
         ProfileEditFeature.objects.update(is_enabled=False)
@@ -90,7 +90,7 @@ class EmployeeSelfEditTests(TestCase):
         hr_user = make_user("selfedit_hr")
         make_employee(
             company=self.company,
-            email="hr@test.horilla",
+            email="hr@test.bells",
             first_name="Hera",
             user=hr_user,
         )
@@ -116,7 +116,7 @@ class EmployeeSelfEditTests(TestCase):
         """
         report = make_employee(
             company=self.company,
-            email="report@test.horilla",
+            email="report@test.bells",
             first_name="Rory",
         )
         report.employee_work_info.reporting_manager_id = self.employee
@@ -134,7 +134,7 @@ class EmployeeSelfEditTests(TestCase):
         boss_user = make_user("selfedit_boss")
         boss = make_employee(
             company=self.company,
-            email="boss@test.horilla",
+            email="boss@test.bells",
             first_name="Bea",
             user=boss_user,
         )

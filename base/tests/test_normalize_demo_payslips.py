@@ -53,7 +53,7 @@ class NormalizeDemoPayslipsTests(TestCase):
     def setUp(self):
         self.company = make_company("Normalize Co")
         self.employee = make_employee(
-            company=self.company, email="normalize@test.horilla"
+            company=self.company, email="normalize@test.bells"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(self.employee, wage=30000.0)

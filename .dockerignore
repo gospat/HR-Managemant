@@ -57,7 +57,7 @@ static_root/
 env/
 venv/
 ENV/
-horillavenv/
+hrvenv/
 
 # IDEs
 .vscode/

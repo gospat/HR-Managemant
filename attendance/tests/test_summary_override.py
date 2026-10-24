@@ -48,12 +48,12 @@ class Fixture(TestCase):
         self.user = make_user("sumadmin", is_superuser=True)
         self.company = make_company("Summary Co")
         make_employee(
-            company=self.company, email="sumadmin@test.horilla", user=self.user
+            company=self.company, email="sumadmin@test.bells", user=self.user
         )
         self.client.force_login(self.user)
 
         self.employee = make_employee(
-            company=self.company, email="worker@test.horilla", first_name="Worker"
+            company=self.company, email="worker@test.bells", first_name="Worker"
         )
         # The factory does not set one, and badge is what the sheet matches on.
         self.employee.badge_id = "TST001"

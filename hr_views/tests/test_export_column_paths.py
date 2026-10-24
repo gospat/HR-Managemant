@@ -15,9 +15,9 @@ class ExportColumnPathTests(TestCase):
         self.admin = make_user(
             "export_admin", is_superuser=True, password="pw-not-real"
         )
-        make_employee(company=company, email="admin@test.horilla", user=self.admin)
+        make_employee(company=company, email="admin@test.bells", user=self.admin)
         self.target = make_employee(
-            company=company, email="target@test.horilla", first_name="Targeted"
+            company=company, email="target@test.bells", first_name="Targeted"
         )
         self.client.force_login(self.admin)
         self.client.session["selected_company"] = str(company.pk)

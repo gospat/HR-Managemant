@@ -171,8 +171,8 @@ msgstr "Secuencia de la etapa actualizada"
 msgid "Dashboard"
 msgstr "Panel"
 
-msgid "Horilla dashboard section"
-msgstr "Sección del panel de Horilla"
+msgid "Bells Tech dashboard section"
+msgstr "Sección del panel de Bells Tech"
 
 msgid "Mark Attendance"
 msgstr "Marcar asistencia"
@@ -213,8 +213,8 @@ msgstr "Opciones de perfil y cambio de contraseña"
 msgid "Dashboard Tiles"
 msgstr "Tarjetas del panel"
 
-msgid "Horilla Dashboard Tiles"
-msgstr "Tarjetas del panel de Horilla"
+msgid "Bells Tech Dashboard Tiles"
+msgstr "Tarjetas del panel de Bells Tech"
 
 msgid "Dashboard Actions"
 msgstr "Acciones del panel"
@@ -243,8 +243,8 @@ msgstr "Su acceso actual a la empresa"
 msgid "App"
 msgstr "Aplicación"
 
-msgid "Horilla Hr Apps. eg Dashboard"
-msgstr "Apps de Horilla HR, p. ej. Panel"
+msgid "Bells Tech Hr Apps. eg Dashboard"
+msgstr "Apps de Bells Tech HR, p. ej. Panel"
 
 msgid "Pipeline"
 msgstr "Pipeline"

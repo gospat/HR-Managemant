@@ -33,7 +33,7 @@ class HistoryAndPayrollDashboardAuthzTests(TestCase):
         def person(name):
             user = make_user(name, password="secret123")
             emp = make_employee(
-                company=company, email=f"{name}@test.horilla", user=user
+                company=company, email=f"{name}@test.bells", user=user
             )
             return user, emp
 

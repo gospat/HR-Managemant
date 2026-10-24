@@ -15,15 +15,15 @@ class CancellationWorkflowTests(TestCase):
         company = make_company("Cancel Co")
         cls.owner_user = make_user("cancel_owner", password="secret123")
         cls.owner = make_employee(
-            company=company, email="cancel_owner@test.horilla", user=cls.owner_user
+            company=company, email="cancel_owner@test.bells", user=cls.owner_user
         )
         cls.manager_user = make_user("cancel_manager", password="secret123")
         cls.manager = make_employee(
-            company=company, email="cancel_manager@test.horilla", user=cls.manager_user
+            company=company, email="cancel_manager@test.bells", user=cls.manager_user
         )
         cls.other_user = make_user("cancel_other", password="secret123")
         cls.other = make_employee(
-            company=company, email="cancel_other@test.horilla", user=cls.other_user
+            company=company, email="cancel_other@test.bells", user=cls.other_user
         )
         work_info = cls.owner.employee_work_info
         work_info.reporting_manager_id = cls.manager

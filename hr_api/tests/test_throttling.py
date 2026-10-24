@@ -116,7 +116,7 @@ class LoginThrottleTests(TestCase):
         self.company = make_company("Throttle Co")
         self.user = make_user("throttle_user", password="secret123")
         self.employee = make_employee(
-            company=self.company, email="throttle@test.horilla", user=self.user
+            company=self.company, email="throttle@test.bells", user=self.user
         )
 
     def tearDown(self):

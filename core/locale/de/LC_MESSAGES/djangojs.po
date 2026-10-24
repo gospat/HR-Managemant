@@ -173,8 +173,8 @@ msgstr "Phasenreihenfolge aktualisiert"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-msgid "Horilla dashboard section"
-msgstr "Horilla-Dashboard-Bereich"
+msgid "Bells Tech dashboard section"
+msgstr "Bells Tech-Dashboard-Bereich"
 
 msgid "Mark Attendance"
 msgstr "Anwesenheit erfassen"
@@ -215,8 +215,8 @@ msgstr "Profil- und Passwortänderungsoptionen"
 msgid "Dashboard Tiles"
 msgstr "Dashboard-Kacheln"
 
-msgid "Horilla Dashboard Tiles"
-msgstr "Horilla-Dashboard-Kacheln"
+msgid "Bells Tech Dashboard Tiles"
+msgstr "Bells Tech-Dashboard-Kacheln"
 
 msgid "Dashboard Actions"
 msgstr "Dashboard-Aktionen"
@@ -245,8 +245,8 @@ msgstr "Ihr aktueller Unternehmenszugriff"
 msgid "App"
 msgstr "App"
 
-msgid "Horilla Hr Apps. eg Dashboard"
-msgstr "Horilla-HR-Apps, z. B. Dashboard"
+msgid "Bells Tech Hr Apps. eg Dashboard"
+msgstr "Bells Tech-HR-Apps, z. B. Dashboard"
 
 msgid "Pipeline"
 msgstr "Pipeline"

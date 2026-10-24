@@ -21,27 +21,27 @@ class DummyModel:
         return DummyModel()
 
 
-def get_horilla_model_class(app_label, model):
+def get_hr_model_class(app_label, model):
     try:
         return apps.get_model(app_label, model)
     except LookupError:
         return DummyModel
 
 
-Recruitment = get_horilla_model_class(app_label="recruitment", model="recruitment")
-AttendanceLateComeEarlyOut = get_horilla_model_class(
+Recruitment = get_hr_model_class(app_label="recruitment", model="recruitment")
+AttendanceLateComeEarlyOut = get_hr_model_class(
     app_label="attendance", model="attendancelatecomeearlyOut"
 )
-Attendance = get_horilla_model_class(app_label="attendance", model="attendance")
-LeaveRequest = get_horilla_model_class(app_label="leave", model="leaverequest")
-Meetings = get_horilla_model_class(app_label="pms", model="Meetings")
-ResignationLetter = get_horilla_model_class(
+Attendance = get_hr_model_class(app_label="attendance", model="attendance")
+LeaveRequest = get_hr_model_class(app_label="leave", model="leaverequest")
+Meetings = get_hr_model_class(app_label="pms", model="Meetings")
+ResignationLetter = get_hr_model_class(
     app_label="offboarding", model="ResignationLetter"
 )
-AssetAssignment = get_horilla_model_class(app_label="asset", model="AssetAssignment")
-TimeSheet = get_horilla_model_class(app_label="project", model="TimeSheet")
-Deduction = get_horilla_model_class(app_label="payroll", model="Deduction")
-Task = get_horilla_model_class(app_label="project", model="Task")
+AssetAssignment = get_hr_model_class(app_label="asset", model="AssetAssignment")
+TimeSheet = get_hr_model_class(app_label="project", model="TimeSheet")
+Deduction = get_hr_model_class(app_label="payroll", model="Deduction")
+Task = get_hr_model_class(app_label="project", model="Task")
 
 
 def tot_hires(self):

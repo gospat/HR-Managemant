@@ -11,7 +11,7 @@ class LeaveRequestApproveBalanceTests(TestCase):
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Approve Bal Co")
-        self.employee = make_employee(company=company, email="approvebal@test.horilla")
+        self.employee = make_employee(company=company, email="approvebal@test.bells")
         self.leave_type = LeaveType.objects.create(
             name="Approve Balance Leave",
             total_days=20,

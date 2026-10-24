@@ -22,7 +22,7 @@ from payroll.models.models import Allowance, MultipleCondition
 class ConditionEvaluatorTests(TestCase):
     def setUp(self):
         company = make_company("Cond Co")
-        self.employee = make_employee(company=company, email="cond@test.horilla")
+        self.employee = make_employee(company=company, email="cond@test.bells")
         self.employee.gender = "male"
         self.employee.country = "United States"
         self.employee.marital_status = "single"

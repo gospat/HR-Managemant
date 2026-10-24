@@ -1,7 +1,7 @@
 """
 employee/sidebar.py
 
-To set Horilla sidebar for employee
+To set Bells Tech sidebar for employee
 """
 
 from django.urls import reverse_lazy

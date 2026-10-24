@@ -49,7 +49,7 @@ class LoginUserViewTests(TestCase):
         self.user = make_user("view_login", password=self.password)
         self.employee = make_employee(
             company=self.company,
-            email="view_login@test.horilla",
+            email="view_login@test.bells",
             first_name="View",
             last_name="Login",
             user=self.user,

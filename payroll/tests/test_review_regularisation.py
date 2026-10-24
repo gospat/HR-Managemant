@@ -99,12 +99,12 @@ class ReviewPageTests(TestCase):
         self.user = make_user("regadmin", is_superuser=True)
         self.company = make_company("Reg Co")
         make_employee(
-            company=self.company, email="regadmin@test.horilla", user=self.user
+            company=self.company, email="regadmin@test.bells", user=self.user
         )
         self.client.force_login(self.user)
 
         self.employee = make_employee(
-            company=self.company, email="reg@test.horilla", first_name="Reg"
+            company=self.company, email="reg@test.bells", first_name="Reg"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=30000.0)

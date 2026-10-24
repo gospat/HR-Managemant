@@ -226,7 +226,7 @@ def history_tracking(request, obj_id, **kwargs):
         instance = model.objects.filter(pk=obj_id).first()
         if not instance:
             return HrRedirect(request, message=_("Object not found"))
-        histories = instance.horilla_history.all()
+        histories = instance.hr_history.all()
         page_number = request.GET.get("page", 1)
         paginator = Paginator(histories, 4)
         page_obj = paginator.get_page(page_number)

@@ -16,10 +16,10 @@ class CandidateExportAuthorizationTests(TestCase):
         company = make_company("Candidate Export Co")
         cls.plain_user = make_user("cx_plain", password="secret123")
         make_employee(
-            company=company, email="cx_plain@test.horilla", user=cls.plain_user
+            company=company, email="cx_plain@test.bells", user=cls.plain_user
         )
         cls.hr_user = make_user("cx_hr", password="secret123")
-        make_employee(company=company, email="cx_hr@test.horilla", user=cls.hr_user)
+        make_employee(company=company, email="cx_hr@test.bells", user=cls.hr_user)
         cls.hr_user.user_permissions.add(
             Permission.objects.get(codename="view_candidate")
         )

@@ -341,7 +341,7 @@ class DetailViewRenderTests(TestCase):
     def setUp(self):
         user = make_user("ssadmin", is_superuser=True)
         company = make_company("SS Co")
-        make_employee(company=company, email="ssadmin@test.horilla", user=user)
+        make_employee(company=company, email="ssadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
@@ -385,7 +385,7 @@ class ExamplePreviewTests(TestCase):
     def setUp(self):
         user = make_user("exadmin", is_superuser=True)
         company = make_company("Ex Co")
-        make_employee(company=company, email="exadmin@test.horilla", user=user)
+        make_employee(company=company, email="exadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
         self.structure = SalaryStructure.objects.create(title="Example")
@@ -786,7 +786,7 @@ class ComponentPickerTests(TestCase):
     def setUp(self):
         user = make_user("pickeradmin", is_superuser=True)
         company = make_company("Picker Co")
-        make_employee(company=company, email="pickeradmin@test.horilla", user=user)
+        make_employee(company=company, email="pickeradmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 

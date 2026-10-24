@@ -23,7 +23,7 @@ from django.views import View
 from base.context_processors import intial_notice_period
 from base.methods import eval_validate
 from core.http.response import HrRedirect
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
@@ -1404,7 +1404,7 @@ if apps.is_installed("asset"):
         show_toggle_form = False
 
         def __init__(self, *args, **kwargs):
-            AssetAssignment = get_horilla_model_class(
+            AssetAssignment = get_hr_model_class(
                 app_label="asset", model="assetassignment"
             )
             self.model = AssetAssignment  # 809
@@ -1466,7 +1466,7 @@ if apps.is_installed("pms"):
         ]
 
         def __init__(self, *args, **kwargs):
-            self.Feedback = get_horilla_model_class(app_label="pms", model="feedback")
+            self.Feedback = get_hr_model_class(app_label="pms", model="feedback")
             self.model = self.Feedback  # 809
             super().__init__(*args, **kwargs)
 

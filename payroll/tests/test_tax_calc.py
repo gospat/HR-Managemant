@@ -30,7 +30,7 @@ class TaxComputationErrorTests(TestCase):
 
     def setUp(self):
         company = make_company("Tax Co")
-        self.employee = make_employee(company=company, email="tax@test.horilla")
+        self.employee = make_employee(company=company, email="tax@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def _calculate(self, filing_status):
@@ -114,7 +114,7 @@ class DeclarativeAdjustmentTests(TestCase):
 
     def setUp(self):
         company = make_company("Adjust Co")
-        self.employee = make_employee(company=company, email="adjust@test.horilla")
+        self.employee = make_employee(company=company, email="adjust@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def _tax(self, filing_status, yearly):

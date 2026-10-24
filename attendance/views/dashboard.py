@@ -35,7 +35,7 @@ from base.templatetags.basefilters import is_reportingmanager
 from employee.models import Employee
 from core import settings
 from core.decorators import hx_request_required, login_required
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 
 
 def find_on_time(request, today, week_day, department=None):
@@ -64,7 +64,7 @@ def find_expected_attendances(request, week_day):
     """
     employees = Employee.objects.filter(is_active=True)
     if apps.is_installed("leave"):
-        LeaveRequest = get_horilla_model_class(app_label="leave", model="leaverequest")
+        LeaveRequest = get_hr_model_class(app_label="leave", model="leaverequest")
         on_leave = LeaveRequest.objects.filter(status="Approved")
         on_leave = filtersubordinates(request, on_leave, "attendance.view_attendance")
     else:

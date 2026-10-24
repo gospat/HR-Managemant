@@ -197,7 +197,7 @@ from core.decorators import (
 from core.group_by import group_by_queryset
 from core.http.response import HrRedirect, with_bulk_result
 from core.menu import get_settings_menu
-from core.methods import get_horilla_model_class, remove_dynamic_url
+from core.methods import get_hr_model_class, remove_dynamic_url
 from hr_audit.forms import HistoryTrackingFieldsForm
 from hr_audit.models import AccountBlockUnblock, AuditTag, HistoryTrackingFields
 from hr_auth.models import HorillaUser
@@ -946,7 +946,7 @@ def reset_send_success(request):
 
 class HrPasswordResetView(PasswordResetView):
     """
-    Horilla View for Reset Password
+    Bells Tech View for Reset Password
     """
 
     template_name = "forgot_password.html"
@@ -1010,7 +1010,7 @@ class HrPasswordResetView(PasswordResetView):
 @method_decorator(login_required, name="dispatch")
 class EmployeePasswordResetView(PasswordResetView):
     """
-    Horilla View for Employee Reset Password
+    Bells Tech View for Employee Reset Password
     """
 
     template_name = "forgot_password.html"
@@ -1901,7 +1901,7 @@ def object_delete(request, obj_id, **kwargs):
         ),
 
     if apps.is_installed("pms") and redirect_path == "/pms/filter-key-result/":
-        KeyResult = get_horilla_model_class(app_label="pms", model="keyresult")
+        KeyResult = get_hr_model_class(app_label="pms", model="keyresult")
         key_results = KeyResult.objects.all()
         if key_results.exists():
             previous_data = request.GET.urlencode()
@@ -3295,7 +3295,7 @@ def employee_shift_view(request):
 
     shifts = EmployeeShift.objects.all()
     if apps.is_installed("attendance"):
-        GraceTime = get_horilla_model_class(app_label="attendance", model="gracetime")
+        GraceTime = get_hr_model_class(app_label="attendance", model="gracetime")
         grace_times = GraceTime.objects.all().exclude(is_default=True)
     else:
         grace_times = None
@@ -6019,7 +6019,7 @@ def _system_preferences_context(request):
     tracking_company = get_session_company(request)
 
     if apps.is_installed("payroll"):
-        PayrollSettings = get_horilla_model_class(
+        PayrollSettings = get_hr_model_class(
             app_label="payroll", model="payrollsettings"
         )
         from payroll.forms.component_forms import PayrollSettingsForm
@@ -6214,7 +6214,7 @@ def encashment_general_settings_view(request):
     if not apps.is_installed("payroll"):
         return redirect("system-preferences-view")
 
-    EncashmentGeneralSettings = get_horilla_model_class(
+    EncashmentGeneralSettings = get_hr_model_class(
         app_label="payroll", model="encashmentgeneralsettings"
     )
     from payroll.forms.forms import (

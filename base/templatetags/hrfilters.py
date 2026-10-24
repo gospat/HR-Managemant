@@ -18,7 +18,7 @@ from django.utils.translation import gettext as _
 from base.models import Company, EmployeeShiftSchedule, IntegrationApps
 from employee.methods.duration_methods import strtime_seconds
 from core.hr_middlewares import _thread_locals, get_selected_company
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from hr_theme.models import CompanyTheme, HorillaColorTheme
 
 register = template.Library()
@@ -37,7 +37,7 @@ def checkminimumot(ot=None):
     """
     if ot is not None:
         if apps.is_installed("attendance"):
-            AttendanceValidationCondition = get_horilla_model_class(
+            AttendanceValidationCondition = get_hr_model_class(
                 app_label="attendance", model="attendancevalidationcondition"
             )
             condition = AttendanceValidationCondition.objects.all()
@@ -319,7 +319,7 @@ def currency_symbol_position(amount):
     if not apps.is_installed("payroll"):
         return f"$ {amount}"
 
-    PayrollSettings = get_horilla_model_class(
+    PayrollSettings = get_hr_model_class(
         app_label="payroll", model="payrollsettings"
     )
     company_id = get_selected_company()

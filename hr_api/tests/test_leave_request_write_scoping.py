@@ -54,27 +54,27 @@ class LeaveWriteScopingTests(TestCase):
         self.attacker_user = make_user("lv_attacker", password="secret123")
         self.attacker = make_employee(
             company=company,
-            email="lv_attacker@test.horilla",
+            email="lv_attacker@test.bells",
             user=self.attacker_user,
             phone="2000001",
         )
         self.victim_user = make_user("lv_victim", password="secret123")
         self.victim = make_employee(
             company=company,
-            email="lv_victim@test.horilla",
+            email="lv_victim@test.bells",
             user=self.victim_user,
             phone="2000002",
         )
         # The attacker manages somebody -- just not the victim.
         self.subordinate = make_employee(
-            company=company, email="lv_sub@test.horilla", phone="2000003"
+            company=company, email="lv_sub@test.bells", phone="2000003"
         )
         _manage(self.subordinate, self.attacker)
 
         self.boss_user = make_user("lv_boss", password="secret123")
         self.boss = make_employee(
             company=company,
-            email="lv_boss@test.horilla",
+            email="lv_boss@test.bells",
             user=self.boss_user,
             phone="2000004",
         )

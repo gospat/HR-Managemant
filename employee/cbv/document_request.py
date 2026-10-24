@@ -32,7 +32,7 @@ from hr_documents.forms import DocumentForm
 from hr_documents.forms import DocumentRejectCbvForm as RejectForm
 from hr_documents.forms import DocumentRequestForm, DocumentUpdateForm
 from hr_documents.models import Document, DocumentRequest
-from hr_views import models as horilla_views_models
+from hr_views import models as hr_views_models
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
@@ -416,7 +416,7 @@ class DocumentRequestPipelineView(Pipeline):
         context["keys_to_remove"] = []
 
         context["saved_filters"] = self.request.GET
-        context["stored_filters"] = horilla_views_models.SavedFilter.objects.filter(
+        context["stored_filters"] = hr_views_models.SavedFilter.objects.filter(
             saved_filter_path_query(self.request), created_by=self.request.user
         ).distinct()
 
@@ -484,7 +484,7 @@ class DocumentListView(HrListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["stored_filters"] = horilla_views_models.SavedFilter.objects.none()
+        context["stored_filters"] = hr_views_models.SavedFilter.objects.none()
         return context
 
     row_attrs = """

@@ -162,7 +162,7 @@ class DemoDatePolicyDBTests(TestCase):
     def setUpTestData(cls):
         cls.today = date.today()
         cls.company = make_company("Demo Clamp Co")
-        cls.employee = make_employee(company=cls.company, email="clamp@test.horilla")
+        cls.employee = make_employee(company=cls.company, email="clamp@test.bells")
         cls.shift = EmployeeShift.objects.create(employee_shift="Clamp Day")
 
     def test_a_class_activity_dates_not_after_today(self):

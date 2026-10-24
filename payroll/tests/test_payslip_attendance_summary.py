@@ -51,7 +51,7 @@ HOURLY = {
 class HourlyPayslipCarriesItsHoursTests(TestCase):
     def setUp(self):
         company = make_company("Hours Co")
-        self.employee = make_employee(company=company, email="hours@test.horilla")
+        self.employee = make_employee(company=company, email="hours@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(
             self.employee, wage_type="hourly", wage=0, hourly_wage=100.0
@@ -143,7 +143,7 @@ class MonthlyPayslipHasNoHoursTests(TestCase):
 
     def setUp(self):
         company = make_company("Monthly Co")
-        self.employee = make_employee(company=company, email="monthly@test.horilla")
+        self.employee = make_employee(company=company, email="monthly@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=30000.0)
 
@@ -220,13 +220,13 @@ class TheRenderedPayslipTests(TestCase):
     def setUp(self):
         user = make_user("slipadmin", is_superuser=True)
         company = make_company("Slip Co")
-        make_employee(company=company, email="slipadmin@test.horilla", user=user)
+        make_employee(company=company, email="slipadmin@test.bells", user=user)
         self.client.force_login(user)
 
         from payroll.models.tax_models import PayrollSettings
 
         PayrollSettings.objects.create(currency_symbol="$", position="postfix")
-        self.employee = make_employee(company=company, email="slip@test.horilla")
+        self.employee = make_employee(company=company, email="slip@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(
             self.employee, wage_type="hourly", wage=0, hourly_wage=100.0

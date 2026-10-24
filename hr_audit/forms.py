@@ -127,7 +127,7 @@ def field_choices_for(app_label, model_name):
         model = django_apps.get_model(app_label, model_name)
     except LookupError:
         return []
-    skip = {"horilla_history", "objects"}
+    skip = {"hr_history", "objects"}
     return [
         (f.name, getattr(f, "verbose_name", f.name) or f.name)
         for f in model._meta.get_fields()

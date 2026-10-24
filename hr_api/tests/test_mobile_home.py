@@ -28,7 +28,7 @@ class MobileHomeTests(TestCase):
         self.user = make_user("home_user")
         self.employee = make_employee(
             company=self.company,
-            email="home@test.horilla",
+            email="home@test.bells",
             first_name="Hana",
             user=self.user,
         )
@@ -186,7 +186,7 @@ class HomeAnnouncementAudienceTests(TestCase):
         self.user = make_user("audience_user")
         self.employee = make_employee(
             company=self.company,
-            email="audience@test.horilla",
+            email="audience@test.bells",
             first_name="Ada",
             user=self.user,
         )

@@ -88,7 +88,7 @@ def main():
     while len(company_emps) < TARGET_EMPLOYEE_GROUPS:
         n = len(company_emps) + 1
         badge = f"PAG{n:03d}"
-        email = f"pagination.demo{n}@horilla.local"
+        email = f"pagination.demo{n}@bells.local"
         if Employee.objects.filter(email=email).exists():
             emp = Employee.objects.get(email=email)
         else:

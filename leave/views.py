@@ -60,7 +60,7 @@ from core.decorators import (
 from core.group_by import group_by_queryset
 from core.http.response import HrRedirect, with_bulk_result
 from core.methods import (
-    get_horilla_model_class,
+    get_hr_model_class,
     handle_no_permission,
     remove_dynamic_url,
 )
@@ -600,7 +600,7 @@ def leave_request_view(request):
         for leave_request in leave_requests:
 
             # Fetch interviews for the employee within the requested leave period
-            InterviewSchedule = get_horilla_model_class(
+            InterviewSchedule = get_hr_model_class(
                 app_label="recruitment", model="interviewschedule"
             )
 
@@ -829,7 +829,7 @@ def leave_request_filter(request):
         for leave_request in leave_requests:
 
             # Fetch interviews for the employee within the requested leave period
-            InterviewSchedule = get_horilla_model_class(
+            InterviewSchedule = get_hr_model_class(
                 app_label="recruitment", model="interviewschedule"
             )
 
@@ -987,13 +987,13 @@ def _may_act_on_leave_request(request, leave_request, perm, owner_allowed=False)
 
 def _leave_decision_denied(request):
     """Denial in the shape the approve/reject callers read: the leave list
-    and the calendar take the outcome from HX-Trigger's horillaMessage."""
+    and the calendar take the outcome from HX-Trigger's hrMessage."""
     if not request.headers.get("HX-Request"):
         return handle_no_permission(request)
     response = HttpResponse("", status=200)
     response["HX-Trigger"] = json.dumps(
         {
-            "horillaMessage": {
+            "hrMessage": {
                 "level": "error",
                 "text": str(_("You don't have permission.")),
             }
@@ -1094,7 +1094,7 @@ def leave_request_approve(request, id, emp_id=None):
             response["HX-Trigger"] = json.dumps(
                 {
                     "reloadLeaveRequestList": {"target": "body"},
-                    "horillaMessage": {
+                    "hrMessage": {
                         "level": "error",
                         "text": str(
                             _(
@@ -1210,12 +1210,12 @@ def leave_request_approve(request, id, emp_id=None):
         response = HttpResponse("", status=200)
         trigger_data = {"reloadLeaveRequestList": {"target": "body"}}
         if approved:
-            trigger_data["horillaMessage"] = {
+            trigger_data["hrMessage"] = {
                 "level": "success",
                 "text": str(_("Leave request approved successfully..")),
             }
         elif error_message:
-            trigger_data["horillaMessage"] = {
+            trigger_data["hrMessage"] = {
                 "level": "error",
                 "text": error_message,
             }
@@ -1414,7 +1414,7 @@ def leave_request_cancel(request, id, emp_id=None):
                 response["HX-Trigger"] = json.dumps(
                     {
                         "reloadLeaveRequestList": {"target": "body"},
-                        "horillaMessage": {
+                        "hrMessage": {
                             "level": "success",
                             "text": str(_("Leave request rejected successfully..")),
                         },
@@ -1519,7 +1519,7 @@ def _cancellation_response(request, level, text):
         response["HX-Trigger"] = json.dumps(
             {
                 "reloadLeaveRequestList": {"target": "body"},
-                "horillaMessage": {"level": level, "text": str(text)},
+                "hrMessage": {"level": level, "text": str(text)},
             }
         )
         return response
@@ -3265,7 +3265,7 @@ def user_request_view(request):
             for leave_request in leave_requests:
 
                 # Fetch interviews for the employee within the requested leave period
-                InterviewSchedule = get_horilla_model_class(
+                InterviewSchedule = get_hr_model_class(
                     app_label="recruitment", model="interviewschedule"
                 )
 
@@ -3341,7 +3341,7 @@ def user_request_filter(request):
             for leave_request in leave_requests:
 
                 # Fetch interviews for the employee within the requested leave period
-                InterviewSchedule = get_horilla_model_class(
+                InterviewSchedule = get_hr_model_class(
                     app_label="recruitment", model="interviewschedule"
                 )
 
@@ -6362,7 +6362,7 @@ if apps.is_installed("recruitment"):
             date_list = [
                 start_date_obj + timedelta(days=i) for i in range(delta.days + 1)
             ]
-            InterviewSchedule = get_horilla_model_class(
+            InterviewSchedule = get_hr_model_class(
                 app_label="recruitment", model="interviewschedule"
             )
 

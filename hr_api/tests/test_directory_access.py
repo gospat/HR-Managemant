@@ -32,14 +32,14 @@ class DirectoryAccessTests(TestCase):
         self.user = make_user("dir_user")
         self.employee = make_employee(
             company=self.company,
-            email="dir@test.horilla",
+            email="dir@test.bells",
             first_name="Dana",
             user=self.user,
         )
         for i in range(3):
             make_employee(
                 company=self.company,
-                email=f"colleague{i}@test.horilla",
+                email=f"colleague{i}@test.bells",
                 first_name=f"Colleague{i}",
             )
         self.client.force_authenticate(user=self.user)
@@ -80,7 +80,7 @@ class DirectoryAccessTests(TestCase):
         )
         report = make_employee(
             company=self.company,
-            email="dir_report@test.horilla",
+            email="dir_report@test.bells",
             first_name="Rudi",
         )
         report.employee_work_info.reporting_manager_id = self.employee

@@ -1,7 +1,7 @@
 """
 Model forms for authoring tours and steps from the Settings UI.
 
-Both extend ``base.forms.ModelForm`` so fields automatically receive Horilla's
+Both extend ``base.forms.ModelForm`` so fields automatically receive Bells Tech's
 ``oh-*`` styling / Select2 widgets, consistent with the rest of the product.
 """
 

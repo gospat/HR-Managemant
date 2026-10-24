@@ -1,5 +1,5 @@
 """
-App configuration for the Horilla Automations app.
+App configuration for the Bells Tech Automations app.
 Initializes model choices and starts automation when the server runs.
 """
 
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 class HrAutomationConfig(AppConfig):
-    """Configuration class for the Horilla Automations Django app."""
+    """Configuration class for the Bells Tech Automations Django app."""
 
     default_auto_field = "django.db.models.BigAutoField"
     name = "hr_automations"

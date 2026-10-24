@@ -39,7 +39,7 @@ AUGUST = {
 class DailyAmountFollowsTheContractTests(TestCase):
     def setUp(self):
         company = make_company("LOP Co")
-        self.employee = make_employee(company=company, email="lop@test.horilla")
+        self.employee = make_employee(company=company, email="lop@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def _contract(self, **kwargs):
@@ -106,7 +106,7 @@ class AttendanceBranchUsesTheSameRuleTests(TestCase):
 
     def setUp(self):
         company = make_company("LOP Branch Co")
-        self.employee = make_employee(company=company, email="lopb@test.horilla")
+        self.employee = make_employee(company=company, email="lopb@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def _run(self, **contract_kwargs):
@@ -190,7 +190,7 @@ class NegativePayIsFlooredTests(TestCase):
 
     def setUp(self):
         company = make_company("Floor Co")
-        self.employee = make_employee(company=company, email="floor@test.horilla")
+        self.employee = make_employee(company=company, email="floor@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=10000.0)
 

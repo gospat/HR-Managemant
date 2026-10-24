@@ -42,7 +42,7 @@ class ComponentListPageTests(TestCase):
     def setUp(self):
         user = make_user("listadmin", is_superuser=True)
         company = make_company("List Co")
-        make_employee(company=company, email="listadmin@test.horilla", user=user)
+        make_employee(company=company, email="listadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 

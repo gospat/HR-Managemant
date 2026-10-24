@@ -25,7 +25,7 @@ class Fixture(TestCase):
         self.user = make_user("taxadmin", is_superuser=True)
         self.company = make_company("Tax Co")
         admin = make_employee(
-            company=self.company, email="taxadmin@test.horilla", user=self.user
+            company=self.company, email="taxadmin@test.bells", user=self.user
         )
         # An Employee gets a contract on save, and the admin's would count as
         # one more contract with no filing status -- which is what the page
@@ -36,7 +36,7 @@ class Fixture(TestCase):
     def employee(self, name, **contract):
         person = make_employee(
             company=self.company,
-            email=f"{name.lower()}@tax.horilla",
+            email=f"{name.lower()}@tax.bells",
             first_name=name,
         )
         Contract.objects.filter(employee_id=person).delete()
@@ -367,7 +367,7 @@ class SlabPresentationTests(Fixture):
 
     def test_it_is_hidden_without_permission_to_change(self):
         viewer = make_user("viewer")
-        make_employee(company=self.company, email="viewer@test.horilla", user=viewer)
+        make_employee(company=self.company, email="viewer@test.bells", user=viewer)
         from django.contrib.auth.models import Permission
 
         viewer.user_permissions.add(
@@ -479,7 +479,7 @@ class PageTests(Fixture):
 
     def test_it_needs_permission(self):
         stranger = make_user("nosy")
-        make_employee(company=self.company, email="nosy@test.horilla", user=stranger)
+        make_employee(company=self.company, email="nosy@test.bells", user=stranger)
         self.client.force_login(stranger)
 
         self.assertNotEqual(self.page().status_code, 200)

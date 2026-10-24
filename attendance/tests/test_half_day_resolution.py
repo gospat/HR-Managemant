@@ -22,7 +22,7 @@ WEDNESDAY = datetime.date(2026, 9, 2)
 class HalfDayResolutionTests(TestCase):
     def setUp(self):
         company = make_company("Half Day Co")
-        self.employee = make_employee(company=company, email="half@test.horilla")
+        self.employee = make_employee(company=company, email="half@test.bells")
 
     def _row(self, resolution):
         AttendanceConflictResolution.objects.filter(employee_id=self.employee).delete()
@@ -271,7 +271,7 @@ class HalfDayLeaveNaturalTests(TestCase):
 
     def setUp(self):
         company = make_company("Natural Half Co")
-        self.employee = make_employee(company=company, email="natural@test.horilla")
+        self.employee = make_employee(company=company, email="natural@test.bells")
 
     def _leave(self, payment="paid", breakdown="second_half", name="Half Leave"):
         from leave.models import LeaveRequest, LeaveType

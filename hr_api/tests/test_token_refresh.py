@@ -30,7 +30,7 @@ class TokenRefreshTests(TestCase):
         self.user = make_user("refresh_user", password=PASSWORD)
         make_employee(
             company=self.company,
-            email="refresh@test.horilla",
+            email="refresh@test.bells",
             first_name="Rita",
             user=self.user,
         )
@@ -115,7 +115,7 @@ class RefreshHonoursPasswordRevocationTests(TestCase):
         self.user = make_user("revoke_user", password=PASSWORD)
         make_employee(
             company=self.company,
-            email="revoke@test.horilla",
+            email="revoke@test.bells",
             first_name="Rue",
             user=self.user,
         )

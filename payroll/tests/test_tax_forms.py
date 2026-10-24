@@ -92,12 +92,12 @@ class TestPyCodeEndpointTests(TestCase):
     """
 
     def setUp(self):
-        # Horilla's view decorators resolve the acting employee off the user,
+        # Bells Tech's view decorators resolve the acting employee off the user,
         # so a bare create_superuser is not enough to get past them (it answers
         # 204, not 200).
         user = make_user("taxadmin", is_superuser=True)
         company = make_company("Tax Editor Co")
-        make_employee(company=company, email="taxadmin@test.horilla", user=user)
+        make_employee(company=company, email="taxadmin@test.bells", user=user)
         self.client.force_login(user)
         self.url = "/payroll/test-py-code/"
         self.hx = {"HTTP_HX_REQUEST": "true"}

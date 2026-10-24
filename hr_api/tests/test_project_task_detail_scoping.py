@@ -16,11 +16,11 @@ class ProjectTaskDetailScopingTests(TestCase):
         company = make_company("Project Co")
         cls.plain_user = make_user("prj_plain", password="secret123")
         make_employee(
-            company=company, email="prj_plain@test.horilla", user=cls.plain_user
+            company=company, email="prj_plain@test.bells", user=cls.plain_user
         )
         cls.viewer_user = make_user("prj_viewer", password="secret123")
         make_employee(
-            company=company, email="prj_viewer@test.horilla", user=cls.viewer_user
+            company=company, email="prj_viewer@test.bells", user=cls.viewer_user
         )
         cls.viewer_user.user_permissions.add(
             Permission.objects.get(codename="view_project"),

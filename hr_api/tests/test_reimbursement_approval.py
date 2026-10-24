@@ -37,11 +37,11 @@ class ReimbursementApprovalIntegrityTests(TestCase):
         self.approver_user = make_user("reimb_approver", password="secret123")
         self.approver = make_employee(
             company=company,
-            email="reimb_approver@test.horilla",
+            email="reimb_approver@test.bells",
             user=self.approver_user,
         )
         self.claimant = make_employee(
-            company=company, email="reimb_claimant@test.horilla"
+            company=company, email="reimb_claimant@test.bells"
         )
         self.approver_user.user_permissions.add(
             Permission.objects.get(codename="change_reimbursement")
@@ -150,7 +150,7 @@ class ReimbursementApprovalIntegrityTests(TestCase):
         plain = make_user("reimb_plain", password="secret123")
         make_employee(
             company=make_company("Other Co"),
-            email="reimb_plain@test.horilla",
+            email="reimb_plain@test.bells",
             user=plain,
         )
         claim = self._claim()

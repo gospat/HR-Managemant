@@ -30,9 +30,9 @@ class BulkApproveRejectTests(TestCase):
         company = make_company("Bulk Co")
         cls.user = make_user("bulk-approver", is_superuser=True)
         cls.admin = make_employee(
-            company=company, email="bulk-approver@test.horilla", user=cls.user
+            company=company, email="bulk-approver@test.bells", user=cls.user
         )
-        cls.staff = make_employee(company=company, email="bulk-staff@test.horilla")
+        cls.staff = make_employee(company=company, email="bulk-staff@test.bells")
         cls.day = EmployeeShift.objects.create(employee_shift="Day")
         cls.night = EmployeeShift.objects.create(employee_shift="Night")
         cls.office = WorkType.objects.create(work_type="Office")
@@ -115,10 +115,10 @@ class BulkArchiveRotatingShiftAssignTests(TestCase):
         company = make_company("Archive Co")
         cls.user = make_user("archive-admin", is_superuser=True)
         make_employee(
-            company=company, email="archive-admin@test.horilla", user=cls.user
+            company=company, email="archive-admin@test.bells", user=cls.user
         )
-        cls.staff = make_employee(company=company, email="archive-staff@test.horilla")
-        cls.other = make_employee(company=company, email="archive-other@test.horilla")
+        cls.staff = make_employee(company=company, email="archive-staff@test.bells")
+        cls.other = make_employee(company=company, email="archive-other@test.bells")
         day = EmployeeShift.objects.create(employee_shift="Day")
         night = EmployeeShift.objects.create(employee_shift="Night")
         cls.rotation = RotatingShift.objects.create(
@@ -175,10 +175,10 @@ class BulkArchiveRotatingWorkTypeAssignTests(TestCase):
         company = make_company("WT Archive Co")
         cls.user = make_user("wt-archive-admin", is_superuser=True)
         make_employee(
-            company=company, email="wt-archive-admin@test.horilla", user=cls.user
+            company=company, email="wt-archive-admin@test.bells", user=cls.user
         )
         cls.staff = make_employee(
-            company=company, email="wt-archive-staff@test.horilla"
+            company=company, email="wt-archive-staff@test.bells"
         )
         cls.office = WorkType.objects.create(work_type="Office")
         cls.remote = WorkType.objects.create(work_type="Remote")

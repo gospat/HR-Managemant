@@ -166,8 +166,8 @@ msgstr "階段順序已更新"
 msgid "Dashboard"
 msgstr "儀表板"
 
-msgid "Horilla dashboard section"
-msgstr "Horilla 儀表板區塊"
+msgid "Bells Tech dashboard section"
+msgstr "Bells Tech 儀表板區塊"
 
 msgid "Mark Attendance"
 msgstr "標記出勤"
@@ -208,8 +208,8 @@ msgstr "個人資料與變更密碼選項"
 msgid "Dashboard Tiles"
 msgstr "儀表板區塊"
 
-msgid "Horilla Dashboard Tiles"
-msgstr "Horilla 儀表板區塊"
+msgid "Bells Tech Dashboard Tiles"
+msgstr "Bells Tech 儀表板區塊"
 
 msgid "Dashboard Actions"
 msgstr "儀表板操作"
@@ -238,8 +238,8 @@ msgstr "您目前的公司存取權限"
 msgid "App"
 msgstr "應用程式"
 
-msgid "Horilla Hr Apps. eg Dashboard"
-msgstr "Horilla HR 應用，例如儀表板"
+msgid "Bells Tech Hr Apps. eg Dashboard"
+msgstr "Bells Tech HR 應用，例如儀表板"
 
 msgid "Pipeline"
 msgstr "招聘流程"

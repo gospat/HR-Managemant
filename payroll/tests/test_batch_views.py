@@ -48,7 +48,7 @@ class Fixture(TestCase):
         self.user = make_user("runadmin", is_superuser=True)
         self.company = make_company("Run Co")
         make_employee(
-            company=self.company, email="runadmin@test.horilla", user=self.user
+            company=self.company, email="runadmin@test.bells", user=self.user
         )
         self.client.force_login(self.user)
 
@@ -56,7 +56,7 @@ class Fixture(TestCase):
         for name in ("Ann", "Ben"):
             employee = make_employee(
                 company=self.company,
-                email=f"{name.lower()}@run.horilla",
+                email=f"{name.lower()}@run.bells",
                 first_name=name,
             )
             Contract.objects.filter(employee_id=employee).delete()

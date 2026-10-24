@@ -19,7 +19,7 @@ from django.utils.translation import gettext_lazy as _
 from base.hr_company_manager import HrCompanyManager
 from core import hr_middlewares
 from core.hr_middlewares import _thread_locals
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from core.models import HrModel, NoPermissionModel, upload_path
 from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_auth.models import HorillaUser

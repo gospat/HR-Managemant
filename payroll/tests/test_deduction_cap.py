@@ -54,7 +54,7 @@ class TaxableGrossTests(TestCase):
     def setUp(self):
         self.company = make_company("Cap Co")
         self.employee = make_employee(
-            company=self.company, email="cap@test.horilla", first_name="Cap"
+            company=self.company, email="cap@test.bells", first_name="Cap"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(
@@ -102,7 +102,7 @@ class DeductionCapTests(TestCase):
     def setUp(self):
         self.company = make_company("Cap Co")
         self.employee = make_employee(
-            company=self.company, email="capped@test.horilla", first_name="Capped"
+            company=self.company, email="capped@test.bells", first_name="Capped"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(

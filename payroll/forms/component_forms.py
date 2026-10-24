@@ -24,7 +24,7 @@ from employee.filters import EmployeeFilter
 from employee.models import BonusPoint, Employee
 from core import hr_middlewares
 from core.hr_middlewares import _thread_locals
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from hr_widgets.forms import HrForm, default_select_option_template
 from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
 from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
@@ -1337,7 +1337,7 @@ class ReimbursementForm(ModelForm):
         return employee_qs.first()
 
     def get_encashable_leaves(self, employee):
-        LeaveType = get_horilla_model_class(app_label="leave", model="leavetype")
+        LeaveType = get_hr_model_class(app_label="leave", model="leavetype")
         return LeaveType.objects.filter(
             employee_available_leave__employee_id=employee,
             employee_available_leave__total_leave_days__gte=1,
@@ -1380,7 +1380,7 @@ class ReimbursementForm(ModelForm):
         if not apps.is_installed("leave") or not self.employee:
             return
 
-        AvailableLeave = get_horilla_model_class(
+        AvailableLeave = get_hr_model_class(
             app_label="leave", model="availableleave"
         )
         assigned_leaves = self.get_encashable_leaves(self.employee)
@@ -1478,7 +1478,7 @@ class ReimbursementForm(ModelForm):
                 if leave_type not in encashable:
                     self.add_error("leave_type_id", "This leave type is not encashable")
                 else:
-                    AvailableLeave = get_horilla_model_class("leave", "availableleave")
+                    AvailableLeave = get_hr_model_class("leave", "availableleave")
                     available_leave = AvailableLeave.objects.filter(
                         leave_type_id=leave_type, employee_id=employee
                     ).first()

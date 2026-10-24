@@ -38,7 +38,7 @@ class LeaveManagerScopeTests(TestCase):
         def person(name):
             user = make_user(name, password="secret123")
             emp = make_employee(
-                company=company, email=f"{name}@test.horilla", user=user
+                company=company, email=f"{name}@test.bells", user=user
             )
             return user, emp
 
@@ -86,7 +86,7 @@ class LeaveManagerScopeTests(TestCase):
             reverse("request-approve", args=[self.leave.pk]), **HX
         )
         self.assertEqual(self.refreshed_status(), "requested")
-        message = json.loads(response["HX-Trigger"])["horillaMessage"]
+        message = json.loads(response["HX-Trigger"])["hrMessage"]
         self.assertEqual(message["level"], "error")
 
     def test_other_manager_cannot_approve_from_the_address_bar(self):

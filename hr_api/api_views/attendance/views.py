@@ -165,7 +165,7 @@ class ClockInAPIView(APIView):
                 if start_time_sec > end_time_sec:
                     # night shift
                     # ------------------
-                    # Night shift in Horilla consider a 24 hours from noon to next day noon,
+                    # Night shift in Bells Tech consider a 24 hours from noon to next day noon,
                     # the shift day taken today if the attendance clocked in after 12 O clock.
 
                     if mid_day_sec > now_sec:

@@ -46,12 +46,12 @@ class InitializedDatabaseRejectsSetupFlow(TestCase):
     def setUp(self):
         company = Company.objects.create(company="Acme", hq=True)
         user = HorillaUser.objects.create_superuser(
-            username="root", email="root@test.horilla", password="pw-not-real"
+            username="root", email="root@test.bells", password="pw-not-real"
         )
         # initialize_database_condition() only counts setup as finished when a
         # superuser has an employee attached, so the guard is not armed without
         # this.
-        make_employee(company=company, email="root@test.horilla", user=user)
+        make_employee(company=company, email="root@test.bells", user=user)
 
     def test_step_views_do_not_serve_the_wizard(self):
         for name in STEP_URL_NAMES:
@@ -87,7 +87,7 @@ class InitializedDatabaseRejectsSetupFlow(TestCase):
                 "firstname": "Back",
                 "lastname": "Door",
                 "badge_id": "BD1",
-                "email": "backdoor@test.horilla",
+                "email": "backdoor@test.bells",
                 "phone": "9999999999",
             },
             headers={"hx-request": "true"},
@@ -112,7 +112,7 @@ class InitializedDatabaseRejectsSetupFlow(TestCase):
                 "firstname": "B",
                 "lastname": "D",
                 "badge_id": "BD2",
-                "email": "bd2@test.horilla",
+                "email": "bd2@test.bells",
                 "phone": "9999999999",
             },
             headers={"hx-request": "true"},

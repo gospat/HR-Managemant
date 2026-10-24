@@ -1,4 +1,4 @@
-"""Horilla API JWT login and auth-gate smoke tests."""
+"""Bells Tech API JWT login and auth-gate smoke tests."""
 
 import base64
 
@@ -16,7 +16,7 @@ class LoginAPITests(TestCase):
         self.user = make_user("api_login", password=self.password)
         self.employee = make_employee(
             company=self.company,
-            email="api_login@test.horilla",
+            email="api_login@test.bells",
             user=self.user,
         )
 
@@ -48,7 +48,7 @@ class JWTProtectedEndpointTests(TestCase):
         self.user = make_user("api_gate", password=self.password)
         make_employee(
             company=company,
-            email="api_gate@test.horilla",
+            email="api_gate@test.bells",
             user=self.user,
         )
 

@@ -22,7 +22,7 @@ def _owned_subscriptions(request):
 
 
 def _reload_response(request):
-    """Refresh the CBV list container in place, matching the rest of Horilla's
+    """Refresh the CBV list container in place, matching the rest of Bells Tech's
     'POST action -> click the hidden {view_id}Reload button' convention.
     Also closes #genericModal — a no-op for the row-action callers (toggle/
     delete/run-now, never invoked from inside that modal) but needed for the

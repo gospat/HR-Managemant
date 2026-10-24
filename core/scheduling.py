@@ -1,5 +1,5 @@
 """
-Central registry for Horilla's background jobs.
+Central registry for Bells Tech's background jobs.
 
 Why this exists
 ---------------

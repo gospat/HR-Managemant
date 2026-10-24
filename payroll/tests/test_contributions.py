@@ -46,7 +46,7 @@ class Fixture(TestCase):
         self.user = make_user("contribadmin", is_superuser=True)
         self.company = make_company("Contrib Co")
         make_employee(
-            company=self.company, email="contribadmin@test.horilla", user=self.user
+            company=self.company, email="contribadmin@test.bells", user=self.user
         )
         self.client.force_login(self.user)
 
@@ -54,7 +54,7 @@ class Fixture(TestCase):
         for name in ("Ann", "Ben"):
             employee = make_employee(
                 company=self.company,
-                email=f"{name.lower()}@contrib.horilla",
+                email=f"{name.lower()}@contrib.bells",
                 first_name=name,
             )
             Contract.objects.filter(employee_id=employee).delete()
@@ -269,7 +269,7 @@ class PageTests(Fixture):
 
     def test_it_needs_permission(self):
         stranger = make_user("nosy")
-        make_employee(company=self.company, email="nosy@test.horilla", user=stranger)
+        make_employee(company=self.company, email="nosy@test.bells", user=stranger)
         self.client.force_login(stranger)
 
         response = self.client.get(reverse("payroll-contribution-list"))

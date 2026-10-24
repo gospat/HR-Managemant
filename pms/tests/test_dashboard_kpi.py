@@ -31,7 +31,7 @@ class DashboardKpiTests(TestCase):
         company = make_company("KPI Test Co")
         cls.user = make_user("kpi_user", password="secret123")
         cls.employee = make_employee(
-            company=company, email="kpi@test.horilla", user=cls.user
+            company=company, email="kpi@test.bells", user=cls.user
         )
         cls.user.user_permissions.add(
             Permission.objects.get(
@@ -162,7 +162,7 @@ class DashboardKpiTests(TestCase):
         other = make_user("kpi_nobody", password="secret123")
         make_employee(
             company=make_company("KPI Other Co", hq=False),
-            email="kpi_nobody@test.horilla",
+            email="kpi_nobody@test.bells",
             user=other,
         )
         self.client.force_login(other)

@@ -9,7 +9,7 @@ class AvailableLeaveCarryforwardTests(TestCase):
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Leave Carry Co")
-        self.employee = make_employee(company=company, email="carry@test.horilla")
+        self.employee = make_employee(company=company, email="carry@test.bells")
         self.LeaveType = LeaveType
         self.AvailableLeave = AvailableLeave
 

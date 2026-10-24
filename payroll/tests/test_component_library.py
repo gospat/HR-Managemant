@@ -152,7 +152,7 @@ class LoadedComponentsComputeTests(TestCase):
 
     def setUp(self):
         company = make_company("Lib Co")
-        self.employee = make_employee(company=company, email="lib@test.horilla")
+        self.employee = make_employee(company=company, email="lib@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=30000.0)
 
@@ -224,7 +224,7 @@ class LibraryViewTests(TestCase):
     def setUp(self):
         user = make_user("libadmin", is_superuser=True)
         company = make_company("Lib View Co")
-        make_employee(company=company, email="libadmin@test.horilla", user=user)
+        make_employee(company=company, email="libadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
@@ -327,7 +327,7 @@ class PickerModalTests(TestCase):
     def setUp(self):
         user = make_user("pickadmin", is_superuser=True)
         company = make_company("Pick Co")
-        make_employee(company=company, email="pickadmin@test.horilla", user=user)
+        make_employee(company=company, email="pickadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
@@ -381,7 +381,7 @@ class LibraryPermissionTests(TestCase):
     def setUp(self):
         self.user = make_user("halfperms")
         company = make_company("Half Co")
-        make_employee(company=company, email="halfperms@test.horilla", user=self.user)
+        make_employee(company=company, email="halfperms@test.bells", user=self.user)
         self.client.force_login(self.user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 

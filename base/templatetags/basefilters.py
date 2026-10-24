@@ -168,11 +168,11 @@ def _get_employee_of_user(user):
     user object - this tag/filter is called once per row in list views, and
     without this cache each call re-issues the same lookup query.
     """
-    if not hasattr(user, "_horilla_employee_cache"):
-        user._horilla_employee_cache = Employee.objects.filter(
+    if not hasattr(user, "_hr_employee_cache"):
+        user._hr_employee_cache = Employee.objects.filter(
             employee_user_id=user
         ).first()
-    return user._horilla_employee_cache
+    return user._hr_employee_cache
 
 
 @register.simple_tag
@@ -181,9 +181,9 @@ def is_manager_of(user, instance, field_name="employee_id"):
 
     target_employee = getattr(instance, field_name, None)
 
-    if not hasattr(user, "_horilla_is_manager_of_cache"):
-        user._horilla_is_manager_of_cache = {}
-    cache = user._horilla_is_manager_of_cache
+    if not hasattr(user, "_hr_is_manager_of_cache"):
+        user._hr_is_manager_of_cache = {}
+    cache = user._hr_is_manager_of_cache
     key = (getattr(employee, "id", None), getattr(target_employee, "id", None))
     if key not in cache:
         cache[key] = EmployeeWorkInformation.objects.filter(
@@ -209,8 +209,8 @@ def is_leave_approval_manager(user):
     """
     This method will return true if the user is comes in MultipleApprovalCondition model as approving manager
     """
-    if hasattr(user, "_horilla_is_leave_approval_manager_cache"):
-        return user._horilla_is_leave_approval_manager_cache
+    if hasattr(user, "_hr_is_leave_approval_manager_cache"):
+        return user._hr_is_leave_approval_manager_cache
     employee = _get_employee_of_user(user)
     manager = (
         MultipleApprovalManagers.objects.entire()
@@ -219,7 +219,7 @@ def is_leave_approval_manager(user):
         if employee
         else False
     )
-    user._horilla_is_leave_approval_manager_cache = manager
+    user._hr_is_leave_approval_manager_cache = manager
     return manager
 
 

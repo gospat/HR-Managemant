@@ -171,8 +171,8 @@ msgstr "Sequenza di fase aggiornata"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-msgid "Horilla dashboard section"
-msgstr "Sezione dashboard Horilla"
+msgid "Bells Tech dashboard section"
+msgstr "Sezione dashboard Bells Tech"
 
 msgid "Mark Attendance"
 msgstr "Registra presenza"
@@ -213,8 +213,8 @@ msgstr "Opzioni profilo e cambio password"
 msgid "Dashboard Tiles"
 msgstr "Riquadri dashboard"
 
-msgid "Horilla Dashboard Tiles"
-msgstr "Riquadri dashboard Horilla"
+msgid "Bells Tech Dashboard Tiles"
+msgstr "Riquadri dashboard Bells Tech"
 
 msgid "Dashboard Actions"
 msgstr "Azioni dashboard"
@@ -243,8 +243,8 @@ msgstr "Il tuo accesso aziendale attuale"
 msgid "App"
 msgstr "App"
 
-msgid "Horilla Hr Apps. eg Dashboard"
-msgstr "App Horilla HR, es. Dashboard"
+msgid "Bells Tech Hr Apps. eg Dashboard"
+msgstr "App Bells Tech HR, es. Dashboard"
 
 msgid "Pipeline"
 msgstr "Pipeline"

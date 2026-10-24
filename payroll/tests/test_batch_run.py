@@ -64,7 +64,7 @@ class Fixture(TestCase):
         for name in ("Ann", "Ben", "Cara"):
             employee = make_employee(
                 company=self.company,
-                email=f"{name.lower()}@test.horilla",
+                email=f"{name.lower()}@test.bells",
                 first_name=name,
             )
             Contract.objects.filter(employee_id=employee).delete()

@@ -168,8 +168,8 @@ msgstr "تم تحديث تسلسل المراحل"
 msgid "Dashboard"
 msgstr "لوحة التحكم"
 
-msgid "Horilla dashboard section"
-msgstr "قسم لوحة تحكم Horilla"
+msgid "Bells Tech dashboard section"
+msgstr "قسم لوحة تحكم Bells Tech"
 
 msgid "Mark Attendance"
 msgstr "تسجيل الحضور"
@@ -210,8 +210,8 @@ msgstr "خيارات الملف الشخصي وتغيير كلمة المرور"
 msgid "Dashboard Tiles"
 msgstr "بلاطات لوحة التحكم"
 
-msgid "Horilla Dashboard Tiles"
-msgstr "بلاطات لوحة تحكم Horilla"
+msgid "Bells Tech Dashboard Tiles"
+msgstr "بلاطات لوحة تحكم Bells Tech"
 
 msgid "Dashboard Actions"
 msgstr "إجراءات لوحة التحكم"
@@ -240,8 +240,8 @@ msgstr "وصولك الحالي للشركة"
 msgid "App"
 msgstr "برنامج"
 
-msgid "Horilla Hr Apps. eg Dashboard"
-msgstr "تطبيقات Horilla HR مثل لوحة التحكم"
+msgid "Bells Tech Hr Apps. eg Dashboard"
+msgstr "تطبيقات Bells Tech HR مثل لوحة التحكم"
 
 msgid "Pipeline"
 msgstr "خط الأنابيب"

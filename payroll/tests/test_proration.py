@@ -232,7 +232,7 @@ class LimitNoteEndpointTests(TestCase):
     def setUp(self):
         user = make_user("noteadmin", is_superuser=True)
         company = make_company("Note Co")
-        make_employee(company=company, email="noteadmin@test.horilla", user=user)
+        make_employee(company=company, email="noteadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 

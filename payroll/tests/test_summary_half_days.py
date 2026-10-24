@@ -22,7 +22,7 @@ DAY_WAGE = 1000.0
 class HalfDayPayrollTests(TestCase):
     def setUp(self):
         company = make_company("Half Pay Co")
-        self.employee = make_employee(company=company, email="halfpay@test.horilla")
+        self.employee = make_employee(company=company, email="halfpay@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         Contract.objects.create(
             contract_name="Daily",

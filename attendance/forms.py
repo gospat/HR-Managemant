@@ -943,7 +943,7 @@ excluded_fields = [
     "request_type",
     "month_sequence",
     "objects",
-    "horilla_history",
+    "hr_history",
 ]
 
 

@@ -3,7 +3,7 @@
 `PassWordResetForm.save()` built the link from `get_current_site(request)`.
 That resolves through django.contrib.sites, and the only row a normal install
 has is the one the framework's own migration creates -- domain
-``example.com``. Nothing in Horilla ever updates it, so every reset mail sent
+``example.com``. Nothing in Bells Tech ever updates it, so every reset mail sent
 a link to
 
     http://example.com/reset/<uid>/<token>/
@@ -65,7 +65,7 @@ class PasswordResetDomainTests(TestCase):
         cls.company = make_company("Reset Co")
         cls.employee = make_employee(
             company=cls.company,
-            email="resetme@test.horilla",
+            email="resetme@test.bells",
             first_name="Reset",
             last_name="Me",
         )

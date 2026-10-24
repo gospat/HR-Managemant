@@ -20,7 +20,7 @@ import logging
 
 from django.apps import apps
 
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from payroll.methods.basic_pay_source import COMPONENT as BASIC_FROM_COMPONENT
 from payroll.methods.basic_pay_source import CONTRACT as BASIC_FROM_CONTRACT
 from payroll.methods.basic_pay_source import NEITHER as BASIC_FROM_NEITHER
@@ -53,7 +53,7 @@ def get_pending_attendance(employee, start_date, end_date):
     """
     if not apps.is_installed("attendance"):
         return []
-    Attendance = get_horilla_model_class(app_label="attendance", model="attendance")
+    Attendance = get_hr_model_class(app_label="attendance", model="attendance")
     records = Attendance.objects.filter(
         employee_id=employee,
         attendance_date__range=(start_date, end_date),

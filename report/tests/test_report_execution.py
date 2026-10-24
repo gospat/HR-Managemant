@@ -60,26 +60,26 @@ class StandardReportExecutionTests(TestCase):
         # invisible to them.
         cls.emp_a = make_employee(
             company=cls.company,
-            email="a@test.horilla",
+            email="a@test.bells",
             first_name="Ann",
             date_joining=cls.today - timedelta(days=400),
         )
         cls.emp_b = make_employee(
             company=cls.company,
-            email="b@test.horilla",
+            email="b@test.bells",
             first_name="Bob",
             date_joining=cls.today - timedelta(days=20),
         )
         cls.emp_left = make_employee(
             company=cls.company,
-            email="c@test.horilla",
+            email="c@test.bells",
             first_name="Cara",
             date_joining=cls.today - timedelta(days=40),
         )
         cls.emp_left.is_active = False
         cls.emp_left.save(update_fields=["is_active"])
         cls.emp_other = make_employee(
-            company=cls.other_company, email="d@test.horilla", first_name="Dan"
+            company=cls.other_company, email="d@test.bells", first_name="Dan"
         )
 
         cls._seed_exits()
@@ -168,7 +168,7 @@ class StandardReportExecutionTests(TestCase):
         make_candidate(
             recruitment=cls.recruitment,
             stage=cls.stage,
-            email="cand1@test.horilla",
+            email="cand1@test.bells",
         )
         # Candidate.save() derives `hired` from the stage's stage_type, so a
         # hired candidate has to sit on the real hired stage rather than
@@ -177,7 +177,7 @@ class StandardReportExecutionTests(TestCase):
         make_candidate(
             recruitment=cls.recruitment,
             stage=hired_stage,
-            email="cand2@test.horilla",
+            email="cand2@test.bells",
             name="Hired Candidate",
             hired=True,
         )
@@ -379,13 +379,13 @@ class ReportNumericAgreementTests(TestCase):
         cls.today = date.today()
         cls.company = make_company("Agreement Corp")
         cls.active_1 = make_employee(
-            company=cls.company, email="act1@test.horilla", first_name="Act1"
+            company=cls.company, email="act1@test.bells", first_name="Act1"
         )
         cls.active_2 = make_employee(
-            company=cls.company, email="act2@test.horilla", first_name="Act2"
+            company=cls.company, email="act2@test.bells", first_name="Act2"
         )
         cls.terminated = make_employee(
-            company=cls.company, email="term@test.horilla", first_name="Term"
+            company=cls.company, email="term@test.bells", first_name="Term"
         )
         cls.terminated.is_active = False
         cls.terminated.save(update_fields=["is_active"])
@@ -468,7 +468,7 @@ class ReportQueryBudgetTests(TestCase):
         cls.employees = [
             make_employee(
                 company=cls.company,
-                email=f"budget{i}@test.horilla",
+                email=f"budget{i}@test.bells",
                 first_name=f"Emp{i}",
             )
             for i in range(6)
@@ -517,7 +517,7 @@ class SubscriptionClaimTests(TestCase):
 
         cls.company = make_company("Claim Corp")
         cls.employee = make_employee(
-            company=cls.company, email="claim@test.horilla", first_name="Claim"
+            company=cls.company, email="claim@test.bells", first_name="Claim"
         )
         # The owner has to clear both the view and export permission gates,
         # or delivery exits before ever reaching the claim.
@@ -533,7 +533,7 @@ class SubscriptionClaimTests(TestCase):
 
         return patch(
             "report.delivery.ConfiguredEmailBackend.dynamic_from_email_with_display_name",
-            new_callable=lambda: property(lambda self: "reports@test.horilla"),
+            new_callable=lambda: property(lambda self: "reports@test.bells"),
             create=True,
         )
 
@@ -631,7 +631,7 @@ class AsyncExportScopingTests(TestCase):
             with self.assertRaises(async_export.ExportQueueFull):
                 async_export.queue_export_email(
                     user_id=1,
-                    to_email="x@test.horilla",
+                    to_email="x@test.bells",
                     slug="workforce-composition",
                     fmt="xlsx",
                     filters_dict={},
@@ -823,7 +823,7 @@ class PeriodNoteDisclosureTests(TestCase):
 
         cls.today = date.today()
         cls.company = make_company("Note Corp")
-        make_employee(company=cls.company, email="note@test.horilla", first_name="Note")
+        make_employee(company=cls.company, email="note@test.bells", first_name="Note")
 
     def setUp(self):
         clear_selected_company()
@@ -898,13 +898,13 @@ class AuditActivityScopingTests(TestCase):
         cls.user_b = make_user("audit-b")
         cls.emp_a = make_employee(
             company=cls.company_a,
-            email="aa@test.horilla",
+            email="aa@test.bells",
             first_name="AuditA",
             user=cls.user_a,
         )
         cls.emp_b = make_employee(
             company=cls.company_b,
-            email="bb@test.horilla",
+            email="bb@test.bells",
             first_name="AuditB",
             user=cls.user_b,
         )
@@ -1078,13 +1078,13 @@ class CohortActiveFilterTests(TestCase):
         # inside the 90-day window.
         cls.early_leaver = make_employee(
             company=cls.company,
-            email="leaver@test.horilla",
+            email="leaver@test.bells",
             first_name="Early",
             date_joining=cls.today - timedelta(days=40),
         )
         cls.stayer = make_employee(
             company=cls.company,
-            email="stayer@test.horilla",
+            email="stayer@test.bells",
             first_name="Stayer",
             date_joining=cls.today - timedelta(days=40),
         )

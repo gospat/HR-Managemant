@@ -23,7 +23,7 @@ class EmployeeLeaveDetailsForecastTests(TestCase):
         cls.user = make_user("forecast-balance")
         cls.employee = make_employee(
             company=company,
-            email="forecast-balance@test.horilla",
+            email="forecast-balance@test.bells",
             user=cls.user,
         )
         # reset_based monthly with a reset already behind us, so the

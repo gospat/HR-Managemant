@@ -41,7 +41,7 @@ class CandidateStageProgressionTests(TestCase):
     def _make_candidate(self, stage):
         return Candidate.objects.create(
             name="Pat Candidate",
-            email="pat.candidate@test.horilla",
+            email="pat.candidate@test.bells",
             mobile="9998887777",
             recruitment_id=self.rec,
             job_position_id=self.jp,

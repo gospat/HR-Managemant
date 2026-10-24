@@ -103,7 +103,7 @@ jobs:
           load: true
           push: false
           platforms: linux/amd64
-          tags: horilla-hr:smoketest
+          tags: hr-app:smoketest
           build-args: |
             VERSION=${{ steps.v.outputs.version }}
             VCS_REF=${{ github.sha }}
@@ -126,30 +126,30 @@ jobs:
           # which blocks waiting for Postgres (DB_HOST defaults to "db") long
           # before it would exec this command. Overriding CMD alone is not
           # enough -- the entrypoint still runs and the wait loop exits 1.
-          IMG_VERSION=$(docker run --rm --entrypoint python horilla-hr:smoketest \
+          IMG_VERSION=$(docker run --rm --entrypoint python hr-app:smoketest \
             -c "import core; print(core.__version__)")
           echo "Image reports __version__=$IMG_VERSION"
 
-          docker network create horilla-smoke
-          docker run -d --name smoke-db --network horilla-smoke \
-            -e POSTGRES_DB=horilla_db -e POSTGRES_USER=horilla_user \
-            -e POSTGRES_PASSWORD=horilla_pass postgres:16-alpine
+          docker network create hr-smoke
+          docker run -d --name smoke-db --network hr-smoke \
+            -e POSTGRES_DB=hr_db -e POSTGRES_USER=hr_user \
+            -e POSTGRES_PASSWORD=hr_pass postgres:16-alpine
 
           for i in $(seq 1 60); do
-            docker exec smoke-db pg_isready -U horilla_user -d horilla_db >/dev/null 2>&1 && break
+            docker exec smoke-db pg_isready -U hr_user -d hr_db >/dev/null 2>&1 && break
             sleep 2
             [ "$i" -eq 60 ] && { echo "::error::Postgres never became ready"; exit 1; }
           done
 
-          docker run -d --name smoke-web --network horilla-smoke -p 8000:8000 \
+          docker run -d --name smoke-web --network hr-smoke -p 8000:8000 \
             -e DEBUG=0 \
             -e SECRET_KEY=ci-smoke-test-key-not-a-real-secret-000000000000 \
             -e ALLOWED_HOSTS=localhost,127.0.0.1 \
             -e CSRF_TRUSTED_ORIGINS=http://localhost:8000 \
-            -e DATABASE_URL=postgres://horilla_user:horilla_pass@smoke-db:5432/horilla_db \
+            -e DATABASE_URL=postgres://hr_user:hr_pass@smoke-db:5432/hr_db \
             -e DB_HOST=smoke-db -e DB_PORT=5432 \
             -e DB_INIT_PASSWORD=ci-smoke-db-init-not-a-real-secret-0000 \
-            horilla-hr:smoketest
+            hr-app:smoketest
 
           # 300 x 2s = 10 minutes. The entrypoint runs the full migration set
           # against an empty database before gunicorn binds: 185 migrations at
@@ -196,12 +196,12 @@ jobs:
         if: always()
         run: |
           docker rm -f smoke-web smoke-db 2>/dev/null || true
-          docker network rm horilla-smoke 2>/dev/null || true
+          docker network rm hr-smoke 2>/dev/null || true
 
       - name: Scan image (fail on CRITICAL)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: horilla-hr:smoketest
+          image-ref: hr-app:smoketest
           # HIGH included: this gate already caught a CRITICAL Django SQL
           # injection before it shipped, and a HIGH in an HR app handling
           # payroll and personal data is not a "publish anyway" finding.

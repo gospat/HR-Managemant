@@ -135,7 +135,7 @@ class HrModelBase(ModelBase):
                 name,
                 (object,),
                 {
-                    "_is_horilla_extension": True,
+                    "_is_hr_extension": True,
                     "_inherit": inherit,
                     "_extension_fields": contributed_fields,
                     "__module__": namespace.get("__module__", ""),

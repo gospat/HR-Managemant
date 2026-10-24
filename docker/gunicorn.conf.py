@@ -1,4 +1,4 @@
-# Gunicorn configuration for Horilla-HR
+# Gunicorn configuration for Bells Tech-HR
 # This file provides advanced configuration options for the WSGI server
 
 import multiprocessing

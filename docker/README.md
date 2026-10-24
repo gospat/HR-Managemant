@@ -183,9 +183,9 @@ make logs
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `POSTGRES_DB` | `horilla_db` | Database name |
-| `POSTGRES_USER` | `horilla_user` | Database user |
-| `POSTGRES_PASSWORD` | `horilla_pass` | Database password — **change for production** |
+| `POSTGRES_DB` | `hr_db` | Database name |
+| `POSTGRES_USER` | `hr_user` | Database user |
+| `POSTGRES_PASSWORD` | `hr_pass` | Database password — **change for production** |
 
 #### Server Settings
 
@@ -262,7 +262,7 @@ docker compose exec web python manage.py test
 make db-shell
 
 # Redis CLI
-docker compose exec redis redis-cli -a horilla_pass
+docker compose exec redis redis-cli -a hr_pass
 ```
 
 ### Viewing Logs
@@ -482,7 +482,7 @@ Add a memory limit to prevent Redis from consuming all available RAM:
 
 ```yaml
 redis:
-  command: redis-server --appendonly yes --requirepass horilla_pass --maxmemory 256mb --maxmemory-policy allkeys-lru
+  command: redis-server --appendonly yes --requirepass hr_pass --maxmemory 256mb --maxmemory-policy allkeys-lru
 ```
 
 ---
@@ -493,30 +493,30 @@ redis:
 
 ```bash
 # SQL backup
-docker compose exec db pg_dump -U horilla_user horilla_db > backup_$(date +%Y%m%d_%H%M%S).sql
+docker compose exec db pg_dump -U hr_user hr_db > backup_$(date +%Y%m%d_%H%M%S).sql
 
 # Compressed backup
-docker compose exec db pg_dump -U horilla_user -F c horilla_db > backup_$(date +%Y%m%d).dump
+docker compose exec db pg_dump -U hr_user -F c hr_db > backup_$(date +%Y%m%d).dump
 ```
 
 ### Database Restore
 
 ```bash
 # From SQL file
-cat backup.sql | docker compose exec -T db psql -U horilla_user -d horilla_db
+cat backup.sql | docker compose exec -T db psql -U hr_user -d hr_db
 
 # From compressed dump
-docker compose exec -T db pg_restore -U horilla_user -d horilla_db --clean < backup.dump
+docker compose exec -T db pg_restore -U hr_user -d hr_db --clean < backup.dump
 ```
 
 ### Media Backup
 
 ```bash
 # Backup media volume
-docker run --rm -v horilla_media:/data -v $(pwd):/backup alpine tar czf /backup/media_backup.tar.gz -C /data .
+docker run --rm -v hr_media:/data -v $(pwd):/backup alpine tar czf /backup/media_backup.tar.gz -C /data .
 
 # Restore media volume
-docker run --rm -v horilla_media:/data -v $(pwd):/backup alpine tar xzf /backup/media_backup.tar.gz -C /data
+docker run --rm -v hr_media:/data -v $(pwd):/backup alpine tar xzf /backup/media_backup.tar.gz -C /data
 ```
 
 ---
@@ -622,8 +622,8 @@ docker system df -v
 #### Slow performance
 
 1. Check worker count: `docker compose exec web ps aux | grep gunicorn`
-2. Check database connections: `docker compose exec db psql -U horilla_user -c "SELECT count(*) FROM pg_stat_activity;"`
-3. Check Redis memory: `docker compose exec redis redis-cli -a horilla_pass INFO memory`
+2. Check database connections: `docker compose exec db psql -U hr_user -c "SELECT count(*) FROM pg_stat_activity;"`
+3. Check Redis memory: `docker compose exec redis redis-cli -a hr_pass INFO memory`
 
 ### Resetting Everything
 

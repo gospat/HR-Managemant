@@ -12,7 +12,7 @@ class LeaveLedgerBuildTests(TestCase):
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Ledger Co")
-        self.employee = make_employee(company=company, email="ledger@test.horilla")
+        self.employee = make_employee(company=company, email="ledger@test.bells")
         self.LeaveType = LeaveType
         self.AvailableLeave = AvailableLeave
 
@@ -356,7 +356,7 @@ class ForecastNextResetTests(TestCase):
         from leave.models import AvailableLeave, LeaveType
 
         company = make_company("Forecast Co")
-        self.employee = make_employee(company=company, email="forecast@test.horilla")
+        self.employee = make_employee(company=company, email="forecast@test.bells")
         self.LeaveType = LeaveType
         self.AvailableLeave = AvailableLeave
 
@@ -448,7 +448,7 @@ class LeaveLedgerViewTests(TestCase):
         company = make_company("Ledger View Co")
         user = make_user("ledger_view_user", is_superuser=True)
         self.employee = make_employee(
-            company=company, email="ledgerview@test.horilla", user=user
+            company=company, email="ledgerview@test.bells", user=user
         )
         lt = LeaveType.objects.create(
             name="Ledger View Type",

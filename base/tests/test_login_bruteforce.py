@@ -33,9 +33,9 @@ class LoginLockoutTests(TestCase):
         self.addCleanup(_reset_axes)
         company = Company.objects.create(company="Acme", hq=True)
         self.user = HorillaUser.objects.create_user(
-            username="alice", email="alice@test.horilla", password="correct-horse"
+            username="alice", email="alice@test.bells", password="correct-horse"
         )
-        make_employee(company=company, email="alice@test.horilla", user=self.user)
+        make_employee(company=company, email="alice@test.bells", user=self.user)
 
     def _attempt(self, password):
         return self.client.post(
@@ -84,9 +84,9 @@ class LoginDoesNotLeakAccountExistenceTests(TestCase):
         self.addCleanup(_reset_axes)
         company = Company.objects.create(company="Acme", hq=True)
         blocked = HorillaUser.objects.create_user(
-            username="blocked", email="blocked@test.horilla", password="pw-not-real"
+            username="blocked", email="blocked@test.bells", password="pw-not-real"
         )
-        make_employee(company=company, email="blocked@test.horilla", user=blocked)
+        make_employee(company=company, email="blocked@test.bells", user=blocked)
         blocked.is_active = False
         blocked.save(update_fields=["is_active"])
 

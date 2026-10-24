@@ -67,9 +67,9 @@ class Loader(BaseLoader):
         request = self._get_request()
         if request is None:
             return get_site_for_request(request)
-        if not hasattr(request, "_horilla_dbtemplate_site"):
-            request._horilla_dbtemplate_site = get_site_for_request(request)
-        return request._horilla_dbtemplate_site
+        if not hasattr(request, "_hr_dbtemplate_site"):
+            request._hr_dbtemplate_site = get_site_for_request(request)
+        return request._hr_dbtemplate_site
 
     def _get_language(self):
         """Resolve the current language from the request."""

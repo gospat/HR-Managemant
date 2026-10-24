@@ -26,7 +26,7 @@ class Fixture(TestCase):
     def setUp(self):
         self.company = make_company("Repair Co")
         self.employee = make_employee(
-            company=self.company, email="repair@test.horilla", first_name="Repair"
+            company=self.company, email="repair@test.bells", first_name="Repair"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         self.basic_component = Allowance.objects.create(

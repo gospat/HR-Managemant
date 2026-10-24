@@ -51,7 +51,7 @@ class BackfillPayrollFeatureCoverageCtcDownTests(TestCase):
         self.company = make_company("Coverage Co")
         self.employees = []
         for i in range(8):
-            employee = make_employee(company=self.company, email=f"cov{i}@test.horilla")
+            employee = make_employee(company=self.company, email=f"cov{i}@test.bells")
             # Employee.save() auto-creates a starter contract; the factory's
             # own active-contract-per-employee guard refuses a second one.
             Contract.objects.filter(employee_id=employee).delete()

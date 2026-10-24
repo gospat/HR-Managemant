@@ -170,8 +170,8 @@ msgstr "Secvența etapelor a fost actualizată"
 msgid "Dashboard"
 msgstr "Tablou de bord"
 
-msgid "Horilla dashboard section"
-msgstr "Secțiune tablou de bord Horilla"
+msgid "Bells Tech dashboard section"
+msgstr "Secțiune tablou de bord Bells Tech"
 
 msgid "Mark Attendance"
 msgstr "Marchează prezența"
@@ -212,8 +212,8 @@ msgstr "Opțiuni de profil și schimbare a parolei"
 msgid "Dashboard Tiles"
 msgstr "Plăci tablou de bord"
 
-msgid "Horilla Dashboard Tiles"
-msgstr "Plăci ale tabloului de bord Horilla"
+msgid "Bells Tech Dashboard Tiles"
+msgstr "Plăci ale tabloului de bord Bells Tech"
 
 msgid "Dashboard Actions"
 msgstr "Acțiuni tablou de bord"
@@ -242,8 +242,8 @@ msgstr "Accesul dumneavoastră actual la companie"
 msgid "App"
 msgstr "Aplicație"
 
-msgid "Horilla Hr Apps. eg Dashboard"
-msgstr "Aplicații Horilla HR. de ex. Tablou de bord"
+msgid "Bells Tech Hr Apps. eg Dashboard"
+msgstr "Aplicații Bells Tech HR. de ex. Tablou de bord"
 
 msgid "Pipeline"
 msgstr "Flux"

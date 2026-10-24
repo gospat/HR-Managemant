@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from base.templatetags.hrfilters import is_asset_fine_enabled
 from employee.models import Employee
 from core.http.response import HrRedirect
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import HrFormView
 from payroll.forms.component_forms import AssetFineForm, LoanAccountForm
@@ -35,7 +35,7 @@ class AssetFineFormView(HrFormView):
 
     def form_valid(self, form: AssetFineForm) -> HttpResponse:
         if apps.is_installed("asset"):
-            Asset = get_horilla_model_class(app_label="asset", model="asset")
+            Asset = get_hr_model_class(app_label="asset", model="asset")
         asset_id = self.request.GET["asset_id"]
         employee_id = self.request.GET["employee_id"]
         asset = Asset.objects.get(id=asset_id)

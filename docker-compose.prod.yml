@@ -1,4 +1,4 @@
-# Production overlay for Horilla HR (open-source).
+# Production overlay for Bells Tech HR (open-source).
 #
 # Usage:
 #   cp .env.dist .env   # then set strong secrets
@@ -54,8 +54,8 @@ services:
 
   db:
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-horilla_db}
-      POSTGRES_USER: ${POSTGRES_USER:-horilla_user}
+      POSTGRES_DB: ${POSTGRES_DB:-hr_db}
+      POSTGRES_USER: ${POSTGRES_USER:-hr_user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
 
   redis:

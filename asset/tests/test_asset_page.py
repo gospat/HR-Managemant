@@ -31,7 +31,7 @@ class AssetPageTests(TestCase):
         self.user = make_user("assets-admin", password="pw", is_superuser=True)
         make_employee(
             company=make_company("Asset Co"),
-            email="assets-admin@test.horilla",
+            email="assets-admin@test.bells",
             first_name="Asset",
             last_name="Admin",
             user=self.user,
@@ -130,7 +130,7 @@ class DefaultGroupingTests(TestCase):
         user = make_user("assets-nav", password="pw", is_superuser=True)
         make_employee(
             company=make_company("Nav Co"),
-            email="assets-nav@test.horilla",
+            email="assets-nav@test.bells",
             first_name="Nav",
             last_name="Admin",
             user=user,
@@ -171,7 +171,7 @@ class DashboardCountsMatchTheirListsTests(TestCase):
         user = make_user("assets-dash", password="pw", is_superuser=True)
         self.employee = make_employee(
             company=make_company("Dash Co"),
-            email="assets-dash@test.horilla",
+            email="assets-dash@test.bells",
             first_name="Dash",
             last_name="Admin",
             user=user,

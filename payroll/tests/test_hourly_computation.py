@@ -15,7 +15,7 @@ from payroll.tests.factories_payroll import make_active_contract
 class HourlyComputationTests(TestCase):
     def setUp(self):
         company = make_company("Hourly Co")
-        self.employee = make_employee(company=company, email="hourly@test.horilla")
+        self.employee = make_employee(company=company, email="hourly@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.workday = date(2024, 1, 8)  # Monday
         self.start = date(2024, 1, 1)
@@ -92,7 +92,7 @@ class HourlyWageFieldTests(TestCase):
 
     def setUp(self):
         company = make_company("Hourly Co")
-        self.employee = make_employee(company=company, email="hw@test.horilla")
+        self.employee = make_employee(company=company, email="hw@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def test_an_hourly_contract_pays_from_the_hourly_box(self):
@@ -146,7 +146,7 @@ class HourlyWithNoAttendanceTests(TestCase):
         from payroll.models.models import Contract
 
         company = make_company("Hourly Zero Co")
-        self.employee = make_employee(company=company, email="hourlyzero@test.horilla")
+        self.employee = make_employee(company=company, email="hourlyzero@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def _contract(self, **kwargs):

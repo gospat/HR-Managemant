@@ -28,7 +28,7 @@ from contextvars import ContextVar
 # ContextVar, not thread-local: it survives async context switches, and each
 # request gets its own value even when threads are reused (gunicorn runs gthread
 # workers, so threads are very much reused).
-_request_id: ContextVar[str | None] = ContextVar("horilla_request_id", default=None)
+_request_id: ContextVar[str | None] = ContextVar("hr_request_id", default=None)
 
 REQUEST_ID_HEADER = "X-Request-ID"
 _MAX_INBOUND_LENGTH = 200
@@ -305,23 +305,23 @@ def scheduler_metrics():
     import time
 
     lines = [
-        "# HELP horilla_scheduler_jobs_registered Jobs currently in the jobstore.",
-        "# TYPE horilla_scheduler_jobs_registered gauge",
+        "# HELP hr_scheduler_jobs_registered Jobs currently in the jobstore.",
+        "# TYPE hr_scheduler_jobs_registered gauge",
     ]
 
     try:
         from django_apscheduler.models import DjangoJob, DjangoJobExecution
 
         job_count = DjangoJob.objects.count()
-        lines.append(f"horilla_scheduler_jobs_registered {job_count}")
+        lines.append(f"hr_scheduler_jobs_registered {job_count}")
 
         # A scheduler that died leaves next_run_time in the past and drifting;
         # this is the number worth alerting on.
         overdue = DjangoJob.objects.filter(next_run_time__lt=time.time()).count()
         lines += [
-            "# HELP horilla_scheduler_jobs_overdue Jobs whose next run time has passed.",
-            "# TYPE horilla_scheduler_jobs_overdue gauge",
-            f"horilla_scheduler_jobs_overdue {overdue}",
+            "# HELP hr_scheduler_jobs_overdue Jobs whose next run time has passed.",
+            "# TYPE hr_scheduler_jobs_overdue gauge",
+            f"hr_scheduler_jobs_overdue {overdue}",
         ]
 
         statuses = DjangoJobExecution.objects.values_list("status", flat=True)
@@ -329,15 +329,15 @@ def scheduler_metrics():
         for status in statuses:
             counts[status] = counts.get(status, 0) + 1
         lines += [
-            "# HELP horilla_scheduler_executions_total Job executions by status.",
-            "# TYPE horilla_scheduler_executions_total counter",
+            "# HELP hr_scheduler_executions_total Job executions by status.",
+            "# TYPE hr_scheduler_executions_total counter",
         ]
         for status, count in sorted(counts.items()):
             lines.append(
-                f'horilla_scheduler_executions_total{{status="{status}"}} {count}'
+                f'hr_scheduler_executions_total{{status="{status}"}} {count}'
             )
     except Exception:  # pragma: no cover - metrics must never break the probe
         logging.getLogger(__name__).exception("Failed to collect scheduler metrics")
-        lines.append("horilla_scheduler_jobs_registered 0")
+        lines.append("hr_scheduler_jobs_registered 0")
 
     return "\n".join(lines) + "\n"

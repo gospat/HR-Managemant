@@ -1555,7 +1555,7 @@ def edit_cosec_user(request, user_id, device_id):
 @login_required
 @install_required
 @permission_required("biometric.delete_biometricemployees")
-def delete_horilla_cosec_user(request, user_id, device_id):
+def delete_hr_cosec_user(request, user_id, device_id):
     """
     View function to delete a user from a COSEC biometric device and database.
 
@@ -2486,10 +2486,10 @@ def cosec_biometric_attendance_scheduler(device_id):
 
 def dahua_biometric_attendance_logs(device):
     """
-    Retrieves logs from a Dahua biometric device and marks attendance in Horilla.
+    Retrieves logs from a Dahua biometric device and marks attendance in Bells Tech.
 
     This function fetches biometric logs from the specified device, processes the attendance records,
-    and updates the attendance system in Horilla. If an employee has an active clock-in record,
+    and updates the attendance system in Bells Tech. If an employee has an active clock-in record,
     it marks their clock-out; otherwise, it registers a new clock-in entry.
 
     Args:

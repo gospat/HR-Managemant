@@ -1,5 +1,5 @@
 """
-Run Horilla's background jobs in one dedicated process.
+Run Bells Tech's background jobs in one dedicated process.
 
 Deploy this as its own service with **exactly one replica**. Jobs used to start
 inside every gunicorn worker (see ``core.scheduling``), so payroll runs and

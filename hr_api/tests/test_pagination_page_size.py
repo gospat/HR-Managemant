@@ -27,7 +27,7 @@ class PageSizeTests(TestCase):
         self.user = make_user("paging_user")
         make_employee(
             company=self.company,
-            email="paging@test.horilla",
+            email="paging@test.bells",
             first_name="Pat",
             user=self.user,
         )
@@ -36,7 +36,7 @@ class PageSizeTests(TestCase):
         for i in range(29):
             make_employee(
                 company=self.company,
-                email=f"paging{i}@test.horilla",
+                email=f"paging{i}@test.bells",
                 first_name=f"Person{i}",
             )
         self.client.force_authenticate(user=self.user)

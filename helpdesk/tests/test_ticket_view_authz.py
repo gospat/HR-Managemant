@@ -17,15 +17,15 @@ class TicketViewAuthorizationTests(TestCase):
         company = make_company("Helpdesk Co")
         cls.owner_user = make_user("tk_owner", password="secret123")
         cls.owner = make_employee(
-            company=company, email="tk_owner@test.horilla", user=cls.owner_user
+            company=company, email="tk_owner@test.bells", user=cls.owner_user
         )
         cls.other_user = make_user("tk_other", password="secret123")
         cls.other = make_employee(
-            company=company, email="tk_other@test.horilla", user=cls.other_user
+            company=company, email="tk_other@test.bells", user=cls.other_user
         )
         cls.manager_user = make_user("tk_manager", password="secret123")
         cls.manager = make_employee(
-            company=company, email="tk_manager@test.horilla", user=cls.manager_user
+            company=company, email="tk_manager@test.bells", user=cls.manager_user
         )
         work_info = cls.owner.employee_work_info
         work_info.reporting_manager_id = cls.manager

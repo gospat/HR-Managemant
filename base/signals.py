@@ -23,7 +23,7 @@ from base.models import (
     PenaltyAccounts,
 )
 from employee.models import Employee, Policy
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 
 
 @receiver(post_save, sender=Company)
@@ -67,7 +67,7 @@ def create_deduction_cutleave_from_penalty(sender, instance, created, **kwargs):
     if created:
         penalty_amount = instance.penalty_amount
         if apps.is_installed("payroll") and penalty_amount:
-            Deduction = get_horilla_model_class(app_label="payroll", model="deduction")
+            Deduction = get_hr_model_class(app_label="payroll", model="deduction")
             penalty = Deduction()
             if instance.late_early_id:
                 penalty.title = f"{instance.late_early_id.get_type_display()} penalty"
@@ -124,7 +124,7 @@ def delete_deduction_cutleave_from_penalty(sender, instance, **kwargs):
     """
     # Check if the deduction model is installed
     if apps.is_installed("payroll"):
-        Deduction = get_horilla_model_class(app_label="payroll", model="deduction")
+        Deduction = get_hr_model_class(app_label="payroll", model="deduction")
 
         # A CASCADE delete of the related AttendanceLateComeEarlyOut (e.g.
         # reset_backfilled_rows_before_reload) deletes this PenaltyAccounts

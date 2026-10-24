@@ -2,7 +2,7 @@
 models.py
 =========
 
-This module defines the abstract base model `HrModel` for the Horilla HRMS project.
+This module defines the abstract base model `HrModel` for the Bells Tech HRMS project.
 The `HrModel` provides common fields and functionalities for other models within
 the application, such as tracking creation and modification timestamps and user
 information, audit logging, and active/inactive status management.
@@ -107,7 +107,7 @@ def upload_path(instance, filename):
 class HrModel(models.Model, metaclass=HrModelBase):
     """
     An abstract base model that includes common fields and functionalities
-    for models within the Horilla application.
+    for models within the Bells Tech application.
     """
 
     created_at = models.DateTimeField(
@@ -134,7 +134,7 @@ class HrModel(models.Model, metaclass=HrModelBase):
         verbose_name=_("Modified By"),
         related_name="%(class)s_modified_by",
     )
-    horilla_history = AuditlogHistoryField()
+    hr_history = AuditlogHistoryField()
     objects = models.Manager()
     is_active = models.BooleanField(default=True, verbose_name=_("Active"))
 

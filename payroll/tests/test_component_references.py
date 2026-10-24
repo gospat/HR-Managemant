@@ -40,7 +40,7 @@ EMPTY_LEAVES = {
 class ComponentReferenceTests(TestCase):
     def setUp(self):
         company = make_company("Ref Co")
-        self.employee = make_employee(company=company, email="ref@test.horilla")
+        self.employee = make_employee(company=company, email="ref@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=30000.0)
 
@@ -234,7 +234,7 @@ class ReservedCodeTests(TestCase):
 
     def setUp(self):
         company = make_company("Reserved Co")
-        self.employee = make_employee(company=company, email="reserved@test.horilla")
+        self.employee = make_employee(company=company, email="reserved@test.bells")
 
     def test_a_component_named_gross_does_not_take_the_engines_code(self):
         for title, taken in (("Gross", "GROSS"), ("CTC", "CTC")):

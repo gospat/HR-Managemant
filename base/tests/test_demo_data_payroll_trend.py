@@ -61,7 +61,7 @@ class BackfillPayrollCoverageTests(TestCase):
 
     def setUp(self):
         self.company = make_company("Trend Co")
-        self.employee = make_employee(company=self.company, email="trend@test.horilla")
+        self.employee = make_employee(company=self.company, email="trend@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=30000.0)
 

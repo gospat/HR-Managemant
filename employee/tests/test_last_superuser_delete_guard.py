@@ -34,7 +34,7 @@ class LastSuperuserDeleteGuardTests(TestCase):
         user = make_user(username, is_superuser=True, email=email)
         employee = make_employee(
             company=self.company,
-            email=email or f"{username}@test.horilla",
+            email=email or f"{username}@test.bells",
             first_name=username,
             user=user,
         )
@@ -90,7 +90,7 @@ class LastSuperuserDeleteGuardTests(TestCase):
     def test_can_still_delete_an_ordinary_employee(self):
         admin = self._superuser_employee("admin-c")
         staffer = make_employee(
-            company=self.company, email="staffer@test.horilla", first_name="Staffer"
+            company=self.company, email="staffer@test.bells", first_name="Staffer"
         )
         Contract.objects.filter(employee_id=staffer).update(contract_status="expired")
         client = self._client_as(admin)
@@ -137,7 +137,7 @@ class LastSuperuserDeleteGuardTests(TestCase):
         )
         requester = make_employee(
             company=self.company,
-            email="requester@test.horilla",
+            email="requester@test.bells",
             first_name="Requester",
             user=requester_user,
         )
@@ -162,7 +162,7 @@ class LastSuperuserDeleteGuardTests(TestCase):
         admin_a = self._superuser_employee("self-admin-a")
         admin_b = self._superuser_employee("self-admin-b")
         staffer = make_employee(
-            company=self.company, email="self-staffer@test.horilla", first_name="S"
+            company=self.company, email="self-staffer@test.bells", first_name="S"
         )
         Contract.objects.filter(employee_id=staffer).update(contract_status="expired")
         client = self._client_as(admin_a)
@@ -181,7 +181,7 @@ class LastSuperuserDeleteGuardTests(TestCase):
         admin_a = self._superuser_employee("arch-admin-a")
         self._superuser_employee("arch-admin-b")
         staffer = make_employee(
-            company=self.company, email="arch-staffer@test.horilla", first_name="A"
+            company=self.company, email="arch-staffer@test.bells", first_name="A"
         )
         client = self._client_as(admin_a)
 
@@ -198,7 +198,7 @@ class LastSuperuserDeleteGuardTests(TestCase):
     def test_bulk_delete_reports_blocked_employees_in_the_summary(self):
         admin = self._superuser_employee("sum-admin")
         blocked = make_employee(
-            company=self.company, email="sum-blocked@test.horilla", first_name="Blocked"
+            company=self.company, email="sum-blocked@test.bells", first_name="Blocked"
         )  # keeps the active contract make_employee() creates -> PROTECT
         client = self._client_as(admin)
 
@@ -218,12 +218,12 @@ class LastSuperuserDeleteGuardTests(TestCase):
         free = []
         for i in range(5):
             e = make_employee(
-                company=self.company, email=f"many{i}@test.horilla", first_name=f"M{i}"
+                company=self.company, email=f"many{i}@test.bells", first_name=f"M{i}"
             )
             Contract.objects.filter(employee_id=e).update(contract_status="expired")
             free.append(e.pk)
         blocked = make_employee(
-            company=self.company, email="many-blocked@test.horilla", first_name="B"
+            company=self.company, email="many-blocked@test.bells", first_name="B"
         )  # active contract -> PROTECT
         client = self._client_as(admin)
 
@@ -243,7 +243,7 @@ class LastSuperuserDeleteGuardTests(TestCase):
         """employee_user_id is nullable -- the guard must tolerate None."""
         self._superuser_employee("solo-admin")  # keeps count() >= 1 either way
         orphan = make_employee(
-            company=self.company, email="orphan@test.horilla", first_name="Orphan"
+            company=self.company, email="orphan@test.bells", first_name="Orphan"
         )
         Contract.objects.filter(employee_id=orphan).update(contract_status="expired")
         # .update() bypasses Employee.save(), which would otherwise

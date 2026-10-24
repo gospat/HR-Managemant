@@ -1,5 +1,5 @@
 """
-Horilla management command to create a new user and associated employee.
+Bells Tech management command to create a new user and associated employee.
 """
 
 import uuid
@@ -12,7 +12,7 @@ from hr_auth.models import HorillaUser
 
 class Command(BaseCommand):
     """
-    Horilla management command to create a new user and associated employee.
+    Bells Tech management command to create a new user and associated employee.
     """
 
     help = "Creates a new user"

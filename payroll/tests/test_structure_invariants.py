@@ -139,7 +139,7 @@ class BasicPayPrecedenceTests(TestCase):
 
     def setUp(self):
         company = make_company("Precedence Co")
-        self.employee = make_employee(company=company, email="prec@test.horilla")
+        self.employee = make_employee(company=company, email="prec@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def _run(self):
@@ -220,7 +220,7 @@ class BasicPayPrecedenceTests(TestCase):
 class CtcDownGuardTests(TestCase):
     def setUp(self):
         company = make_company("Guard Co")
-        self.employee = make_employee(company=company, email="guard@test.horilla")
+        self.employee = make_employee(company=company, email="guard@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.structure = SalaryStructure.objects.create(
             title="Broken CTC", structure_mode="ctc_down"

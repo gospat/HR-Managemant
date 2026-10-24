@@ -45,22 +45,22 @@ class WriteTargetScopingTests(TestCase):
         self.attacker_user = make_user("ws_attacker", password="secret123")
         self.attacker = make_employee(
             company=self.company,
-            email="ws_attacker@test.horilla",
+            email="ws_attacker@test.bells",
             user=self.attacker_user,
             phone="3000001",
         )
         self.victim = make_employee(
-            company=self.company, email="ws_victim@test.horilla", phone="3000002"
+            company=self.company, email="ws_victim@test.bells", phone="3000002"
         )
         self.subordinate = make_employee(
-            company=self.company, email="ws_sub@test.horilla", phone="3000003"
+            company=self.company, email="ws_sub@test.bells", phone="3000003"
         )
         _manage(self.subordinate, self.attacker)
 
         self.boss_user = make_user("ws_boss", password="secret123")
         self.boss = make_employee(
             company=self.company,
-            email="ws_boss@test.horilla",
+            email="ws_boss@test.bells",
             user=self.boss_user,
             phone="3000004",
         )

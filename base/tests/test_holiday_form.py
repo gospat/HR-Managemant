@@ -104,7 +104,7 @@ class HolidayViewTests(TestCase):
 
         cls.company = make_company("View Corp")
         cls.user = make_user("holiday_admin", is_superuser=True)
-        make_employee(company=cls.company, email="ha@test.horilla", user=cls.user)
+        make_employee(company=cls.company, email="ha@test.bells", user=cls.user)
         cls.holiday = Holidays.objects.create(
             name="Existing",
             start_date=date(2026, 11, 5),

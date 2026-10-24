@@ -15,9 +15,9 @@ class ExistingIdsTests(TestCase):
         company = make_company("Existing Ids Co")
         cls.user = make_user("ids-admin", is_superuser=True)
         cls.admin = make_employee(
-            company=company, email="ids-admin@test.horilla", user=cls.user
+            company=company, email="ids-admin@test.bells", user=cls.user
         )
-        cls.other = make_employee(company=company, email="ids-other@test.horilla")
+        cls.other = make_employee(company=company, email="ids-other@test.bells")
 
     def _post(self, **data):
         client = Client()

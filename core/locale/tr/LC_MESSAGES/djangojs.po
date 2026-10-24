@@ -168,8 +168,8 @@ msgstr "Aşama sırası güncellendi"
 msgid "Dashboard"
 msgstr "Gösterge paneli"
 
-msgid "Horilla dashboard section"
-msgstr "Horilla gösterge paneli bölümü"
+msgid "Bells Tech dashboard section"
+msgstr "Bells Tech gösterge paneli bölümü"
 
 msgid "Mark Attendance"
 msgstr "Yoklama işaretle"
@@ -210,8 +210,8 @@ msgstr "Profil ve şifre değiştirme seçenekleri"
 msgid "Dashboard Tiles"
 msgstr "Gösterge paneli kutucukları"
 
-msgid "Horilla Dashboard Tiles"
-msgstr "Horilla gösterge paneli kutucukları"
+msgid "Bells Tech Dashboard Tiles"
+msgstr "Bells Tech gösterge paneli kutucukları"
 
 msgid "Dashboard Actions"
 msgstr "Gösterge paneli işlemleri"
@@ -240,8 +240,8 @@ msgstr "Mevcut şirket erişiminiz"
 msgid "App"
 msgstr "Uygulama"
 
-msgid "Horilla Hr Apps. eg Dashboard"
-msgstr "Horilla IK uygulamaları, örn. Gösterge paneli"
+msgid "Bells Tech Hr Apps. eg Dashboard"
+msgstr "Bells Tech IK uygulamaları, örn. Gösterge paneli"
 
 msgid "Pipeline"
 msgstr "İş hattı"

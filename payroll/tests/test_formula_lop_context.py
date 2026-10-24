@@ -41,7 +41,7 @@ class Fixture(TestCase):
     def setUp(self):
         company = make_company("Formula Context Co")
         self.employee = make_employee(
-            company=company, email="formula-context@test.horilla"
+            company=company, email="formula-context@test.bells"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(self.employee, wage=30000.0)

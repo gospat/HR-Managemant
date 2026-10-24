@@ -1,4 +1,4 @@
-"""Standalone Nigerian university configuration on top of Horilla."""
+"""Standalone Nigerian university configuration on top of Bells Tech."""
 
 import os
 

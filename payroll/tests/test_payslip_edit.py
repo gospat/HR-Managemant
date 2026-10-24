@@ -48,12 +48,12 @@ class Fixture(TestCase):
         self.user = make_user("payslipeditor", is_superuser=True)
         self.company = make_company("Edit Co")
         make_employee(
-            company=self.company, email="payslipeditor@test.horilla", user=self.user
+            company=self.company, email="payslipeditor@test.bells", user=self.user
         )
         self.client.force_login(self.user)
 
         self.employee = make_employee(
-            company=self.company, email="worker@edit.horilla", first_name="Worker"
+            company=self.company, email="worker@edit.bells", first_name="Worker"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=30000.0)
@@ -306,7 +306,7 @@ class ViewTests(Fixture):
 
     def test_it_needs_permission(self):
         stranger = make_user("nosy")
-        make_employee(company=self.company, email="nosy@test.horilla", user=stranger)
+        make_employee(company=self.company, email="nosy@test.bells", user=stranger)
         self.client.force_login(stranger)
 
         response = self.client.get(self.url())
@@ -588,7 +588,7 @@ class NewLineViewTests(Fixture):
         back -- not the status code.
         """
         stranger = make_user("nosy2")
-        make_employee(company=self.company, email="nosy2@test.horilla", user=stranger)
+        make_employee(company=self.company, email="nosy2@test.bells", user=stranger)
         self.client.force_login(stranger)
 
         response = self.client.post(
@@ -1101,7 +1101,7 @@ class RecalculateEndpointTests(DerivedLinesFixture):
 
     def test_it_needs_permission(self):
         stranger = make_user("nosy3")
-        make_employee(company=self.company, email="nosy3@test.horilla", user=stranger)
+        make_employee(company=self.company, email="nosy3@test.bells", user=stranger)
         self.client.force_login(stranger)
 
         response = self.client.post(self.url(), {}, HTTP_HX_REQUEST="true")

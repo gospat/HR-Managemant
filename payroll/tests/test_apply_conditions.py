@@ -50,7 +50,7 @@ EMPTY_LEAVES = {
 class ApplyConditionSetup:
     def setUp(self):
         company = make_company("Gate Co")
-        self.employee = make_employee(company=company, email="gate@test.horilla")
+        self.employee = make_employee(company=company, email="gate@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         make_active_contract(self.employee, wage=30000.0)
 

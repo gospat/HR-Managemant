@@ -50,7 +50,7 @@ class Fixture(TestCase):
     def setUp(self):
         self.company = make_company("Employer Co")
         self.employee = make_employee(
-            company=self.company, email="emp@test.horilla", first_name="Emp"
+            company=self.company, email="emp@test.bells", first_name="Emp"
         )
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(self.employee, wage=30000.0)

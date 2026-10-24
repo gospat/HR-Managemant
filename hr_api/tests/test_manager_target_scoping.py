@@ -44,13 +44,13 @@ class BankDetailsManagerScopingTests(TestCase):
         self.attacker_user = make_user("scope_attacker", password="secret123")
         self.attacker = make_employee(
             company=self.company,
-            email="scope_attacker@test.horilla",
+            email="scope_attacker@test.bells",
             user=self.attacker_user,
             phone="1000001",
         )
         self.victim = make_employee(
             company=self.company,
-            email="scope_victim@test.horilla",
+            email="scope_victim@test.bells",
             phone="1000002",
         )
         # The attacker manages someone -- just not the victim. This is the whole
@@ -58,7 +58,7 @@ class BankDetailsManagerScopingTests(TestCase):
         # this row.
         self.subordinate = make_employee(
             company=self.company,
-            email="scope_subordinate@test.horilla",
+            email="scope_subordinate@test.bells",
             phone="1000003",
         )
         _set_reporting_manager(self.subordinate, self.attacker)

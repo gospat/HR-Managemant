@@ -17,9 +17,9 @@ class WritePermissionTests(TestCase):
         company = make_company("API Perm Co")
         self.user = make_user("api_perm_emp", password="secret123")
         self.employee = make_employee(
-            company=company, email="api_perm_emp@test.horilla", user=self.user
+            company=company, email="api_perm_emp@test.bells", user=self.user
         )
-        self.other = make_employee(company=company, email="api_perm_other@test.horilla")
+        self.other = make_employee(company=company, email="api_perm_other@test.bells")
         self.client.force_authenticate(user=self.user)
 
     def test_plain_employee_cannot_delete_asset(self):

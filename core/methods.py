@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from hr_auth.models import HorillaUser
 
 
-def get_horilla_model_class(app_label, model):
+def get_hr_model_class(app_label, model):
     """
     Retrieves the model class for the given app label and model name using Django's ContentType framework.
 
@@ -44,7 +44,7 @@ def dynamic_attr(obj, attribute_path):
 
     for attr in attributes:
         with contextlib.suppress(Exception):
-            Contract = get_horilla_model_class(app_label="payroll", model="contract")
+            Contract = get_hr_model_class(app_label="payroll", model="contract")
             if isinstance(obj.first(), Contract):
                 obj = obj.filter(is_active=True).first()
 

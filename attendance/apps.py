@@ -1,5 +1,5 @@
 """
-This module defines the configuration for the 'attendance' app within the Horilla HRMS project.
+This module defines the configuration for the 'attendance' app within the Bells Tech HRMS project.
 """
 
 from django.apps import AppConfig

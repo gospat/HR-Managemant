@@ -19,7 +19,7 @@ from payroll.models.models import Allowance, Contract, Deduction, SalaryStructur
 class ContractStructureValidationTests(TestCase):
     def setUp(self):
         company = make_company("Validation Co")
-        self.employee = make_employee(company=company, email="v@test.horilla")
+        self.employee = make_employee(company=company, email="v@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.gross_up = SalaryStructure.objects.create(
             title="Gross Up Structure", structure_mode="gross_up"
@@ -83,7 +83,7 @@ class ReviewWarningNamesTheWageTypeTests(TestCase):
 
     def setUp(self):
         company = make_company("Warning Co")
-        self.employee = make_employee(company=company, email="w@test.horilla")
+        self.employee = make_employee(company=company, email="w@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def _message(self, wage_type):
@@ -120,7 +120,7 @@ class StructureMembershipFollowsTheContractTests(TestCase):
 
     def setUp(self):
         company = make_company("Membership Co")
-        self.employee = make_employee(company=company, email="m@test.horilla")
+        self.employee = make_employee(company=company, email="m@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.hra = Allowance.objects.create(
             title="HRA", code="HRA", sequence=10, is_fixed=True, amount=1000
@@ -187,7 +187,7 @@ class PayFrequencyChoicesTests(TestCase):
 
         self.form_class = ContractForm
         company = make_company("Frequency Co")
-        self.employee = make_employee(company=company, email="f@test.horilla")
+        self.employee = make_employee(company=company, email="f@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
 
     def test_weekly_and_semi_monthly_are_disabled_but_listed(self):

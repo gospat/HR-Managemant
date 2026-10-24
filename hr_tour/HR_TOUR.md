@@ -137,7 +137,7 @@ Patterns: HorillaListView row actions, HTMX modals, generic delete.
 - Reads `window.PRODUCT_TOUR`
 - Builds driver steps from API payload
 - On destroy: posts `completed` if last step reached, else `skipped`
-- Exposes launcher UI (`#horillaTourLauncher`) and `window.horillaTour` for Start/Replay
+- Exposes launcher UI (`#tourLauncherBtn`) and `window.PRODUCT_TOUR` for Start/Replay
 - Header button `#tourLauncherBtn` toggles the panel
 
 #### Permissions

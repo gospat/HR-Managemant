@@ -49,7 +49,7 @@ class CtcDownSetup:
 
     def setUp(self):
         company = make_company("CTC Co")
-        self.employee = make_employee(company=company, email="ctc@test.horilla")
+        self.employee = make_employee(company=company, email="ctc@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.structure = SalaryStructure.objects.create(
             title="CTC Structure", structure_mode="ctc_down"

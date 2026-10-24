@@ -22,7 +22,7 @@ from employee.models import EmployeeGeneralSetting, ProfileEditFeature
 from core.__version__ import __version__
 from core.decorators import hx_request_required, login_required
 from core.http.response import HrRedirect
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 
 
 class AllCompany:
@@ -251,7 +251,7 @@ def resignation_request_enabled(request):
     enabled_resignation_request = False
     first = None
     if apps.is_installed("offboarding"):
-        OffboardingGeneralSetting = get_horilla_model_class(
+        OffboardingGeneralSetting = get_hr_model_class(
             app_label="offboarding", model="offboardinggeneralsetting"
         )
         if selected_company and selected_company != "all":
@@ -273,7 +273,7 @@ def timerunner_enabled(request):
     """
     enabled_timerunner = True
     if apps.is_installed("attendance"):
-        AttendanceGeneralSetting = get_horilla_model_class(
+        AttendanceGeneralSetting = get_hr_model_class(
             app_label="attendance", model="attendancegeneralsetting"
         )
         selected_company = request.session.get("selected_company")
@@ -296,7 +296,7 @@ def intial_notice_period(request):
     initial = 30
     first = None
     if apps.is_installed("payroll"):
-        PayrollGeneralSetting = get_horilla_model_class(
+        PayrollGeneralSetting = get_hr_model_class(
             app_label="payroll", model="payrollgeneralsetting"
         )
         selected_company = request.session.get("selected_company")
@@ -320,7 +320,7 @@ def check_candidate_recruitment_setting(request):
     if hasattr(request, "_recruitment_general_setting_cache"):
         return request._recruitment_general_setting_cache
 
-    RecruitmentGeneralSetting = get_horilla_model_class(
+    RecruitmentGeneralSetting = get_hr_model_class(
         app_label="recruitment", model="recruitmentgeneralsetting"
     )
     candidate_id = request.session.get("candidate_id")
@@ -328,7 +328,7 @@ def check_candidate_recruitment_setting(request):
     # Anonymous candidate sessions never carry selected_company, so resolve via
     # the candidate's own company instead of the company_id IS NULL fallback.
     if not request.user.is_authenticated and candidate_id:
-        Candidate = get_horilla_model_class(app_label="recruitment", model="candidate")
+        Candidate = get_hr_model_class(app_label="recruitment", model="candidate")
         candidate = Candidate.objects.filter(pk=candidate_id).first()
         company_id = getattr(
             getattr(candidate, "recruitment_id", None), "company_id_id", None

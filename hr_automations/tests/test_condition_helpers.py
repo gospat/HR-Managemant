@@ -77,7 +77,7 @@ class GetToFieldViewTests(TestCase):
     def setUp(self):
         company = make_company("Automation Co")
         user = make_user("automation_user", password="secret123")
-        make_employee(company=company, email="automation_user@test.horilla", user=user)
+        make_employee(company=company, email="automation_user@test.bells", user=user)
         self.client = Client()
         self.client.force_login(user)
 

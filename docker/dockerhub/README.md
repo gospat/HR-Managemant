@@ -39,13 +39,13 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: horilla_db
-      POSTGRES_USER: horilla_user
+      POSTGRES_DB: hr_db
+      POSTGRES_USER: hr_user
       POSTGRES_PASSWORD: change-me-db-password
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U horilla_user -d horilla_db"]
+      test: ["CMD-SHELL", "pg_isready -U hr_user -d hr_db"]
       interval: 5s
       retries: 10
 
@@ -61,7 +61,7 @@ services:
       SECRET_KEY: "replace-with-50-plus-random-characters"
       ALLOWED_HOSTS: "localhost,127.0.0.1"
       CSRF_TRUSTED_ORIGINS: "http://localhost:8000"
-      DATABASE_URL: "postgres://horilla_user:change-me-db-password@db:5432/horilla_db"
+      DATABASE_URL: "postgres://hr_user:change-me-db-password@db:5432/hr_db"
       DB_HOST: db
       DB_PORT: "5432"
       DB_INIT_PASSWORD: "replace-with-your-own-init-password"

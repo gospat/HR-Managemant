@@ -38,7 +38,7 @@ from base.models import (
 from employee.methods.duration_methods import format_time, strtime_seconds
 from core import hr_middlewares
 from core.hr_middlewares import _thread_locals
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from core.models import HrModel, has_xss, upload_path
 from hr_audit.methods import get_diff
 from hr_audit.models import HorillaAuditInfo, HrAuditLog
@@ -455,16 +455,16 @@ class Employee(models.Model):
         a dictionary is returned with a list of related models of that employee.
         """
         if apps.is_installed("onboarding"):
-            OnboardingStage = get_horilla_model_class("onboarding", "onboardingstage")
-            OnboardingTask = get_horilla_model_class("onboarding", "onboardingtask")
+            OnboardingStage = get_hr_model_class("onboarding", "onboardingstage")
+            OnboardingTask = get_hr_model_class("onboarding", "onboardingtask")
             onboarding_stage_query = OnboardingStage.objects.filter(employee_id=self.pk)
             onboarding_task_query = OnboardingTask.objects.filter(employee_id=self.pk)
         else:
             onboarding_stage_query = None
             onboarding_task_query = None
         if apps.is_installed("recruitment"):
-            Recruitment = get_horilla_model_class("recruitment", "recruitment")
-            Stage = get_horilla_model_class("recruitment", "stage")
+            Recruitment = get_hr_model_class("recruitment", "recruitment")
+            Stage = get_hr_model_class("recruitment", "stage")
             recruitment_stage_query = Stage.objects.filter(stage_managers=self.pk)
             recruitment_manager_query = Recruitment.objects.filter(
                 recruitment_managers=self.pk
@@ -687,7 +687,7 @@ class Employee(models.Model):
         This method is used to check if the user is in the list of online users.
         """
         if apps.is_installed("attendance"):
-            Attendance = get_horilla_model_class("attendance", "attendance")
+            Attendance = get_hr_model_class("attendance", "attendance")
             request = getattr(hr_middlewares._thread_locals, "request", None)
 
             if request is not None:

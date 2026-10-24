@@ -22,7 +22,7 @@ class SendMailMissingInstanceTests(TestCase):
     def setUpTestData(cls):
         company = make_company("Automation Race Co")
         cls.employee = make_employee(
-            company=company, email="automation-race@test.horilla"
+            company=company, email="automation-race@test.bells"
         )
         cls.leave_type = LeaveType.objects.create(
             name="Casual Automation Race", total_days=5

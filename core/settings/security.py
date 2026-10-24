@@ -63,7 +63,7 @@ def validate_production_secrets(secret_key, allowed_hosts, db_init_password):
 
     if errors:
         raise ImproperlyConfigured(
-            "Horilla production security check failed:\n- " + "\n- ".join(errors)
+            "Bells Tech production security check failed:\n- " + "\n- ".join(errors)
         )
 
 

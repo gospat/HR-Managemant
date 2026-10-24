@@ -114,7 +114,7 @@ class StaleStaffRecord(Exception):
 
 
 def staff_revision(employee):
-    """Include actual shared Horilla fields so legacy-screen edits also conflict."""
+    """Include actual shared Bells Tech fields so legacy-screen edits also conflict."""
     work = getattr(employee, "employee_work_info", None)
     profile = getattr(employee, "university_profile", None)
     user = employee.employee_user_id if employee.employee_user_id_id else None

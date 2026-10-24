@@ -27,7 +27,7 @@ class ProgressCalculationTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         company = make_company("OKR Test Co")
-        cls.employee = make_employee(company=company, email="okr@test.horilla")
+        cls.employee = make_employee(company=company, email="okr@test.bells")
         cls.objective = Objective.objects.create(
             title="Ship the thing",
             description="An objective",

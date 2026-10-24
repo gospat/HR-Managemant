@@ -43,7 +43,7 @@ class ArchiveRevokesLoginTests(TestCase):
         # request, so every call below passes one.
         self.request = RequestFactory().post("/login/")
 
-    def _employee_with_password(self, email="leaver@test.horilla"):
+    def _employee_with_password(self, email="leaver@test.bells"):
         emp = make_employee(
             company=self.company,
             email=email,
@@ -82,7 +82,7 @@ class ArchiveRevokesLoginTests(TestCase):
         )
 
     def test_unarchiving_restores_authentication(self):
-        emp = self._employee_with_password("returner@test.horilla")
+        emp = self._employee_with_password("returner@test.bells")
         emp.is_active = False
         emp.save()
         emp.sync_login_access()
@@ -104,7 +104,7 @@ class ArchiveRevokesLoginTests(TestCase):
 
     def test_the_user_flag_is_persisted_not_just_assigned(self):
         """The original bug was an unsaved in-memory assignment."""
-        emp = self._employee_with_password("persist@test.horilla")
+        emp = self._employee_with_password("persist@test.bells")
         emp.is_active = False
         emp.save()
         emp.sync_login_access()
@@ -115,7 +115,7 @@ class ArchiveRevokesLoginTests(TestCase):
 
     def test_value_is_not_inverted(self):
         """Guards the specific `not` that made archiving set the old value."""
-        emp = self._employee_with_password("inversion@test.horilla")
+        emp = self._employee_with_password("inversion@test.bells")
         for employee_state in (False, True, False):
             emp.is_active = employee_state
             emp.save()
@@ -137,7 +137,7 @@ class ArchiveRevokesLoginTests(TestCase):
         """
         emp = make_employee(
             company=self.company,
-            email="nouser@test.horilla",
+            email="nouser@test.bells",
             first_name="No",
             last_name="Account",
         )
@@ -154,7 +154,7 @@ class ArchiveRevokesLoginTests(TestCase):
         the sync is an explicit call at the archive sites only -- and a plain
         employee save must leave the user's flag alone.
         """
-        emp = self._employee_with_password("dashboard@test.horilla")
+        emp = self._employee_with_password("dashboard@test.bells")
         user = emp.employee_user_id
         user.is_active = False  # access revoked, employee still active
         user.save(update_fields=["is_active"])

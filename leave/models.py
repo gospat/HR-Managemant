@@ -30,7 +30,7 @@ from base.models import (
 from employee.models import Employee, EmployeeWorkInformation
 from core import hr_middlewares
 from core.hr_middlewares import _thread_locals
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from core.models import HrModel, upload_path
 from hr_audit.methods import get_diff
 from hr_audit.models import HorillaAuditInfo, HrAuditLog
@@ -1328,7 +1328,7 @@ class LeaveRequest(HrModel):
         leave_requests_with_interview = []
         context = {"instance": self}
         if apps.is_installed("recruitment"):
-            Schedule = get_horilla_model_class(
+            Schedule = get_hr_model_class(
                 app_label="recruitment", model="interviewschedule"
             )
             interviews = Schedule.objects.filter(
@@ -1535,14 +1535,14 @@ class LeaveRequest(HrModel):
             request = getattr(_thread_locals, "request", None)
             cache = None
             if request is not None:
-                cache = getattr(request, "_horilla_interview_clash_cache", None)
+                cache = getattr(request, "_hr_interview_clash_cache", None)
                 if cache is None:
-                    cache = request._horilla_interview_clash_cache = {}
+                    cache = request._hr_interview_clash_cache = {}
 
             if cache is not None and cache_key in cache:
                 has_interview = cache[cache_key]
             else:
-                Schedule = get_horilla_model_class(
+                Schedule = get_hr_model_class(
                     app_label="recruitment", model="interviewschedule"
                 )
                 has_interview = Schedule.objects.filter(
@@ -2032,11 +2032,11 @@ class LeaveRequest(HrModel):
     def is_approved(self):
         request = getattr(hr_middlewares._thread_locals, "request", None)
         if request:
-            if not hasattr(request.user, "_horilla_employee_cache"):
-                request.user._horilla_employee_cache = Employee.objects.filter(
+            if not hasattr(request.user, "_hr_employee_cache"):
+                request.user._hr_employee_cache = Employee.objects.filter(
                     employee_user_id=request.user
                 ).first()
-            employee = request.user._horilla_employee_cache
+            employee = request.user._hr_employee_cache
 
             multiple_approvals = self.multiple_approvals()
             condition_approval = None
@@ -2679,7 +2679,7 @@ if apps.is_installed("attendance"):
         #     """
         #     Overriding LeaveRequest model save method
         #     """
-        #     WorkRecords = get_horilla_model_class(
+        #     WorkRecords = get_hr_model_class(
         #         app_label="attendance", model="workrecords"
         #     )
         #     if (

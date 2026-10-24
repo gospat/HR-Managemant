@@ -30,12 +30,12 @@ class Fixture(TestCase):
         self.user = make_user("bulkadmin", is_superuser=True)
         self.company = make_company("Bulk Co")
         make_employee(
-            company=self.company, email="bulkadmin@test.horilla", user=self.user
+            company=self.company, email="bulkadmin@test.bells", user=self.user
         )
         self.client.force_login(self.user)
 
         self.employee = make_employee(
-            company=self.company, email="bulkworker@test.horilla"
+            company=self.company, email="bulkworker@test.bells"
         )
 
     def _get(self, dates=DATES):

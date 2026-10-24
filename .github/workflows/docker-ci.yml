@@ -40,7 +40,7 @@ jobs:
         run: |
           docker compose -f "$COMPOSE_FILE" up -d db redis
           for i in $(seq 1 60); do
-            if docker compose -f "$COMPOSE_FILE" exec -T db pg_isready -U horilla_user -d horilla_db 2>/dev/null; then
+            if docker compose -f "$COMPOSE_FILE" exec -T db pg_isready -U hr_user -d hr_db 2>/dev/null; then
               echo "Postgres is ready"
               break
             fi

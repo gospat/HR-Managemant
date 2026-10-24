@@ -1,11 +1,11 @@
-"""Horilla ``AppLauncher`` for the database-backed template app."""
+"""Bells Tech ``AppLauncher`` for the database-backed template app."""
 
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
 
 class HrDBTemplateConfig(AppConfig):
-    """Horilla app config: registers ``horilla_dbtemplate`` and auto-imports signal handlers."""
+    """Bells Tech app config: registers ``horilla_dbtemplate`` and auto-imports signal handlers."""
 
     default = True
 

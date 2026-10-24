@@ -275,11 +275,11 @@ class MetricsEndpointTests(TestCase):
 
         company = Company.objects.create(company="Metrics Co", hq=True)
         self.staff = HorillaUser.objects.create_user(
-            username="ops", email="ops@test.horilla", password="pw-not-real"
+            username="ops", email="ops@test.bells", password="pw-not-real"
         )
         self.staff.is_staff = True
         self.staff.save(update_fields=["is_staff"])
-        make_employee(company=company, email="ops@test.horilla", user=self.staff)
+        make_employee(company=company, email="ops@test.bells", user=self.staff)
 
     def test_anonymous_callers_get_404(self):
         # Job counts and failure rates are operational detail, not public.
@@ -292,7 +292,7 @@ class MetricsEndpointTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response["Content-Type"].startswith("text/plain"))
-        self.assertIn("horilla_scheduler_jobs_registered", response.content.decode())
+        self.assertIn("hr_scheduler_jobs_registered", response.content.decode())
 
     def test_collection_failure_does_not_break_the_endpoint(self):
         from unittest.mock import patch

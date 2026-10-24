@@ -11,7 +11,7 @@ class EmployeeCreateTests(TestCase):
         company = make_company("Emp Co")
         emp = make_employee(
             company=company,
-            email="newhire@test.horilla",
+            email="newhire@test.bells",
             first_name="New",
             last_name="Hire",
             phone="9111111111",
@@ -20,7 +20,7 @@ class EmployeeCreateTests(TestCase):
         self.assertTrue(hasattr(emp, "employee_work_info"))
         self.assertEqual(emp.employee_work_info.company_id_id, company.pk)
         self.assertIsNotNone(emp.employee_user_id_id)
-        self.assertEqual(emp.employee_user_id.email, "newhire@test.horilla")
+        self.assertEqual(emp.employee_user_id.email, "newhire@test.bells")
 
 
 class EmployeeCompanyIsolationTests(CompanyFilterTestMixin, TestCase):

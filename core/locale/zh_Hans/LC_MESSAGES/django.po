@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Horilla\n"
+"Project-Id-Version: Bells Tech\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-14 15:26+0530\n"
 "PO-Revision-Date: 2026-08-04 09:08+0000\n"
-"Last-Translator: Horilla Localization Team\n"
+"Last-Translator: Bells Tech Localization Team\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
@@ -67,8 +67,8 @@ msgstr "群組"
 msgid "Default Accessibility"
 msgstr "預設可訪問性"
 
-msgid "Limit default view access to horilla feature"
-msgstr "限制預設檢視存取至 Horilla 功能"
+msgid "Limit default view access to Bells Tech feature"
+msgstr "限制預設檢視存取至 Bells Tech 功能"
 
 msgid "Actions"
 msgstr "操作"
@@ -4506,8 +4506,8 @@ msgstr ""
 msgid "Mail Server"
 msgstr "邮件服务器"
 
-msgid "Configure an outgoing mail server so Horilla can send emails."
-msgstr "配置外发邮件服务器，以便 Horilla 可以发送电子邮件。"
+msgid "Configure an outgoing mail server so Bells Tech can send emails."
+msgstr "配置外发邮件服务器，以便 Bells Tech 可以发送电子邮件。"
 
 msgid "First Employee"
 msgstr "首位员工"
@@ -4909,9 +4909,9 @@ msgid "Enable this to trigger automatic check out."
 msgstr "启用此功能以触发自动签退。"
 
 msgid ""
-"Time at which the horilla will automatically check out the employee "
+"Time at which the Bells Tech will automatically check out the employee "
 "attendance if they forget."
-msgstr "如果员工忘记签退，Horilla 将在此时间自动签退其考勤。"
+msgstr "如果员工忘记签退，Bells Tech 将在此时间自动签退其考勤。"
 
 msgid "Employee Shift Schedule"
 msgstr "员工轮班安排"
@@ -5952,8 +5952,8 @@ msgid "Forgot password"
 msgstr "忘记密码"
 
 #, fuzzy
-#| msgid "Horilla Bot"
-msgid "Horilla"
+#| msgid "Bells Tech Bot"
+msgid "Bells Tech"
 msgstr "霍里拉机器人"
 
 msgid "Assign"
@@ -6644,8 +6644,8 @@ msgid "About"
 msgstr "关于"
 
 #, fuzzy
-#| msgid "Horilla Bot"
-msgid "Horilla HR"
+#| msgid "Bells Tech Bot"
+msgid "Bells Tech HR"
 msgstr "霍里拉机器人"
 
 msgid "Quote this version when reporting a problem."
@@ -6659,8 +6659,8 @@ msgstr "关闭"
 msgid "HR setup checklist"
 msgstr ""
 
-msgid "Get started with Horilla HR"
-msgstr "开始使用 Horilla HR"
+msgid "Get started with Bells Tech HR"
+msgstr "开始使用 Bells Tech HR"
 
 #, python-format
 msgid ""
@@ -7741,7 +7741,7 @@ msgstr "部门"
 msgid "job_position"
 msgstr ""
 "职位\n"
-"这些翻译保持了专业性和准确性，适用于企业级人力资源管理系统（Horilla HRM）的上"
+"这些翻译保持了专业性和准确性，适用于企业级人力资源管理系统（Bells Tech HRM）的上"
 "下文。每个术语都遵循了指定的翻译要求，确保了在中文商业环境中的适用性和清晰"
 "度。"
 
@@ -7916,7 +7916,7 @@ msgstr ""
 msgid "gdrive"
 msgstr ""
 
-msgid "horilla-theme"
+msgid "hr-theme"
 msgstr ""
 
 msgid "color-settings"
@@ -8275,8 +8275,8 @@ msgstr "未找到 {}。"
 msgid "%(model__meta_verbose_name)s object does not exist."
 msgstr "%(model__meta_verbose_name)s 对象不存在。"
 
-msgid "Test mail from Horilla"
-msgstr "来自 Horilla 的测试邮件"
+msgid "Test mail from Bells Tech"
+msgstr "来自 Bells Tech 的测试邮件"
 
 msgid "Something went wrong :"
 msgstr "出现错误："
@@ -12602,7 +12602,7 @@ msgstr "未知"
 msgid "Yesterday"
 msgstr "昨天"
 
-msgid "Horilla Bot"
+msgid "Bells Tech Bot"
 msgstr "霍里拉机器人"
 
 #, fuzzy
@@ -12758,8 +12758,8 @@ msgid "Tracked fields updated for %(model)s."
 msgstr ""
 
 #, fuzzy
-#| msgid "Horilla Bot"
-msgid "Horilla Auth"
+#| msgid "Bells Tech Bot"
+msgid "Bells Tech Auth"
 msgstr "霍里拉机器人"
 
 msgid "Users"
@@ -13397,10 +13397,10 @@ msgstr "银行信息"
 msgid "Enable Google meet"
 msgstr "启用 Google Meet"
 
-msgid "Enable this to integrate Google meet to Horilla."
+msgid "Enable this to integrate Google meet to Bells Tech."
 msgstr ""
 
-msgid "Schedule and join Google Meet video calls directly from Horilla."
+msgid "Schedule and join Google Meet video calls directly from Bells Tech."
 msgstr ""
 
 msgid "Google Cloud Credential not found."
@@ -15168,8 +15168,8 @@ msgid "Main navigation"
 msgstr "电子邮件配置"
 
 #, fuzzy
-#| msgid "Horilla Bot"
-msgid "Horilla HR version"
+#| msgid "Bells Tech Bot"
+msgid "Bells Tech HR version"
 msgstr "霍里拉机器人"
 
 #, fuzzy
@@ -15420,7 +15420,7 @@ msgstr ""
 msgid "Please login to access the dashboard."
 msgstr "请登录以访问仪表板。"
 
-msgid "e.g. adam.luis@horilla.com"
+msgid "e.g. adam.luis@bells.edu.ng"
 msgstr ""
 
 msgid "Sign In"
@@ -16906,11 +16906,11 @@ msgstr "未找到处罚记录。"
 msgid "Enable Linkedin"
 msgstr "启用人脸识别"
 
-msgid "Enable this to integrate linkedin to Horilla."
+msgid "Enable this to integrate linkedin to Bells Tech."
 msgstr ""
 
 msgid ""
-"Post job openings directly to LinkedIn and manage applicants from Horilla."
+"Post job openings directly to LinkedIn and manage applicants from Bells Tech."
 msgstr ""
 
 msgid "Prefix added to every auto-generated employee badge ID (e.g. PEP0001)."
@@ -24915,7 +24915,7 @@ msgid "Error occurred while deleting candidate rejection"
 msgstr "删除拒绝的候选人时发生错误"
 
 #, python-format
-msgid "Horilla report ready: %(name)s"
+msgid "Bells Tech report ready: %(name)s"
 msgstr ""
 
 #, python-format
@@ -24927,7 +24927,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "Horilla report export failed: %(name)s"
+msgid "Bells Tech report export failed: %(name)s"
 msgstr ""
 
 #, python-format
@@ -25002,7 +25002,7 @@ msgstr "扣款已更新。"
 msgid "Comparison"
 msgstr "公司"
 
-msgid "Attached is your scheduled Horilla report:"
+msgid "Attached is your scheduled Bells Tech report:"
 msgstr ""
 
 #, python-format
@@ -25650,7 +25650,7 @@ msgstr ""
 msgid "Document Expiry Aging"
 msgstr "公告到期"
 
-msgid "Overdue and upcoming horilla_documents expiry buckets (90-day horizon)."
+msgid "Overdue and upcoming document expiry buckets (90-day horizon)."
 msgstr ""
 
 msgid "Headcount Bridge"
@@ -27778,8 +27778,8 @@ msgid "Download Error File"
 msgstr "下载错误文件"
 
 #, fuzzy
-#| msgid "Horilla Bot"
-msgid "Horilla HRMS"
+#| msgid "Bells Tech Bot"
+msgid "Bells Tech HRMS"
 msgstr "霍里拉机器人"
 
 msgid "Sign Up"
@@ -27792,11 +27792,11 @@ msgid "Go To Home"
 msgstr "返回首页"
 
 msgid ""
-"Authenticate with your password to initialize the Horilla HRMS database."
-msgstr "使用您的密码进行身份验证以初始化 Horilla HRMS 数据库。"
+"Authenticate with your password to initialize the Bells Tech HRMS database."
+msgstr "使用您的密码进行身份验证以初始化 Bells Tech HRMS 数据库。"
 
-msgid "Please sign up to access the Horilla HRMS."
-msgstr "请注册以访问 Horilla HRMS。"
+msgid "Please sign up to access the Bells Tech HRMS."
+msgstr "请注册以访问 Bells Tech HRMS。"
 
 #, fuzzy
 #| msgid "e.g. Kerala"
@@ -28011,7 +28011,7 @@ msgstr "API密钥"
 
 msgid ""
 "Meta app secret, used to verify the X-Hub-Signature-256 header on incoming "
-"webhook calls. Without it Horilla cannot tell a real delivery from a forged "
+"webhook calls. Without it Bells Tech cannot tell a real delivery from a forged "
 "one, so unsigned payloads are rejected. Find it under App Settings > Basic "
 "in the Meta developer console."
 msgstr ""
@@ -28019,7 +28019,7 @@ msgstr ""
 msgid "WhatsApp Integration"
 msgstr "WhatsApp 集成"
 
-msgid "Enable this to integrate WhatsApp to Horilla."
+msgid "Enable this to integrate WhatsApp to Bells Tech."
 msgstr ""
 
 msgid ""

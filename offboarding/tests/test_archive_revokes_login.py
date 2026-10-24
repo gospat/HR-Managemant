@@ -29,7 +29,7 @@ class ArchivedStageRevokesLoginTests(TestCase):
         self.leaver_user = make_user("leaver_user")
         self.leaver = make_employee(
             company=self.company,
-            email="leaver@test.horilla",
+            email="leaver@test.bells",
             first_name="Lee",
             user=self.leaver_user,
         )
@@ -37,7 +37,7 @@ class ArchivedStageRevokesLoginTests(TestCase):
         self.admin_user = make_user("offboard_admin", is_superuser=True)
         make_employee(
             company=self.company,
-            email="offboard_admin@test.horilla",
+            email="offboard_admin@test.bells",
             first_name="Ada",
             user=self.admin_user,
         )

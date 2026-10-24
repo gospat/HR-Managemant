@@ -78,7 +78,7 @@ from employee.filters import EmployeeFilter
 from employee.models import Employee, EmployeeTag
 from core import hr_middlewares
 from core.hr_middlewares import _thread_locals
-from core.methods import get_horilla_model_class
+from core.methods import get_hr_model_class
 from hr_audit.models import AuditTag
 from hr_auth.models import HorillaUser
 from hr_widgets.widgets.hr_multi_select_field import HrMultiSelectField
@@ -2625,7 +2625,7 @@ excluded_fields = [
     "created_by",
     "modified_by",
     "additional_data",
-    "horilla_history",
+    "hr_history",
     "additional_data",
 ]
 
@@ -3339,14 +3339,14 @@ class PassWordResetForm(forms.Form):
         elif request is not None:
             # get_current_site() resolves through django.contrib.sites, whose
             # only row on a normal install is the one its own migration
-            # creates -- domain "example.com". Nothing in Horilla ever updates
+            # creates -- domain "example.com". Nothing in Bells Tech ever updates
             # it, so every reset link pointed at example.com while the rest of
             # the product was reachable on the real host. Leave-request mail
             # never had the problem because it takes the host straight off the
             # request (leave/threading.py), which is what this now does too.
             #
             # request.get_host() and not the X-Forwarded-Host reader in
-            # horilla_dbtemplate.utils.site: get_host() is validated against
+            # hr_dbtemplate.utils.site: get_host() is validated against
             # ALLOWED_HOSTS, and a reset link is exactly the wrong place to
             # trust an unvalidated header -- that is how reset-link poisoning
             # works. Deployments behind a proxy should set USE_X_FORWARDED_HOST,
@@ -3707,7 +3707,7 @@ class PenaltyAccountForm(ModelForm):
         employee = kwargs.pop("employee", None)
         super().__init__(*args, **kwargs)
         if apps.is_installed("leave") and employee:
-            LeaveType = get_horilla_model_class(app_label="leave", model="leavetype")
+            LeaveType = get_hr_model_class(app_label="leave", model="leavetype")
             available_leaves = employee.available_leave.all()
             assigned_leave_types = LeaveType.objects.filter(
                 id__in=available_leaves.values_list("leave_type_id", flat=True)

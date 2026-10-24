@@ -38,7 +38,7 @@ class ApiTenantScopingTests(TestCase):
         self.user_a = make_user("tenant_a_user", password="secret123")
         self.employee_a = make_employee(
             company=self.company_a,
-            email="tenant_a@test.horilla",
+            email="tenant_a@test.bells",
             first_name="Alice",
             user=self.user_a,
         )
@@ -57,7 +57,7 @@ class ApiTenantScopingTests(TestCase):
         self.user_b = make_user("tenant_b_user", password="secret123")
         self.employee_b = make_employee(
             company=self.company_b,
-            email="tenant_b@test.horilla",
+            email="tenant_b@test.bells",
             first_name="Bob",
             user=self.user_b,
         )

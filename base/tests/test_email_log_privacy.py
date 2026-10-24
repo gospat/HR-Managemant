@@ -27,7 +27,7 @@ class RedactionTests(TestCase):
     def test_password_reset_subject_drops_the_body(self):
         self.assertEqual(
             redact_credential_body(
-                "Password reset on Horilla", "Follow this link: /reset/abc/def/"
+                "Password reset on Bells Tech", "Follow this link: /reset/abc/def/"
             ),
             REDACTED,
         )

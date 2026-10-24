@@ -1,4 +1,4 @@
-"""Lightweight model factories for Horilla TestCase suites."""
+"""Lightweight model factories for Bells Tech TestCase suites."""
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ def make_user(
     email: str | None = None,
     is_superuser: bool = False,
 ) -> HorillaUser:
-    email = email or f"{username}@test.horilla"
+    email = email or f"{username}@test.bells"
     if is_superuser:
         return HorillaUser.objects.create_superuser(
             username=username, email=email, password=password

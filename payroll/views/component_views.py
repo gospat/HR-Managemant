@@ -53,7 +53,7 @@ from core.decorators import (
 )
 from core.group_by import group_by_queryset
 from core.http.response import HrRedirect
-from core.methods import dynamic_attr, get_horilla_model_class, get_urlencode
+from core.methods import dynamic_attr, get_hr_model_class, get_urlencode
 
 # from leave.models import AvailableLeave
 from notifications.signals import notify
@@ -1116,7 +1116,7 @@ def payslip_pending_attendance_action(request):
     attendance_id = request.POST.get("attendance_id")
     action = request.POST.get("action")
 
-    Attendance = get_horilla_model_class(app_label="attendance", model="attendance")
+    Attendance = get_hr_model_class(app_label="attendance", model="attendance")
     try:
         attendance = Attendance.objects.get(pk=attendance_id)
     except (Attendance.DoesNotExist, ValueError, TypeError):
@@ -1750,7 +1750,7 @@ def asset_fine(request):
     Add asset fine method
     """
     if apps.is_installed("asset"):
-        Asset = get_horilla_model_class(app_label="asset", model="asset")
+        Asset = get_hr_model_class(app_label="asset", model="asset")
     asset_id = request.GET["asset_id"]
     employee_id = request.GET["employee_id"]
     asset = Asset.objects.get(id=asset_id)
@@ -1942,7 +1942,7 @@ def get_assigned_leaves(request):
             {"error": "Missing required parameters: employeeId"}, status=400
         )
     if apps.is_installed("leave"):
-        AvailableLeave = get_horilla_model_class(
+        AvailableLeave = get_hr_model_class(
             app_label="leave", model="availableleave"
         )
 

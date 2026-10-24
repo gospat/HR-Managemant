@@ -11,7 +11,7 @@ class TestkitFactorySmokeTests(TestCase):
         user = make_user("factory_user")
         emp = make_employee(
             company=company,
-            email="factory@test.horilla",
+            email="factory@test.bells",
             first_name="Fac",
             last_name="Tory",
         )

@@ -31,7 +31,7 @@ class CapabilitiesTests(TestCase):
         self.user = make_user("caps_user", password=PASSWORD)
         self.employee = make_employee(
             company=self.company,
-            email="caps@test.horilla",
+            email="caps@test.bells",
             first_name="Cara",
             user=self.user,
         )
@@ -73,7 +73,7 @@ class CapabilitiesTests(TestCase):
     def test_reporting_manager_is_manager(self):
         report = make_employee(
             company=self.company,
-            email="report@test.horilla",
+            email="report@test.bells",
             first_name="Ravi",
         )
         report.employee_work_info.reporting_manager_id = self.employee
@@ -91,7 +91,7 @@ class CapabilitiesTests(TestCase):
         """One band per user: the design never shows both."""
         report = make_employee(
             company=self.company,
-            email="report2@test.horilla",
+            email="report2@test.bells",
             first_name="Rhea",
         )
         report.employee_work_info.reporting_manager_id = self.employee

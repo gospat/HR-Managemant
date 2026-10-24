@@ -1440,7 +1440,7 @@ class HrListView(ListView):
 
 class HrSectionView(TemplateView):
     """
-    Horilla Template View
+    Bells Tech Template View
     """
 
     def __init__(self, **kwargs: Any) -> None:
@@ -2562,7 +2562,7 @@ class HrNavView(TemplateView):
 @method_decorator(hx_request_required, name="dispatch")
 class HrProfileView(DetailView):
     """
-    GenericHorillaProfileView
+    GenericHrProfileView
     """
 
     template_name = "generic/hr_profile_view.html"

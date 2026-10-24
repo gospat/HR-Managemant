@@ -23,7 +23,7 @@ The API documentation is available at the following URLs:
 ### Using the `document_api` Decorator
 
 ```python
-from horilla_api.docs import document_api
+from hr_api.docs import document_api
 
 class MyAPIView(APIView):
     @document_api(

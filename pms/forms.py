@@ -828,7 +828,7 @@ class FeedbackForm(HrModelForm):
                 else Employee.objects.none()
             )
 
-        # # Horilla multi-select filter for subordinates
+        # # Bells Tech multi-select filter for subordinates
         # self.fields["subordinate_id"] = HrMultiSelectField(
         #     queryset=Employee.objects.all(),
         #     widget=HrMultiSelectWidget(

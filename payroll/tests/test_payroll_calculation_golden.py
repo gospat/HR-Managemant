@@ -96,7 +96,7 @@ class PayrollCalculationGoldenTests(TestCase):
 
     def setUp(self):
         company = make_company("Golden Co")
-        self.employee = make_employee(company=company, email="golden@test.horilla")
+        self.employee = make_employee(company=company, email="golden@test.bells")
         # make_employee's own contract (if any) would compete for "active".
         Contract.objects.filter(employee_id=self.employee).delete()
 

@@ -22,7 +22,7 @@ from payroll.tests.factories_payroll import make_active_contract
 class ComponentRouteTests(TestCase):
     def setUp(self):
         self.company = make_company("Route Co")
-        self.employee = make_employee(company=self.company, email="route@test.horilla")
+        self.employee = make_employee(company=self.company, email="route@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(self.employee)
 
@@ -134,11 +134,11 @@ class MembershipEditingTests(TestCase):
     def setUp(self):
         user = make_user("compadmin", is_superuser=True)
         self.company = make_company("Comp Co")
-        make_employee(company=self.company, email="compadmin@test.horilla", user=user)
+        make_employee(company=self.company, email="compadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
-        self.employee = make_employee(company=self.company, email="member@test.horilla")
+        self.employee = make_employee(company=self.company, email="member@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(self.employee)
         self.component = Allowance.objects.create(
@@ -166,7 +166,7 @@ class MembershipEditingTests(TestCase):
         The component is shared. Editing membership from one contract must
         leave every other employee on it exactly as they were.
         """
-        other = make_employee(company=self.company, email="other@test.horilla")
+        other = make_employee(company=self.company, email="other@test.bells")
         self.component.specific_employees.add(other)
 
         self._post(f"allowance:{self.component.pk}")
@@ -203,13 +203,13 @@ class BulkTests(TestCase):
     def setUp(self):
         user = make_user("bulkadmin", is_superuser=True)
         self.company = make_company("Bulk Co")
-        make_employee(company=self.company, email="bulkadmin@test.horilla", user=user)
+        make_employee(company=self.company, email="bulkadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
         self.contracts = []
         for name in ("one", "two", "three"):
-            employee = make_employee(company=self.company, email=f"{name}@test.horilla")
+            employee = make_employee(company=self.company, email=f"{name}@test.bells")
             Contract.objects.filter(employee_id=employee).delete()
             self.contracts.append(make_active_contract(employee))
 
@@ -311,11 +311,11 @@ class StandardComponentsOnTheContractTests(TestCase):
     def setUp(self):
         user = make_user("stdadmin", is_superuser=True)
         self.company = make_company("Std Co")
-        make_employee(company=self.company, email="stdadmin@test.horilla", user=user)
+        make_employee(company=self.company, email="stdadmin@test.bells", user=user)
         self.client.force_login(user)
         self.hx = {"HTTP_HX_REQUEST": "true"}
 
-        self.employee = make_employee(company=self.company, email="std@test.horilla")
+        self.employee = make_employee(company=self.company, email="std@test.bells")
         Contract.objects.filter(employee_id=self.employee).delete()
         self.contract = make_active_contract(self.employee)
 

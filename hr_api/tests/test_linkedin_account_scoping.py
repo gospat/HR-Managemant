@@ -47,7 +47,7 @@ class LinkedInAccountScopingTests(TestCase):
         self.user_a = make_user("li_tenant_a", password="secret123")
         self.employee_a = make_employee(
             company=self.company_a,
-            email="li_a@test.horilla",
+            email="li_a@test.bells",
             first_name="Alice",
             user=self.user_a,
         )

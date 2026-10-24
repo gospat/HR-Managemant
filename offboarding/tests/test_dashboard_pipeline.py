@@ -22,14 +22,14 @@ class OffboardingPipelineWidgetTests(TestCase):
         User = get_user_model()
         self.admin = User.objects.create_superuser(
             username="pipeline-admin",
-            email="pipeline-admin@test.horilla",
+            email="pipeline-admin@test.bells",
             password="pass",
         )
         # A superuser with no linked Employee gets redirected to the new-hire
         # onboarding flow before ever reaching the dashboard view.
         make_employee(
             company=self.company,
-            email="pipeline-admin-profile@test.horilla",
+            email="pipeline-admin-profile@test.bells",
             user=self.admin,
         )
         self.client = Client()
@@ -50,7 +50,7 @@ class OffboardingPipelineWidgetTests(TestCase):
             return OffboardingStage.objects.get(offboarding_id=process, type=stage_type)
 
         employees = [
-            make_employee(company=self.company, email=f"exit{i}@test.horilla")
+            make_employee(company=self.company, email=f"exit{i}@test.bells")
             for i in range(5)
         ]
 

@@ -20,7 +20,7 @@ from hr_views.history_methods import get_diff
 @method_decorator(hx_request_required, name="dispatch")
 class HrHistoryView(DetailView):
     """
-    GenericHorillaHistoryView
+    GenericHrHistoryView
     """
 
     template_name = "generic/hr_history_view.html"
@@ -42,9 +42,9 @@ class HrHistoryView(DetailView):
         if tracking:
             context["tracking"] = tracking
             context["log_entries"] = None
-        elif hasattr(instance, "horilla_history"):
+        elif hasattr(instance, "hr_history"):
             context["tracking"] = None
-            context["log_entries"] = instance.horilla_history.all().order_by(
+            context["log_entries"] = instance.hr_history.all().order_by(
                 "-timestamp"
             )
         else:

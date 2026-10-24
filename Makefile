@@ -31,7 +31,7 @@ shell: ## Open shell in web container
 	$(COMPOSE) exec web bash
 
 db-shell: ## Open PostgreSQL shell
-	$(COMPOSE) exec db psql -U horilla_user -d horilla_db
+	$(COMPOSE) exec db psql -U hr_user -d hr_db
 
 status: ## Show status of all services
 	$(COMPOSE) ps

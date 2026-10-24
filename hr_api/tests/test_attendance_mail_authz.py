@@ -42,24 +42,24 @@ class ConvertedMailTemplateAuthorizationTests(TestCase):
         # check required and nothing more.
         self.attacker_user = make_user("mail_attacker", password="secret123")
         self.attacker = make_employee(
-            company=company, email="mail_attacker@test.horilla", user=self.attacker_user
+            company=company, email="mail_attacker@test.bells", user=self.attacker_user
         )
         managed_user = make_user("mail_attacker_report", password="secret123")
         make_employee(
             company=company,
-            email="mail_attacker_report@test.horilla",
+            email="mail_attacker_report@test.bells",
             user=managed_user,
         )
         self._set_manager(managed_user, self.attacker)
 
         self.target_user = make_user("mail_target", password="secret123")
         self.target = make_employee(
-            company=company, email="mail_target@test.horilla", user=self.target_user
+            company=company, email="mail_target@test.bells", user=self.target_user
         )
 
         self.manager_user = make_user("mail_manager", password="secret123")
         self.manager = make_employee(
-            company=company, email="mail_manager@test.horilla", user=self.manager_user
+            company=company, email="mail_manager@test.bells", user=self.manager_user
         )
         self._set_manager(self.target_user, self.manager)
 
@@ -111,13 +111,13 @@ class OfflineEmployeeMailsendAuthorizationTests(TestCase):
         self.attacker_user = make_user("mailsend_attacker", password="secret123")
         self.attacker = make_employee(
             company=company,
-            email="mailsend_attacker@test.horilla",
+            email="mailsend_attacker@test.bells",
             user=self.attacker_user,
         )
         managed_user = make_user("mailsend_attacker_report", password="secret123")
         make_employee(
             company=company,
-            email="mailsend_attacker_report@test.horilla",
+            email="mailsend_attacker_report@test.bells",
             user=managed_user,
         )
         from employee.models import EmployeeWorkInformation
@@ -128,7 +128,7 @@ class OfflineEmployeeMailsendAuthorizationTests(TestCase):
 
         self.target_user = make_user("mailsend_target", password="secret123")
         self.target = make_employee(
-            company=company, email="mailsend_target@test.horilla", user=self.target_user
+            company=company, email="mailsend_target@test.bells", user=self.target_user
         )
 
     def _auth(self, user):
@@ -166,10 +166,10 @@ class MailTemplateListAuthorizationTests(TestCase):
         # A reporting manager who does NOT hold view_horillamailtemplate.
         self.manager_user = make_user("mt_manager", password="secret123")
         self.manager = make_employee(
-            company=company, email="mt_manager@test.horilla", user=self.manager_user
+            company=company, email="mt_manager@test.bells", user=self.manager_user
         )
         report_user = make_user("mt_report", password="secret123")
-        make_employee(company=company, email="mt_report@test.horilla", user=report_user)
+        make_employee(company=company, email="mt_report@test.bells", user=report_user)
         from employee.models import EmployeeWorkInformation
 
         EmployeeWorkInformation.objects.filter(

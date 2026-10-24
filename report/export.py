@@ -1,7 +1,7 @@
 """
 Server-side Excel / CSV export for standard report payloads.
 
-Workbook layout (aligned with Horilla explorer exports):
+Workbook layout (aligned with Bells Tech explorer exports):
   1. Cover   — company letterhead, report title, metadata, filters, KPIs
   2. Data    — letterhead + primary tabular result set, print-ready
   3. Charts  — native openpyxl chart objects + their source data (when present)
@@ -31,7 +31,7 @@ def _brand_name() -> str:
 
 
 # ---------------------------------------------------------------------------
-# Style tokens — Horilla primary (coral / #E54F38)
+# Style tokens — Bells Tech primary (coral / #E54F38)
 # ---------------------------------------------------------------------------
 COLOR_PRIMARY = "E54F38"
 COLOR_PRIMARY_DARK = "CE4732"

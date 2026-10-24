@@ -46,7 +46,7 @@
 # --- Multi-tenancy and authentication ---
 # Company scoping is enforced in a small number of places. Everything else
 # in the product inherits its correctness from these files.
-/base/horilla_company_manager.py  @horilla-opensource
+/base/hr_company_manager.py       @horilla-opensource
 /base/middleware.py               @horilla-opensource
 /base/auth_backends.py            @horilla-opensource
 /hr_api/authentication.py         @horilla-opensource

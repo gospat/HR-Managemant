@@ -33,7 +33,7 @@ These systems are complementary: the checklist drives first-time HR configuratio
 
 **End-user flow**
 
-1. Authenticated page load injects `window.HORILLA_TOUR` and `tourController.js`
+1. Authenticated page load injects `window.PRODUCT_TOUR` and `tourController.js`
 2. JS calls `GET /tour/api/active/?page=&path=`
 3. Highest-priority unfinished `auto_once` tour starts via driver.js
 4. On close/finish, JS posts status to `POST /tour/api/progress/`
@@ -46,7 +46,7 @@ These systems are complementary: the checklist drives first-time HR configuratio
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  Templates (footer_scripts.html)                            │
-│    window.HORILLA_TOUR = { page, path, activeUrl, … }       │
+│    window.PRODUCT_TOUR = { page, path, activeUrl, … }       │
 │    + static/build/js/tourController.js                      │
 └──────────────────────────┬──────────────────────────────────┘
                            │ fetch
@@ -134,7 +134,7 @@ Patterns: HorillaListView row actions, HTMX modals, generic delete.
 #### Frontend (`tourController.js`)
 
 - Depends on global **driver.js** (`window.driver.js.driver`)
-- Reads `window.HORILLA_TOUR`
+- Reads `window.PRODUCT_TOUR`
 - Builds driver steps from API payload
 - On destroy: posts `completed` if last step reached, else `skipped`
 - Exposes launcher UI (`#horillaTourLauncher`) and `window.horillaTour` for Start/Replay
@@ -283,7 +283,7 @@ static/build/js/tourController.js
 base/dashboard.py                    setup checklist context + dismiss
 base/templates/base/setup_checklist_banner.html
 base/templates/base/setup_checklist_step.html
-hr_theme/.../footer_scripts.html   HORILLA_TOUR bootstrap
+hr_theme/.../footer_scripts.html   PRODUCT_TOUR bootstrap
 hr_theme/.../header.html           Take a tour button
 ```
 

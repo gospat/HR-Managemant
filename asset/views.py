@@ -1624,7 +1624,7 @@ def asset_export_excel(request):
                     for (
                         format_name,
                         format_string,
-                    ) in settings.HORILLA_DATE_FORMATS.items():
+                    ) in settings.HR_DATE_FORMATS.items():
                         if format_name == date_format:
                             value = start_date.strftime(format_string)
 

@@ -3313,7 +3313,7 @@ def work_info_export(request):
             if isinstance(value, date):
                 try:
                     data = value.strftime(
-                        settings.HORILLA_DATE_FORMATS.get(date_format, "%Y-%m-%d")
+                        settings.HR_DATE_FORMATS.get(date_format, "%Y-%m-%d")
                     )
                 except Exception:
                     data = str(value)

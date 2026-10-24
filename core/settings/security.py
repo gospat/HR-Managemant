@@ -1,7 +1,7 @@
 """
 Production security gates and Django secure defaults.
 
-Applied from base settings when DEBUG is False or HORILLA_ENV=production.
+Applied from base settings when DEBUG is False or HR_ENV=production.
 Local/tutorial defaults (DEBUG=True) remain permissive for open-source onboarding.
 """
 
@@ -25,8 +25,8 @@ INSECURE_DB_INIT_PASSWORDS = frozenset(
 )
 
 
-def is_production_mode(debug: bool, horilla_env: str) -> bool:
-    return (not debug) or (horilla_env or "").strip().lower() == "production"
+def is_production_mode(debug: bool, env_value: str) -> bool:
+    return (not debug) or (env_value or "").strip().lower() == "production"
 
 
 def validate_production_secrets(secret_key, allowed_hosts, db_init_password):

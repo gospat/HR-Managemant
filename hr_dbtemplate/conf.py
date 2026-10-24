@@ -1,7 +1,7 @@
 """
 Configuration for horilla_dbtemplate.
 
-Reads from Django settings with HORILLA_DBTEMPLATE_* prefix.
+Reads from Django settings with HR_DBTEMPLATE_* prefix.
 Django 6.x compatible.
 """
 
@@ -9,8 +9,8 @@ from django.conf import settings
 
 
 def get_setting(name, default=None):
-    """Get a setting with HORILLA_DBTEMPLATE_ prefix."""
-    full_name = f"HORILLA_DBTEMPLATE_{name}"
+    """Get a setting with HR_DBTEMPLATE_ prefix."""
+    full_name = f"HR_DBTEMPLATE_{name}"
     return getattr(settings, full_name, default)
 
 

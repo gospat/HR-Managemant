@@ -1018,7 +1018,7 @@ def format_export_value(value, employee):
         check_in_time = datetime.strptime(str(value).split(".")[0], "%H:%M:%S").time()
 
         # Print the formatted time for each format
-        for format_name, format_string in settings.HORILLA_TIME_FORMATS.items():
+        for format_name, format_string in settings.HR_TIME_FORMATS.items():
             if format_name == time_format:
                 value = check_in_time.strftime(format_string)
 
@@ -1026,7 +1026,7 @@ def format_export_value(value, employee):
         # Convert the string to a datetime.date object
         start_date = datetime.strptime(str(value), "%Y-%m-%d").date()
         # Print the formatted date for each format
-        for format_name, format_string in settings.HORILLA_DATE_FORMATS.items():
+        for format_name, format_string in settings.HR_DATE_FORMATS.items():
             if format_name == date_format:
                 value = start_date.strftime(format_string)
 
@@ -1676,7 +1676,7 @@ def get_subordinates(request):
 def format_date(date_str):
     # List of possible date formats to try
 
-    for format_name, format_string in settings.HORILLA_DATE_FORMATS.items():
+    for format_name, format_string in settings.HR_DATE_FORMATS.items():
         try:
             return datetime.strptime(date_str, format_string).strftime("%Y-%m-%d")
         except ValueError:

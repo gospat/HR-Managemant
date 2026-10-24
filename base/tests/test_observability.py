@@ -318,7 +318,7 @@ class ReadinessSchedulerTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["scheduler"], "missing")
 
-    @override_settings(HORILLA_REQUIRE_SCHEDULER=True)
+    @override_settings(HR_REQUIRE_SCHEDULER=True)
     def test_ready_fails_when_scheduler_is_required_and_missing(self):
         response = self.client.get("/ready/")
 

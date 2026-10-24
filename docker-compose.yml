@@ -58,7 +58,7 @@ services:
       - REDIS_URL=redis://:horilla_pass@redis:6379/0
       # web owns migrate/collectstatic; racing them from here can deadlock on
       # DDL and would wipe STATIC_ROOT while web is serving from it.
-      - HORILLA_SKIP_RELEASE_TASKS=1
+      - HR_SKIP_RELEASE_TASKS=1
     depends_on:
       db:
         condition: service_healthy

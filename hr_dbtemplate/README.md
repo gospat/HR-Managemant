@@ -18,8 +18,8 @@ Use this document when extending behaviour, debugging cache issues, or onboardin
 ### Django settings (reference)
 
 - **`INSTALLED_APPS`**: include `django.contrib.sites` and `horilla_dbtemplate` (or the app’s dotted path your project uses).
-- **`HORILLA_DBTEMPLATE_CACHE_BACKEND`**: optional; name of a key in `CACHES` (default: `"default"`). See `conf.py`.
-- **`HORILLA_DBTEMPLATE_AUTO_POPULATE_CONTENT`**: optional; if true, empty content can be filled from disk on save. See `conf.py`.
+- **`HR_DBTEMPLATE_CACHE_BACKEND`**: optional; name of a key in `CACHES` (default: `"default"`). See `conf.py`.
+- **`HR_DBTEMPLATE_AUTO_POPULATE_CONTENT`**: optional; if true, empty content can be filled from disk on save. See `conf.py`.
 
 ### Registering the loader
 
@@ -80,7 +80,7 @@ Paths are relative to **`hr_dbtemplate/`**.
 | **`admin.py`** | `ModelAdmin` / inlines: change form, version history, diff, preview, unlock URLs, edit lock on change view, bulk actions (activate, archive, cache invalidate/repopulate, syntax check, export JSON). Uses `add_template_to_cache` / `remove_cached_template` where appropriate. |
 | **`signals.py`** | Connects **`post_save`**, **`pre_delete`**, **`m2m_changed`** on `Template.sites`: invalidate wide, then **`on_commit`** refresh cache for the saved row’s **current** sites/languages. |
 | **`loaders.py`** | Django **`BaseLoader`** subclass: thread-local request, site + language, cache layer, DB query order, analytics update on successful DB read, `TemplateDoesNotExist` fallback. |
-| **`conf.py`** | `HORILLA_DBTEMPLATE_*` settings → cache backend name, `AUTO_POPULATE_CONTENT`, **`get_cache()`**. |
+| **`conf.py`** | `HR_DBTEMPLATE_*` settings → cache backend name, `AUTO_POPULATE_CONTENT`, **`get_cache()`**. |
 | **`utils/cache.py`** | Cache key helpers, **`remove_cached_template`** (all sites × all request languages), **`warm_template_cache`**, **`add_template_to_cache`**, `set_and_return` for loader; optional `request_finished` → **`cache.close`** for locmem-style backends. |
 | **`utils/site.py`** | **`get_request_host`**, **`get_site_for_request`** (proxy-aware). |
 | **`utils/template.py`** | **`check_template_syntax`** for admin bulk action. |

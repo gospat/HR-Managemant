@@ -481,10 +481,10 @@ def get_company(context):
     # The resolved theme can't change within a single request, so memoize on it.
     if request is None:
         return _resolve_company_theme(company_id)
-    cache = getattr(request, "_horilla_company_theme_cache", None)
+    cache = getattr(request, "_hr_company_theme_cache", None)
     if cache is None:
         cache = {}
-        request._horilla_company_theme_cache = cache
+        request._hr_company_theme_cache = cache
     if company_id not in cache:
         cache[company_id] = _resolve_company_theme(company_id)
     return cache[company_id]

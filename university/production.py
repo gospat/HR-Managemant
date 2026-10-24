@@ -10,7 +10,7 @@ if errors:
     raise ImproperlyConfigured(
         "University production configuration rejected:\n- " + "\n- ".join(errors)
     )
-os.environ["HORILLA_ENV"] = "production"
+os.environ["HR_ENV"] = "production"
 from .settings import *  # noqa: E402,F403
 
 HR_DEPLOYMENT_STAGE = os.environ["HR_DEPLOYMENT_STAGE"]

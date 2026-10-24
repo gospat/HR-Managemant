@@ -592,11 +592,11 @@ def view_payslip_pdf(request, payslip_id):
             month_start_name = start_date.strftime("%B %d, %Y")
             month_end_name = end_date.strftime("%B %d, %Y")
             # Formatted date for each format
-            for format_name, format_string in pay_settings.HORILLA_DATE_FORMATS.items():
+            for format_name, format_string in pay_settings.HR_DATE_FORMATS.items():
                 if format_name == date_format:
                     formatted_start_date = start_date.strftime(format_string)
 
-            for format_name, format_string in pay_settings.HORILLA_DATE_FORMATS.items():
+            for format_name, format_string in pay_settings.HR_DATE_FORMATS.items():
                 if format_name == date_format:
                     formatted_end_date = end_date.strftime(format_string)
             data["month_start_name"] = month_start_name
@@ -1078,11 +1078,11 @@ def payslip_export(request):
             # Convert the string to a datetime.date object
             start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
             end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
-            for format_name, format_string in pay_settings.HORILLA_DATE_FORMATS.items():
+            for format_name, format_string in pay_settings.HR_DATE_FORMATS.items():
                 if format_name == date_format:
                     formatted_start_date = start_date.strftime(format_string)
 
-            for format_name, format_string in pay_settings.HORILLA_DATE_FORMATS.items():
+            for format_name, format_string in pay_settings.HR_DATE_FORMATS.items():
                 if format_name == date_format:
                     formatted_end_date = end_date.strftime(format_string)
 
@@ -1584,7 +1584,7 @@ def payslip_pdf(request, id):
                 return HttpResponse("The payslip period is invalid.", status=400)
 
             # Format the start and end dates
-            period_format = pay_settings.HORILLA_DATE_FORMATS.get(
+            period_format = pay_settings.HR_DATE_FORMATS.get(
                 date_format, "%b. %d, %Y"
             )
             formatted_start_date = start_date.strftime(period_format)

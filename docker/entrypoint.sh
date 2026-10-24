@@ -60,13 +60,13 @@ fi
 
 # Run migrations
 #
-# HORILLA_SKIP_RELEASE_TASKS=1 skips migrate and collectstatic for containers
+# HR_SKIP_RELEASE_TASKS=1 skips migrate and collectstatic for containers
 # that share this image but must not perform release tasks -- notably the
 # scheduler service, which starts alongside web. Two containers racing `migrate`
 # can deadlock on the same DDL, and `collectstatic --clear` (below) would wipe
 # STATIC_ROOT out from under a web container already serving from it.
-if [ "${HORILLA_SKIP_RELEASE_TASKS:-0}" = "1" ]; then
-  echo "HORILLA_SKIP_RELEASE_TASKS=1 -- skipping migrate and collectstatic."
+if [ "${HR_SKIP_RELEASE_TASKS:-0}" = "1" ]; then
+  echo "HR_SKIP_RELEASE_TASKS=1 -- skipping migrate and collectstatic."
   echo "Starting server..."
   exec "$@"
 fi

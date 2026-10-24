@@ -35,7 +35,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS")
-HORILLA_ENV = env("HORILLA_ENV", default="")
+HR_ENV = env("HR_ENV", default="")
 REDIS_URL = env("REDIS_URL", default=None)
 
 # Default site ID for django.contrib.sites framework.
@@ -411,14 +411,14 @@ LOGGING = build_logging_config(
 # install sends nothing anywhere by default. PII is scrubbed in before_send
 # rather than trusting the receiving project's config -- a stack trace here can
 # hold salaries, bank details and reset tokens.
-from core.__version__ import __version__ as _horilla_version  # noqa: E402
+from core.__version__ import __version__ as _hr_version  # noqa: E402
 from core.observability import init_sentry  # noqa: E402
 
 SENTRY_DSN = env("SENTRY_DSN", default="")
 init_sentry(
     dsn=SENTRY_DSN,
-    environment=HORILLA_ENV or ("development" if DEBUG else "production"),
-    release=_horilla_version,
+    environment=HR_ENV or ("development" if DEBUG else "production"),
+    release=_hr_version,
     traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
 )
 
@@ -451,7 +451,7 @@ NESTED_SUBORDINATE_VISIBILITY = False
 TWO_FACTORS_AUTHENTICATION = False
 # When True, /ready/ returns 503 until run_scheduler has registered jobs.
 # Off by default so Docker CI (web without the scheduler service) still passes.
-HORILLA_REQUIRE_SCHEDULER = env.bool("HORILLA_REQUIRE_SCHEDULER", default=False)
+HR_REQUIRE_SCHEDULER = env.bool("HR_REQUIRE_SCHEDULER", default=False)
 
 SIDEBARS = [
     "employee",
@@ -553,7 +553,7 @@ NO_PERMISSION_MODALS = [
 
 FILE_STORAGE = FileSystemStorage(location="csv_tmp/")
 
-HORILLA_DATE_FORMATS = {
+HR_DATE_FORMATS = {
     "DD/MM/YY": "%d/%m/%y",
     "DD-MM-YYYY": "%d-%m-%Y",
     "DD.MM.YYYY": "%d.%m.%Y",
@@ -568,7 +568,7 @@ HORILLA_DATE_FORMATS = {
     "dddd, MMMM D, YYYY": "%A, %B %d, %Y",
 }
 
-HORILLA_TIME_FORMATS = {
+HR_TIME_FORMATS = {
     "hh:mm A": "%I:%M %p",  # 12-hour format
     "HH:mm": "%H:%M",  # 24-hour format
     "HH:mm:ss.SSSSSS": "%H:%M:%S.%f",  # 24-hour format with seconds and microseconds
@@ -658,7 +658,7 @@ AXES_IPWARE_META_PRECEDENCE_ORDER = (
 # ========================================
 # PRODUCTION SECURITY GATES
 # ========================================
-# Fail closed when DEBUG=False or HORILLA_ENV=production. Local DEBUG=True
+# Fail closed when DEBUG=False or HR_ENV=production. Local DEBUG=True
 # tutorials keep insecure-but-documented defaults for open-source onboarding.
 from core.settings.security import (  # noqa: E402
     apply_secure_defaults,
@@ -666,13 +666,13 @@ from core.settings.security import (  # noqa: E402
     validate_production_secrets,
 )
 
-IS_PRODUCTION = is_production_mode(DEBUG, HORILLA_ENV)
+IS_PRODUCTION = is_production_mode(DEBUG, HR_ENV)
 
 if IS_PRODUCTION:
     validate_production_secrets(SECRET_KEY, ALLOWED_HOSTS, DB_INIT_PASSWORD)
 
 if IS_PRODUCTION:
-    # Same switch as the secrets gate above: HORILLA_ENV=production must not
+    # Same switch as the secrets gate above: HR_ENV=production must not
     # pass secret validation and then ship insecure cookies because DEBUG was
     # left on.
     globals().update(apply_secure_defaults(env, DEBUG))

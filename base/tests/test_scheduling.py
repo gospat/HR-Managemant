@@ -155,7 +155,7 @@ class DeploymentWiringTests(SimpleTestCase):
         container."""
         for name in ("docker-compose.yml", "docker-compose.prod.yml"):
             with self.subTest(compose=name):
-                self.assertIn("HORILLA_SKIP_RELEASE_TASKS", self._compose(name))
+                self.assertIn("HR_SKIP_RELEASE_TASKS", self._compose(name))
 
     def test_prod_scheduler_is_single_replica(self):
         """Two schedulers reintroduce the duplicate-run problem."""

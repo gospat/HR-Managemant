@@ -150,7 +150,7 @@ make logs
 | **redis** | `redis:7-alpine` | Caching, session storage (password-protected, AOF persistence) |
 | **nginx** | `nginx:alpine` | Reverse proxy and static file serving (production only). Does **not** serve `/media/` directly — that path is proxied to Django so `protected_media()` can enforce auth and content-type gates. |
 
-> **Upgrade:** if you deploy without this Compose file, start **exactly one** `python manage.py run_scheduler` process. Missing it is silent — those jobs simply never fire. `GET /ready/` includes `"scheduler": "ok"|"missing"`. Set `HORILLA_REQUIRE_SCHEDULER=1` to make `/ready/` return 503 while jobs are unregistered — only where a failing readiness probe will not pull web out of the load balancer, since a stopped scheduler delays background jobs but does not stop the app serving requests.
+> **Upgrade:** if you deploy without this Compose file, start **exactly one** `python manage.py run_scheduler` process. Missing it is silent — those jobs simply never fire. `GET /ready/` includes `"scheduler": "ok"|"missing"`. Set `HR_REQUIRE_SCHEDULER=1` to make `/ready/` return 503 while jobs are unregistered — only where a failing readiness probe will not pull web out of the load balancer, since a stopped scheduler delays background jobs but does not stop the app serving requests.
 
 ### Volumes
 
@@ -292,7 +292,7 @@ python3 -c "from django.core.management.utils import get_random_secret_key; prin
 ```
 
 Set strong `SECRET_KEY`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, DB/Redis passwords, and `DB_INIT_PASSWORD`.
-With `DEBUG=False` (or `HORILLA_ENV=production`), Django refuses known-insecure secrets.
+With `DEBUG=False` (or `HR_ENV=production`), Django refuses known-insecure secrets.
 
 ### Step 2: Start production overlay
 

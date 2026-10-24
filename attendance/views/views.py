@@ -2843,7 +2843,7 @@ def work_record_export(request):
         record_lookup[record_key] = record.work_record_type
 
     date_format = request.user.employee_get.get_date_format()
-    format_string = settings.HORILLA_DATE_FORMATS.get(date_format)
+    format_string = settings.HR_DATE_FORMATS.get(date_format)
     formatted_dates = [day.strftime(format_string) for day in all_date_objects]
     data_rows = []
 

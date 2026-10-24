@@ -9,7 +9,7 @@ import logging
 
 from django.shortcuts import render
 
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 
 logger = logging.getLogger(__name__)
 from datetime import date, datetime, timedelta
@@ -259,7 +259,7 @@ def clock_in(request):
                     request,
                     _("Check-In Restricted: Your current network is not authorized "),
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
         if not request.__dict__.get("datetime"):
             # The mobile/API clock-in already enforces a configured
@@ -268,7 +268,7 @@ def clock_in(request):
             geofence_error = geofence_denial_web(request, company)
             if geofence_error:
                 messages.error(request, geofence_error)
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
         employee, work_info = employee_exists(request)
         datetime_now = timezone.localtime()
@@ -330,7 +330,7 @@ def clock_in(request):
                 "Check-In Unavailable: Your employee profile or work information is incomplete."
             ),
         )
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     else:
         messages.error(
             request,
@@ -338,7 +338,7 @@ def clock_in(request):
                 "The attendance check-in/check-out feature has not been enabled for your company."
             ),
         )
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
 
 def clock_out_attendance_and_activity(employee, date_today, now, out_datetime=None):
@@ -526,13 +526,13 @@ def clock_out(request):
                     request,
                     _("Check-Out Restricted: Your current network is not authorized"),
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
         if not request.__dict__.get("datetime"):
             geofence_error = geofence_denial_web(request, company)
             if geofence_error:
                 messages.error(request, geofence_error)
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
         datetime_now = timezone.localtime()
         if request.__dict__.get("datetime"):
@@ -605,4 +605,4 @@ def clock_out(request):
                 "The attendance check-in/check-out feature has not been enabled for your company."
             ),
         )
-        return HorillaRedirect(request)
+        return HrRedirect(request)

@@ -32,11 +32,11 @@ from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.forms import DynamicBulkUpdateForm
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabView,
+    HrCardView,
+    HrDetailedView,
+    HrListView,
+    HrNavView,
+    HrTabView,
     TemplateView,
 )
 
@@ -109,7 +109,7 @@ from base import models as base_models
     ),
     name="dispatch",
 )
-class EmployeesList(HorillaListView):
+class EmployeesList(HrListView):
     """
     List view of employees
     """
@@ -454,7 +454,7 @@ Employee.get_detailed_work_url = get_detailed_work_url
 
 
 @method_decorator(login_required, name="dispatch")
-class TabEmployeeWorkList(HorillaListView):
+class TabEmployeeWorkList(HrListView):
     """
     Self Employee Work List
     """
@@ -502,7 +502,7 @@ class TabEmployeeWorkList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeWorkDetails(HorillaDetailedView):
+class EmployeeWorkDetails(HrDetailedView):
     """
     Employee Detail View
     """
@@ -540,7 +540,7 @@ class EmployeeWorkDetails(HorillaDetailedView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WorkTab(HorillaTabView):
+class WorkTab(HrTabView):
     """
     Work Tab
     """
@@ -578,7 +578,7 @@ class WorkTab(HorillaTabView):
     ),
     name="dispatch",
 )
-class EmployeeNav(HorillaNavView):
+class EmployeeNav(HrNavView):
     """
     For nav bar
     """
@@ -817,7 +817,7 @@ class ExportView(TemplateView):
     ),
     name="dispatch",
 )
-class EmployeeCard(HorillaCardView):
+class EmployeeCard(HrCardView):
     """
     For card view
     """

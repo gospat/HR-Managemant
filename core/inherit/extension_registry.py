@@ -4,7 +4,7 @@ core/inherit/extension_registry.py
 Lightweight registry with no Django dependencies — safe to import at any time.
 
 INJECTION_MAP  maps (app_label, model_name_lower, field_name) to the
-               extension app label so HorillaAutodetector can route AddField
+               extension app label so HrAutodetector can route AddField
                operations to the custom app's migrations instead of the
                target app's migrations.
 """

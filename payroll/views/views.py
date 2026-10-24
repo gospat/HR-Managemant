@@ -43,7 +43,7 @@ from core.decorators import (
     permission_required,
 )
 from core.group_by import group_by_queryset
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from notifications.signals import notify
 from payroll.context_processors import get_active_employees
 from payroll.filters import ContractFilter, ContractReGroup, PayslipFilter
@@ -310,7 +310,7 @@ def contract_delete(request, contract_id):
         contract = Contract.objects.get(id=contract_id)
         if contract.contract_status != "draft":
             messages.error(request, _("Only a draft contract can be deleted."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         contract.delete()
         messages.success(request, _("Contract deleted"))
         request_path = request.path.split("/")
@@ -328,14 +328,14 @@ def contract_delete(request, contract_id):
                 urls = f"/payroll/single-contract-view/{next_instance}/"
                 params = f"?{previous_data}&instances_ids={instances_list}"
                 return redirect(urls + params)
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         else:
             return redirect(f"/payroll/contract-filter?{request.GET.urlencode()}")
     except Contract.DoesNotExist:
         messages.error(request, _("Contract not found."))
     except ProtectedError:
         messages.error(request, _("You cannot delete this contract."))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -487,14 +487,14 @@ def settings(request):
             messages.success(request, _("Payroll settings updated."))
             if request.headers.get("HX-Request"):
                 return HttpResponse("")
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         else:
             messages.error(request, _("There was an error updating the currency."))
             if request.headers.get("HX-Request"):
                 return HttpResponse("", status=400)
     if request.headers.get("HX-Request"):
         return HttpResponse("", status=400)
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -507,7 +507,7 @@ def update_payslip_status(request, payslip_id):
     view = request.POST.get("view")
     payslip = Payslip.objects.filter(id=payslip_id).first()
     if not payslip:
-        return HorillaRedirect(request, message=_("Payslip not found."))
+        return HrRedirect(request, message=_("Payslip not found."))
     if payslip:
         payslip.status = status
         payslip.save()
@@ -690,7 +690,7 @@ def delete_payslip(request, payslip_id):
         )
         return response
     if not Payslip.objects.filter():
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     return redirect(reverse("payslip-list"))
 
 
@@ -1871,7 +1871,7 @@ def delete_payrollrequest_comment(request, comment_id):
     comment = ReimbursementrequestComment.objects.filter(id=comment_id)
     if not comment.exists():
         messages.error(request, _("Comment not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     comment_obj = comment.first()
 
     # Mirrors reimbursement_comment.html's delete-control condition, but
@@ -1891,10 +1891,10 @@ def delete_payrollrequest_comment(request, comment_id):
             messages.error(
                 request, _("You don't have permission to delete this comment.")
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     comment.delete()
-    return HorillaRedirect(request, message=_("Comment deleted successfully!"))
+    return HrRedirect(request, message=_("Comment deleted successfully!"))
 
 
 @login_required
@@ -1904,12 +1904,12 @@ def delete_reimbursement_comment_file(request):
     """
     ids = request.GET.getlist("ids")
     if not ids:
-        return HorillaRedirect(request, message=_("No file IDs provided for deletion."))
+        return HrRedirect(request, message=_("No file IDs provided for deletion."))
     records = ReimbursementFile.objects.filter(id__in=ids)
     if not request.user.has_perm("payroll.delete_reimbursementfile"):
         records = records.filter(employee_id__employee_user_id=request.user)
     records.delete()
-    return HorillaRedirect(request, message=_("File deleted successfully"))
+    return HrRedirect(request, message=_("File deleted successfully"))
 
 
 @login_required
@@ -1919,7 +1919,7 @@ def initial_notice_period(request):
     This method is used to set initial value notice period
     """
     if not request.GET.get("notice_period"):
-        return HorillaRedirect(request, message=_("required parameter is missing"))
+        return HrRedirect(request, message=_("required parameter is missing"))
 
     notice_period = eval_validate(request.GET["notice_period"])
     selected_company = request.session.get("selected_company")
@@ -1938,7 +1938,7 @@ def initial_notice_period(request):
     )
     if request.META.get("HTTP_HX_REQUEST"):
         return HttpResponse()
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 # ===========================Auto payslip generate================================
@@ -1977,7 +1977,7 @@ def create_or_update_auto_payslip(request, auto_id=None):
                 request,
                 _(f"Payslip Auto generate for {company} {action} successfully "),
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request, "payroll/settings/auto_payslip_create_or_update.html", {"form": form}
     )

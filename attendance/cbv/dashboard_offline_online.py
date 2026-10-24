@@ -13,12 +13,12 @@ from base.decorators import manager_can_enter
 from employee.filters import EmployeeFilter
 from employee.models import Employee
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_leaverequest"), name="dispatch")
-class DashboardOfflineEmployees(HorillaListView):
+class DashboardOfflineEmployees(HrListView):
     """
     list view for offline employees in dashboard
     """
@@ -61,7 +61,7 @@ class DashboardOfflineEmployees(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_leaverequest"), name="dispatch")
-class DashboardOnlineEmployees(HorillaListView):
+class DashboardOnlineEmployees(HrListView):
     """
     list view for online employees in dashboard
     """

@@ -17,9 +17,9 @@ from django.utils.translation import gettext_lazy as _
 from base.forms import ModelForm
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from hr_widgets.forms import HorillaForm
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.forms import HrForm
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from payroll.models.models import PayPeriodSettings
 
 
@@ -37,7 +37,7 @@ class PayPeriodSettingsForm(ModelForm):
         self.fields["boundary"].widget.attrs.update({"class": "oh-select oh-select-2"})
 
 
-class PayrollBatchScopeForm(HorillaForm):
+class PayrollBatchScopeForm(HrForm):
     """
     Step one: which period, and who is in it.
 
@@ -69,9 +69,9 @@ class PayrollBatchScopeForm(HorillaForm):
         initial=SCOPE_ALL,
         widget=forms.RadioSelect,
     )
-    employee_id = HorillaMultiSelectField(
+    employee_id = HrMultiSelectField(
         queryset=Employee.objects.none(),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -104,7 +104,7 @@ class PayrollBatchScopeForm(HorillaForm):
 
     def clean(self):
         """
-        Not ``HorillaForm.clean``: it requires every HorillaMultiSelectField
+        Not ``HrForm.clean``: it requires every HrMultiSelectField
         on the form whatever the field's own ``required`` says, so the
         "everyone with an active contract" path -- which leaves the picker
         empty on purpose -- could never validate. The employee list is

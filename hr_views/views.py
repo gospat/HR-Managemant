@@ -35,7 +35,7 @@ from xhtml2pdf import pisa
 from base.methods import eval_validate, has_export_access
 from core.decorators import login_required as func_login_required
 from core.export_safety import safe_cell
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from core.signals import post_generic_delete, pre_generic_delete
 from hr_views import models
 from hr_views.cbv_methods import (
@@ -46,7 +46,7 @@ from hr_views.cbv_methods import (
     merge_dicts,
 )
 from hr_views.forms import SavedFilterForm
-from hr_views.generic.cbv.views import HorillaFormView, HorillaListView
+from hr_views.generic.cbv.views import HrFormView, HrListView
 from hr_views.templatetags.generic_template_filters import getattribute
 
 # Create your views here.
@@ -74,7 +74,7 @@ class ToggleColumn(View):
         path = query_dict.get("path")
 
         if not path:
-            return HorillaRedirect(
+            return HrRedirect(
                 self.request,
                 message=_("No matching query found."),
             )
@@ -127,7 +127,7 @@ class ReloadField(View):
         reload_field = request.GET.get("dynamic_field")
 
         if not class_path:
-            return HorillaRedirect(
+            return HrRedirect(
                 request,
                 message=_("No matching query found."),
             )
@@ -138,7 +138,7 @@ class ReloadField(View):
         if not (
             isinstance(form_class, type) and issubclass(form_class, forms.BaseForm)
         ):
-            return HorillaRedirect(
+            return HrRedirect(
                 request,
                 message=_("No matching query found."),
             )
@@ -151,7 +151,7 @@ class ReloadField(View):
         if not onchange:
             onchange = ""
 
-        model: models.HorillaModel = dynamic_cache["model"]
+        model: models.HrModel = dynamic_cache["model"]
         value = dynamic_cache.get("value", "")
 
         cache_field = dynamic_cache["dynamic_field"]
@@ -249,7 +249,7 @@ class ActiveGroup(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class SavedFilter(HorillaFormView):
+class SavedFilter(HrFormView):
     """
     SavedFilter
     """
@@ -311,7 +311,7 @@ class ActiveView(View):
         view_type = self.request.GET.get("view")
 
         if not path:
-            return HorillaRedirect(
+            return HrRedirect(
                 self.request,
                 message=_("No matching query found."),
             )
@@ -370,7 +370,7 @@ class LastAppliedFilter(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class DynamiListView(HorillaListView):
+class DynamiListView(HrListView):
     """
     DynamicListView for Generic Delete
     """
@@ -388,7 +388,7 @@ class DynamiListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaDeleteConfirmationView(View):
+class HrDeleteConfirmationView(View):
     """
     Generic Delete Confirmation View
     """
@@ -408,7 +408,7 @@ class HorillaDeleteConfirmationView(View):
             app, MODEL_NAME = self.request.GET.get("model").split(".")
         except:
             messages.error(self.request, _("Invalid model parameter format."))
-            return HorillaFormView.HttpResponse()
+            return HrFormView.HttpResponse()
 
         if not self.request.user.has_perm(app + ".delete_" + MODEL_NAME.lower()):
             return render(self.request, "no_perm.html")
@@ -417,7 +417,7 @@ class HorillaDeleteConfirmationView(View):
         delete_object = model.objects.filter(pk=pk).first()
         if not delete_object:
             messages.error(self.request, _("Record not found."))
-            return HorillaFormView.HttpResponse()
+            return HrFormView.HttpResponse()
         objs = [delete_object]
         using = router.db_for_write(delete_object._meta.model)
         collector = NestedObjects(using=using, origin=objs)
@@ -469,7 +469,7 @@ class HorillaDeleteConfirmationView(View):
                     f"{get_short_uuid(prefix='generic-delete',length=10)}"
                 )
 
-                class DynamiListView(HorillaListView):
+                class DynamiListView(HrListView):
                     """
                     DynamicListView for Generic Delete
                     """
@@ -716,7 +716,7 @@ class HorillaDeleteConfirmationView(View):
         elif reload_target:
             script = f"$('{reload_target}').first().click();"
 
-        return HorillaFormView.HttpResponse(script=script)
+        return HrFormView.HttpResponse(script=script)
 
     def get_context_data(self, **kwargs) -> dict:
         context = {}
@@ -837,13 +837,13 @@ def export_data(request, *args, **kwargs):
     # =====================================================
     model_path = request.GET.get("model")
     if not model_path:
-        return HorillaRedirect(request, message=_("No matching query found."))
+        return HrRedirect(request, message=_("No matching query found."))
     app_label = model_path.split(".")[0]
     model_name = model_path.split(".")[-1]
     try:
         model = apps.get_model(app_label, model_name)
     except LookupError:
-        return HorillaRedirect(request, message=_("No matching query found."))
+        return HrRedirect(request, message=_("No matching query found."))
     base_table = model._meta.db_table
 
     # =====================================================
@@ -851,7 +851,7 @@ def export_data(request, *args, **kwargs):
     # =====================================================
     if not has_export_access(request, model):
         messages.info(request, _("You don't have access to export this data"))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     # =====================================================
     # SQL BUILD
@@ -898,7 +898,7 @@ def export_data(request, *args, **kwargs):
 
     # Re-derive the id list through the model's own manager instead of
     # trusting the client-supplied `ids` as-is: `model.objects` applies
-    # this app's company/permission scoping (HorillaCompanyManager), the
+    # this app's company/permission scoping (HrCompanyManager), the
     # same scoping the originating list view relies on, while the raw SQL
     # below has no access control of its own and would otherwise return
     # rows for any id an authenticated user cares to submit, including

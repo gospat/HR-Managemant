@@ -3,7 +3,7 @@
 from rest_framework.pagination import PageNumberPagination
 
 
-class HorillaPageNumberPagination(PageNumberPagination):
+class HrPageNumberPagination(PageNumberPagination):
     """
     Page-number pagination that actually honours ``?page_size=``.
 

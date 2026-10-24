@@ -23,10 +23,10 @@ from employee.forms import MultipleFileField
 from employee.models import Employee
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
-from hr_views.generic.cbv.views import HorillaFormView
-from hr_widgets.forms import HorillaForm, HorillaModelForm
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_views.generic.cbv.views import HrFormView
+from hr_widgets.forms import HrForm, HrModelForm
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from leave.methods import get_leave_day_attendance
 from leave.models import (
     AvailableLeave,
@@ -479,7 +479,7 @@ class AvailableLeaveForm(BaseModelForm):
         fields = ["leave_type_id", "employee_id", "is_active"]
 
 
-class LeaveOneAssignForm(HorillaModelForm):
+class LeaveOneAssignForm(HrModelForm):
     """
     Form for assigning available leave to employees.
 
@@ -487,14 +487,14 @@ class LeaveOneAssignForm(HorillaModelForm):
     by specifying the employee and setting the is_active flag.
 
     Attributes:
-        - employee_id: A HorillaMultiSelectField representing the employee to assign leave to.
+        - employee_id: A HrMultiSelectField representing the employee to assign leave to.
     """
 
     cols = {"employee_id": 12}
 
-    employee_id = HorillaMultiSelectField(
+    employee_id = HrMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -805,9 +805,9 @@ class LeaveAllocationBulkForm(BaseModelForm):
 
     verbose_name = _("Bulk Allocate Leave")
 
-    employee_id = HorillaMultiSelectField(
+    employee_id = HrMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -978,7 +978,7 @@ class LeaveRequestExportForm(forms.Form):
     )
 
 
-class AssignLeaveForm(HorillaForm):
+class AssignLeaveForm(HrForm):
     """
     Form for Payslip
     """
@@ -992,9 +992,9 @@ class AssignLeaveForm(HorillaForm):
         label="Leave Type",
         required=False,
     )
-    employee_id = HorillaMultiSelectField(
+    employee_id = HrMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",

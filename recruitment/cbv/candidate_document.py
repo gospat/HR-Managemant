@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 from recruitment.cbv_decorators import all_manager_can_enter
 from recruitment.filters import CandidateDocumentFilter
 from recruitment.models import Candidate, CandidateDocument
@@ -16,7 +16,7 @@ from recruitment.models import Candidate, CandidateDocument
 @method_decorator(
     all_manager_can_enter(perm="recruitment.view_candidate"), name="dispatch"
 )
-class CandidateDocumentListView(HorillaListView):
+class CandidateDocumentListView(HrListView):
     """
     Documents list view for the candidate profile tab
     """

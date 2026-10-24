@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from base.models import Company
-from core.models import HorillaModel
+from core.models import HrModel
 
 THEMES_DATA = [
     {
@@ -421,7 +421,7 @@ THEMES_DATA = [
 ]
 
 
-class HorillaColorTheme(HorillaModel):
+class HorillaColorTheme(HrModel):
     """
     Model to store predefined color themes for Horilla
     """
@@ -580,7 +580,7 @@ class HorillaColorTheme(HorillaModel):
         return cls.objects.filter(name="Coral Red Theme (Default)").first()
 
 
-class CompanyTheme(HorillaModel):
+class CompanyTheme(HrModel):
     """
     Model to store company-wide theme settings
     """

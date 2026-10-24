@@ -9,8 +9,8 @@ from django.utils.translation import gettext_lazy as _
 from base.forms import ModelForm
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from report.delivery import compute_schedule_anchor
 from report.models import ReportSubscription
 
@@ -66,10 +66,10 @@ class ReportSubscriptionForm(ModelForm):
     def __init__(self, *args, report_choices=None, lock_report=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields["recipients_employees"] = HorillaMultiSelectField(
+        self.fields["recipients_employees"] = HrMultiSelectField(
             queryset=Employee.objects.all(),
             required=False,
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",
@@ -114,7 +114,7 @@ class ReportSubscriptionForm(ModelForm):
     def clean(self):
         """Resolve the posted employee ids and require at least one recipient."""
         cleaned_data = super().clean()
-        if isinstance(self.fields.get("recipients_employees"), HorillaMultiSelectField):
+        if isinstance(self.fields.get("recipients_employees"), HrMultiSelectField):
             self.errors.pop("recipients_employees", None)
             employee_data = self.fields["recipients_employees"].queryset.filter(
                 id__in=self.data.getlist("recipients_employees")

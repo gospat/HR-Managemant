@@ -51,8 +51,8 @@ from employee.models import (
 from core import horilla_middlewares
 from hr_audit.models import AccountBlockUnblock
 from hr_auth.models import HorillaUser
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 logger = logging.getLogger(__name__)
 
@@ -726,10 +726,10 @@ class PolicyForm(ModelForm):
     PolicyForm
     """
 
-    employees = HorillaMultiSelectField(
+    employees = HrMultiSelectField(
         queryset=Employee.objects.all(),
         required=False,
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -852,9 +852,9 @@ class DisciplinaryActionForm(ModelForm):
             "start_date": forms.DateInput(attrs={"type": "date"}),
         }
 
-    employee_id = HorillaMultiSelectField(
+    employee_id = HrMultiSelectField(
         queryset=Employee.objects.filter(employee_work_info__isnull=False),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -886,7 +886,7 @@ class DisciplinaryActionForm(ModelForm):
         cleaned_data = super().clean()
 
         # Remove 'employee_id' field error if it's handled manually
-        if isinstance(self.fields["employee_id"], HorillaMultiSelectField):
+        if isinstance(self.fields["employee_id"], HrMultiSelectField):
             self.errors.pop("employee_id", None)
             employee_data = self.fields["employee_id"].queryset.filter(
                 id__in=self.data.getlist("employee_id")

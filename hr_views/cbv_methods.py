@@ -228,7 +228,7 @@ def owner_can_enter(
     """
     from employee.models import Employee, EmployeeWorkInformation
     from core.decorators import check_manager
-    from core.http import HorillaRedirect
+    from core.http import HrRedirect
 
     def _function(self, *args, **kwargs):
         request = getattr(_thread_locals, "request")
@@ -257,7 +257,7 @@ def owner_can_enter(
                 employee = getattr(obj, employee_field, None) if obj else None
             except Exception as e:
                 messages.error(request, _("Sorry, something went wrong!"))
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
         can_enter = (
             request.user.employee_get == employee
@@ -273,7 +273,7 @@ def owner_can_enter(
         )
         if can_enter or not employee:
             return function(self, *args, **kwargs)
-        return HorillaRedirect(request, message=_("You don't have permission."))
+        return HrRedirect(request, message=_("You don't have permission."))
 
     return _function
 
@@ -463,7 +463,7 @@ def saved_filter_path_query(request):
     match on that too, in addition to the exact path, so a saved filter
     shows up regardless of which view mode it was saved from.
 
-    Tabs (HorillaTabView) and the List/Card/Kanban switch links also
+    Tabs (HrTabView) and the List/Card/Kanban switch links also
     propagate a "referrer" query param, meant to let a filter saved from one
     tab/mode of a page show up on its sibling tabs/modes, which live at yet
     other paths. An empty referrer isn't a real identifier though - most
@@ -625,8 +625,8 @@ SAVED_FILTER_CACHE_VOLATILE_PARAMS = {
 
 def saved_filter_cache_key(request):
     """
-    Cache key for a request's "last search/filter" on a HorillaListView /
-    HorillaCardView page.
+    Cache key for a request's "last search/filter" on a HrListView /
+    HrCardView page.
 
     Keying on request.path alone collides whenever the same URL embeds more
     than one independent list in a single session - e.g. every pipeline

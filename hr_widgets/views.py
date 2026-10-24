@@ -8,7 +8,7 @@ from hr_widgets.generic_ajax import (
 )
 from hr_widgets.widgets.select_widgets import (
     ALL_INSTANCES,
-    HorillaMultiSelectWidget,
+    HrMultiSelectWidget,
 )
 
 # Create your views here.
@@ -44,14 +44,14 @@ def get_filter_form(request):
 @login_required
 def ajax_select_choices(request, field_key):
     """
-    Single, generic search endpoint backing every HorillaAjaxSelectWidget
-    field in the app -- see core.filters.HorillaFilterSet.ajax_fields
+    Single, generic search endpoint backing every HrAjaxSelectWidget
+    field in the app -- see core.filters.HrFilterSet.ajax_fields
     for how a FilterSet opts a field into this (declaratively; no new
     view or URL needed for a new field, in this app or any other).
 
     field_key is looked up in the server-side registry (populated only
     from FilterSet class bodies at import time, via
-    HorillaFilterSet.__init_subclass__ -- never from client input), so a
+    HrFilterSet.__init_subclass__ -- never from client input), so a
     client can't point this at an arbitrary model/field by guessing a
     different key. An unregistered key, or a registered one whose
     optional `permission` this user lacks, both just return an empty

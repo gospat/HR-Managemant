@@ -14,14 +14,14 @@ from django.utils.http import urlencode
 from django.utils.translation import gettext_lazy as _
 
 from core.decorators import hx_request_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.kanban import HorillaKanbanView
+from hr_views.generic.cbv.kanban import HrKanbanView
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabView,
     TemplateView,
     get_short_uuid,
 )
@@ -199,7 +199,7 @@ def recruitment_pipeline_actions(request, rec):
 @method_decorator(
     manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class RecruitmentTabView(HorillaTabView):
+class RecruitmentTabView(HrTabView):
     """
     RecruitmentTabView
     """
@@ -312,7 +312,7 @@ class RecruitmentPipelineContentShell(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         rec_id = kwargs.get("rec_id")
         if not models.Recruitment.objects.entire().filter(id=rec_id).exists():
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message=_("No recruitment found matching the query.")
             )
         return super().dispatch(request, *args, **kwargs)
@@ -365,7 +365,7 @@ class RecruitmentPipelineContentShell(TemplateView):
 @method_decorator(
     manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class RecruitmentCandidateNav(HorillaNavView):
+class RecruitmentCandidateNav(HrNavView):
     """
     Navigation bar of a recruitment's pipeline tab, with search, filter,
     list/card toggle, the Add candidate button and the recruitment actions.
@@ -515,7 +515,7 @@ class GetStages(TemplateView):
 @method_decorator(
     manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class CandidateList(HorillaListView):
+class CandidateList(HrListView):
     """
     CandidateList
     """
@@ -773,7 +773,7 @@ class CandidateList(HorillaListView):
 @method_decorator(
     manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class CandidateCard(HorillaKanbanView):
+class CandidateCard(HrKanbanView):
     model = models.Candidate
     # The tab badge counts candidates (set server-side), not stage columns
     records_count_in_tab = False
@@ -917,9 +917,9 @@ class CandidateCard(HorillaKanbanView):
 @method_decorator(
     manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class PipelineNav(HorillaNavView):
+class PipelineNav(HrNavView):
     """
-    HorillaNavView
+    HrNavView
     """
 
     nav_title = _("Pipeline")
@@ -960,7 +960,7 @@ class PipelineNav(HorillaNavView):
 @method_decorator(
     manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class ChangeStage(HorillaFormView):
+class ChangeStage(HrFormView):
     """
     Change Candidate stage
     """

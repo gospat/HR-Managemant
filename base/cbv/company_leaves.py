@@ -16,10 +16,10 @@ from base.forms import CompanyLeaveForm
 from base.models import CompanyLeaves
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 
@@ -41,7 +41,7 @@ class CompanyLeavesView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CompanyleaveListView(HorillaListView):
+class CompanyleaveListView(HrListView):
     """
     list view
     """
@@ -84,7 +84,7 @@ class CompanyleaveListView(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CompanyLeaveNavView(HorillaNavView):
+class CompanyLeaveNavView(HrNavView):
     """
     nav bar
     """
@@ -109,7 +109,7 @@ class CompanyLeaveNavView(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CompanyLeaveDetailView(HorillaDetailedView):
+class CompanyLeaveDetailView(HrDetailedView):
     """
     detail view of the page
     """
@@ -126,7 +126,7 @@ class CompanyLeaveDetailView(HorillaDetailedView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CompanyleaveFormView(HorillaFormView):
+class CompanyleaveFormView(HrFormView):
     """
     form view for create button
     """

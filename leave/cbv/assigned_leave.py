@@ -21,10 +21,10 @@ from hr_views.cbv_methods import (
 )
 from hr_views.forms import DynamicBulkUpdateForm
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from leave.filters import AssignedLeaveFilter
@@ -44,7 +44,7 @@ class AssignedLeaveViewPage(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_availableleave"), name="dispatch")
-class AssignedleaveList(HorillaListView):
+class AssignedleaveList(HrListView):
     """
     list view of the page
     """
@@ -185,7 +185,7 @@ class AssignedleaveList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_availableleave"), name="dispatch")
-class AssignedLeaveNavView(HorillaNavView):
+class AssignedLeaveNavView(HrNavView):
     """
     navbar of the page
     """
@@ -320,7 +320,7 @@ class AssignedLeaveExport(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_availableleave"), name="dispatch")
-class AssignedLeaveDetailView(HorillaDetailedView):
+class AssignedLeaveDetailView(HrDetailedView):
     """
     detail view
     """
@@ -345,7 +345,7 @@ class AssignedLeaveDetailView(HorillaDetailedView):
 
 
 # not done
-class AssignedLeaveFormView(HorillaFormView):
+class AssignedLeaveFormView(HrFormView):
     """
     form view
     """

@@ -3,13 +3,13 @@ import json
 from django.db import models
 
 from core.horilla_middlewares import _thread_locals
-from core.models import HorillaModel
+from core.models import HrModel
 from hr_auth.models import HorillaUser
 
 # Create your models here.
 
 
-class ToggleColumn(HorillaModel):
+class ToggleColumn(HrModel):
     """
     ToggleColumn
     """
@@ -33,7 +33,7 @@ class ToggleColumn(HorillaModel):
         return str(self.user_id.employee_get)
 
 
-class ActiveTab(HorillaModel):
+class ActiveTab(HrModel):
     """
     ActiveTab
     """
@@ -42,7 +42,7 @@ class ActiveTab(HorillaModel):
     tab_target = models.CharField(max_length=256)
 
 
-class ActiveGroup(HorillaModel):
+class ActiveGroup(HrModel):
     """
     ActiveGroup
     """
@@ -52,7 +52,7 @@ class ActiveGroup(HorillaModel):
     group_by_field = models.CharField(max_length=256)
 
 
-class SavedFilter(HorillaModel):
+class SavedFilter(HrModel):
     """
     SavedFilter
     """
@@ -79,7 +79,7 @@ class SavedFilter(HorillaModel):
         return str(self.title)
 
 
-class ActiveView(HorillaModel):
+class ActiveView(HrModel):
     """
     This model to store the active view type for HNV
     """
@@ -91,7 +91,7 @@ class ActiveView(HorillaModel):
         return super().save(*args, **kwargs)
 
 
-class ColumnOrder(HorillaModel):
+class ColumnOrder(HrModel):
     employee = models.ForeignKey(
         "employee.Employee", on_delete=models.CASCADE, related_name="column_order"
     )

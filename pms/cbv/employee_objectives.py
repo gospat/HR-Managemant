@@ -11,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaListView,
-    HorillaNavView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from pms.filters import EmployeeKeyResultListFilter, EmployeeObjectiveFilter
@@ -42,7 +42,7 @@ class EmployeeObjectivesPage(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeObjectivesNav(HorillaNavView):
+class EmployeeObjectivesNav(HrNavView):
     """
     Search and status filter bar of the employee objective list
     """
@@ -60,7 +60,7 @@ class EmployeeObjectivesNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeObjectivesList(HorillaListView):
+class EmployeeObjectivesList(HrListView):
     """
     List of employee objectives
     """
@@ -110,7 +110,7 @@ class EmployeeKeyResultsPage(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeKeyResultsNav(HorillaNavView):
+class EmployeeKeyResultsNav(HrNavView):
     """
     Search and status filter bar of the employee key result list
     """
@@ -128,7 +128,7 @@ class EmployeeKeyResultsNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeKeyResultsList(HorillaListView):
+class EmployeeKeyResultsList(HrListView):
     """
     List of employee key results
     """

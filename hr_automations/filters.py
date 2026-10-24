@@ -2,11 +2,11 @@
 horilla_automations/filters.py
 """
 
-from core.filters import HorillaFilterSet, django_filters
+from core.filters import HrFilterSet, django_filters
 from hr_automations.models import MailAutomation
 
 
-class AutomationFilter(HorillaFilterSet):
+class AutomationFilter(HrFilterSet):
     """
     AutomationFilter
     """

@@ -19,19 +19,19 @@ from django.views.generic import TemplateView
 
 from base.methods import eval_validate
 from core.horilla_middlewares import _thread_locals
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     render_template,
 )
-from hr_views.generic.cbv.kanban import HorillaKanbanView
+from hr_views.generic.cbv.kanban import HrKanbanView
 from hr_views.generic.cbv.pipeline import Pipeline
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabView,
 )
 from hr_views.models import ActiveView
 from onboarding import filters as onboarding_filters
@@ -60,9 +60,9 @@ class PipelineView(TemplateView):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class PipelineNav(HorillaNavView):
+class PipelineNav(HrNavView):
     """
-    HorillaNavView
+    HrNavView
     """
 
     search_url = reverse_lazy("cbv-pipeline-tab-onboarding")
@@ -185,7 +185,7 @@ def recruitment_pipeline_actions_onboarding(request, rec):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class RecruitmentTabView(HorillaTabView):
+class RecruitmentTabView(HrTabView):
     """
     RecruitmentTabView
     """
@@ -253,7 +253,7 @@ class RecruitmentTabView(HorillaTabView):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class RecruitmentCandidateNav(HorillaNavView):
+class RecruitmentCandidateNav(HrNavView):
     """
     Per-job-tab Search+Filter for the Onboarding pipeline page, mirroring
     recruitment.cbv.pipeline.RecruitmentCandidateNav: one instance per job
@@ -270,7 +270,7 @@ class RecruitmentCandidateNav(HorillaNavView):
     # Modern slide-over filter panel (generic/inline_nav.html's own
     # {% if modern_filter %} branch) -- same treatment as the page-level
     # PipelineNav/filters.html and the sibling recruitment/offboarding
-    # per-tab panels. PipelineCandidateFilter is now a HorillaFilterSet
+    # per-tab panels. PipelineCandidateFilter is now a HrFilterSet
     # subclass so it gets the Advanced "+ Add filter" builder too.
     modern_filter = True
 
@@ -361,7 +361,7 @@ class RecruitmentPipelineContentShell(TemplateView):
         # defaults to the list endpoint in that case, so the Nav's view-type
         # toggle must resolve to the same "list" here too. Passing a falsy
         # view_type through left nav_url without a `?view=`, so on a user's
-        # very first visit (no saved choice yet) HorillaNavView never marked
+        # very first visit (no saved choice yet) HrNavView never marked
         # either toggle button active even though list content was already
         # on screen - and inline_nav.html's onload script then read "no
         # button active" as "no filter has run yet" and fired an extra,
@@ -597,7 +597,7 @@ class CandidateOnboardingDetail(CandidateDetail):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class CandidateList(HorillaListView):
+class CandidateList(HrListView):
     """
     CandidateList
     """
@@ -773,7 +773,7 @@ class CandidateList(HorillaListView):
 
         if not request.user.is_authenticated:
             messages.error(request, _("You are not logged in."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
         self.ordered_ids_key = (
             f"ordered_ids_{recruitment_models.Candidate.__name__.lower()}"
@@ -803,7 +803,7 @@ class CandidateList(HorillaListView):
         stage_id = request.GET.get("onboarding_stage_id")
 
         if not stage_id:
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message=_("No stage found matching the query.")
             )
         return super().dispatch(request, *args, **kwargs)
@@ -820,7 +820,7 @@ class CandidateList(HorillaListView):
         # added after self.visible_column's hidden-column filtering too)
         # couldn't be hidden even if they had one. Building these tuples
         # and folding them into self.columns/self.default_columns BEFORE
-        # calling super() makes the base HorillaListView machinery treat
+        # calling super() makes the base HrListView machinery treat
         # them exactly like any other column, `columns` is a plain class
         # attribute (not a queryset), and ListView.as_view() gives each
         # request its own view instance, so this reassignment is
@@ -912,7 +912,7 @@ class CandidateList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CandidateKanbanView(HorillaKanbanView):
+class CandidateKanbanView(HrKanbanView):
     """
     CandidateKanbanView
     """
@@ -1029,7 +1029,7 @@ class CandidateKanbanView(HorillaKanbanView):
 @method_decorator(
     stage_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class ChangeStage(HorillaFormView):
+class ChangeStage(HrFormView):
     """
     Change Candidate stage
     """
@@ -1114,7 +1114,7 @@ class AssignTask(View):
             return super().dispatch(request, *args, **kwargs)
         except ObjectDoesNotExist:
             messages.error(request, _("Requested object does not exist"))
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message=_("Requested object does not exist")
             )
 

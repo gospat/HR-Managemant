@@ -224,7 +224,7 @@ def get_diff(instance, history_related_name, history_list=None, actor_cache=None
             }
         )
     # Records created before history was enabled (or via paths that skipped
-    # simple-history) have no rows — still surface creation from HorillaModel.
+    # simple-history) have no rows — still surface creation from HrModel.
     if not delta_changes:
         created_at = getattr(instance, "created_at", None)
         if created_at:

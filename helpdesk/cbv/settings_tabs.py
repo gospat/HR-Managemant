@@ -13,7 +13,7 @@ from base.models import Tags
 from helpdesk.filter import DepartmentManagerFilter, TagsFilter, TicketTypeFilter
 from helpdesk.models import DepartmentManager, TicketType
 from hr_views.cbv_methods import hx_request_required, login_required
-from hr_views.generic.cbv.views import HorillaTabView, TemplateView
+from hr_views.generic.cbv.views import HrTabView, TemplateView
 
 
 @method_decorator(login_required, name="dispatch")
@@ -26,7 +26,7 @@ class HelpdeskSettingsView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HelpdeskSettingsTabView(HorillaTabView):
+class HelpdeskSettingsTabView(HrTabView):
     """
     tab view for helpdesk settings
     """

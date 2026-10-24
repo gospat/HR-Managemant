@@ -8,8 +8,8 @@ Two surfaces:
    - ``tour-progress`` : record start / completion / skip (replaces /driver-viewed)
 
 2. Settings admin CRUD (permission-gated) to author tours and their ordered
-   steps, following the HorillaSectionView + HorillaNavView + HorillaListView +
-   HorillaFormView pattern used elsewhere in Settings.
+   steps, following the HrSectionView + HrNavView + HrListView +
+   HrFormView pattern used elsewhere in Settings.
 """
 
 from typing import Any
@@ -29,9 +29,9 @@ from hr_tour.forms import TourForm, TourStepForm
 from hr_tour.models import Tour, TourProgress, TourStep
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 
 # ---------------------------------------------------------------------------
@@ -189,7 +189,7 @@ def tour_settings_page(request):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("horilla_tour.view_tour"), name="dispatch")
-class TourNav(HorillaNavView):
+class TourNav(HrNavView):
     """Search bar + Create button for tours."""
 
     nav_title = _("Product Tours")
@@ -212,7 +212,7 @@ class TourNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("horilla_tour.view_tour"), name="dispatch")
-class TourList(HorillaListView):
+class TourList(HrListView):
     """Tours list with Edit / Steps / Delete row actions."""
 
     model = Tour
@@ -289,7 +289,7 @@ class TourList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("horilla_tour.add_tour"), name="dispatch")
-class TourFormView(HorillaFormView):
+class TourFormView(HrFormView):
     """Create / edit a tour (modal)."""
 
     model = Tour

@@ -16,13 +16,13 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 
 from base.models import CompanyLeaves, Holidays
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from leave.filters import UserLeaveRequestFilter
@@ -58,7 +58,7 @@ class MyLeaveRequestView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MainParentListView(HorillaListView):
+class MainParentListView(HrListView):
     """
     main parent class for list view
     """
@@ -208,7 +208,7 @@ class MyLeaveRequestListView(MainParentListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyLeaveRequestNavView(HorillaNavView):
+class MyLeaveRequestNavView(HrNavView):
     """
     nav bar
     """
@@ -246,7 +246,7 @@ class MyLeaveRequestNavView(HorillaNavView):
     # Modern slide-over filter panel (horilla_nav.html's .oh-filter-modern
     # styles) -- same treatment as Attendance/Late Arrival/Check-in Log/
     # Monthly Summary this session. Safe alongside UserLeaveRequestFilter
-    # staying a plain FilterSet (not HorillaFilterSet): modern_filter only
+    # staying a plain FilterSet (not HrFilterSet): modern_filter only
     # toggles the panel's own markup/CSS, and every custom_filter_fields/
     # ajax_fields lookup elsewhere already defaults to [] / {} via getattr
     # for a FilterSet that doesn't declare them -- no AJAX combobox is
@@ -279,7 +279,7 @@ class MyLeaveRequestNavView(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyLeaveRequestDetailView(HorillaDetailedView):
+class MyLeaveRequestDetailView(HrDetailedView):
     """
     detail view of page
     """
@@ -321,7 +321,7 @@ class MyLeaveRequestDetailView(HorillaDetailedView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyLeaveRequestForm(HorillaFormView):
+class MyLeaveRequestForm(HrFormView):
     """
     form view
     """
@@ -379,7 +379,7 @@ class MyLeaveRequestForm(HorillaFormView):
         def _done():
             if self.request.META.get("HTTP_HX_REQUEST"):
                 return self.HttpResponse(targets_to_reload=["#userRequestReload"])
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
 
         emp = self.request.user.employee_get
         emp_id = emp.id
@@ -530,7 +530,7 @@ class MyLeaveRequestForm(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyLeaveRequestSingleForm(HorillaFormView):
+class MyLeaveRequestSingleForm(HrFormView):
     """
     single leave request form
     """
@@ -686,7 +686,7 @@ class MyLeaveRequestSingleForm(HorillaFormView):
                         return self.HttpResponse(
                             targets_to_reload=["#userRequestReload"]
                         )
-                    return HorillaRedirect(self.request)
+                    return HrRedirect(self.request)
                 else:
                     form.add_error(
                         None,

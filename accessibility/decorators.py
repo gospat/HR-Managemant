@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 from accessibility.methods import check_is_accessible
 from base.decorators import decorator_with_arguments
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 
 
 @decorator_with_arguments
@@ -35,6 +35,6 @@ def enter_if_accessible(function, feature, perm=None, method=None):
             return function(request, *args, **kwargs)
         messages.info(request, _("You don't have access to the feature"))
 
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     return check_accessible

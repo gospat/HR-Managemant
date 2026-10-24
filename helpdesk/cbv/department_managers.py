@@ -15,9 +15,9 @@ from helpdesk.forms import DepartmentManagerCreateForm
 from helpdesk.models import DepartmentManager
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 
 
@@ -25,7 +25,7 @@ from hr_views.generic.cbv.views import (
 @method_decorator(
     permission_required(perm="helpdesk.add_departmentmanager"), name="dispatch"
 )
-class DepartmentManagersListView(HorillaListView):
+class DepartmentManagersListView(HrListView):
     """
     List view of the resticted days page
     """
@@ -90,7 +90,7 @@ class DepartmentManagersListView(HorillaListView):
 @method_decorator(
     permission_required(perm="helpdesk.add_departmentmanager"), name="dispatch"
 )
-class DepartmentManagersNav(HorillaNavView):
+class DepartmentManagersNav(HrNavView):
     """
     Nav bar
     """
@@ -124,7 +124,7 @@ class DepartmentManagersNav(HorillaNavView):
 @method_decorator(
     permission_required(perm="helpdesk.add_departmentmanager"), name="dispatch"
 )
-class DepartmentManagersFormView(HorillaFormView):
+class DepartmentManagersFormView(HrFormView):
     """
     Create and edit form for Department Manager
     """

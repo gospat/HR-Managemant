@@ -367,7 +367,7 @@ class FilingStatusTaxRulesFormTests(TestCase):
 
 class PythonCodeXssExemptionTests(TestCase):
     """
-    python_code holds Python source, and HorillaModel's XSS regex is built for
+    python_code holds Python source, and HrModel's XSS regex is built for
     HTML. Its inline-event-handler pattern (on\w+\s*=) matches any assignment
     to a variable containing "on", so ordinary formulas were rejected as
     "Potential XSS content detected."

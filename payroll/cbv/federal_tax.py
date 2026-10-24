@@ -23,10 +23,10 @@ from hr_views.cbv_methods import (
 )
 from hr_views.generic.cbv.pipeline import Pipeline
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 from payroll.filters import FilingStatusFilter, TaxBracketFilter
 from payroll.forms.tax_forms import FilingStatusForm, TaxBracketForm
@@ -36,7 +36,7 @@ from payroll.models.tax_models import TaxBracket
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.add_filingstatus"), name="dispatch")
-class FederalTaxFormView(HorillaFormView):
+class FederalTaxFormView(HrFormView):
     """
     form view for create button
     """
@@ -68,7 +68,7 @@ class FederalTaxFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_filingstatus"), name="dispatch")
-class FilingStatusDetailView(HorillaDetailedView):
+class FilingStatusDetailView(HrDetailedView):
     """
     detail view for filing status, also registered as the related-object-link
     target for FilingStatus via detail_view_url_name
@@ -98,7 +98,7 @@ class FilingStatusDetailView(HorillaDetailedView):
 @method_decorator(login_required, name="dispatch")
 @method_decorator(hx_request_required, name="dispatch")
 @method_decorator(permission_required("payroll.add_taxbracket"), name="dispatch")
-class TaxBracketCreateForm(HorillaFormView):
+class TaxBracketCreateForm(HrFormView):
     """
     from view for create and edit tax brackets
     """
@@ -163,7 +163,7 @@ class TaxBracketCreateForm(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_taxbracket"), name="dispatch")
-class TaxBracketNavView(HorillaNavView):
+class TaxBracketNavView(HrNavView):
     """
     Nav view for tax bracket list
     """
@@ -279,7 +279,7 @@ class FilingStatusPipeline(Pipeline):
 @method_decorator(login_required, name="dispatch")
 @method_decorator(hx_request_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_taxbracket"), name="dispatch")
-class TaxBracketListView(HorillaListView):
+class TaxBracketListView(HrListView):
     """
     List view for tax brackets
     """

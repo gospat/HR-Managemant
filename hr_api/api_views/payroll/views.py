@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from base.backends import ConfiguredEmailBackend
 from base.methods import eval_validate, filtersubordinates
 from hr_api.api_methods.base.methods import reject_reason_from
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 from payroll.filters import (
     AllowanceFilter,
     ContractFilter,
@@ -73,7 +73,7 @@ class PayslipView(APIView):
         if field_name:
             url = request.build_absolute_uri()
             return groupby_queryset(request, url, field_name, payslip_filter_queryset)
-        pagination = HorillaPageNumberPagination()
+        pagination = HrPageNumberPagination()
         page = pagination.paginate_queryset(payslip_filter_queryset, request)
         serializer = PayslipSerializer(page, many=True)
         return pagination.get_paginated_response(serializer.data)
@@ -145,7 +145,7 @@ class ContractView(APIView):
         if field_name:
             url = request.build_absolute_uri()
             return groupby_queryset(request, url, field_name, filter_queryset)
-        pagination = HorillaPageNumberPagination()
+        pagination = HrPageNumberPagination()
         page = pagination.paginate_queryset(filter_queryset, request)
         serializer = ContractSerializer(page, many=True)
         return pagination.get_paginated_response(serializer.data)
@@ -185,7 +185,7 @@ class AllowanceView(APIView):
             return Response(serializer.data, status=200)
         allowance = Allowance.objects.all()
         filter_queryset = AllowanceFilter(request.GET, allowance).qs
-        pagination = HorillaPageNumberPagination()
+        pagination = HrPageNumberPagination()
         page = pagination.paginate_queryset(filter_queryset, request)
         serializer = AllowanceSerializer(page, many=True)
         return pagination.get_paginated_response(serializer.data)
@@ -225,7 +225,7 @@ class DeductionView(APIView):
             return Response(serializer.data, status=200)
         deduction = Deduction.objects.all()
         filter_queryset = DeductionFilter(request.GET, deduction).qs
-        pagination = HorillaPageNumberPagination()
+        pagination = HrPageNumberPagination()
         page = pagination.paginate_queryset(filter_queryset, request)
         serializer = DeductionSerializer(page, many=True)
         return pagination.get_paginated_response(serializer.data)
@@ -272,7 +272,7 @@ class LoanAccountView(APIView):
             serializer = LoanAccountSerializer(instance=loan_account)
             return Response(serializer.data, status=200)
         loan_accounts = LoanAccount.objects.all()
-        pagination = HorillaPageNumberPagination()
+        pagination = HrPageNumberPagination()
         page = pagination.paginate_queryset(loan_accounts, request)
         serializer = LoanAccountSerializer(page, many=True)
         return pagination.get_paginated_response(serializer.data)
@@ -323,7 +323,7 @@ class ReimbursementView(APIView):
         if status_filter in valid_statuses:
             reimbursements = reimbursements.filter(status=status_filter)
         reimbursements = reimbursements.order_by("-id")
-        pagination = HorillaPageNumberPagination()
+        pagination = HrPageNumberPagination()
         page = pagination.paginate_queryset(reimbursements, request)
         serializer = self.serializer_class(page, many=True)
         return pagination.get_paginated_response(serializer.data)
@@ -401,7 +401,7 @@ class ReimbusementApproveRejectView(APIView):
 
         reimbursement.status = status
         # save(), not queryset.update(): update() bypasses model validation and
-        # the modified_by bookkeeping in HorillaModel.save().
+        # the modified_by bookkeeping in HrModel.save().
         reimbursement.save()
         reason = reject_reason_from(request)
         if status == "rejected" and reason:

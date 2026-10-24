@@ -1,1 +1,1 @@
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect

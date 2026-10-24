@@ -18,9 +18,9 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 
@@ -37,7 +37,7 @@ class AssetHistoryView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_assetassignment"), name="dispatch")
-class AssetHistorylistView(HorillaListView):
+class AssetHistorylistView(HrListView):
     """
     list view
     """
@@ -88,7 +88,7 @@ class AssetHistorylistView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_assetassignment"), name="dispatch")
-class AssetHistoryNavView(HorillaNavView):
+class AssetHistoryNavView(HrNavView):
     """
     navbar
     """
@@ -178,7 +178,7 @@ class AssetHistoryExportView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_assetassignment"), name="dispatch")
-class AssetHistoryDetailView(HorillaDetailedView):
+class AssetHistoryDetailView(HrDetailedView):
     """
     detail view of the page
     """

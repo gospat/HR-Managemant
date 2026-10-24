@@ -36,12 +36,12 @@ from base.methods import (
     humanize_filter_tags,
 )
 
-# from core.http import HorillaRedirect
+# from core.http import HrRedirect
 from core.filters import FilterSet
 from core.group_by import group_by_queryset
 from core.horilla_middlewares import _thread_locals, get_selected_company
-from core.http.response import HorillaRedirect
-from core.models import HorillaModel
+from core.http.response import HrRedirect
+from core.models import HrModel
 from core.nested_group_by import nested_group_by_queryset
 from core.signals import post_generic_import, pre_generic_import
 from hr_views import models
@@ -75,7 +75,7 @@ _dynamic_url_routes_registered: set = set()
 def model_has_audit_tracking(model) -> bool:
     """
     Return whether `model` has real history tracking,
-    not just the field every HorillaModel subclass inherits.
+    not just the field every HrModel subclass inherits.
     """
     return (
         hasattr(model, "history_set")
@@ -111,9 +111,9 @@ def register_dynamic_url(route: str, view, name: str = None) -> str:
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaListView(ListView):
+class HrListView(ListView):
     """
-    HorillaListView
+    HrListView
     """
 
     filter_class: FilterSet = None
@@ -414,7 +414,7 @@ class HorillaListView(ListView):
 
         if (
             self.history_tracking
-            and issubclass(self.model, HorillaModel)
+            and issubclass(self.model, HrModel)
             and model_has_audit_tracking(self.model)
         ):
             self.columns += [(_("History"), "get_model_history")]
@@ -565,11 +565,11 @@ class HorillaListView(ListView):
                     "page",
                     records_per_page=10,
                 )
-                context["nested_fields_active"] = HorillaNavView._resolve_field_labels(
+                context["nested_fields_active"] = HrNavView._resolve_field_labels(
                     nested_fields, self.model, self.model._meta.get_field
                 )
                 context["nested_group_by_fields"] = (
-                    HorillaNavView._resolve_field_labels(
+                    HrNavView._resolve_field_labels(
                         self.nested_group_by_fields,
                         self.model,
                         self.model._meta.get_field,
@@ -624,7 +624,7 @@ class HorillaListView(ListView):
         if self.request.session.get(session_key) != ordered_ids:
             self.request.session[session_key] = ordered_ids
 
-        # CACHE.get(self.request.session.session_key + "cbv")[HorillaListView] = context
+        # CACHE.get(self.request.session.session_key + "cbv")[HrListView] = context
         self.export_path = (
             reverse("export-list", kwargs={"short_id": self.view_id})
             + f"?model={self.model.__module__}.{self.model.__name__}"
@@ -762,7 +762,7 @@ class HorillaListView(ListView):
         """
         if not self.import_accessibility():
             messages.info(request, _("You don't have permission"))
-            return HorillaFormView.HttpResponse()
+            return HrFormView.HttpResponse()
         ids = eval_validate(request.POST["selected_ids"])
 
         wb = generate_import_excel(
@@ -1438,7 +1438,7 @@ class HorillaListView(ListView):
         return json.dumps(list(self.get_queryset().values_list("id", flat=True)))
 
 
-class HorillaSectionView(TemplateView):
+class HrSectionView(TemplateView):
     """
     Horilla Template View
     """
@@ -1447,7 +1447,7 @@ class HorillaSectionView(TemplateView):
         super().__init__(**kwargs)
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        # update_initial_cache(request, CACHE, HorillaListView)
+        # update_initial_cache(request, CACHE, HrListView)
 
     nav_url: str = ""
     view_url: str = ""
@@ -1486,7 +1486,7 @@ class HorillaSectionView(TemplateView):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaDetailedView(DetailView):
+class HrDetailedView(DetailView):
     """
     HorillDetailedView
     """
@@ -1547,7 +1547,7 @@ class HorillaDetailedView(DetailView):
             return render(request, self.empty_template, context=self.get_context_data())
         elif not self.instance:
             messages.info(request, _("No record found..."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return response
 
     def __init__(self, **kwargs: Any) -> None:
@@ -1555,7 +1555,7 @@ class HorillaDetailedView(DetailView):
         self.ordered_ids_key = f"ordered_ids_{self.model.__name__.lower()}"
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        # update_initial_cache(request, CACHE, HorillaDetailedView)
+        # update_initial_cache(request, CACHE, HrDetailedView)
 
         # Add verbose names to fields if possible
         updated_body = []
@@ -1618,9 +1618,9 @@ class HorillaDetailedView(DetailView):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaTabView(TemplateView):
+class HrTabView(TemplateView):
     """
-    HorillaTabView
+    HrTabView
     """
 
     view_id: str = ""
@@ -1657,7 +1657,7 @@ class HorillaTabView(TemplateView):
         self.query_params = {}
         if not self.view_id:
             self.view_id = get_short_uuid(3, "htv")
-        # update_initial_cache(request, CACHE, HorillaTabView)
+        # update_initial_cache(request, CACHE, HrTabView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1698,14 +1698,14 @@ class HorillaTabView(TemplateView):
         context["tabs"] = self.tabs
         context["view_id"] = self.view_id
 
-        # CACHE.get(self.request.session.session_key + "cbv")[HorillaTabView] = context
+        # CACHE.get(self.request.session.session_key + "cbv")[HrTabView] = context
 
         return context
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaTabContentShell(TemplateView):
+class HrTabContentShell(TemplateView):
     """
     Per-tab shell: each tab gets its own Nav plus list container.
     """
@@ -1726,9 +1726,9 @@ class HorillaTabContentShell(TemplateView):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaCardView(ListView):
+class HrCardView(ListView):
     """
-    HorillaCardView
+    HrCardView
     """
 
     filter_class: FilterSet = None
@@ -1787,7 +1787,7 @@ class HorillaCardView(ListView):
         super().__init__(**kwargs)
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        # update_initial_cache(request, CACHE, HorillaCardView)
+        # update_initial_cache(request, CACHE, HrCardView)
         self._saved_filters = QueryDict()
         self.ordered_ids_key = f"ordered_ids_{self.model.__name__.lower()}"
 
@@ -1885,7 +1885,7 @@ class HorillaCardView(ListView):
                 ordered_ids.append(str(instance.pk))
         self.request.session[self.ordered_ids_key] = ordered_ids
 
-        # CACHE.get(self.request.session.session_key + "cbv")[HorillaCardView] = context
+        # CACHE.get(self.request.session.session_key + "cbv")[HrCardView] = context
         context["stored_filters"] = models.SavedFilter.objects.filter(
             saved_filter_path_query(self.request), created_by=self.request.user
         ).distinct()
@@ -1972,9 +1972,9 @@ def save(self: forms.ModelForm, commit=True, *args, **kwargs):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaFormView(FormView):
+class HrFormView(FormView):
     """
-    HorillaFormView
+    HrFormView
     """
 
     class HttpResponse:
@@ -2060,7 +2060,7 @@ class HorillaFormView(FormView):
         self.request = request
         if not self.success_url:
             self.success_url = self.request.path
-        # update_initial_cache(request, CACHE, HorillaFormView)
+        # update_initial_cache(request, CACHE, HrFormView)
 
         if self.form_class:
             setattr(self.form_class, "structured", structured)
@@ -2072,7 +2072,7 @@ class HorillaFormView(FormView):
         # form.instance is never falsy (Django always creates a blank one), so check pk existence against the resolved queryset instead.
         if pk and not self.get_queryset():
             messages.error(request, _("Matching query does not exists."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         response = super().get(request, *args, **kwargs)
         return response
 
@@ -2082,7 +2082,7 @@ class HorillaFormView(FormView):
         _pk = pk
         if pk and not self.get_queryset():
             messages.error(request, _("Matching query does not exists."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         response = super().post(request, *args, **kwargs)
         return response
 
@@ -2282,7 +2282,7 @@ class HorillaFormView(FormView):
                 else:
                     company_field.widget = forms.HiddenInput()
                     form.initial["company_id"] = selected_company
-            # CACHE.get(self.request.session.session_key + "cbv")[HorillaFormView] = form
+            # CACHE.get(self.request.session.session_key + "cbv")[HrFormView] = form
             self.form = form
         return self.form
 
@@ -2303,9 +2303,9 @@ class HorillaFormView(FormView):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaNavView(TemplateView):
+class HrNavView(TemplateView):
     """
-    HorillaNavView
+    HrNavView
 
     filter form submit button id: applyFilter
     """
@@ -2343,7 +2343,7 @@ class HorillaNavView(TemplateView):
         self._initialize_model_and_group_fields()
         request = getattr(_thread_locals, "request", None)
         self.request = request
-        # update_initial_cache(request, CACHE, HorillaNavView)
+        # update_initial_cache(request, CACHE, HrNavView)
 
     def _initialize_model_and_group_fields(self) -> None:
         """Resolve group_by_fields/nested_group_by_fields to (field, verbose_name) tuples once filter_instance's model is known."""
@@ -2540,7 +2540,7 @@ class HorillaNavView(TemplateView):
                 parsed_search._replace(query=urlencode(parsed_search_url, doseq=True))
             )
 
-        # CACHE.get(self.request.session.session_key + "cbv")[HorillaNavView] = context
+        # CACHE.get(self.request.session.session_key + "cbv")[HrNavView] = context
         return context
 
     @classmethod
@@ -2560,7 +2560,7 @@ class HorillaNavView(TemplateView):
 
 
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaProfileView(DetailView):
+class HrProfileView(DetailView):
     """
     GenericHorillaProfileView
     """
@@ -2593,7 +2593,7 @@ class HorillaProfileView(DetailView):
         for tab in cls.tabs:
             if not tab.get("url"):
                 key = f"{prefix}-{tab['title']}"
-                HorillaProfileView._tab_view_registry[key] = tab["view"]
+                HrProfileView._tab_view_registry[key] = tab["view"]
                 tab["url"] = f"/hzp-tab/{key}/" + "{pk}/"
 
     def __init__(self, **kwargs: Any) -> None:
@@ -2605,7 +2605,7 @@ class HorillaProfileView(DetailView):
         request = getattr(_thread_locals, "request", None)
         self.request = request
         self.ordered_ids_key = f"ordered_ids_{self.model.__name__.lower()}"
-        # update_initial_cache(request, CACHE, HorillaProfileView)
+        # update_initial_cache(request, CACHE, HrProfileView)
 
         # Safety net for tabs added some other way __init_subclass__/add_tab() didn't already cover.
         self._register_tabs()
@@ -2760,10 +2760,10 @@ class HorillaProfileView(DetailView):
 
 
 def dispatch_profile_tab(request, tab_key: str, pk: int, *args, **kwargs):
-    """Resolve any HorillaProfileView tab through one static route, looking the view up in _tab_view_registry (avoids racy per-tab URL registration across worker processes)."""
+    """Resolve any HrProfileView tab through one static route, looking the view up in _tab_view_registry (avoids racy per-tab URL registration across worker processes)."""
     if not request.user.is_authenticated:
         return redirect(f"{reverse('login')}?next={request.path}")
-    view_func = HorillaProfileView._tab_view_registry.get(tab_key)
+    view_func = HrProfileView._tab_view_registry.get(tab_key)
     if view_func is None:
         raise Http404(f"No profile tab registered for '{tab_key}'")
     return view_func(request, *args, pk=pk, **kwargs)

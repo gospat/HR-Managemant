@@ -1,7 +1,7 @@
 """Give every demo company its own, genuinely scoped asset inventory.
 
 AssetCategory/AssetLot ship with an empty company_id (the "visible to every
-company" convention HorillaCompanyManager treats as shared), and Asset has
+company" convention HrCompanyManager treats as shared), and Asset has
 no company field of its own -- it only derives one transitively through
 asset_category_id__company_id. Since every category is unscoped, all 200
 demo Asset rows are visible under every company simultaneously: switching

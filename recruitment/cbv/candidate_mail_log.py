@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from base.cbv.mail_log_tab import MailLogTabList
 from core.decorators import hx_request_required
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 from recruitment.cbv_decorators import all_manager_can_enter
 from recruitment.models import Candidate
 
@@ -47,9 +47,9 @@ class CandidateMailLogTabList(MailLogTabList):
         pk = self.kwargs.get("pk")
         candidate_obj = Candidate.objects.filter(id=pk).first()
         if not candidate_obj:
-            return HorillaListView.get_queryset(self).none()
+            return HrListView.get_queryset(self).none()
         return (
-            HorillaListView.get_queryset(self)
+            HrListView.get_queryset(self)
             .filter(to__icontains=candidate_obj.email)
             .order_by("-created_at")
         )

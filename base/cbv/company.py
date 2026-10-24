@@ -18,15 +18,15 @@ from base.models import Company
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.forms import DynamicBulkUpdateForm
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_company"), name="dispatch")
-class CompanyListView(HorillaListView):
+class CompanyListView(HrListView):
     """
     list view for company in settings
     """
@@ -130,7 +130,7 @@ class CompanyListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_company"), name="dispatch")
-class CompanyNavView(HorillaNavView):
+class CompanyNavView(HrNavView):
     """
     nav bar of the department view
     """
@@ -154,7 +154,7 @@ class CompanyNavView(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.add_company"), name="dispatch")
-class CompanyCreateForm(HorillaFormView):
+class CompanyCreateForm(HrFormView):
     """
     form view for creating and editing company in settings
     """

@@ -883,7 +883,7 @@ class PeriodNoteDisclosureTests(TestCase):
 class AuditActivityScopingTests(TestCase):
     """
     auditlog.LogEntry is third-party: no company column, no
-    HorillaCompanyManager. Unlike every other model the metrics layer
+    HrCompanyManager. Unlike every other model the metrics layer
     touches, it returned every tenant's activity to any viewer.
     """
 

@@ -17,9 +17,9 @@ from employee.models import Employee
 from employee.views import return_none
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaTabView,
+    HrDetailedView,
+    HrListView,
+    HrTabView,
 )
 from payroll.cbv.allowances import AllowanceListView
 from payroll.cbv.deduction import DeductionListView
@@ -39,7 +39,7 @@ operator_mapping = {
 
 
 @method_decorator(login_required, name="dispatch")
-class AllowanceDeductionTabView(HorillaTabView):
+class AllowanceDeductionTabView(HrTabView):
     """
     generic tab view for allowance and deduction
     """
@@ -173,7 +173,7 @@ class AllowanceTabList(AllowanceListView):
         the employee's active contract and specific conditions
         """
 
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         pk = self.kwargs.get("pk")
         employee = Employee.objects.get(id=pk)
         active_contracts = (
@@ -297,7 +297,7 @@ class DeductionTab(DeductionListView):
         the employee's active contract and specific conditions
         """
 
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         pk = self.kwargs.get("pk")
         employee = Employee.objects.get(id=pk)
         active_contracts = (
@@ -350,7 +350,7 @@ class DeductionTab(DeductionListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DeductionDetailView(HorillaDetailedView):
+class DeductionDetailView(HrDetailedView):
     """
     Detail View
     """
@@ -377,7 +377,7 @@ class DeductionDetailView(HorillaDetailedView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AllowanceDetailView(HorillaDetailedView):
+class AllowanceDetailView(HrDetailedView):
     """
     detail view for allowance tab
     """

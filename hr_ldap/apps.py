@@ -2,7 +2,7 @@ from django.apps import AppConfig
 from django.conf import settings
 
 
-class HorillaLdapConfig(AppConfig):
+class HrLdapConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "hr_ldap"
     # Kept at the original value so migrations, permissions and

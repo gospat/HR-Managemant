@@ -36,7 +36,7 @@ from employee.models import (
 )
 from core.filters import (
     FilterSet,
-    HorillaFilterSet,
+    HrFilterSet,
     filter_by_name,
     filter_name_or_badge_terms,
 )
@@ -46,7 +46,7 @@ from hr_views.templatetags.generic_template_filters import getattribute
 from hr_widgets.generic_ajax import register_ajax_field
 
 
-class EmployeeFilter(HorillaFilterSet):
+class EmployeeFilter(HrFilterSet):
     """
     Filter set class for Candidate model
 
@@ -322,7 +322,7 @@ class EmployeeFilter(HorillaFilterSet):
     # onto a real queryset, so they go through the same generic AJAX-search
     # endpoint as the dedicated fields above (horilla_widgets.generic_ajax)
     # rather than pre-rendering every row as an <option> on every filter
-    # panel load. Registered here (not via HorillaFilterSet.ajax_fields)
+    # panel load. Registered here (not via HrFilterSet.ajax_fields)
     # because these have no corresponding declared form field to swap a
     # widget onto -- they're pure client-built <select> elements driven by
     # custom_filter_fields JSON, so this dict is both the AJAX registration
@@ -355,7 +355,7 @@ class EmployeeFilter(HorillaFilterSet):
         },
     }
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- every model/queryset-backed field in this form (Company,
     # Reporting Manager, Department, Job Position, Groups, Permissions)
     # opts in here, regardless of current option count. Checkbox lists
@@ -471,11 +471,11 @@ class EmployeeFilter(HorillaFilterSet):
 
     def __init__(self, *args, **kwargs):
         # custom_filter_fields/custom_filter_rows are built by
-        # HorillaFilterSet.__init__ itself (via this class's own
+        # HrFilterSet.__init__ itself (via this class's own
         # _build_custom_filter_fields override below) -- the "choice"
         # fields' option lists are small live querysets (Shift, Work
         # Type, ...), scoped the same way as everywhere else in the app
-        # (HorillaCompanyManager via the current request/company), which
+        # (HrCompanyManager via the current request/company), which
         # is exactly why that base __init__ builds this fresh per
         # request instead of it being a class-level constant.
         super().__init__(*args, **kwargs)
@@ -501,7 +501,7 @@ class EmployeeFilter(HorillaFilterSet):
         stays a plain "choices" list since it's a genuinely fixed option
         set, not a queryset.
 
-        Consumed generically by HorillaNavView (as context
+        Consumed generically by HrNavView (as context
         "custom_filter_fields") and rendered by filter_employee.html;
         applied server-side by _apply_custom_filters below.
         """
@@ -573,7 +573,7 @@ class EmployeeFilter(HorillaFilterSet):
                     # (handles Promise the same way it already does for
                     # every str(_(...)) label above), so this only ever
                     # actually resolves at real per-request render time,
-                    # same reasoning as HorillaFilterSet._apply_ajax_fields.
+                    # same reasoning as HrFilterSet._apply_ajax_fields.
                     "url": reverse_lazy(
                         "ajax-choices", args=[ajax_config["key"]]
                     ),
@@ -592,7 +592,7 @@ class EmployeeFilter(HorillaFilterSet):
 
         Every model-choice <select> in this form (Company, Reporting
         Manager, Groups, Permissions) is an AJAX-loaded combobox handled
-        generically by HorillaFilterSet.ajax_fields (see the class
+        generically by HrFilterSet.ajax_fields (see the class
         attribute above) -- no per-field code is needed here for those.
         """
         name_or_badge_field = self.form.fields.get("name_or_badge")
@@ -739,7 +739,7 @@ class PolicyFilter(FilterSet):
         fields = "__all__"
 
 
-class DocumentRequestFilter(HorillaFilterSet):
+class DocumentRequestFilter(HrFilterSet):
     """
     Custom filter for Document Requests.
     """
@@ -765,7 +765,7 @@ class DocumentRequestFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- every
     # model/queryset-backed field in the modern filter panel opts in here
     # instead of pre-rendering its whole queryset as <option> tags.
@@ -884,7 +884,7 @@ class DocumentRequestFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Created At is the only real date
@@ -907,7 +907,7 @@ class DocumentRequestFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -916,7 +916,7 @@ class DocumentRequestFilter(HorillaFilterSet):
         return self._apply_custom_filters(queryset)
 
 
-class DocumentPipelineFilter(HorillaFilterSet):
+class DocumentPipelineFilter(HrFilterSet):
     """
     Filter set class for TaxBracket model.
     """
@@ -945,7 +945,7 @@ class DocumentPipelineFilter(HorillaFilterSet):
         ).distinct()
 
 
-class DisciplinaryActionFilter(HorillaFilterSet):
+class DisciplinaryActionFilter(HrFilterSet):
     """
     Custom filter for Disciplinary Action.
 
@@ -965,7 +965,7 @@ class DisciplinaryActionFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation). "action"
     # (Actiontype) is left as a classic select -- its option list is
     # naturally small (the fixed set of disciplinary action types a
@@ -1072,7 +1072,7 @@ class DisciplinaryActionFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Date's existing exact-match quick
@@ -1102,7 +1102,7 @@ class DisciplinaryActionFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -1111,7 +1111,7 @@ class DisciplinaryActionFilter(HorillaFilterSet):
         return self._apply_custom_filters(queryset)
 
 
-class ActionTypeFilter(HorillaFilterSet):
+class ActionTypeFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
 
@@ -1141,7 +1141,7 @@ class EmployeeTagFilter(FilterSet):
         ]
 
 
-class EmployeeWorkInformationFilter(HorillaFilterSet):
+class EmployeeWorkInformationFilter(HrFilterSet):
 
     search = django_filters.CharFilter(
         field_name="employee_id__employee_first_name", lookup_expr="icontains"

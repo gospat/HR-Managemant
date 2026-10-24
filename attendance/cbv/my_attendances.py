@@ -12,9 +12,9 @@ from attendance.filters import AttendanceFilters
 from attendance.models import Attendance
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 
@@ -28,7 +28,7 @@ class MyAttendances(TemplateView):
     template_name = "cbv/my_attendances/my_attendances.html"
 
 
-class MyAttendancesListView(HorillaListView):
+class MyAttendancesListView(HrListView):
 
     model = Attendance
     filter_class = AttendanceFilters
@@ -184,7 +184,7 @@ class MyAttendanceList(MyAttendancesListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyAttendancestNav(HorillaNavView):
+class MyAttendancestNav(HrNavView):
     """
     Nav bar
     """
@@ -223,7 +223,7 @@ class MyAttendancestNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyAttendancesDetailView(HorillaDetailedView):
+class MyAttendancesDetailView(HrDetailedView):
     """
     Detail View
     """

@@ -92,7 +92,7 @@ class LegacyNullCompanyRowsTests(TestCase):
     """
     Rows written before company_id was populated are NULL.
 
-    HorillaCompanyManager treats a NULL company as visible to everyone
+    HrCompanyManager treats a NULL company as visible to everyone
     (Q(path__isnull=True)), which is deliberate for shared configuration but
     means historical mail-log rows stay cross-tenant readable. Asserted here so
     the behaviour is a documented decision rather than a surprise, and so a

@@ -20,9 +20,9 @@ from base.request_and_approve import paginator_qry
 from employee.models import Employee
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabView,
+    HrListView,
+    HrNavView,
+    HrTabView,
 )
 
 
@@ -41,7 +41,7 @@ def _badge_count_from_individual_tab(request, pk, view_cls):
 
 
 @method_decorator(login_required, name="dispatch")
-class AttendanceTabView(HorillaTabView):
+class AttendanceTabView(HrTabView):
     """
     generic tab view for attendance
     """
@@ -126,7 +126,7 @@ class RequestedAttendanceIndividualTabShell(ProfileTabShellView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RequestedAttendanceIndividualNav(HorillaNavView):
+class RequestedAttendanceIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Requested Attendances profile
     tab - "Create Attendance Request" is self-service only, matching the

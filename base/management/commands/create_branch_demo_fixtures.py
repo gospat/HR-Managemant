@@ -4936,7 +4936,7 @@ def _as_request():
     Stand in a request, for model code that expects to be inside one.
 
     Same helper as create_payroll_fixtures.py's own -- several payroll models
-    read the current user from thread-locals (HorillaModel.save() assigns it
+    read the current user from thread-locals (HrModel.save() assigns it
     to created_by, and some signals notify request.user), and in a command
     there is nobody. A superuser is the right stand-in: a fixture is not
     being restricted by anybody's permissions.

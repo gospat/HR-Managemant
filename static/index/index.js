@@ -30,7 +30,7 @@ if (typeof i18nMessages === 'undefined') {
 }
 
 // Blanket safety net for every htmx request on the page, including
-// programmatic htmx.ajax() calls (e.g. HorillaTabView's tab-content loads)
+// programmatic htmx.ajax() calls (e.g. HrTabView's tab-content loads)
 // that don't set their own hx-timeout. htmx's own default (0) never times
 // out a hung request, so without this a stalled server response leaves
 // the swap target empty indefinitely with no error ever surfacing.
@@ -437,7 +437,7 @@ function syncBulkSelectAllCheckbox(viewId) {
 // hx-on::after-request). Column *reordering* (drag-and-drop) still reloads
 // normally, since re-ordering actual table cells isn't a simple show/hide.
 function toggleColumnVisibility(checkboxEl, fieldName, visible) {
-    // Scope to this list only. HorillaTabView keeps visited tabs in the DOM,
+    // Scope to this list only. HrTabView keeps visited tabs in the DOM,
     // so a global th[id$=...] lookup can match History (or any column) from
     // another tab and wrongly skip the reload this list needs.
     // Group-by tables also use .hlv-container; fall back to [data-list-path]
@@ -1087,7 +1087,7 @@ function htmxLoadIndicator(e) {}
 
 /**
  * Shared failure fallback for any lazy-loaded swap target (the nav filter
- * form's hx-get for list/card views, and HorillaTabView's own tab-content
+ * form's hx-get for list/card views, and HrTabView's own tab-content
  * htmx.ajax() loads). Without this, a non-2xx response, a network failure,
  * or a hung request leaves the swap target exactly as it was (empty, on
  * first load) with no indication anything went wrong, indistinguishable
@@ -1145,7 +1145,7 @@ function htmxLoadFailIndicator(e, evt) {
  * unaffected and only the redundant refetch-on-restore is skipped.
  *
  * `selector` (e.g. "#listContainer") is reused verbatim by every
- * HorillaNavView/HorillaListView pair in the app, so a HorillaTabView page
+ * HrNavView/HrListView pair in the app, so a HrTabView page
  * with more than one tab already loaded has several elements answering to it
  * at once -- a bare `document.querySelector` always grabs the FIRST one,
  * which belongs to whichever tab loaded earliest, not the tab this call is

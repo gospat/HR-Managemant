@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_audit.forms import (
     AuditModelConfigForm,
     AuditModelFieldsForm,
@@ -95,7 +95,7 @@ def save_audit_models(request):
             status=200,
             headers={"HX-Redirect": reverse("audit-history-view")},
         )
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -128,7 +128,7 @@ def edit_audit_model_fields(request, pk):
                     status=200,
                     headers={"HX-Redirect": reverse("audit-history-view")},
                 )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     else:
         form = AuditModelFieldsForm(
             initial={"fields_to_track": config.tracked_fields or []},

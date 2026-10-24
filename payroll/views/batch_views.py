@@ -32,7 +32,7 @@ from django.utils.translation import gettext_lazy as _
 from base.methods import paginator_qry
 from employee.models import Employee
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from payroll.forms.batch_forms import PayPeriodSettingsForm, PayrollBatchScopeForm
 from payroll.methods import batch_run
 from payroll.models.models import (
@@ -161,7 +161,7 @@ def batch_set_status(request, batch_id):
     allowed, reason = batch.can_transition_to(wanted)
     if not allowed:
         messages.error(request, reason)
-        return HorillaRedirect(
+        return HrRedirect(
             request, reverse("payroll-batch-detail", args=[batch.pk])
         )
 
@@ -191,7 +191,7 @@ def batch_set_status(request, batch_id):
         request,
         _("Run marked %(status)s.") % {"status": batch.get_status_display()},
     )
-    return HorillaRedirect(request, reverse("payroll-batch-detail", args=[batch.pk]))
+    return HrRedirect(request, reverse("payroll-batch-detail", args=[batch.pk]))
 
 
 @login_required
@@ -216,12 +216,12 @@ def batch_delete(request, batch_id):
             request,
             _("A paid run cannot be deleted. Correct it with another run."),
         )
-        return HorillaRedirect(
+        return HrRedirect(
             request, reverse("payroll-batch-detail", args=[batch.pk])
         )
 
     if request.method != "POST":
-        return HorillaRedirect(
+        return HrRedirect(
             request, reverse("payroll-batch-detail", args=[batch.pk])
         )
 
@@ -236,7 +236,7 @@ def batch_delete(request, batch_id):
         _("Deleted the run %(name)s and its %(count)s payslip(s).")
         % {"name": name, "count": removed},
     )
-    return HorillaRedirect(request, reverse("payroll-batch-home"))
+    return HrRedirect(request, reverse("payroll-batch-home"))
 
 
 @login_required
@@ -262,7 +262,7 @@ def batch_reopen(request, batch_id):
     detail = reverse("payroll-batch-detail", args=[batch.pk])
 
     if request.method != "POST":
-        return HorillaRedirect(request, detail)
+        return HrRedirect(request, detail)
 
     if (
         batch.status != PayrollBatch.DRAFT
@@ -272,7 +272,7 @@ def batch_reopen(request, batch_id):
             request,
             _("Only a draft run can be sent back to check its inputs."),
         )
-        return HorillaRedirect(request, detail)
+        return HrRedirect(request, detail)
 
     state = {
         "batch_name": batch.batch_name,
@@ -292,7 +292,7 @@ def batch_reopen(request, batch_id):
             "what needs fixing and generate again."
         ),
     )
-    return HorillaRedirect(request, reverse("payroll-batch-review"))
+    return HrRedirect(request, reverse("payroll-batch-review"))
 
 
 # ---------------------------------------------------------------------------
@@ -438,7 +438,7 @@ def wizard_start(request):
             request, _("Nobody in this run can be paid yet. Fix the problems listed.")
         )
         if request.headers.get("HX-Request"):
-            return HorillaRedirect(request, reverse("payroll-batch-review"))
+            return HrRedirect(request, reverse("payroll-batch-review"))
         return redirect("payroll-batch-review")
 
     batch = batch_run.create_batch(
@@ -518,7 +518,7 @@ def pay_period_settings(request):
                 stamp_company_on_create(obj)
             obj.save()
             messages.success(request, _("Pay period saved."))
-            return HorillaRedirect(request, reverse("pay-period-settings"))
+            return HrRedirect(request, reverse("pay-period-settings"))
     else:
         form = PayPeriodSettingsForm(instance=instance)
 

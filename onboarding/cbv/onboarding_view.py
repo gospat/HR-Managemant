@@ -15,9 +15,9 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 
 from employee.models import Employee
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaDetailedView, HorillaFormView
+from hr_views.generic.cbv.views import HrDetailedView, HrFormView
 from notifications.signals import notify
 from onboarding.cbv_decorators import (
     recruitment_manager_can_enter,
@@ -36,7 +36,7 @@ from recruitment.models import Candidate
 @method_decorator(
     recruitment_manager_can_enter("onboarding.add_onboardingstage"), name="dispatch"
 )
-class StageCreateForm(HorillaFormView):
+class StageCreateForm(HrFormView):
     """
     Form view for create and update stage
     """
@@ -83,7 +83,7 @@ class StageCreateForm(HorillaFormView):
 @method_decorator(
     stage_manager_can_enter("onboarding.add_onboardingtask"), name="dispatch"
 )
-class TaskCreateForm(HorillaFormView):
+class TaskCreateForm(HrFormView):
     """
     form view for create tasks
     """
@@ -166,7 +166,7 @@ class TaskCreateForm(HorillaFormView):
 @method_decorator(
     stage_manager_can_enter("onboarding.change_onboardingtask"), name="dispatch"
 )
-class TaskUpdateFormView(HorillaFormView):
+class TaskUpdateFormView(HrFormView):
     """
     form view for update tasks
     """
@@ -213,7 +213,7 @@ class TaskUpdateFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class OnboardingCandidateDetailView(HorillaDetailedView):
+class OnboardingCandidateDetailView(HrDetailedView):
     """
     detail view of onboarding view
     """

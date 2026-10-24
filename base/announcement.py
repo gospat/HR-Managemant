@@ -24,7 +24,7 @@ from base.models import (
 )
 from employee.models import Employee
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_auth.models import HorillaUser
 from notifications.signals import notify
 
@@ -216,13 +216,13 @@ def delete_announcement(request, anoun_id):
 
     if not instance_ids_list:
         # Last announcement deleted — refresh the page to show empty state
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     if next_instance_id and next_instance_id != anoun_id:
         url = reverse("announcement-single-view", kwargs={"pk": next_instance_id})
         return redirect(f"{url}?instance_ids={json.dumps(instance_ids_list)}")
 
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -366,7 +366,7 @@ def comment_view(request, anoun_id):
     announcement = Announcement.objects.filter(id=anoun_id).first()
     if not announcement:
         messages.error(request, _("Announcement not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     comments = AnnouncementComment.objects.filter(announcement_id=anoun_id).order_by(
         "-created_at"
     )
@@ -419,7 +419,7 @@ def announcement_single_view(request, anoun_id=None):
         # announcement.id %}), which fails with NoReverseMatch on an empty
         # id rather than rendering blank.
         messages.error(request, _("Announcement not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     instance_ids = request.GET.get("instance_ids")
     instance_ids_list = json.loads(instance_ids) if instance_ids else []
     previous_instance_id, next_instance_id = (

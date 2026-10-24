@@ -15,13 +15,13 @@ from base.forms import AnnouncementForm
 from base.methods import closest_numbers
 from base.models import Announcement, AnnouncementView, Attachment
 from employee.models import Employee
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
 )
 from notifications.signals import notify
 
@@ -40,7 +40,7 @@ BLOCKED_EXTENSIONS = {
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.add_announcement"), name="dispatch")
-class AnnouncementFormView(HorillaFormView):
+class AnnouncementFormView(HrFormView):
     """
     form view for create button
     """
@@ -143,13 +143,13 @@ class AnnouncementFormView(HorillaFormView):
             )
 
             messages.success(self.request, message)
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
 
         return super().form_valid(form)
 
 
 @method_decorator(login_required, name="dispatch")
-class AnnouncementDetailView(HorillaDetailedView):
+class AnnouncementDetailView(HrDetailedView):
 
     model = Announcement
     template_name = "announcement/announcement_one.html"

@@ -17,10 +17,10 @@ from base.forms import DepartmentForm
 from base.models import Department
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 
 
@@ -50,7 +50,7 @@ def _attach_department_managers(departments):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_department"), name="dispatch")
-class DepartmentListView(HorillaListView):
+class DepartmentListView(HrListView):
     """
     list view for department in settings
     """
@@ -117,7 +117,7 @@ class DepartmentListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_department"), name="dispatch")
-class DepartmentNavView(HorillaNavView):
+class DepartmentNavView(HrNavView):
     """
     nav bar of the department view
     """
@@ -141,7 +141,7 @@ class DepartmentNavView(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_department"), name="dispatch")
-class DepartmentDetailView(HorillaDetailedView):
+class DepartmentDetailView(HrDetailedView):
     """
     detail view for department, also registered as the related-object-link
     target for Department via detail_view_url_name
@@ -165,7 +165,7 @@ class DepartmentDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.add_department"), name="dispatch")
-class DepartmentCreateForm(HorillaFormView):
+class DepartmentCreateForm(HrFormView):
     """
     form view for creating and editing departments in settings
     """

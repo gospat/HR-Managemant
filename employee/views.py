@@ -125,9 +125,9 @@ from core.decorators import (
     owner_can_enter,
     permission_required,
 )
-from core.filters import HorillaPaginator
+from core.filters import HrPaginator
 from core.group_by import group_by_queryset
-from core.http.response import HorillaRedirect, with_bulk_result
+from core.http.response import HrRedirect, with_bulk_result
 from core.methods import dynamic_attr, get_horilla_model_class
 from hr_audit.models import AccountBlockUnblock, HistoryTrackingFields
 from hr_auth.methods import generate_random_password
@@ -313,7 +313,7 @@ def profile_edit_access(request, emp_id):
                 cache.delete(user_cache_key[-1])
                 update_employee_accessibility_cache(user_cache_key[-1], employee)
 
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -408,7 +408,7 @@ def about_tab(request, pk, **kwargs):
     employee = Employee.objects.filter(id=pk).first()
     if not employee:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     contracts = employee.contract_set.all() if apps.is_installed("payroll") else None
     employee_leaves = (
         employee.available_leave.all() if apps.is_installed("leave") else None
@@ -444,7 +444,7 @@ def allowances_deductions_tab(request, pk):
     employee = Employee.objects.filter(id=pk).first()
     if not employee:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     active_contracts = (
         employee.contract_set.filter(contract_status="active").first()
         if apps.is_installed("payroll")
@@ -553,7 +553,7 @@ def shift_tab(request, pk):
     employee = Employee.objects.filter(id=pk).first()
     if not employee:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     work_type_requests = WorkTypeRequest.objects.filter(employee_id=pk)
     work_type_requests_ids = json.dumps(
         [instance.id for instance in work_type_requests]
@@ -680,7 +680,7 @@ def document_request_create(request):
                 redirect=reverse("employee-profile"),
                 icon="chatbox-ellipses",
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     context = {
         "form": form,
@@ -713,7 +713,7 @@ def document_request_update(request, id):
                 Employee.objects.filter(id__in=form.data.getlist("employee_id"))
             )
             documents.exclude(employee_id__in=doc_obj.employee_id.all()).delete()
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     context = {
         "form": form,
@@ -766,14 +766,14 @@ def document_create(request, emp_id=None):
     employee_id = Employee.objects.filter(id=emp_id).first() if emp_id else None
     if not employee_id:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     form = DocumentForm(initial={"employee_id": employee_id, "expiry_date": None})
     if request.method == "POST":
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, _("Document created successfully."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     context = {
         "form": form,
@@ -897,7 +897,7 @@ def document_delete(request, id):
     refreshed = htmx_refresh_document_request_container(request)
     if refreshed is not None:
         return refreshed
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 def can_access_document(request, document, perm):
@@ -927,14 +927,14 @@ def file_upload(request, id):
 
     document_item = Document.find(id)
     if document_item is None:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Document found matching the query.")
         )
 
     if not can_access_document(
         request, document_item, "horilla_documents.change_document"
     ):
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("You do not have permission to update this document.")
         )
 
@@ -958,7 +958,7 @@ def file_upload(request, id):
                 )
             except:
                 pass
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     context = {"form": form, "document": document_item}
     return render(request, "tabs/htmx/document_form.html", context=context)
@@ -1010,14 +1010,14 @@ def view_file(request, id):
         document_qs = document_qs.filter(employee_id__employee_user_id=request.user)
     document_obj = document_qs.first()
     if document_obj is None:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Document found matching the query.")
         )
 
     if not can_access_document(
         request, document_obj, "horilla_documents.view_document"
     ):
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("You do not have permission to view this document.")
         )
 
@@ -1089,7 +1089,7 @@ def document_approve(request, id):
         )
         return HttpResponse(span)
 
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -1108,7 +1108,7 @@ def document_reject(request, id):
     document_obj = get_object_or_404(Document, id=id)
     if not document_obj.document_request_id:
         messages.error(request, _("Only document requests can be rejected"))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     form = DocumentRejectForm()
     if document_obj.document:
         if request.method == "POST":
@@ -1119,10 +1119,10 @@ def document_reject(request, id):
                 document_obj.save()
                 messages.error(request, _("Document request rejected"))
 
-                return HorillaRedirect(request)
+                return HrRedirect(request)
     else:
         messages.error(request, _("No document uploaded"))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     return render(
         request,
@@ -1167,7 +1167,7 @@ def document_bulk_approve(request):
 
     response = htmx_refresh_document_request_container(request)
     if response is None:
-        response = HorillaRedirect(request)
+        response = HrRedirect(request)
     if request.method == "POST":
         response = with_bulk_result(response, count_approved, not_uploaded_count)
     return response
@@ -1213,7 +1213,7 @@ def document_bulk_reject(request):
         )
         response = htmx_refresh_document_request_container(request)
         if response is None:
-            response = HorillaRedirect(request)
+            response = HrRedirect(request)
         return with_bulk_result(
             response, updated_count, max(len(ids) - updated_count, 0)
         )
@@ -1237,7 +1237,7 @@ def employee_profile_bank_details(request):
         bank_info.employee_id = employee
         bank_info.save()
         messages.success(request, _("Bank details updated"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -1274,7 +1274,7 @@ def paginator_qry(qryset, page_number):
     """
     This method is used to paginate query set
     """
-    paginator = HorillaPaginator(qryset, get_pagination())
+    paginator = HrPaginator(qryset, get_pagination())
     qryset = paginator.get_page(page_number)
     return qryset
 
@@ -1671,7 +1671,7 @@ def employee_view_update(request, obj_id, **kwargs):
     emp = Employee.objects.entire().filter(id=obj_id).first()
 
     if not employee and not emp:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee found matching the query.")
         )
 
@@ -1827,7 +1827,7 @@ def employee_view_update(request, obj_id, **kwargs):
             },
         )
         return response
-    return HorillaRedirect(request, fallback_url="/employee/employee-view")
+    return HrRedirect(request, fallback_url="/employee/employee-view")
 
 
 @login_required
@@ -2228,7 +2228,7 @@ def employee_update(request, obj_id):
     employee = Employee.objects.filter(id=obj_id).first()
     if not employee:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     form = EmployeeForm(instance=employee)
     work_info = EmployeeWorkInformation.objects.filter(employee_id=employee).first()
     bank_info = EmployeeBankDetails.objects.filter(employee_id=employee).first()
@@ -2274,7 +2274,7 @@ def employee_delete(request, obj_id):
             <= 1
         ):
             messages.error(request, _("You can't delete the last superuser."))
-            return HorillaRedirect(request, fallback_url=f"/view={view}")
+            return HrRedirect(request, fallback_url=f"/view={view}")
         if apps.is_installed("payroll"):
             if employee.contract_set.all().exists():
                 contracts = employee.contract_set.all()
@@ -2298,7 +2298,7 @@ def employee_delete(request, obj_id):
         error_message = str(error_message)
         request.session["error_message"] = error_message
         return redirect(reverse("employee-view") + "?error_message=true")
-    return HorillaRedirect(request, fallback_url=f"/view={view}")
+    return HrRedirect(request, fallback_url=f"/view={view}")
 
 
 def _employees_blocking_delete(employee_ids):
@@ -2518,7 +2518,7 @@ def employee_send_invitation(request, emp_id):
     employee = get_object_or_404(Employee, id=emp_id)
     if not employee.employee_user_id:
         messages.error(request, _("This employee has no linked login account."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     sent = send_employee_invitation(employee, request.get_host(), request.is_secure())
     if sent:
@@ -2533,7 +2533,7 @@ def employee_send_invitation(request, emp_id):
             )
             % {"employee": employee},
         )
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -2575,7 +2575,7 @@ def employee_archive(request, obj_id):
     employee = Employee.objects.filter(id=obj_id).first()
     if not employee:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     employee.is_active = not employee.is_active
     save = True
     message = "Employee un-archived"
@@ -2603,7 +2603,7 @@ def employee_archive(request, obj_id):
         messages.success(request, message)
         key = "HTTP_HX_REQUEST"
         if key not in request.META.keys():
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         else:
             return HttpResponse("<script>$('#applyFilter').click();</script>")
     else:
@@ -2625,7 +2625,7 @@ def employee_archive(request, obj_id):
 def replace_employee(request, emp_id):
     employee = Employee.objects.filter(id=emp_id).first()
     if not employee:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee found matching the query.")
         )
 
@@ -2728,7 +2728,7 @@ def get_manager_in(request):
     employee_id = request.GET.get("employee_id")
     employee = Employee.objects.filter(id=employee_id).first()
     if not employee:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee found matching the query.")
         )
 
@@ -2750,7 +2750,7 @@ def get_manager_in(request):
         employee.save()
         employee.sync_login_access()
         messages.success(request, message)
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     else:
         return render(
             request,
@@ -3014,7 +3014,7 @@ def employee_export(request):
     are exported; otherwise every employee is exported, same as before.
     """
     if not has_export_access(request, Employee):
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("You don't have access to export this data")
         )
 
@@ -3225,7 +3225,7 @@ def work_info_export(request):
     This method is used to export employee data to xlsx
     """
     if not has_export_access(request, Employee):
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("You don't have access to export this data")
         )
 
@@ -3632,9 +3632,9 @@ def note_tab(request, pk):
     employee_obj = Employee.objects.filter(id=pk).first()
     if not employee_obj:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     notes = EmployeeNote.objects.filter(employee_id=pk).order_by("-id")
-    notes = HorillaPaginator(notes, 10).get_page(request.GET.get("page"))
+    notes = HrPaginator(notes, 10).get_page(request.GET.get("page"))
 
     return render(
         request,
@@ -3664,13 +3664,13 @@ def employee_history_sidebar(request, pk):
     Same activity-history feed as the profile page's History tab, wrapped
     with the #historySidebar's own header chrome (close chevron + title) --
     for opening it directly from the employee list's History column, the
-    same way HorillaModel-based lists open their auto-added History column
+    same way HrModel-based lists open their auto-added History column
     (see generic/history_col.html / horilla_history_view.html).
     """
     employee_obj = Employee.objects.filter(id=pk).first()
     if not employee_obj:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     return render(
         request,
         "employee/history_sidebar.html",
@@ -3690,7 +3690,7 @@ def add_note(request, emp_id=None):
     employee_obj = Employee.objects.filter(id=emp_id).first()
     if not employee_obj:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     form = EmployeeNoteForm(initial={"employee_id": emp_id})
     if request.method == "POST":
@@ -3729,7 +3729,7 @@ def employee_note_update(request, note_id):
 
     note = EmployeeNote.find(note_id)
     if not note:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee Note found matching the query.")
         )
 
@@ -3744,7 +3744,7 @@ def employee_note_update(request, note_id):
                 "tabs/update_note.html",
                 {"form": form},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "tabs/update_note.html",
@@ -3765,7 +3765,7 @@ def employee_note_delete(request, note_id):
 
     note = EmployeeNote.find(note_id)
     if not note:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee Note found matching the query.")
         )
 
@@ -3787,7 +3787,7 @@ def add_more_employee_files(request, note_id):
     note = EmployeeNote.objects.filter(id=note_id).first()
     if not note:
         messages.error(request, _("Note not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     employee_id = note.employee_id.id
 
     if request.method == "POST":
@@ -3901,7 +3901,7 @@ def bonus_points_tab(request, pk):
     employee_obj = Employee.objects.filter(id=pk).first()
     if not employee_obj:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     context = {
         "employee": employee_obj,
         **_bonus_points_context(employee_obj, request.GET.get("page")),
@@ -3931,7 +3931,7 @@ def bonus_points_history_tab(request, pk):
     employee_obj = Employee.objects.filter(id=pk).first()
     if not employee_obj:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     context = {
         "employee": employee_obj,
         **_bonus_points_context(employee_obj, request.GET.get("page")),
@@ -3967,7 +3967,7 @@ def add_bonus_points(request, emp_id):
 
     bonus_point = BonusPoint.find(emp_id)
     if not bonus_point:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Bonus Point found matching the query.")
         )
 
@@ -3988,7 +3988,7 @@ def add_bonus_points(request, emp_id):
                     form.cleaned_data["points"]
                 ),
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return render(
         request,
@@ -4015,7 +4015,7 @@ def redeem_points(request, emp_id):
     try:
         employee = Employee.objects.get(id=emp_id)
     except Employee.DoesNotExist:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee found matching the query.")
         )
 
@@ -4057,7 +4057,7 @@ def redeem_points(request, emp_id):
                     description=f"{employee} want to redeem {points} points",
                     allowance_on=date.today(),
                 )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "tabs/forms/redeem_points_form.html",
@@ -4268,7 +4268,7 @@ def encashment_condition_create(request):
                 messages.success(request, _("Settings updated."))
                 if request.headers.get("HX-Request"):
                     return HttpResponse("")
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         else:
             encashment_form = EncashmentGeneralSettingsForm(instance=instance)
 
@@ -4281,7 +4281,7 @@ def encashment_condition_create(request):
     messages.warning(request, _("Payroll app not installed"))
     if request.headers.get("HX-Request"):
         return HttpResponse("", status=400)
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -4397,7 +4397,7 @@ def initial_prefix(request):
             messages.success(request, _("Initial prefix updated successfully."))
             if request.headers.get("HX-Request"):
                 return HttpResponse("")
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         else:
             messages.error(request, _("There was an error updating the prefix."))
     else:
@@ -4405,7 +4405,7 @@ def initial_prefix(request):
 
     if request.headers.get("HX-Request"):
         return HttpResponse("", status=400)
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -4434,7 +4434,7 @@ def employee_get_mail_log(request, pk=None):
     employee = Employee.objects.filter(id=pk).first() if pk else None
     if not employee:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     tracked_mails = EmailLog.objects.filter(to__icontains=employee.email)
     try:
         if employee.employee_work_info and employee.employee_work_info.email:
@@ -4641,7 +4641,7 @@ def employee_tag_update(request, tag_id):
     tag = EmployeeTag.objects.filter(id=tag_id).first()
     if not tag:
         messages.error(request, _("Tag not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     form = EmployeeTagForm(instance=tag)
     if request.method == "POST":
         form = EmployeeTagForm(request.POST, instance=tag)
@@ -4649,7 +4649,7 @@ def employee_tag_update(request, tag_id):
             form.save()
             form = EmployeeTagForm()
             messages.success(request, _("Tag has been updated successfully!"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "base/employee_tag/employee_tag_form.html",

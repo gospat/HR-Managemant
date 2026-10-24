@@ -15,7 +15,7 @@ from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 
 from core.config import logger
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 
 _request_var = ContextVar("request", default=None)
 current_company_id = ContextVar("current_company_id", default=None)
@@ -59,7 +59,7 @@ class ThreadLocalMiddleware:
             # Clear on the way out. Threads are reused -- by a worker for the
             # next request, and by the test runner for the next test -- so a
             # request left here outlives the one it belongs to. Anything that
-            # reads it later (HorillaModel.save() stamps created_by/modified_by
+            # reads it later (HrModel.save() stamps created_by/modified_by
             # from request.user) then attributes work to a stale user. In tests
             # that surfaces as an IntegrityError at teardown: modified_by_id
             # points at a user whose transaction has already rolled back.
@@ -126,12 +126,12 @@ class MissingParameterMiddleware:
 
             logger.error(message)
 
-            return HorillaRedirect(request, message=message)
+            return HrRedirect(request, message=message)
 
         elif isinstance(exception, ObjectDoesNotExist):
             logger.error(f"{exception.__class__.__name__}: {exception}")
 
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message="The requested item could not be found."
             )
 

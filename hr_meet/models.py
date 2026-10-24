@@ -10,11 +10,11 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from google.oauth2.credentials import Credentials
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company
 from employee.models import Employee
 from core.horilla_middlewares import _thread_locals
-from core.models import HorillaModel, NoPermissionModel
+from core.models import HrModel, NoPermissionModel
 from hr_views.cbv_methods import render_template
 from recruitment.models import Candidate
 
@@ -37,7 +37,7 @@ class GoogleCloudCredential(models.Model):
         blank=True,
         verbose_name="Company",
     )
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     @property
     def redirect_uri_list(self):
@@ -130,7 +130,7 @@ class GoogleCloudCredential(models.Model):
         unique_together = ["project_id", "company_id"]
 
 
-class GoogleCredential(HorillaModel, NoPermissionModel):
+class GoogleCredential(HrModel, NoPermissionModel):
     """
     Model representing Google credentials for an employee, including
     token information, client ID, client secret, scopes, and expiration time.
@@ -208,7 +208,7 @@ class GoogleCredential(HorillaModel, NoPermissionModel):
         return f"Google credential - {self.employee_id}"
 
 
-class GoogleMeeting(HorillaModel):
+class GoogleMeeting(HrModel):
     """
     Model representing a Google meeting scheduled by an employee.
     Stores information about the meeting's title, description, start time,

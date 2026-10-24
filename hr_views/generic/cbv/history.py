@@ -10,15 +10,15 @@ from django.views.generic import DetailView
 from simple_history.utils import get_history_model_for_model
 
 from core.horilla_middlewares import _thread_locals
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import hx_request_required, login_required
-from hr_views.generic.cbv.views import HorillaFormView
+from hr_views.generic.cbv.views import HrFormView
 from hr_views.history_methods import get_diff
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(hx_request_required, name="dispatch")
-class HorillaHistoryView(DetailView):
+class HrHistoryView(DetailView):
     """
     GenericHorillaHistoryView
     """
@@ -125,7 +125,7 @@ class HorillaHistoryView(DetailView):
             # fallback raises ImproperlyConfigured (an unhandled 500)
             # rather than a normal response.
             messages.error(request, _("Invalid model parameter format."))
-            return HorillaFormView.HttpResponse()
+            return HrFormView.HttpResponse()
         # Prefer HistoryManager when present; history_set is only the reverse FK.
         if hasattr(self.model, "history") and hasattr(
             getattr(self.model, "history"), "model"
@@ -140,7 +140,7 @@ class HorillaHistoryView(DetailView):
         instance = self.get_queryset().filter(pk=kwargs.get("pk")).first()
         if instance is None or not self.can_view_history(instance):
             messages.info(request, _("You don't have permission."))
-            return HorillaFormView.HttpResponse()
+            return HrFormView.HttpResponse()
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -151,7 +151,7 @@ class HorillaHistoryView(DetailView):
         self.model = self._resolve_model(request)
         if not self.model:
             messages.error(request, _("Missing model parameter."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         opts = self.model._meta
         instance = self.get_queryset().filter(pk=kwargs.get("pk")).first()
         # Reverting rewrites the record, so it takes the change permission,
@@ -161,7 +161,7 @@ class HorillaHistoryView(DetailView):
             f"{opts.app_label}.change_{opts.model_name}"
         ):
             messages.info(request, _("You don't have permission."))
-            return HorillaFormView.HttpResponse()
+            return HrFormView.HttpResponse()
         try:
             history_model = get_history_model_for_model(self.model)
         except Exception:
@@ -174,8 +174,8 @@ class HorillaHistoryView(DetailView):
         # The snapshot must be of this record, not any row of the model.
         if not history or history.instance.pk != instance.pk:
             messages.error(request, _("History record not found."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         history.instance.save()
         messages.success(request, _("History reverted"))
 
-        return HorillaFormView.HttpResponse()
+        return HrFormView.HttpResponse()

@@ -19,7 +19,7 @@ from core.inherit.extension_registry import INJECTION_MAP
 from core.inherit.migration_ops import InjectField
 
 
-class HorillaAutodetector(MigrationAutodetector):
+class HrAutodetector(MigrationAutodetector):
 
     def _generate_added_field(self, app_label, model_name, field_name):
         key = (app_label, model_name.lower(), field_name)

@@ -24,7 +24,7 @@ from django.utils.translation import gettext_lazy as _
 from PIL import Image
 
 from accessibility.accessibility import ACCESSBILITY_FEATURE
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import (
     Company,
     Department,
@@ -39,9 +39,9 @@ from employee.methods.duration_methods import format_time, strtime_seconds
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
-from core.models import HorillaModel, has_xss, upload_path
+from core.models import HrModel, has_xss, upload_path
 from hr_audit.methods import get_diff
-from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_auth.methods import (
     generate_random_password,
     generate_unique_fallback_username,
@@ -140,7 +140,7 @@ class Employee(models.Model):
     is_directly_converted = models.BooleanField(
         default=False, null=True, blank=True, editable=False
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_work_info__company_id"
     )
 
@@ -559,9 +559,9 @@ class Employee(models.Model):
         Renders a clickable icon that opens this employee's activity-history
         feed -- the same feed shown on the profile page's History tab -- in
         the shared #historySidebar, matching the History column every
-        HorillaModel-based list already gets automatically (see
-        HorillaListView's history_tracking handling). Employee doesn't
-        subclass HorillaModel, so it's added explicitly here instead.
+        HrModel-based list already gets automatically (see
+        HrListView's history_tracking handling). Employee doesn't
+        subclass HrModel, so it's added explicitly here instead.
         """
         return render_template(
             path="cbv/employees/history_col.html",
@@ -866,7 +866,7 @@ class Employee(models.Model):
         return self
 
 
-class EmployeeTag(HorillaModel):
+class EmployeeTag(HrModel):
     """
     EmployeeTag Model
     """
@@ -1006,13 +1006,13 @@ class EmployeeWorkInformation(models.Model):
     )
     additional_info = models.JSONField(null=True, blank=True)
     experience = models.FloatField(null=True, blank=True, default=0)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def __str__(self) -> str:
         return f"{self.employee_id} - {self.job_position_id}"
@@ -1099,7 +1099,7 @@ class EmployeeWorkInformation(models.Model):
         return self
 
 
-class EmployeeBankDetails(HorillaModel):
+class EmployeeBankDetails(HrModel):
     """
     EmployeeBankDetails model
     """
@@ -1129,7 +1129,7 @@ class EmployeeBankDetails(HorillaModel):
         max_length=50, null=True, blank=True, verbose_name="Bank Code #2"
     )
     additional_info = models.JSONField(null=True, blank=True)
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -1155,7 +1155,7 @@ class EmployeeBankDetails(HorillaModel):
                 )
 
 
-class NoteFiles(HorillaModel):
+class NoteFiles(HrModel):
     files = models.FileField(upload_to=upload_path, blank=True, null=True)
     objects = models.Manager()
 
@@ -1169,7 +1169,7 @@ class NoteFiles(HorillaModel):
         return name.endswith((".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".svg"))
 
 
-class EmployeeNote(HorillaModel):
+class EmployeeNote(HrModel):
     """
     EmployeeNote model
     """
@@ -1182,7 +1182,7 @@ class EmployeeNote(HorillaModel):
     description = models.TextField(verbose_name=_("Description"), null=True)  # 905
     note_files = models.ManyToManyField(NoteFiles, blank=True)
     updated_by = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -1190,7 +1190,7 @@ class EmployeeNote(HorillaModel):
         return f"{self.description}"
 
 
-class PolicyMultipleFile(HorillaModel):
+class PolicyMultipleFile(HrModel):
     """
     PoliciesMultipleFile model
     """
@@ -1235,7 +1235,7 @@ class PolicyMultipleFile(HorillaModel):
         return "oh-file-icon--default"
 
 
-class Policy(HorillaModel):
+class Policy(HrModel):
     """
     Policies model
     """
@@ -1271,7 +1271,7 @@ class Policy(HorillaModel):
         ),
     )
 
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     class Meta:
         verbose_name = _("Policy")
@@ -1282,7 +1282,7 @@ class Policy(HorillaModel):
         self.attachments.all().delete()
 
 
-class BonusPoint(HorillaModel):
+class BonusPoint(HrModel):
     """
     Model representing bonus points for employees with associated conditions.
     """
@@ -1309,13 +1309,13 @@ class BonusPoint(HorillaModel):
     )
     redeeming_points = models.IntegerField(blank=True, null=True)
     reason = models.TextField(blank=True, null=True, max_length=255)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -1343,7 +1343,7 @@ class BonusPoint(HorillaModel):
             BonusPoint.objects.create(employee_id=instance)
 
 
-class Actiontype(HorillaModel):
+class Actiontype(HrModel):
     """
     Action type model
     """
@@ -1408,7 +1408,7 @@ class Actiontype(HorillaModel):
         return self.id
 
 
-class DisciplinaryAction(HorillaModel):
+class DisciplinaryAction(HrModel):
     """
     Disciplinary model
     """
@@ -1427,7 +1427,7 @@ class DisciplinaryAction(HorillaModel):
     )
     start_date = models.DateField(null=True)
     attachment = models.FileField(upload_to=upload_path, null=True, blank=True)
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def __str__(self) -> str:
         return f"{self.action}"
@@ -1527,17 +1527,17 @@ class DisciplinaryAction(HorillaModel):
         return url
 
 
-class EmployeeGeneralSetting(HorillaModel):
+class EmployeeGeneralSetting(HrModel):
     """
     EmployeeGeneralSetting
     """
 
     badge_id_prefix = models.CharField(max_length=5, default="PEP")
     company_id = models.ForeignKey(Company, null=True, on_delete=models.CASCADE)
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
 
-class ProfileEditFeature(HorillaModel):
+class ProfileEditFeature(HrModel):
     """
     ProfileEditFeature
     """

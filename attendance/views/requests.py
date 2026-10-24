@@ -50,7 +50,7 @@ from core.decorators import (
     manager_can_enter,
     permission_required,
 )
-from core.http.response import HorillaRedirect, with_bulk_result
+from core.http.response import HrRedirect, with_bulk_result
 from notifications.signals import notify
 
 
@@ -171,7 +171,7 @@ def request_new(request):
             if form.is_valid():
                 instance = form.save(commit=False)
                 messages.success(request, _("Attendance request created"))
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         return render(
             request,
             "requests/attendance/request_new_form.html",
@@ -204,9 +204,9 @@ def request_new(request):
             if form.new_instance is not None:
                 form.new_instance.save()
                 messages.success(request, _("New attendance request created"))
-                return HorillaRedirect(request)
+                return HrRedirect(request)
             messages.success(request, _("Update request updated"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "requests/attendance/request_new_form.html",
@@ -314,7 +314,7 @@ def attendance_request_changes(request, attendance_id):
     """
     attendance = Attendance.find(attendance_id)
     if not attendance:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Attendance found matching the query.")
         )
 
@@ -390,7 +390,7 @@ def attendance_request_changes(request, attendance_id):
                     + f"?id={attendance.id}",
                     icon="checkmark-circle-outline",
                 )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "requests/attendance/form.html",
@@ -407,7 +407,7 @@ def validate_attendance_request(request, attendance_id):
     """
     attendance = Attendance.find(attendance_id)
     if not attendance:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Attendance found matching the query.")
         )
 
@@ -462,7 +462,7 @@ def approve_validate_attendance_request(request, attendance_id):
     """
     attendance = Attendance.find(attendance_id)
     if not attendance:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Attendance found matching the query.")
         )
 
@@ -578,7 +578,7 @@ def approve_validate_attendance_request(request, attendance_id):
             </script>
             """
         )
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -638,7 +638,7 @@ def cancel_attendance_request(request, attendance_id):
             </script>
             """
         )
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -866,7 +866,7 @@ def edit_validate_attendance(request, attendance_id):
     """
     attendance = Attendance.find(attendance_id)
     if not attendance:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Attendance found matching the query.")
         )
 

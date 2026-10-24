@@ -9,9 +9,9 @@ from django.forms import ValidationError
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from employee.models import Employee
-from core.models import HorillaModel, upload_path
+from core.models import HrModel, upload_path
 from hr_views.cbv_methods import render_template
 
 STATUS = [
@@ -43,7 +43,7 @@ def document_create(instance):
         document[0].save()
 
 
-class DocumentRequest(HorillaModel):
+class DocumentRequest(HrModel):
     title = models.CharField(max_length=100, verbose_name=_("Title"))
     employee_id = models.ManyToManyField(Employee, verbose_name=_("Employees"))
     format = models.CharField(choices=FORMATS, max_length=10, verbose_name=_("Format"))
@@ -51,7 +51,7 @@ class DocumentRequest(HorillaModel):
         blank=True, null=True, verbose_name=_("Max size (In MB)")
     )
     description = models.TextField(blank=True, null=True, verbose_name=_("Description"))
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -90,7 +90,7 @@ def document_request_m2m_changed(sender, instance, action, **kwargs):
         document_create(instance)
 
 
-class Document(HorillaModel):
+class Document(HrModel):
     title = models.CharField(max_length=250)
     employee_id = models.ForeignKey(
         Employee, on_delete=models.PROTECT, verbose_name=_("Employee")
@@ -115,7 +115,7 @@ class Document(HorillaModel):
     is_digital_asset = models.BooleanField(
         default=False, verbose_name=_("Is Digital Asset")
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 

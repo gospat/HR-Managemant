@@ -13,7 +13,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
 
 from core import settings
-from core.http import HorillaRedirect
+from core.http import HrRedirect
 from core.methods import handle_no_permission
 from core.settings import BASE_DIR, TEMPLATES
 
@@ -347,7 +347,7 @@ def owner_can_enter(
                 employee = getattr(obj, employee_field, None) if obj else None
             except:
                 messages.error(request, _("Sorry, something went wrong!"))
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         can_enter = (
             request.user.employee_get == employee
             or request.user.has_perm(perm)
@@ -390,7 +390,7 @@ def install_required(function):
                         "Please enable the Track Late Arrival & Early Departure from settings"
                     ),
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         selected_company = request.session.get("selected_company")
         if selected_company == "all":
             biometric_company = None
@@ -408,7 +408,7 @@ def install_required(function):
                     "Please activate the biometric attendance feature in the settings menu."
                 ),
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return _function
 

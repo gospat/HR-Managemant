@@ -16,15 +16,15 @@ from django.views import View
 
 from base.methods import closest_numbers
 from core.decorators import manager_can_enter
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.history import HorillaHistoryView
+from hr_views.generic.cbv.history import HrHistoryView
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrCardView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from pms.filters import ActualKeyResultFilter
@@ -44,7 +44,7 @@ class KeyResultViewPage(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="pms.view_keyresult"), name="dispatch")
-class KeyResultNavView(HorillaNavView):
+class KeyResultNavView(HrNavView):
     """
     navbar of the page
     """
@@ -102,7 +102,7 @@ class KeyResultNavView(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="pms.view_keyresult"), name="dispatch")
-class KeyResultsListView(HorillaListView):
+class KeyResultsListView(HrListView):
 
     model = KeyResult
     filter_class = ActualKeyResultFilter
@@ -164,7 +164,7 @@ class KeyResultsListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="pms.view_keyresult"), name="dispatch")
-class KeyResultCardView(HorillaCardView):
+class KeyResultCardView(HrCardView):
     """
     card view of the page
     """
@@ -230,7 +230,7 @@ class KeyResultCardView(HorillaCardView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="pms.view_keyresult"), name="dispatch")
-class KeyResultsDetailedView(HorillaDetailedView):
+class KeyResultsDetailedView(HrDetailedView):
     """
     Detail View
     """
@@ -261,7 +261,7 @@ class KeyResultsDetailedView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="pms.view_keyresult"), name="dispatch")
-class KeyResultFormView(HorillaFormView):
+class KeyResultFormView(HrFormView):
     """
     form view for create and update key results
     """
@@ -340,7 +340,7 @@ class DeleteKeyResults(View):
             # No "next" key result to navigate to (no instances_ids provided,
             # or the deleted one was the last in the list) -- fall back to a
             # safe redirect instead of building a URL with "None" in it.
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
         paths = {
             "genericModalBody": f"/pms/key-result-detail-view/{next_instance}?instance_ids={instances_list}&deleted=true",
@@ -354,7 +354,7 @@ class DeleteKeyResults(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class EKRHistory(HorillaHistoryView):
+class EKRHistory(HrHistoryView):
     """
     EKR History
     """

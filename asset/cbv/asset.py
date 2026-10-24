@@ -6,12 +6,12 @@ from django.utils.translation import gettext_lazy as _
 from asset.filters import AssetFilter
 from asset.models import Asset
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaDetailedView, HorillaListView
+from hr_views.generic.cbv.views import HrDetailedView, HrListView
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_asset"), name="dispatch")
-class AssetListView(HorillaListView):
+class AssetListView(HrListView):
     """
     list view for batch number
     """
@@ -76,7 +76,7 @@ class AssetListView(HorillaListView):
         # Fallback for a deep link into this category's asset list (see
         # asset_category_view) - only applies when the current request
         # didn't already specify its own date filter. Read (not popped)
-        # since HorillaListView calls get_queryset() more than once per
+        # since HrListView calls get_queryset() more than once per
         # request; asset_category_view clears it on the next plain visit
         # instead, so it doesn't linger indefinitely.
         if not self.request.GET.get(
@@ -100,7 +100,7 @@ class AssetListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_asset"), name="dispatch")
-class AssetInformationView(HorillaDetailedView):
+class AssetInformationView(HrDetailedView):
     """
     Detail view of the page
     """

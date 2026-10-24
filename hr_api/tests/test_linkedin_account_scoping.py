@@ -12,7 +12,7 @@ from DEFAULT_AUTHENTICATION_CLASSES.
 
 Note the shape these deliberately avoid: authenticating with
 force_authenticate() bypasses the authentication class, so the ContextVar
-stays unset, HorillaCompanyManager adds no predicate, and the test "proves"
+stays unset, HrCompanyManager adds no predicate, and the test "proves"
 a leak on a path no real caller takes. These log in for a real token.
 
 Two defects that did survive that check:
@@ -67,7 +67,7 @@ class LinkedInAccountScopingTests(TestCase):
         force_authenticate sets request.user directly and skips the
         authentication class -- but TenantScopedJWTAuthentication is exactly
         what calls set_selected_company(), so bypassing it leaves the
-        ContextVar unset and HorillaCompanyManager unscoped. A test using it
+        ContextVar unset and HrCompanyManager unscoped. A test using it
         would prove a path no real caller takes.
         """
         response = self.client.post(

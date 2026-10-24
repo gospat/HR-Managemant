@@ -1,6 +1,6 @@
 {% load i18n %}
 {% comment %}
-    Shared with any HorillaNavView-rendered template that opts into the
+    Shared with any HrNavView-rendered template that opts into the
     modern slide-over filter panel (modern_filter=True) -- currently
     horilla_nav.html and inline_nav.html. Two self-contained pieces:
 
@@ -15,7 +15,7 @@
        mirror that in any other consumer).
     2. The custom filter builder ("+ Add filter", Advanced section) --
        generic across any FilterSet that sets its own custom_filter_fields
-       (see HorillaFilterSet._build_custom_filter_fields for the registry
+       (see HrFilterSet._build_custom_filter_fields for the registry
        shape). Each namespace's field list is read once from its own
        <script type="application/json" id="customFilterFields-{namespace}">
        (json_script, so it's already safely escaped), then every row is
@@ -304,7 +304,7 @@
             return select;
         }
         // Range-style fields moved into this builder (e.g. AttendanceFilters'
-        // Clock In/Out, Pending Hour, OT -- see HorillaFilterSet.
+        // Clock In/Out, Pending Hour, OT -- see HrFilterSet.
         // _build_custom_filter_fields's docstring for the two entry
         // shapes) get a native date/time picker instead of a bare text
         // box, same as the dedicated widget they used to have would have

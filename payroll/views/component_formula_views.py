@@ -358,7 +358,7 @@ def load_component_library(request):
     from django.contrib import messages
     from django.urls import reverse
 
-    from core.http.response import HorillaRedirect
+    from core.http.response import HrRedirect
     from payroll.component_library import load_components
 
     back = reverse(
@@ -366,12 +366,12 @@ def load_component_library(request):
     )
 
     if request.method != "POST":
-        return HorillaRedirect(request, back)
+        return HrRedirect(request, back)
 
     keys = request.POST.getlist("components")
     if not keys:
         messages.error(request, _("Select at least one component to load."))
-        return HorillaRedirect(request, back)
+        return HrRedirect(request, back)
 
     created = load_components(keys)
     if created:
@@ -385,7 +385,7 @@ def load_component_library(request):
         )
     else:
         messages.info(request, _("Those components already exist."))
-    return HorillaRedirect(request, back)
+    return HrRedirect(request, back)
 
 
 @login_required

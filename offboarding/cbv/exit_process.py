@@ -22,22 +22,22 @@ from django.views import View
 
 from base.context_processors import intial_notice_period
 from base.methods import eval_validate
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from core.methods import get_horilla_model_class
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
-from hr_views.generic.cbv.kanban import HorillaKanbanView
+from hr_views.generic.cbv.kanban import HrKanbanView
 from hr_views.generic.cbv.pipeline import Pipeline
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaSectionView,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrSectionView,
+    HrTabView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -150,7 +150,7 @@ def offboarding_pipeline_modal_success_response(
 @method_decorator(
     offboarding_manager_can_enter("offboarding.add_offboardingstage"), name="dispatch"
 )
-class OffboardingStageFormView(HorillaFormView):
+class OffboardingStageFormView(HrFormView):
     """
     form view for create button
     """
@@ -199,7 +199,7 @@ class OffboardingStageFormView(HorillaFormView):
 @method_decorator(
     any_manager_can_enter("offboarding.add_offboardingemployee"), name="dispatch"
 )
-class OffboardingStageAddEmployeeForm(HorillaFormView):
+class OffboardingStageAddEmployeeForm(HrFormView):
     """
     form view for create button
     """
@@ -264,7 +264,7 @@ class OffboardingStageAddEmployeeForm(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("offboarding.add_offboarding"), name="dispatch")
-class OffboardingCreateFormView(HorillaFormView):
+class OffboardingCreateFormView(HrFormView):
     """
     form view for create and edit offboarding
     """
@@ -301,7 +301,7 @@ class OffboardingCreateFormView(HorillaFormView):
     offboarding_or_stage_manager_can_enter("offboarding.add_offboardingtask"),
     name="dispatch",
 )
-class OffboardingTaskFormView(HorillaFormView):
+class OffboardingTaskFormView(HrFormView):
     """
     form view for create and edit offboarding tasks
     """
@@ -354,7 +354,7 @@ class OffboardingTaskFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ExitProcessDetailView(HorillaDetailedView):
+class ExitProcessDetailView(HrDetailedView):
     """
     detail view
     """
@@ -389,7 +389,7 @@ class ExitProcessDetailView(HorillaDetailedView):
     ),
     name="dispatch",
 )
-class OffboardingPipelineView(HorillaSectionView):
+class OffboardingPipelineView(HrSectionView):
     """
     Offboarding Pipeline View
     """
@@ -406,7 +406,7 @@ class OffboardingPipelineView(HorillaSectionView):
     ),
     name="dispatch",
 )
-class OffboardingPipelineNav(HorillaNavView):
+class OffboardingPipelineNav(HrNavView):
     """
     Offboarding Pipeline Navigation View
 
@@ -478,7 +478,7 @@ class OffboardingPipelineNav(HorillaNavView):
         # This Nav has no single filter_instance of its own (all three
         # filtersets above are combined into one panel), so the generic
         # custom_filter_fields/custom_filter_rows context
-        # (HorillaNavView.get_context_data) is never populated -- expose
+        # (HrNavView.get_context_data) is never populated -- expose
         # each filterset's own registry/restore-rows under its own key
         # instead, matching the namespaced builder each accordion uses
         # in the template.
@@ -581,7 +581,7 @@ def offboarding_pipeline_actions(request, offboarding):
     ),
     name="dispatch",
 )
-class PipeLineTabView(HorillaTabView):
+class PipeLineTabView(HrTabView):
     """
     Pipeline Tab View
     """
@@ -658,7 +658,7 @@ class OffboardingPipelineContentShell(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         if not Offboarding.objects.filter(pk=kwargs.get("pk")).exists():
             messages.error(request, _("No Offboarding found matching the query."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -679,7 +679,7 @@ class OffboardingPipelineContentShell(TemplateView):
         context["content_url"] = content_url
         context["offboarding"] = offboarding
         # Always pass the resolved view_type through, not just when ?view=
-        # was explicitly on this shell's own request - HorillaNavView only
+        # was explicitly on this shell's own request - HrNavView only
         # marks a view-type button active (oh-view-btn--active) when its
         # own request carries ?view=, and inline_nav.html's onload script
         # fires an extra full-board resubmit whenever no button is active.
@@ -701,7 +701,7 @@ class OffboardingPipelineContentShell(TemplateView):
     ),
     name="dispatch",
 )
-class OffboardingPipelineTabNav(HorillaNavView):
+class OffboardingPipelineTabNav(HrNavView):
     """
     Per-offboarding-tab Search+Filter for the Exit Process pipeline.
 
@@ -878,7 +878,7 @@ class OffboardingPipelineStage(Pipeline):
 
 
 @method_decorator(login_required, name="dispatch")
-class OffboardingKanbanView(HorillaKanbanView):
+class OffboardingKanbanView(HrKanbanView):
     """
     Offboarding Kanban View
     """
@@ -1052,7 +1052,7 @@ class OffboardingKanbanRequiredTaskCheck(View):
 
 
 @method_decorator(login_required, name="dispatch")
-class OffboardingEmployeeList(HorillaListView):
+class OffboardingEmployeeList(HrListView):
     """
     Offboarding Employee List View
     """
@@ -1273,7 +1273,7 @@ class OffboardingEmployeeList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DashboardTaskListview(HorillaListView):
+class DashboardTaskListview(HrListView):
     """
     For dashboard task status table
     """
@@ -1333,7 +1333,7 @@ class EmployeeTasksPage(TemplateView):
 @method_decorator(
     any_manager_can_enter("offboarding.view_offboarding"), name="dispatch"
 )
-class EmployeeTasksNav(HorillaNavView):
+class EmployeeTasksNav(HrNavView):
     """
     Search and filter bar of the offboarding task list
     """
@@ -1354,7 +1354,7 @@ class EmployeeTasksNav(HorillaNavView):
 @method_decorator(
     any_manager_can_enter("offboarding.view_offboarding"), name="dispatch"
 )
-class EmployeeTasksList(HorillaListView):
+class EmployeeTasksList(HrListView):
     """
     List of offboarding employee tasks
     """
@@ -1394,7 +1394,7 @@ if apps.is_installed("asset"):
     @method_decorator(
         any_manager_can_enter("offboarding.view_offboarding"), name="dispatch"
     )
-    class DashboardNotReturndAsssets(HorillaListView):
+    class DashboardNotReturndAsssets(HrListView):
         """
         For dashboard task status table
         """
@@ -1450,7 +1450,7 @@ if apps.is_installed("pms"):
     @method_decorator(
         any_manager_can_enter("offboarding.view_offboarding"), name="dispatch"
     )
-    class DashboardFeedbackView(HorillaListView):
+    class DashboardFeedbackView(HrListView):
         """
         For dashboard task status table
         """

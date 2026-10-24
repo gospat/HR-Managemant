@@ -49,7 +49,7 @@ def audit_activity(filters: ReportFilters) -> dict:
     )
 
     # auditlog.LogEntry is third-party: it has no company column and no
-    # HorillaCompanyManager, so unlike every other model this metrics layer
+    # HrCompanyManager, so unlike every other model this metrics layer
     # touches it was returning every tenant's activity to anyone who could
     # view the report. Scope through the acting user's employee record.
     #

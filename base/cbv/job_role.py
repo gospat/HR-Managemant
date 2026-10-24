@@ -16,16 +16,16 @@ from base.forms import JobRoleForm
 from base.models import JobPosition, JobRole
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_jobrole"), name="dispatch")
-class JobRoleListView(HorillaListView):
+class JobRoleListView(HrListView):
     """
     List view of the page
     """
@@ -61,7 +61,7 @@ class JobRoleListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_jobrole"), name="dispatch")
-class JobRoleNav(HorillaNavView):
+class JobRoleNav(HrNavView):
     """
     Nav bar
     """
@@ -85,7 +85,7 @@ class JobRoleNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_jobrole"), name="dispatch")
-class JobRoleDetailView(HorillaDetailedView):
+class JobRoleDetailView(HrDetailedView):
     """
     detail view for job role, also registered as the related-object-link
     target for JobRole via detail_view_url_name
@@ -110,7 +110,7 @@ class JobRoleDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.add_jobrole"), name="dispatch")
-class JobRoleFormView(HorillaFormView):
+class JobRoleFormView(HrFormView):
     """
     Create and edit form
     """

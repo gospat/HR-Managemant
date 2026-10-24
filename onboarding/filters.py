@@ -11,7 +11,7 @@ from django_filters import filters
 from base.filters import FilterSet
 from base.models import Company
 from employee.models import Employee
-from core.filters import HorillaFilterSet
+from core.filters import HrFilterSet
 from onboarding.models import (
     CandidateStage,
     CandidateTask,
@@ -23,7 +23,7 @@ from recruitment.filters import RecruitmentFilter as rec_filter
 from recruitment.models import Candidate, Recruitment
 
 
-class CandidateTaskFilter(HorillaFilterSet):
+class CandidateTaskFilter(HrFilterSet):
     """
     Task filter class
     """
@@ -37,7 +37,7 @@ class CandidateTaskFilter(HorillaFilterSet):
         fields = "__all__"
 
 
-class CandidateTaskListFilter(HorillaFilterSet):
+class CandidateTaskListFilter(HrFilterSet):
     """
     Filter for the standalone onboarding task list page
     """
@@ -136,7 +136,7 @@ class RecruitmentFilter(rec_filter):
         return queryset.distinct()
 
 
-class PipelineCandidateFilter(HorillaFilterSet):
+class PipelineCandidateFilter(HrFilterSet):
     """
     FilterSet class for Candidate model
     """
@@ -234,7 +234,7 @@ class PipelineCandidateFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring for
+        (see HrFilterSet._build_custom_filter_fields's docstring for
         the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by recruitment.filters.
         CandidateFilter, which this class mirrors. Exposes the full
@@ -296,7 +296,7 @@ class PipelineCandidateFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as CandidateFilter/PipelineEmployeeFilter.
         """
@@ -422,7 +422,7 @@ class CandidateFilter(FilterSet):
         fields = {}
 
 
-class OnboardingStageFilter(HorillaFilterSet):
+class OnboardingStageFilter(HrFilterSet):
     """
     OnboardingStageFilter
     """
@@ -460,7 +460,7 @@ class OnboardingStageFilter(HorillaFilterSet):
         label="Candidates",
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- Stage Manager opts into an AJAX-searched combobox instead of
     # pre-rendering its whole queryset as <option> tags.
     ajax_fields = {
@@ -530,7 +530,7 @@ class OnboardingStageFilter(HorillaFilterSet):
         return queryset.distinct()
 
 
-class OnboardingCandidateFilter(HorillaFilterSet):
+class OnboardingCandidateFilter(HrFilterSet):
     """
     OnboardingStageFilter
     """
@@ -560,7 +560,7 @@ class OnboardingCandidateFilter(HorillaFilterSet):
         widget=forms.DateInput(attrs={"type": "date"}),
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- Tasks opts into an AJAX-searched combobox instead of
     # pre-rendering its whole queryset as <option> tags.
     ajax_fields = {

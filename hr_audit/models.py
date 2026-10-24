@@ -21,7 +21,7 @@ from simple_history.signals import (  # pre_create_historical_m2m_records,; post
 )
 
 # from employee.models import Employee
-from core.models import HorillaModel
+from core.models import HrModel
 from hr_audit.methods import remove_duplicate_history
 
 logger = logging.getLogger(__name__)
@@ -94,13 +94,13 @@ class HorillaAuditInfo(models.Model):
         abstract = True
 
 
-class HorillaAuditLog(HistoricalRecords):
+class HrAuditLog(HistoricalRecords):
     """
     Model to store additional information for historical records.
     """
 
     # def __init__(self, *args, bases=None, **kwargs):
-    #     super(HorillaAuditLog, self).__init__(*args, **kwargs)
+    #     super(HrAuditLog, self).__init__(*args, **kwargs)
     #     self.is_horilla_audit_log = True
 
     pass
@@ -152,7 +152,7 @@ def post_create_horilla_audit_log(sender, instance, *_args, **kwargs):
                 tag, _created = _AuditTag.objects.get_or_create(title=raw_value)
                 tag_ids.append(tag.pk)
         history_instance.history_tags.set(tag_ids)
-        if isinstance(history_instance, HorillaAuditLog):
+        if isinstance(history_instance, HrAuditLog):
             history_instance.history_title = "Demo Title"
             remove_duplicate_history(instance)
             if instance.skip_history:
@@ -163,7 +163,7 @@ def post_create_horilla_audit_log(sender, instance, *_args, **kwargs):
         logger.debug("audit tags not applied: %s", error)
 
 
-class HistoryTrackingFields(HorillaModel):
+class HistoryTrackingFields(HrModel):
     """
     Per-company work-information history tracking settings.
     When company_id is null, the row is the default used for "All Companies"
@@ -381,12 +381,12 @@ class HistoryTrackingFields(HorillaModel):
         return history_object
 
 
-class AccountBlockUnblock(HorillaModel):
+class AccountBlockUnblock(HrModel):
     is_enabled = models.BooleanField(default=False, null=True, blank=True)
     objects = models.Manager()
 
 
-class AuditModelConfig(HorillaModel):
+class AuditModelConfig(HrModel):
     """
     Stores which models (and optionally which fields) are tracked by the
     django-auditlog registry. When no rows exist, a built-in default set

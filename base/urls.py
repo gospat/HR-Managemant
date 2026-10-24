@@ -409,7 +409,7 @@ urlpatterns = [
     path("login/", views.login_user, name="login"),
     path(
         "forgot-password/",
-        views.HorillaPasswordResetView.as_view(),
+        views.HrPasswordResetView.as_view(),
         name="forgot-password",
     ),
     path(

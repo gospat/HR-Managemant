@@ -18,13 +18,13 @@ from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from attendance.methods.utils import validate_time_format
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company
 from employee.methods.duration_methods import format_time, strtime_seconds
 from employee.models import Employee
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
-from core.models import HorillaModel, upload_path
+from core.models import HrModel, upload_path
 from hr_views.cbv_methods import render_template
 
 # Create your models here.
@@ -49,7 +49,7 @@ def validate_time_format(value):
         raise ValidationError(_("Invalid format")) from error
 
 
-class Project(HorillaModel):
+class Project(HrModel):
     PROJECT_STATUS = [
         ("new", _("New")),
         ("in_progress", _("In Progress")),
@@ -77,7 +77,7 @@ class Project(HorillaModel):
     company_id = models.ForeignKey(
         Company, null=True, editable=False, on_delete=models.PROTECT
     )
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     def get_company_name(self):
         """
@@ -264,7 +264,7 @@ class Project(HorillaModel):
         unique_together = ["title", "company_id"]
 
 
-class ProjectStage(HorillaModel):
+class ProjectStage(HrModel):
     """
     ProjectStage model
     """
@@ -280,7 +280,7 @@ class ProjectStage(HorillaModel):
     )
     sequence = models.IntegerField(null=True, blank=True, editable=False)
     is_end_stage = models.BooleanField(default=False, verbose_name=_("End stage"))
-    objects = HorillaCompanyManager("project__company_id")
+    objects = HrCompanyManager("project__company_id")
 
     def __str__(self) -> str:
         return f"{self.title}"
@@ -331,7 +331,7 @@ class ProjectStage(HorillaModel):
         verbose_name_plural = _("Project Stages")
 
 
-class Task(HorillaModel):
+class Task(HrModel):
     """
     Task model
     """
@@ -379,7 +379,7 @@ class Task(HorillaModel):
     )
     description = models.TextField(verbose_name=_("Description"))
     sequence = models.IntegerField(default=0)
-    objects = HorillaCompanyManager("project__company_id")
+    objects = HrCompanyManager("project__company_id")
 
     def clean(self) -> None:
         if (
@@ -657,7 +657,7 @@ class Task(HorillaModel):
         return f"'{url_with_params}'" + "," + f"'{message}'"
 
 
-class TimeSheet(HorillaModel):
+class TimeSheet(HrModel):
     """
     TimeSheet model
     """
@@ -700,7 +700,7 @@ class TimeSheet(HorillaModel):
         verbose_name=_("Status"),
     )
     description = models.TextField(blank=True, null=True, verbose_name=_("Description"))
-    objects = HorillaCompanyManager("project_id__company_id")
+    objects = HrCompanyManager("project_id__company_id")
 
     def clean(self):
         if self.project_id is None:

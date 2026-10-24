@@ -13,19 +13,19 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company, Department, JobPosition
 from employee.models import BonusPoint, Employee
 from core.horilla_middlewares import _thread_locals
-from core.models import HorillaModel
+from core.models import HrModel
 from hr_audit.methods import get_diff
-from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_views.cbv_methods import render_template
 
 """Objectives and key result section"""
 
 
-class Period(HorillaModel):
+class Period(HrModel):
     """this is a period model used for creating period"""
 
     period_name = models.CharField(
@@ -34,7 +34,7 @@ class Period(HorillaModel):
     start_date = models.DateField()
     end_date = models.DateField()
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     def __str__(self):
         return self.period_name
@@ -75,7 +75,7 @@ class Period(HorillaModel):
         return company_names_string
 
 
-class KeyResult(HorillaModel):
+class KeyResult(HrModel):
     """model used to create key results"""
 
     PROGRESS_CHOICES = (
@@ -100,7 +100,7 @@ class KeyResult(HorillaModel):
     )
     duration = models.IntegerField(null=True, blank=True, help_text=_("In Days"))
     archive = models.BooleanField(default=False)
-    history = HorillaAuditLog(bases=[HorillaAuditInfo])
+    history = HrAuditLog(bases=[HorillaAuditInfo])
     company_id = models.ForeignKey(
         Company,
         null=True,
@@ -108,7 +108,7 @@ class KeyResult(HorillaModel):
         verbose_name=_("Company"),
         on_delete=models.CASCADE,
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -182,7 +182,7 @@ class KeyResult(HorillaModel):
         return url
 
 
-class Objective(HorillaModel):
+class Objective(HrModel):
     """Model used for creating objectives"""
 
     DURATION_UNIT = (
@@ -223,7 +223,7 @@ class Objective(HorillaModel):
     add_assignees = models.BooleanField(default=False)
     is_template = models.BooleanField(default=False)
     archive = models.BooleanField(default=False)
-    history = HorillaAuditLog(bases=[HorillaAuditInfo])
+    history = HrAuditLog(bases=[HorillaAuditInfo])
     company_id = models.ForeignKey(
         Company,
         null=True,
@@ -234,7 +234,7 @@ class Objective(HorillaModel):
     self_employee_progress_update = models.BooleanField(
         default=True, verbose_name=_("Self employee progress update")
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -350,7 +350,7 @@ class Objective(HorillaModel):
         super().save()
 
 
-class EmployeeObjective(HorillaModel):
+class EmployeeObjective(HrModel):
     """this is a EmployObjective model used for creating Employee objectives"""
 
     STATUS_CHOICES = (
@@ -407,9 +407,9 @@ class EmployeeObjective(HorillaModel):
     )
     progress_percentage = models.IntegerField(default=0)
 
-    history = HorillaAuditLog(bases=[HorillaAuditInfo], related_name="history_set")
+    history = HrAuditLog(bases=[HorillaAuditInfo], related_name="history_set")
     archive = models.BooleanField(default=False)
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         """
@@ -578,8 +578,8 @@ class Comment(models.Model):
         blank=True,
     )
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    history = HorillaAuditLog(excluded_fields=["comment"], bases=[HorillaAuditInfo])
-    objects = HorillaCompanyManager(
+    history = HrAuditLog(excluded_fields=["comment"], bases=[HorillaAuditInfo])
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -643,8 +643,8 @@ class EmployeeKeyResult(models.Model):
     )
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
-    history = HorillaAuditLog(bases=[HorillaAuditInfo])
-    objects = HorillaCompanyManager(
+    history = HrAuditLog(bases=[HorillaAuditInfo])
+    objects = HrCompanyManager(
         related_company_field="employee_objective_id__objective_id__company_id"
     )
     progress_percentage = models.IntegerField(default=0)
@@ -910,7 +910,7 @@ class EmployeeKeyResult(models.Model):
 """360degree feedback section"""
 
 
-class QuestionTemplate(HorillaModel):
+class QuestionTemplate(HrModel):
     """question template creation"""
 
     question_template = models.CharField(
@@ -918,7 +918,7 @@ class QuestionTemplate(HorillaModel):
     )
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     def __str__(self):
         return self.question_template
@@ -969,7 +969,7 @@ class QuestionTemplate(HorillaModel):
         return url
 
 
-class Question(HorillaModel):
+class Question(HrModel):
     """question creation"""
 
     QUESTION_TYPE_CHOICE = (
@@ -990,13 +990,13 @@ class Question(HorillaModel):
         null=True,
         blank=True,
     )
-    objects = HorillaCompanyManager("template_id__company_id")
+    objects = HrCompanyManager("template_id__company_id")
 
     def __str__(self):
         return self.question
 
 
-class QuestionOptions(HorillaModel):
+class QuestionOptions(HrModel):
     """options for question"""
 
     question_id = models.ForeignKey(
@@ -1010,10 +1010,10 @@ class QuestionOptions(HorillaModel):
     option_b = models.CharField(max_length=250, null=True, blank=True)
     option_c = models.CharField(max_length=250, null=True, blank=True)
     option_d = models.CharField(max_length=250, null=True, blank=True)
-    objects = HorillaCompanyManager("question_id__template_id__company_id")
+    objects = HrCompanyManager("question_id__template_id__company_id")
 
 
-class Feedback(HorillaModel):
+class Feedback(HrModel):
     """feedback model for creating feedback"""
 
     STATUS_CHOICES = (
@@ -1098,7 +1098,7 @@ class Feedback(HorillaModel):
     cyclic_next_start_date = models.DateField(null=True, blank=True)
     cyclic_next_end_date = models.DateField(null=True, blank=True)
 
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         ordering = ["-id"]
@@ -1402,7 +1402,7 @@ class Answer(models.Model):
     feedback_id = models.ForeignKey(
         Feedback, on_delete=models.PROTECT, related_name="feedback_answer"
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def __str__(self):
         return f"{self.employee_id.employee_first_name} - {self.answer}"
@@ -1427,10 +1427,10 @@ class KeyResultFeedback(models.Model):
         blank=True,
         on_delete=models.DO_NOTHING,
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
 
-class Meetings(HorillaModel):
+class Meetings(HrModel):
     title = models.CharField(max_length=100)
     date = models.DateTimeField(null=True, blank=True)
     employee_id = models.ManyToManyField(
@@ -1465,7 +1465,7 @@ class Meetings(HorillaModel):
         verbose_name=_("Company"),
         on_delete=models.CASCADE,
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         verbose_name = _("Meetings")
@@ -1640,13 +1640,13 @@ class MeetingsAnswer(models.Model):
     meeting_id = models.ForeignKey(
         Meetings, on_delete=models.PROTECT, related_name="meeting_answer"
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def __str__(self):
         return f"{self.employee_id.employee_first_name} - {self.answer}"
 
 
-class EmployeeBonusPoint(HorillaModel):
+class EmployeeBonusPoint(HrModel):
     employee_id = models.ForeignKey(
         Employee,
         on_delete=models.DO_NOTHING,
@@ -1665,7 +1665,7 @@ class EmployeeBonusPoint(HorillaModel):
         on_delete=models.CASCADE,
         related_name="employeebonuspoint_set",
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def __str__(self):
         return f"{self.employee_id.employee_first_name} - {self.bonus_point}"
@@ -1761,7 +1761,7 @@ class BonusPointSetting(models.Model):
         verbose_name=_("Company"),
         on_delete=models.CASCADE,
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def get_model_display(self):
         """

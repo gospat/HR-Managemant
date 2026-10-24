@@ -1,7 +1,7 @@
 """
 core/inherit/view_registry.py
 
-Registry for the two _inherit modes supported by HorillaViewInheritMixin.
+Registry for the two _inherit modes supported by HrViewInheritMixin.
 
 Mode 1 — _inherit = True  (direct-subclass replacement)
   register_replacement() patches parent_cls.__new__ so every instantiation
@@ -41,7 +41,7 @@ def register_view(key: str, view_cls) -> None:
 def register_replacement(parent_cls, ext_cls) -> None:
     """
     Mode-1 registration: ext_cls replaces parent_cls via __new__ patching.
-    Called immediately when the extension class is defined (via HorillaViewInheritMixin).
+    Called immediately when the extension class is defined (via HrViewInheritMixin).
     """
     _patch_new(parent_cls, ext_cls)
 

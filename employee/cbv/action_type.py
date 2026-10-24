@@ -16,12 +16,12 @@ from employee.filters import ActionTypeFilter
 from employee.forms import ActiontypeForm
 from employee.models import Actiontype
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaListView, HorillaNavView
+from hr_views.generic.cbv.views import HrListView, HrNavView
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="employee.view_actiontype"), name="dispatch")
-class ActionTypeListView(HorillaListView):
+class ActionTypeListView(HrListView):
     """
     List view of the Action Type page.
     """
@@ -84,7 +84,7 @@ class ActionTypeListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="employee.view_actiontype"), name="dispatch")
-class ActionTypeNav(HorillaNavView):
+class ActionTypeNav(HrNavView):
     """
     Navigation bar for Action Type.
     """

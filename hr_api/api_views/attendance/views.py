@@ -35,7 +35,7 @@ from base.methods import generate_pdf, sanitize_mail_template_body
 from base.models import HorillaMailTemplate
 from base.views import is_reportingmanger
 from employee.filters import EmployeeFilter
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 
 from ...api_decorators.base.decorators import (
     approver_permission_required,
@@ -316,7 +316,7 @@ class AttendanceView(APIView):
                 request, url, field_name, attendances_filter_queryset
             )
         # pagination workflow
-        paginater = HorillaPageNumberPagination()
+        paginater = HrPageNumberPagination()
         page = paginater.paginate_queryset(attendances_filter_queryset, request)
         serializer = AttendanceSerializer(page, many=True)
         return paginater.get_paginated_response(serializer.data)
@@ -521,7 +521,7 @@ class AttendanceRequestView(APIView):
             url = request.build_absolute_uri()
             return groupby_queryset(request, url, field_name, request_filtered_queryset)
 
-        pagenation = HorillaPageNumberPagination()
+        pagenation = HrPageNumberPagination()
         page = pagenation.paginate_queryset(request_filtered_queryset, request)
         serializer = self.serializer_class(page, many=True)
         return pagenation.get_paginated_response(serializer.data)
@@ -739,7 +739,7 @@ class AttendanceOverTimeView(APIView):
             url = request.build_absolute_uri()
             return groupby_queryset(request, url, field_name, queryset)
 
-        pagenation = HorillaPageNumberPagination()
+        pagenation = HrPageNumberPagination()
         page = pagenation.paginate_queryset(queryset, request)
         serializer = AttendanceOverTimeSerializer(page, many=True)
         return pagenation.get_paginated_response(serializer.data)
@@ -916,7 +916,7 @@ class OfflineEmployeesListView(APIView):
         # Get leave status for the filtered employees
         leave_status = self.get_leave_status(filtered_qs)
 
-        pagenation = HorillaPageNumberPagination()
+        pagenation = HrPageNumberPagination()
         page = pagenation.paginate_queryset(leave_status, request)
         return pagenation.get_paginated_response(page)
 
@@ -1055,7 +1055,7 @@ class MailTemplateView(APIView):
         # pre-existing test_write_permissions coverage already expects.
         if not request.user.has_perm("base.view_horillamailtemplate"):
             return Response({"error": _("No permission")}, status=403)
-        # HorillaMailTemplate.objects is a HorillaCompanyManager, so the
+        # HorillaMailTemplate.objects is a HrCompanyManager, so the
         # queryset stays company-scoped exactly as the web list is.
         instances = HorillaMailTemplate.objects.all()
         serializer = MailTemplateSerializer(instances, many=True)
@@ -1182,7 +1182,7 @@ class UserAttendanceView(APIView):
             employee_id=employee_id
         ).order_by("-attendance_date")
 
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         paginator.page_size = 20
         page = paginator.paginate_queryset(attendance_queryset, request)
 

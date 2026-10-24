@@ -29,7 +29,7 @@ from base.models import CompanyLeaves, EmployeeShift, Holidays, Roster, RosterPu
 from employee.models import Employee
 from core.decorators import hx_request_required
 from hr_views.cbv_methods import login_required, paginator_qry
-from hr_views.generic.cbv.views import HorillaCardView, HorillaNavView
+from hr_views.generic.cbv.views import HrCardView, HrNavView
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -64,7 +64,7 @@ class RosterHomeView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RosterNavView(HorillaNavView):
+class RosterNavView(HrNavView):
     nav_title = _("Roster Planner")
     template_name = "generic/inline_nav.html"
     search_url = reverse_lazy("roster-grid")
@@ -120,7 +120,7 @@ class RosterNavView(HorillaNavView):
         # blank on first load (apply_first_filter submits the form empty)
         # while the grid behind them is in fact showing this week's data.
         # Set directly on the widget rather than passed as the form's
-        # `initial=` (which HorillaNavView's own filterset construction
+        # `initial=` (which HrNavView's own filterset construction
         # doesn't expose a hook for), and only when nothing was actually
         # submitted -- an explicitly empty From/To after the user clears
         # it themselves must stay empty, not silently snap back to
@@ -138,7 +138,7 @@ class RosterNavView(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RosterGridView(HorillaCardView):
+class RosterGridView(HrCardView):
     model = Roster
     filter_class = RosterFilter
     template_name = "base/roster/roster_grid.html"

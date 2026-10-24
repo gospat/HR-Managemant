@@ -29,7 +29,7 @@ from employee.cbv.accessibility import allocation_accessibility
 from employee.models import Employee, EmployeeBankDetails, EmployeeWorkInformation
 from employee.models import models as django_models
 from core.horilla_middlewares import _thread_locals
-from core.http import HorillaRedirect
+from core.http import HrRedirect
 from core.methods import handle_no_permission
 from hr_views.cbv_methods import (
     allocation_manager_can_enter,
@@ -38,9 +38,9 @@ from hr_views.cbv_methods import (
     render_template,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
     TemplateView,
 )
 
@@ -87,7 +87,7 @@ class _KeepInstanceIdMixin:
 
 
 @method_decorator(login_required, name="dispatch")
-class AllocationView(HorillaDetailedView):
+class AllocationView(HrDetailedView):
     """
     AllocationView
     """
@@ -109,7 +109,7 @@ class AllocationView(HorillaDetailedView):
             candidate = Candidate.objects.filter(pk=pk).first()
             if not candidate:
                 messages.error(request, _("Record not found."))
-                return HorillaFormView.HttpResponse()
+                return HrFormView.HttpResponse()
             if not allocation_accessibility(request, candidate):
                 return handle_no_permission(request)
             # set candidate to request for accessing inside work info signal
@@ -140,12 +140,12 @@ class AllocationView(HorillaDetailedView):
                 messages.info(
                     request, _("Allocation feature not possible to this candidate")
                 )
-                return HorillaFormView.HttpResponse()
+                return HrFormView.HttpResponse()
         else:
             instance = Employee.objects.filter(pk=pk).first()
             if not instance:
                 messages.error(request, _("Employee not found."))
-                return HorillaFormView.HttpResponse()
+                return HrFormView.HttpResponse()
             if not allocation_accessibility(request, instance):
                 return handle_no_permission(request)
 
@@ -300,7 +300,7 @@ class BankInfo(ModelForm):
 
 
 @method_decorator(login_required, name="dispatch")
-class PersonalFormView(HorillaFormView):
+class PersonalFormView(HrFormView):
     """
     PersonalFormView
     """
@@ -353,7 +353,7 @@ class PersonalFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(allocation_manager_can_enter(), name="dispatch")
-class WorkFormView(HorillaFormView):
+class WorkFormView(HrFormView):
     """
     WorkFormView
     """
@@ -419,7 +419,7 @@ def work_info_post_save(sender, instance, created, **kwargs):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(allocation_manager_can_enter(), name="dispatch")
-class BankFormView(HorillaFormView):
+class BankFormView(HrFormView):
     """
     WorkFormView
     """
@@ -672,7 +672,7 @@ if app_installed("asset"):
 
     @method_decorator(login_required, name="dispatch")
     @method_decorator(allocation_manager_can_enter(), name="dispatch")
-    class AssetAllocationList(_KeepInstanceIdMixin, HorillaListView):
+    class AssetAllocationList(_KeepInstanceIdMixin, HrListView):
         """
         AssetAllocationLists
         """
@@ -837,7 +837,7 @@ if app_installed("asset"):
 
     @method_decorator(login_required, name="dispatch")
     @method_decorator(allocation_manager_can_enter(), name="dispatch")
-    class AssetCategoryAllocationList(_KeepInstanceIdMixin, HorillaListView):
+    class AssetCategoryAllocationList(_KeepInstanceIdMixin, HrListView):
         """
         Lists asset categories for the employee and lets managers raise an
         AssetRequest for the selected categories instead of allocating an
@@ -1034,7 +1034,7 @@ class GroupAssignView(TemplateView):
         employee_id = request.GET.get("employee")
         employee = Employee.objects.filter(id=employee_id).first()
         if not employee:
-            return HorillaRedirect(request, message=_("Employee not found"))
+            return HrRedirect(request, message=_("Employee not found"))
         groups = employee.employee_user_id.groups.all()
         form = AddToUserGroupForm(
             initial={
@@ -1356,12 +1356,12 @@ class Summary(TemplateView):
         instance_id = request.GET.get("instance_id")
 
         if not instance_id:
-            return HorillaRedirect(request, message=_("Employee ID missing."))
+            return HrRedirect(request, message=_("Employee ID missing."))
 
         try:
             Employee.objects.get(pk=instance_id)
         except Employee.DoesNotExist:
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message=_("No Employee found matching the query.")
             )
 

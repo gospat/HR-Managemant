@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import hx_request_required, login_required
-from hr_views.generic.cbv.views import HorillaTabView, TemplateView
+from hr_views.generic.cbv.views import HrTabView, TemplateView
 from payroll.cbv.allowances import AllowanceListView
 from payroll.cbv.deduction import DeductionListView
 from payroll.cbv.payslip_automation import PaySlipAutomationListView
@@ -18,7 +18,7 @@ from payroll.cbv.salary_structure import SalaryStructureListView
 
 
 def _payroll_settings_tab_badge_count(request, view_cls):
-    """Same queryset rules as the tab's HorillaListView (filters, permissions)."""
+    """Same queryset rules as the tab's HrListView (filters, permissions)."""
     view = view_cls()
     view.request = request
     view.args = ()
@@ -37,7 +37,7 @@ class PayrollSettingsView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class PayrollSettingsTabView(HorillaTabView):
+class PayrollSettingsTabView(HrTabView):
     """
     tab view for payroll settings, shows payslip auto generation as a tab
     """

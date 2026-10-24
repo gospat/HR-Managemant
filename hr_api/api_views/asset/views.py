@@ -13,7 +13,7 @@ from asset.filters import AssetFilter
 from asset.models import *
 from base.methods import filtersubordinates
 from hr_api.api_methods.base.methods import reject_reason_from
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 
 from ...api_decorators.base.decorators import permission_required
 from ...api_filters.asset.filters import AssetCategoryFilter
@@ -37,7 +37,7 @@ class AssetAPIView(APIView):
             asset = self.get_asset(pk)
             serializer = AssetSerializer(asset)
             return Response(serializer.data)
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         queryset = Asset.objects.all()
         filterset = self.filterset_class(request.GET, queryset=queryset)
         page = paginator.paginate_queryset(filterset.qs, request)
@@ -85,7 +85,7 @@ class AssetCategoryAPIView(APIView):
             asset_category = self.get_asset_category(pk)
             serializer = AssetCategorySerializer(asset_category)
             return Response(serializer.data)
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         queryset = AssetCategory.objects.all()
         filterset = self.filterset_class(request.GET, queryset=queryset)
         page = paginator.paginate_queryset(filterset.qs, request)
@@ -130,7 +130,7 @@ class AssetLotAPIView(APIView):
             asset_lot = self.get_asset_lot(pk)
             serializer = AssetLotSerializer(asset_lot)
             return Response(serializer.data)
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         assets = AssetLot.objects.all()
         page = paginator.paginate_queryset(assets, request)
         serializer = AssetLotSerializer(page, many=True)
@@ -174,7 +174,7 @@ class AssetAllocationAPIView(APIView):
             asset_assignment = self.get_asset_assignment(pk)
             serializer = AssetAssignmentGetSerializer(asset_assignment)
             return Response(serializer.data)
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         assets = AssetAssignment.objects.all()
         page = paginator.paginate_queryset(assets, request)
         serializer = AssetAssignmentGetSerializer(page, many=True)
@@ -230,7 +230,7 @@ class AssetRequestAPIView(APIView):
                 return Response({"error": _("AssetRequest not found")}, status=404)
             serializer = AssetRequestGetSerializer(asset_request)
             return Response(serializer.data)
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         assets = filtersubordinates(
             request,
             AssetRequest.objects.all(),

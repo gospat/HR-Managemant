@@ -2,8 +2,8 @@
 models.py
 =========
 
-This module defines the abstract base model `HorillaModel` for the Horilla HRMS project.
-The `HorillaModel` provides common fields and functionalities for other models within
+This module defines the abstract base model `HrModel` for the Horilla HRMS project.
+The `HrModel` provides common fields and functionalities for other models within
 the application, such as tracking creation and modification timestamps and user
 information, audit logging, and active/inactive status management.
 """
@@ -22,7 +22,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from core.horilla_middlewares import _thread_locals
-from core.inherit.model_inherit import EXTENSION_REGISTRY, HorillaModelBase
+from core.inherit.model_inherit import EXTENSION_REGISTRY, HrModelBase
 from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import render_template
 
@@ -104,7 +104,7 @@ def upload_path(instance, filename):
     return f"{app_label}/{model_name}/{unique_name}"
 
 
-class HorillaModel(models.Model, metaclass=HorillaModelBase):
+class HrModel(models.Model, metaclass=HrModelBase):
     """
     An abstract base model that includes common fields and functionalities
     for models within the Horilla application.
@@ -147,7 +147,7 @@ class HorillaModel(models.Model, metaclass=HorillaModelBase):
 
     class Meta:
         """
-        Meta class for HorillaModel
+        Meta class for HrModel
         """
 
         abstract = True
@@ -192,7 +192,7 @@ class HorillaModel(models.Model, metaclass=HorillaModelBase):
             if request and not request.user.is_anonymous:
                 self.modified_by = user
 
-        super(HorillaModel, self).save(*args, **kwargs)
+        super(HrModel, self).save(*args, **kwargs)
 
     def clean_fields(self, exclude=None):
         errors = {}

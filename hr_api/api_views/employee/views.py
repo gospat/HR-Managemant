@@ -30,7 +30,7 @@ from employee.models import (
 from employee.views import can_access_document, work_info_export, work_info_import
 from core.decorators import check_manager
 from hr_api.api_decorators.base.decorators import permission_required
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 from hr_api.api_methods.employee.methods import get_next_badge_id
 from hr_documents.models import Document, DocumentRequest
 from notifications.signals import notify
@@ -141,7 +141,7 @@ class EmployeeAPIView(APIView):
             {"error": _("Permission denied")}, status=status.HTTP_403_FORBIDDEN
         )
 
-        # paginator = HorillaPageNumberPagination()
+        # paginator = HrPageNumberPagination()
         # if request.user.has_perm('employee.view_employee'):
         #     employees_queryset = Employee.objects.all()
         # elif request.user.employee_get.get_subordinate_employees():
@@ -334,7 +334,7 @@ class EmployeeListAPIView(APIView):
             )
 
         # Paginate
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(employees_queryset, request)
 
         serializer = EmployeeListSerializer(page, many=True)
@@ -476,7 +476,7 @@ class EmployeeWorkInformationAPIView(APIView):
             "employee.view_employeeworkinformation",
             EmployeeWorkInformation.objects.all(),
         )
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(queryset, request)
         serializer = EmployeeWorkInformationSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -605,7 +605,7 @@ class ActiontypeView(APIView):
             serializer = self.serializer_class(action_type)
             return Response(serializer.data, status=200)
         action_types = Actiontype.objects.all()
-        paginater = HorillaPageNumberPagination()
+        paginater = HrPageNumberPagination()
         page = paginater.paginate_queryset(action_types, request)
         serializer = self.serializer_class(page, many=True)
         return paginater.get_paginated_response(serializer.data)
@@ -710,7 +710,7 @@ class DisciplinaryActionAPIView(APIView):
             else:
                 queryset = DisciplinaryAction.objects.filter(employee_id=employee)
 
-            paginator = HorillaPageNumberPagination()
+            paginator = HrPageNumberPagination()
             disciplinary_actions = queryset
             disciplinary_action_filter_queryset = self.filterset_class(
                 request.GET, queryset=disciplinary_actions
@@ -791,7 +791,7 @@ class PolicyAPIView(APIView):
             else:
                 policies = Policy.objects.all()
             serializer = PolicySerializer(policies, many=True)
-            paginator = HorillaPageNumberPagination()
+            paginator = HrPageNumberPagination()
             page = paginator.paginate_queryset(policies, request)
             serializer = PolicySerializer(page, many=True)
             return paginator.get_paginated_response(serializer.data)
@@ -879,7 +879,7 @@ class DocumentRequestAPIView(APIView):
                 document_requests = DocumentRequest.objects.filter(
                     employee_id=request.user.employee_get
                 )
-            pagination = HorillaPageNumberPagination()
+            pagination = HrPageNumberPagination()
             page = pagination.paginate_queryset(document_requests, request)
             serializer = DocumentRequestSerializer(page, many=True)
             return pagination.get_paginated_response(serializer.data)
@@ -975,7 +975,7 @@ class DocumentAPIView(APIView):
             document_requests_filtered = self.filterset_class(
                 request.GET, queryset=documents
             ).qs
-            paginator = HorillaPageNumberPagination()
+            paginator = HrPageNumberPagination()
             page = paginator.paginate_queryset(document_requests_filtered, request)
             serializer = DocumentSerializer(page, many=True)
             return paginator.get_paginated_response(serializer.data)
@@ -1125,7 +1125,7 @@ class EmployeeSelectorView(APIView):
         if request.user.has_perm("employee.view_employee"):
             employees = Employee.objects.all()
 
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(employees, request)
         serializer = EmployeeSelectorSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)

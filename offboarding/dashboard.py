@@ -148,7 +148,7 @@ def offboarding_pipeline(request):
 
     from offboarding.models import OffboardingEmployee
 
-    # HorillaCompanyManager.get_queryset() applies .distinct() whenever the
+    # HrCompanyManager.get_queryset() applies .distinct() whenever the
     # company OR-filter is active, which silently corrupts any aggregation
     # built on top of it. This isn't limited to .values().annotate(Count())
     # -- a *plain* .values_list("stage_id__type", flat=True) is just as

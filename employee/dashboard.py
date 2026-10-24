@@ -3,7 +3,7 @@ Employee dashboard views — KPI summary + ApexCharts.
 
 Request KPIs mirror the querysets of the Requests page tabs (shift, shift
 allocation, work type and document) so each count equals what its click-through
-list shows. Company scoping comes from the models' HorillaCompanyManager, which
+list shows. Company scoping comes from the models' HrCompanyManager, which
 already resolves the session's selected company (including "All Company").
 """
 

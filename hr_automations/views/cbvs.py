@@ -33,7 +33,7 @@ REFRESH_ALERT_SCRIPT = (
 @method_decorator(
     permission_required("horilla_automations.view_mailautomation"), name="dispatch"
 )
-class AutomationSectionView(views.HorillaSectionView):
+class AutomationSectionView(views.HrSectionView):
     """
     Legacy standalone Mail Automations page. Migrated into Settings > Mail;
     redirect direct visits to the settings page.
@@ -57,7 +57,7 @@ class AutomationSectionView(views.HorillaSectionView):
 @method_decorator(
     permission_required("horilla_automations.view_mailautomation"), name="dispatch"
 )
-class AutomationNavView(views.HorillaNavView):
+class AutomationNavView(views.HrNavView):
     """
     AutomationNavView
     """
@@ -108,7 +108,7 @@ class AutomationNavView(views.HorillaNavView):
 @method_decorator(
     permission_required("horilla_automations.change_mailautomation"), name="dispatch"
 )
-class AutomationFormView(views.HorillaFormView):
+class AutomationFormView(views.HrFormView):
     """
     AutomationFormView
     """
@@ -144,7 +144,7 @@ class AutomationFormView(views.HorillaFormView):
 @method_decorator(
     permission_required("horilla_automations.view_mailautomation"), name="dispatch"
 )
-class AutomationListView(views.HorillaListView):
+class AutomationListView(views.HrListView):
     """
     AutomationListView
     """
@@ -198,7 +198,7 @@ class AutomationListView(views.HorillaListView):
 @method_decorator(
     permission_required("horilla_automations.view_mailautomation"), name="dispatch"
 )
-class AutomationDetailedView(views.HorillaDetailedView):
+class AutomationDetailedView(views.HrDetailedView):
     """
     AutomationDetailedView
     """

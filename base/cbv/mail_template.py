@@ -14,14 +14,14 @@ from django.utils.translation import gettext_lazy as _
 
 from base.forms import MailTemplateForm
 from base.models import HorillaMailTemplate
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaFormView, HorillaNavView
+from hr_views.generic.cbv.views import HrFormView, HrNavView
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("base.add_horillamailtemplate"), name="dispatch")
-class MailTemplateFormView(HorillaFormView):
+class MailTemplateFormView(HrFormView):
     """
     form view for create and edit mail template
     """
@@ -48,13 +48,13 @@ class MailTemplateFormView(HorillaFormView):
             form.save()
 
             messages.success(self.request, message)
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
         return super().form_valid(form)
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("base.add_horillamailtemplate"), name="dispatch")
-class MailTemplateDuplicateForm(HorillaFormView):
+class MailTemplateDuplicateForm(HrFormView):
     """
     from view for duplicate mail templates
     """
@@ -98,13 +98,13 @@ class MailTemplateDuplicateForm(HorillaFormView):
             message = _("Template Added")
             messages.success(self.request, message)
             form.save()
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
         return self.form_invalid(form)
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("base.view_horillamailtemplate"), name="dispatch")
-class MailTemplateNavView(HorillaNavView):
+class MailTemplateNavView(HrNavView):
     """
     Mail Template Nav View
     """

@@ -17,16 +17,16 @@ from base.decorators import manager_can_enter
 from base.methods import is_reportingmanager
 from employee.cbv.employee_profile import EmployeeProfileView
 from employee.models import Employee
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -46,7 +46,7 @@ class FeedbackViewPage(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class FeedbackListView(HorillaListView):
+class FeedbackListView(HrListView):
     """
     list view
     """
@@ -189,7 +189,7 @@ class FeedbackListView(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class FeedbackGenericTabView(HorillaTabView):
+class FeedbackGenericTabView(HrTabView):
     """
     tab view of the page
     """
@@ -367,7 +367,7 @@ class AllFeedbackTab(FeedbackListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AnonymousFeedbackTab(HorillaListView):
+class AnonymousFeedbackTab(HrListView):
     """
     anonymous feedback tab
     """
@@ -431,7 +431,7 @@ class AnonymousFeedbackTab(HorillaListView):
                 """
 
 
-class _FeedbackTabNavBase(HorillaNavView):
+class _FeedbackTabNavBase(HrNavView):
     """
     Shared Search/Filter/Create/Actions wiring for each 360 Feedback tab's
     own, independent Nav - only search_url/search_swap_target differ per
@@ -565,25 +565,25 @@ class AnonymousFeedbackNav(_FeedbackTabNavBase):
         """
 
 
-class SelfFeedbackTabShell(HorillaTabContentShell):
+class SelfFeedbackTabShell(HrTabContentShell):
     nav_url_name = "self-feedback-nav"
     container_id = "selfFeedbackListContainer"
     tabs_root_id = "feedbackTabs"
 
 
-class RequestedFeedbackTabShell(HorillaTabContentShell):
+class RequestedFeedbackTabShell(HrTabContentShell):
     nav_url_name = "requested-feedback-nav"
     container_id = "requestedFeedbackListContainer"
     tabs_root_id = "feedbackTabs"
 
 
-class AllFeedbackTabShell(HorillaTabContentShell):
+class AllFeedbackTabShell(HrTabContentShell):
     nav_url_name = "all-feedback-nav"
     container_id = "allFeedbackListContainer"
     tabs_root_id = "feedbackTabs"
 
 
-class AnonymousFeedbackTabShell(HorillaTabContentShell):
+class AnonymousFeedbackTabShell(HrTabContentShell):
     nav_url_name = "anonymous-feedback-nav"
     container_id = "anonymousFeedbackListContainer"
     tabs_root_id = "feedbackTabs"
@@ -603,7 +603,7 @@ class AnonymousFeedbackTabShell(HorillaTabContentShell):
 
 
 @method_decorator(login_required, name="dispatch")
-class AddAnonymousFeedbackForm(HorillaFormView):
+class AddAnonymousFeedbackForm(HrFormView):
     """
     form view
     """
@@ -652,7 +652,7 @@ class AddAnonymousFeedbackForm(HorillaFormView):
                     )
             feedback.save()
             messages.success(self.request, message)
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
         return super().form_valid(form)
 
 
@@ -669,7 +669,7 @@ class PerformanceTab(SelfFeedbacktab):
         super().__init__(**kwargs)
         pk = self.request.resolver_match.kwargs.get("pk")
         self.search_url = reverse("individual-performance-tab-list", kwargs={"pk": pk})
-        # HorillaListView defaults selected_instances_key_id to the shared
+        # HrListView defaults selected_instances_key_id to the shared
         # "selectedInstances" bucket, so a bulk-select made on any other list
         # using that same default (most don't override it) leaked into this
         # tab's "Select"/"Unselect" count. Scope it to this tab instead.
@@ -699,7 +699,7 @@ class PerformanceTab(SelfFeedbacktab):
 
 
 @method_decorator(login_required, name="dispatch")
-class PerformanceTabView(HorillaTabView):
+class PerformanceTabView(HrTabView):
     """
     Performance tab in employee profile, holding the Feedback and Key Results sub-tabs
     """
@@ -741,7 +741,7 @@ EmployeeProfileView.add_tab(
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.change_feedback"), name="dispatch")
-class FeedbackUpdateFormView(HorillaFormView):
+class FeedbackUpdateFormView(HrFormView):
     """
     Form View for update feedback
     """
@@ -796,7 +796,7 @@ class FeedbackUpdateFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AnounyFeedbackDetailView(HorillaDetailedView):
+class AnounyFeedbackDetailView(HrDetailedView):
 
     model = AnonymousFeedback
 

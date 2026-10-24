@@ -29,7 +29,7 @@ from base.filters import FilterSet
 from base.models import Company, Department, EmployeeShift, JobPosition, WorkType
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from core.filters import HorillaFilterSet, filter_by_name, filter_name_or_badge_terms
+from core.filters import HrFilterSet, filter_by_name, filter_name_or_badge_terms
 
 
 class DurationInSecondsFilter(django_filters.CharFilter):
@@ -56,7 +56,7 @@ class DurationInSecondsFilter(django_filters.CharFilter):
         return qs
 
 
-class AttendanceOverTimeFilter(HorillaFilterSet):
+class AttendanceOverTimeFilter(HrFilterSet):
     """
     Filter set class for AttendanceOverTime model
 
@@ -136,7 +136,7 @@ class AttendanceOverTimeFilter(HorillaFilterSet):
         ] = _("Work Location")
 
 
-class LateComeEarlyOutFilter(HorillaFilterSet):
+class LateComeEarlyOutFilter(HrFilterSet):
     """
     LateComeEarlyOutFilter class
     """
@@ -174,7 +174,7 @@ class LateComeEarlyOutFilter(HorillaFilterSet):
         widget=forms.RadioSelect,
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- mirrors
     # AttendanceFilters.ajax_fields, keys prefixed "late-" so they don't
     # collide with the other Attendance FilterSets' ajax-choices keys.
@@ -387,7 +387,7 @@ class LateComeEarlyOutFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters.filter_queryset.
         """
@@ -419,7 +419,7 @@ class LateComeEarlyOutFilter(HorillaFilterSet):
         )
 
 
-class AttendanceActivityFilter(HorillaFilterSet):
+class AttendanceActivityFilter(HrFilterSet):
     """
     Filter set class for AttendanceActivity model
 
@@ -477,7 +477,7 @@ class AttendanceActivityFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- mirrors
     # AttendanceFilters.ajax_fields field-for-field (same employee_id__
     # employee_work_info__* paths, since AttendanceActivity also has an
@@ -618,7 +618,7 @@ class AttendanceActivityFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters.filter_queryset.
         """
@@ -654,7 +654,7 @@ class AttendanceActivityFilter(HorillaFilterSet):
         )
 
 
-class AttendanceFilters(HorillaFilterSet):
+class AttendanceFilters(HrFilterSet):
     """
     Filter set class for Attendance model
 
@@ -686,7 +686,7 @@ class AttendanceFilters(HorillaFilterSet):
     # the leading empty choice is what lets the field clear back to
     # unfiltered (a plain Yes/No ChoiceField, or the auto-generated
     # BooleanFilter/NullBooleanSelect Meta.fields would otherwise produce
-    # for these two, can't express that -- see HorillaNavView.
+    # for these two, can't express that -- see HrNavView.
     # _get_applied_filter_count's own comment on why "unknown" being non-
     # empty matters for the filter-count badge).
     attendance_validated = django_filters.ChoiceFilter(
@@ -740,7 +740,7 @@ class AttendanceFilters(HorillaFilterSet):
         widget=forms.RadioSelect,
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- every
     # model/queryset-backed field in the modern filter panel opts in here
     # instead of pre-rendering its whole queryset as <option> tags.
@@ -924,7 +924,7 @@ class AttendanceFilters(HorillaFilterSet):
         Is) rather than a separate fixed-direction entry per side --
         attendance_clock_in/attendance_clock_out are plain TimeField
         columns, so any of gte/lte/gt/lt/exact is just a normal ORM
-        lookup (see HorillaFilterSet._build_custom_filter_fields's
+        lookup (see HrFilterSet._build_custom_filter_fields's
         docstring), no per-direction Filter object needed.
 
         Pending Hour and OT use the "declared-filter" shape instead
@@ -985,7 +985,7 @@ class AttendanceFilters(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically (see its own docstring) -- this is
         the minimal "call it at the end" hookup, same as EmployeeFilter's
         own filter_queryset does alongside its own extra logic.
@@ -1248,7 +1248,7 @@ class AttendanceBreakpointFilter(FilterSet):
         ]
 
 
-class GraceTimeFilter(HorillaFilterSet):
+class GraceTimeFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
 
@@ -1264,7 +1264,7 @@ class GraceTimeFilter(HorillaFilterSet):
         return ((queryset.filter(company_id__company__icontains=value))).distinct()
 
 
-class AttendanceGeneralSettingFilter(HorillaFilterSet):
+class AttendanceGeneralSettingFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
 

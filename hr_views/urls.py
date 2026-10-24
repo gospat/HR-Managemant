@@ -7,7 +7,7 @@ from django.urls import path
 from hr_views import views
 from hr_views.generic.cbv import history
 from hr_views.generic.cbv.views import (
-    HorillaListView,
+    HrListView,
     ReloadMessages,
     dispatch_profile_tab,
 )
@@ -47,17 +47,17 @@ urlpatterns = [
     ),
     path(
         "generic-delete/",
-        views.HorillaDeleteConfirmationView.as_view(),
+        views.HrDeleteConfirmationView.as_view(),
         name="generic-delete",
     ),
     path(
         "history-revert/<int:pk>/<int:history_id>/",
-        history.HorillaHistoryView.as_view(),
+        history.HrHistoryView.as_view(),
         name="history-revert",
     ),
     path(
         "generic-history/<int:pk>/",
-        history.HorillaHistoryView.as_view(),
+        history.HrHistoryView.as_view(),
         name="generic-history",
     ),
     path(

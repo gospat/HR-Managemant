@@ -16,13 +16,13 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company
-from core.models import HorillaModel
+from core.models import HrModel
 from hr_auth.models import HorillaUser
 
 
-class Tour(HorillaModel):
+class Tour(HrModel):
     """A guided product tour made of ordered steps, rendered with driver.js."""
 
     AUDIENCE_CHOICES = [
@@ -112,7 +112,7 @@ class Tour(HorillaModel):
         help_text=_("Leave blank for a global tour shared by every company."),
     )
 
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     class Meta:
         verbose_name = _("Tour")
@@ -128,7 +128,7 @@ class Tour(HorillaModel):
         return self.steps.count()
 
     def get_update_url(self):
-        """Edit URL — consumed by HorillaListView row actions."""
+        """Edit URL — consumed by HrListView row actions."""
         return reverse_lazy("tour-update-form", kwargs={"pk": self.pk})
 
     def get_delete_url(self):
@@ -140,7 +140,7 @@ class Tour(HorillaModel):
         return self.pk
 
 
-class TourStep(HorillaModel):
+class TourStep(HrModel):
     """A single highlighted step within a :class:`Tour`."""
 
     SIDE_CHOICES = [
@@ -195,7 +195,7 @@ class TourStep(HorillaModel):
         ),
     )
 
-    objects = HorillaCompanyManager("tour__company_id")
+    objects = HrCompanyManager("tour__company_id")
 
     class Meta:
         verbose_name = _("Tour step")
@@ -206,7 +206,7 @@ class TourStep(HorillaModel):
         return f"{self.tour.title} · {self.sequence}. {self.title}"
 
 
-class TourProgress(HorillaModel):
+class TourProgress(HrModel):
     """Per-user completion state for a tour (supersedes ``base.DriverViewed``)."""
 
     STATUS_CHOICES = [
@@ -238,7 +238,7 @@ class TourProgress(HorillaModel):
         null=True, blank=True, verbose_name=_("Completed at")
     )
 
-    objects = HorillaCompanyManager("tour__company_id")
+    objects = HrCompanyManager("tour__company_id")
 
     class Meta:
         verbose_name = _("Tour progress")

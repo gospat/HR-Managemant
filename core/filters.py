@@ -19,7 +19,7 @@ from base.methods import reload_queryset
 from core.horilla_middlewares import _thread_locals
 from hr_views.templatetags.generic_template_filters import getattribute
 from hr_widgets.generic_ajax import register_ajax_field
-from hr_widgets.widgets.select_widgets import HorillaAjaxSelectWidget
+from hr_widgets.widgets.select_widgets import HrAjaxSelectWidget
 
 FILTER_FOR_DBFIELD_DEFAULTS[models.ForeignKey][
     "filter_class"
@@ -170,7 +170,7 @@ class FilterSet(django_filters.FilterSet):
                 widget.attrs.update({"class": existing_class})
 
 
-class HorillaPaginator(Paginator):
+class HrPaginator(Paginator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.start_count = 0
@@ -191,16 +191,16 @@ class HorillaPaginator(Paginator):
         return self.page
 
 
-class HorillaFilterSet(FilterSet):
+class HrFilterSet(FilterSet):
     """
-    HorillaFilterSet
+    HrFilterSet
 
     Any subclass can opt a ModelMultipleChoiceField into an AJAX-loaded
     combobox -- searched/paginated on the server instead of pre-rendering
     its whole queryset as <option> tags, for fields whose option count is
     large (100s-1000s) -- by declaring `ajax_fields` on the class body:
 
-        class MyFilter(HorillaFilterSet):
+        class MyFilter(HrFilterSet):
             ajax_fields = {
                 "some_fk_or_m2m_field": {
                     "key": "my-app-my-field",   # unique across the whole app
@@ -223,7 +223,7 @@ class HorillaFilterSet(FilterSet):
 
     Beyond that, the caller still owns placing the field in a template
     (`{{form.field_name}}`) same as any other field -- widget/rendering
-    only, no extra markup needed since HorillaAjaxSelectWidget carries
+    only, no extra markup needed since HrAjaxSelectWidget carries
     its own class/data attrs that the existing .oh-select-ajax JS init
     already picks up.
     """
@@ -361,14 +361,14 @@ class HorillaFilterSet(FilterSet):
             if field is None:
                 continue
             selected_values = self._data_getlist(field_name)
-            field.widget = HorillaAjaxSelectWidget(
+            field.widget = HrAjaxSelectWidget(
                 attrs={"id": "id_filter_" + config["key"].replace("-", "_")},
                 # reverse_lazy, not reverse: some FilterSets are
                 # instantiated at class-body time (e.g. a NavView's
                 # `filter_instance = MyFilter()`), while urls.py may
                 # still be mid-import -- resolving now would risk a
                 # circular import. The lazy proxy only resolves to a
-                # real path when stringified, which HorillaAjaxSelectWidget
+                # real path when stringified, which HrAjaxSelectWidget
                 # only does inside build_attrs, at actual render time.
                 ajax_url=reverse_lazy("ajax-choices", args=[config["key"]]),
                 placeholder=config.get("placeholder", ""),
@@ -414,7 +414,7 @@ class HorillaFilterSet(FilterSet):
         "choice" field, so its value input is an AJAX-searched combobox
         instead of a fully preloaded <select>.
 
-        Consumed generically by HorillaNavView (as context
+        Consumed generically by HrNavView (as context
         "custom_filter_fields") and rendered by each app's own filter
         template; applied server-side by _apply_custom_filters below.
         """

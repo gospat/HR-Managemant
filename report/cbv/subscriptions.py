@@ -11,10 +11,10 @@ from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from report.access import company_id_from_request, user_can_subscribe_report
@@ -88,7 +88,7 @@ class ReportSubscriptionsView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReportSubscriptionsNav(HorillaNavView):
+class ReportSubscriptionsNav(HrNavView):
     nav_title = _("Report Subscriptions")
 
     def __init__(self, **kwargs: Any) -> None:
@@ -110,7 +110,7 @@ class ReportSubscriptionsNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReportSubscriptionsListView(HorillaListView):
+class ReportSubscriptionsListView(HrListView):
     """List of the current user's own report subscriptions."""
 
     model = ReportSubscription
@@ -179,8 +179,8 @@ class ReportSubscriptionsListView(HorillaListView):
         self.actions = _subscription_actions()
 
     def get_queryset(self, queryset=None, filtered=False, *args, **kwargs):
-        # HorillaListView's base get_queryset() ultimately calls the manager's
-        # .all(), which auto-hides is_active=False rows (HorillaCompanyManager
+        # HrListView's base get_queryset() ultimately calls the manager's
+        # .all(), which auto-hides is_active=False rows (HrCompanyManager
         # convention). A paused subscription is a real, user-toggleable state
         # here, not a soft-delete — it must stay visible so the owner can
         # re-activate it. Seed from .get_queryset() (company-scoped only, no
@@ -198,7 +198,7 @@ class ReportSubscriptionsListView(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReportSubscriptionFormView(HorillaFormView):
+class ReportSubscriptionFormView(HrFormView):
     """Create/edit form for a report subscription."""
 
     model = ReportSubscription
@@ -306,7 +306,7 @@ class ReportSubscriptionFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReportSubscriptionDetailView(HorillaDetailedView):
+class ReportSubscriptionDetailView(HrDetailedView):
     """Detail view for a single report subscription."""
 
     model = ReportSubscription

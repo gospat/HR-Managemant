@@ -48,7 +48,7 @@ from core.decorators import (
     permission_required,
 )
 from core.group_by import group_by_queryset
-from core.http.response import HorillaRedirect, with_bulk_result
+from core.http.response import HrRedirect, with_bulk_result
 from core.methods import handle_no_permission
 from hr_auth.models import HorillaUser
 from hr_automations.methods.methods import generate_choices
@@ -185,7 +185,7 @@ def objective_creation(request):
         objective_form = ObjectiveForm(request.POST)
         if objective_form.is_valid():
             obj_form_save(request, objective_form)
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     context = {
         "objective_form": objective_form,
         "p_form": PeriodForm(),
@@ -269,7 +269,7 @@ def objective_update(request, obj_id):
                 request,
                 _("Objective %(objective)s Updated") % {"objective": instance},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     context = {"objective_form": objective_form, "k_form": KRForm(), "update": True}
 
     return render(request, "okr/objective_creation.html", context)
@@ -398,7 +398,7 @@ def kr_create_or_update(request, kr_id=None):
                     _("Key result %(key_result)s updated successfully")
                     % {"key_result": instance},
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
         else:
             form = KRForm(request.POST)
@@ -409,7 +409,7 @@ def kr_create_or_update(request, kr_id=None):
                     _("Key result %(key_result)s created successfully")
                     % {"key_result": instance},
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
     return render(request, "okr/key_result/real_kr_form.html", {"form": form})
 
@@ -426,7 +426,7 @@ def archive_key_result(request, pk):
     """
     key_result = KeyResult.find(pk)
     if not key_result:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Key Result found matching the query.")
         )
 
@@ -495,7 +495,7 @@ def add_assignees(request, obj_id):
                 request,
                 _("Objective %(objective)s Updated") % {"objective": objective},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     context = {
         "form": form,
@@ -771,7 +771,7 @@ def objective_detailed_view(request, obj_id, **kwargs):
     """
     objective = Objective.find(obj_id)
     if not objective:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Objective found matching the query.")
         )
 
@@ -860,7 +860,7 @@ def objective_detailed_view_activity(request, id):
         return render(request, "okr/objective_detailed_view_activity.html", context)
     else:
         messages.info(request, _("You don't have permission."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
 
 @login_required
@@ -968,7 +968,7 @@ def objective_detailed_view_objective_status(request, id):
     objective = EmployeeObjective.objects.filter(id=id).first()
     if not objective:
         messages.error(request, _("Objective not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     status = request.POST.get("objective_status")
     objective.status = status
     objective.save()
@@ -998,7 +998,7 @@ def objective_detailed_view_key_result_status(request, obj_id, kr_id):
     employee_key_result = EmployeeKeyResult.objects.filter(id=kr_id).first()
     if not employee_key_result:
         messages.error(request, _("Key result not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     current_value = employee_key_result.current_value
     target_value = employee_key_result.target_value
@@ -1084,7 +1084,7 @@ def objective_archive(request, id):
     """
     objective = Objective.find(id)
     if not objective:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Objective found matching the query.")
         )
 
@@ -1163,7 +1163,7 @@ def create_employee_objective(request):
                         start_date=emp_obj.start_date,
                     )
             messages.success(request, _("Employee objective created successfully"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     context = {"form": form, "k_form": KRForm(), "emp_obj": True}
     return render(
         request, "okr/emp_objective/emp_objective_create_form.html", context=context
@@ -1176,7 +1176,7 @@ def get_objective_keyresults(request):
     objective = Objective.find(obj_id)
     if not objective:
 
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Objective found matching the query.")
         )
 
@@ -1211,12 +1211,12 @@ def update_employee_objective(request, emp_obj_id):
                 emp_obj = form.save(commit=False)
                 emp_obj.save()
                 messages.success(request, _("Employee objective Updated successfully"))
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         context = {"form": form, "k_form": KRForm()}
         return render(request, "okr/emp_objective_form.html", context=context)
     else:
         messages.info(request, _("You don't have permission."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
 
 @login_required
@@ -1231,7 +1231,7 @@ def archive_employee_objective(request, emp_obj_id):
     """
     emp_objective = EmployeeObjective.find(emp_obj_id)
     if not emp_objective:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee Objective found matching the query.")
         )
 
@@ -1247,7 +1247,7 @@ def archive_employee_objective(request, emp_obj_id):
         return HttpResponse(
             "<script> $('.reload-record').click(); $('#reloadMessagesButton').click();</script>"
         )
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -1262,7 +1262,7 @@ def delete_employee_objective(request, emp_obj_id):
     """
     emp_objective = EmployeeObjective.find(emp_obj_id)
     if not emp_objective:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee Objective found matching the query.")
         )
 
@@ -1271,7 +1271,7 @@ def delete_employee_objective(request, emp_obj_id):
     emp_objective.delete()
     objective.assignees.remove(employee)
     messages.success(request, _("Objective deleted successfully!."))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -1401,7 +1401,7 @@ def key_result_creation(request, obj_id, obj_type):
             employee=employee, initial={"start_date": start_date, "end_date": end_date}
         )
     else:
-        return HorillaRedirect(request, message=_("Invalid parameters"))
+        return HrRedirect(request, message=_("Invalid parameters"))
     context = {
         "key_result_form": key_result_form,
         "objective_id": obj_id,
@@ -1486,7 +1486,7 @@ def key_result_creation_htmx(request, id):
             form.employee_objective_id = objective
             form.save()
             messages.success(request, _("Key result created"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         context["key_result_form"] = form_key_result
     return render(request, "okr/key_result/key_result_creation_htmx.html", context)
 
@@ -1516,7 +1516,7 @@ def key_result_update(request, id):
         if key_result_form.is_valid():
             key_result_form.save()
             messages.info(request, _("Key result updated"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         else:
             context["key_result_form"] = key_result_form
     return render(request, "okr/key_result/key_result_update.html", context)
@@ -1654,7 +1654,7 @@ def feedback_update(request, id):
     feedback_started = Answer.objects.filter(feedback_id=feedback)
     context = {"feedback_form": form}
     if feedback_started:
-        return HorillaRedirect(request, message=_("Ongoing feedback is not editable!."))
+        return HrRedirect(request, message=_("Ongoing feedback is not editable!."))
 
     if request.method == "POST":
         form = FeedbackForm(request.POST, instance=feedback)
@@ -1676,7 +1676,7 @@ def feedback_update(request, id):
             feedback = form.save()
             messages.info(request, _("Feedback updated successfully!."))
             send_feedback_notifications(request, feedback)
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         else:
             context["feedback_form"] = form
     return render(request, "feedback/feedback_update.html", context)
@@ -1863,7 +1863,7 @@ def feedback_detailed_view(request, id, **kwargs):
     """
     feedback = Feedback.find(id)
     if not feedback:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Feedback found matching the query.")
         )
 
@@ -1910,7 +1910,7 @@ def feedback_detailed_view_answer(request, id, emp_id):
     feedback = Feedback.find(id)
     employee = Employee.objects.filter(id=emp_id).first()
     if not feedback or not employee:
-        return HorillaRedirect(
+        return HrRedirect(
             request,
             message=_("No %(class_name)s found matching the query.")
             % {"class_name": "Feedback" if not feedback else "Employee"},
@@ -1944,7 +1944,7 @@ def feedback_answer_get(request, id, **kwargs):
 
     feedback = Feedback.find(id)
     if not feedback:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Feedback found matching the query.")
         )
 
@@ -2008,7 +2008,7 @@ def feedback_answer_post(request, id):
     """
     feedback = Feedback.find(id)
     if not feedback:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Feedback found matching the query.")
         )
 
@@ -2110,7 +2110,7 @@ def feedback_answer_view(request, id, **kwargs):
 
     feedback = Feedback.find(id)
     if not feedback:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Feedback found matching the query.")
         )
 
@@ -2204,7 +2204,7 @@ def feedback_delete(request, id):
             {"reloadFeedbackContainer": {"target": "body"}}
         )
         return response
-    return HorillaRedirect(request, message=error_message)
+    return HrRedirect(request, message=error_message)
 
 
 @login_required
@@ -2249,7 +2249,7 @@ def get_feedback_overview(request, obj_id):
         request, feedback, perm="pms.view_feedback"
     ):
         messages.info(request, _("You don't have permission."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     questions = feedback.question_template_id.question.all().order_by("id")
     page_obj = Paginator(questions, 10).get_page(request.GET.get("page"))
@@ -2327,7 +2327,7 @@ def feedback_archive(request, id):
 
     feedback = Feedback.find(id)
     if not feedback:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Feedback found matching the query.")
         )
 
@@ -2493,7 +2493,7 @@ def question_view(request, id):
     """
     question_template = QuestionTemplate.find(id)
     if not question_template:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Question Template found matching the query.")
         )
 
@@ -2607,7 +2607,7 @@ def question_delete(request, id):
     except Exception as e:
         error_msg = _(f"Unexpected error: {str(e)}")
 
-    return HorillaRedirect(request, message=error_msg)
+    return HrRedirect(request, message=error_msg)
 
 
 @login_required
@@ -2878,7 +2878,7 @@ def period_delete(request, period_id):
     except ProtectedError:
         messages.error(request, _("Related entries exists"))
     if target == "listContainer":
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     return redirect("period-hx-view")
 
 
@@ -3318,7 +3318,7 @@ def anonymous_feedback_add(request):
                     )
                 except:
                     pass
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     else:
         form = AnonymousFeedbackForm()
 
@@ -3356,12 +3356,12 @@ def edit_anonymous_feedback(request, obj_id):
                 feedback = form.save(commit=False)
                 feedback.anonymous_feedback_id = anonymous_id
                 feedback.save()
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         context = {"form": form, "create": False}
         return render(request, "anonymous/anonymous_feedback_form.html", context)
     else:
         messages.info(request, _("You are don't have permissions."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
 
 @login_required
@@ -3374,7 +3374,7 @@ def archive_anonymous_feedback(request, obj_id):
 
     feedback = AnonymousFeedback.objects.filter(id=obj_id).first()
     if not feedback:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Anonymous Feedback found matching the query.")
         )
 
@@ -3492,7 +3492,7 @@ def employee_keyresult_creation(request, emp_obj_id):
                         kwargs={"obj_id": emp_objective.objective_id.id},
                     ),
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         context = {
             "form": emp_key_result,
             "emp_objective": emp_objective,
@@ -3500,7 +3500,7 @@ def employee_keyresult_creation(request, emp_obj_id):
         return render(request, "okr/key_result/kr_form.html", context=context)
     else:
         messages.info(request, _("You are don't have permissions."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
 
 @login_required
@@ -3541,7 +3541,7 @@ def employee_keyresult_update(request, kr_id):
                     kwargs={"obj_id": emp_kr.employee_objective_id.objective_id.id},
                 ),
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     context = {
         "form": emp_key_result,
@@ -3561,7 +3561,7 @@ def delete_employee_keyresult(request, kr_id):
     """
     emp_kr = EmployeeKeyResult.objects.filter(id=kr_id).first()
     if not emp_kr:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee Key Result found matching the query.")
         )
 
@@ -3574,7 +3574,7 @@ def delete_employee_keyresult(request, kr_id):
         or request.user.employee_get in objective.managers.all()
     ):
         messages.info(request, _("You don't have permission"))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     emp_objective = emp_kr.employee_objective_id
     emp_kr.delete()
@@ -3598,7 +3598,7 @@ def employee_keyresult_update_status(request, kr_id):
     emp_kr = EmployeeKeyResult.objects.filter(id=kr_id).first()
     if not emp_kr:
 
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Employee Key Result found matching the query.")
         )
 
@@ -3622,7 +3622,7 @@ def employee_keyresult_update_status(request, kr_id):
         )
 
     messages.info(request, _("You don't have permission"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -3844,7 +3844,7 @@ def archive_meetings(request, obj_id):
     meeting = Meetings.find(obj_id)
     if not meeting:
 
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Meetings found matching the query.")
         )
 
@@ -3874,7 +3874,7 @@ def meeting_manager_remove(request, meet_id, manager_id):
     meeting = Meetings.find(meet_id)
     if not meeting:
 
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Meetings found matching the query.")
         )
 
@@ -3901,7 +3901,7 @@ def meeting_employee_remove(request, meet_id, employee_id):
     meeting = Meetings.find(meet_id)
     if not meeting:
 
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Meetings found matching the query.")
         )
 
@@ -4028,7 +4028,7 @@ def meeting_answer_post(request, id):
 
     meeting = Meetings.find(id)
     if not meeting:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Meetings found matching the query.")
         )
 
@@ -4068,7 +4068,7 @@ def meeting_answer_view(request, id, emp_id, **kwargs):
     meeting = Meetings.find(id)
     employee = Employee.objects.filter(id=emp_id).first()
     if not meeting or not employee:
-        return HorillaRedirect(
+        return HrRedirect(
             request,
             message=_("No %(class_name)s found matching the query.")
             % {"class_name": "Meetings" if not meeting else "Employee"},
@@ -4113,7 +4113,7 @@ def meeting_question_template_view(request, meet_id):
 def meeting_single_view(request, id):
     meeting = Meetings.find(id)
     if not meeting:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Meetings found matching the query.")
         )
 
@@ -4256,7 +4256,7 @@ def update_isactive_bonuspoint_setting(request, obj_id):
     """
     bonus_point_setting = BonusPointSetting.objects.filter(id=obj_id).first()
     if not bonus_point_setting:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No Bonus Point Setting found matching the query.")
         )
 

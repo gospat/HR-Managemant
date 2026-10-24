@@ -24,13 +24,13 @@ from base.methods import (
 )
 from base.models import RotatingWorkTypeAssign
 from employee.models import Employee
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -50,7 +50,7 @@ class RotatingWorkRequestView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class GeneralParent(HorillaListView):
+class GeneralParent(HrListView):
     """
     main parent class for list view
     """
@@ -140,7 +140,7 @@ class RotatingWorkListView(GeneralParent):
 @method_decorator(
     manager_can_enter("base.view_rotatingworktypeassign"), name="dispatch"
 )
-class RotatingWorkNavView(HorillaNavView):
+class RotatingWorkNavView(HrNavView):
     """
     Nav view of the page
     """
@@ -243,7 +243,7 @@ class RotatingWorkNavView(HorillaNavView):
 @method_decorator(
     manager_can_enter("base.view_rotatingworktypeassign"), name="dispatch"
 )
-class RotatingWorkDetailView(HorillaDetailedView):
+class RotatingWorkDetailView(HrDetailedView):
     """
     Detail view of page
     """
@@ -309,7 +309,7 @@ class RotatingWorkExport(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("base.add_rotatingworktypeassign"), name="dispatch")
-class RotatingWorkTypeFormView(HorillaFormView):
+class RotatingWorkTypeFormView(HrFormView):
     """
     form view
     """
@@ -386,7 +386,7 @@ class RotatingWorkTypeFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("base.add_rotatingworktypeassign"), name="dispatch")
-class RotatingWorkTypeDuplicateForm(HorillaFormView):
+class RotatingWorkTypeDuplicateForm(HrFormView):
     """
     duplicate from view
     """
@@ -422,6 +422,6 @@ class RotatingWorkTypeDuplicateForm(HorillaFormView):
             message = _("Rotating Work Assign Created")
             messages.success(self.request, message)
             form.save()
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
 
         return self.form_invalid(form)

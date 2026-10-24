@@ -1,15 +1,15 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company
 from employee.models import Employee
 from core import horilla_middlewares
-from core.models import HorillaModel
+from core.models import HrModel
 from hr_auth.models import HorillaUser
 
 
-class ReportTemplate(HorillaModel):
+class ReportTemplate(HrModel):
     """
     A saved field arrangement (Rows/Columns/renderer/aggregator) for a
     report's pivot table, or a shared/system layout for standard reports.
@@ -42,7 +42,7 @@ class ReportTemplate(HorillaModel):
         Company, null=True, editable=False, on_delete=models.PROTECT
     )
 
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         ordering = ["-created_at"]
@@ -64,7 +64,7 @@ class ReportTemplate(HorillaModel):
         super().save(*args, **kwargs)
 
 
-class ReportSubscription(HorillaModel):
+class ReportSubscription(HrModel):
     """
     Scheduled delivery of a standard report (Excel attachment via email).
     """
@@ -110,7 +110,7 @@ class ReportSubscription(HorillaModel):
         related_name="report_subscriptions",
     )
 
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         ordering = ["-created_at"]
@@ -204,7 +204,7 @@ class ReportSubscription(HorillaModel):
         super().save(*args, **kwargs)
 
 
-class ReportFavorite(HorillaModel):
+class ReportFavorite(HrModel):
     """User-pinned standard report for quick catalog access."""
 
     report_slug = models.CharField(max_length=100, verbose_name=_("Report"))
@@ -218,7 +218,7 @@ class ReportFavorite(HorillaModel):
         Company, null=True, blank=True, on_delete=models.PROTECT
     )
 
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         ordering = ["-created_at"]
@@ -230,7 +230,7 @@ class ReportFavorite(HorillaModel):
         return f"{self.report_slug} ({self.user_id})"
 
 
-class ReportSavedView(HorillaModel):
+class ReportSavedView(HrModel):
     """
     A user-named collection of standard reports for quick catalog filtering
     (e.g. "Q3 board pack") — distinct from ReportFavorite (a single implicit
@@ -250,7 +250,7 @@ class ReportSavedView(HorillaModel):
         Company, null=True, blank=True, on_delete=models.PROTECT
     )
 
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         ordering = ["name"]
@@ -275,7 +275,7 @@ class ReportSavedView(HorillaModel):
         self.save(update_fields=["report_slugs"])
 
 
-class ReportFilterPreset(HorillaModel):
+class ReportFilterPreset(HrModel):
     """Named filter snapshot for a standard report (period + advanced fields)."""
 
     report_slug = models.CharField(max_length=100, verbose_name=_("Report"))
@@ -296,7 +296,7 @@ class ReportFilterPreset(HorillaModel):
         Company, null=True, blank=True, on_delete=models.PROTECT
     )
 
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         ordering = ["name"]
@@ -322,7 +322,7 @@ class ReportFilterPreset(HorillaModel):
         super().save(*args, **kwargs)
 
 
-class ReportRunLog(HorillaModel):
+class ReportRunLog(HrModel):
     """Lite audit of standard report runs (UI view / export)."""
 
     ACTION_VIEW = "view"
@@ -354,7 +354,7 @@ class ReportRunLog(HorillaModel):
         Company, null=True, blank=True, on_delete=models.PROTECT
     )
 
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     @property
     def report_name(self) -> str:
@@ -402,7 +402,7 @@ class ReportRunLog(HorillaModel):
         return f"{self.report_slug} · {self.action}"
 
 
-class ReportAccess(HorillaModel):
+class ReportAccess(HrModel):
     """
     Optional access matrix for standard reports.
 
@@ -450,7 +450,7 @@ class ReportAccess(HorillaModel):
         Company, null=True, blank=True, on_delete=models.PROTECT
     )
 
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         ordering = ["report_slug", "domain", "group_id"]

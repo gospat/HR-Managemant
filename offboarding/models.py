@@ -14,21 +14,21 @@ from django.utils.timesince import timesince
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company
 from employee.models import Employee
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
-from core.models import HorillaModel, upload_path
-from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from core.models import HrModel, upload_path
+from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_views.cbv_methods import render_template
 from notifications.signals import notify
 
 # Create your models here.
 
 
-class Offboarding(HorillaModel):
+class Offboarding(HrModel):
     """
     Offboarding model
     """
@@ -44,7 +44,7 @@ class Offboarding(HorillaModel):
         null=True,
         verbose_name="Company",
     )
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     def __str__(self):
         return self.title
@@ -70,7 +70,7 @@ class Offboarding(HorillaModel):
         return
 
 
-class OffboardingStage(HorillaModel):
+class OffboardingStage(HrModel):
     """
     Offboarding model
     """
@@ -142,7 +142,7 @@ def create_initial_stage(sender, instance, created, **kwargs):
         initial_stage.save()
 
 
-class OffboardingStageMultipleFile(HorillaModel):
+class OffboardingStageMultipleFile(HrModel):
     """
     OffboardingStageMultipleFile
     """
@@ -150,7 +150,7 @@ class OffboardingStageMultipleFile(HorillaModel):
     attachment = models.FileField(upload_to=upload_path)
 
 
-class OffboardingEmployee(HorillaModel):
+class OffboardingEmployee(HrModel):
     """
     OffboardingEmployee model / Employee on stage
     """
@@ -170,7 +170,7 @@ class OffboardingEmployee(HorillaModel):
     notice_period_ends = models.DateField(
         null=True, blank=True, verbose_name=_("Notice Period Ends")
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -374,7 +374,7 @@ class OffboardingEmployee(HorillaModel):
         return f'{reverse_lazy("get-manager-in")}?employee_id={self.employee_id.id}&offboarding=True'
 
 
-class ResignationLetter(HorillaModel):
+class ResignationLetter(HrModel):
     """
     Resignation Request Employee model
     """
@@ -394,10 +394,10 @@ class ResignationLetter(HorillaModel):
     offboarding_employee_id = models.ForeignKey(
         OffboardingEmployee, on_delete=models.CASCADE, editable=False, null=True
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
@@ -583,7 +583,7 @@ class ResignationLetter(HorillaModel):
         offboarding_employee.save()
 
 
-class OffboardingTask(HorillaModel):
+class OffboardingTask(HrModel):
     """
     OffboardingTask model
     """
@@ -606,7 +606,7 @@ class OffboardingTask(HorillaModel):
         return self.title
 
 
-class EmployeeTask(HorillaModel):
+class EmployeeTask(HrModel):
     """
     EmployeeTask model
     """
@@ -626,7 +626,7 @@ class EmployeeTask(HorillaModel):
     status = models.CharField(max_length=20, choices=statuses, default="todo")
     task_id = models.ForeignKey(OffboardingTask, on_delete=models.CASCADE)
     description = models.TextField(null=True, editable=False, max_length=255)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
@@ -649,7 +649,7 @@ class EmployeeTask(HorillaModel):
         )
 
 
-class ExitReason(HorillaModel):
+class ExitReason(HrModel):
     """
     ExitReason model
     """
@@ -662,7 +662,7 @@ class ExitReason(HorillaModel):
     attachments = models.ManyToManyField(OffboardingStageMultipleFile)
 
 
-class OffboardingNote(HorillaModel):
+class OffboardingNote(HrModel):
     """
     OffboardingNote
     """
@@ -694,11 +694,11 @@ class OffboardingNote(HorillaModel):
         return super().save(*args, **kwargs)
 
 
-class OffboardingGeneralSetting(HorillaModel):
+class OffboardingGeneralSetting(HrModel):
     """
     OffboardingGeneralSettings
     """
 
     resignation_request = models.BooleanField(default=False)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")

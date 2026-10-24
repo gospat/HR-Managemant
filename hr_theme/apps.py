@@ -7,7 +7,7 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 
-class HorillaThemeConfig(AppConfig):
+class HrThemeConfig(AppConfig):
     """App configuration class for horilla_theme."""
 
     default_auto_field = "django.db.models.BigAutoField"
@@ -37,6 +37,6 @@ class HorillaThemeConfig(AppConfig):
         except Exception as e:
             import logging
 
-            logging.warning("HorillaThemeConfig.ready failed: %s", e)
+            logging.warning("HrThemeConfig.ready failed: %s", e)
 
         super().ready()

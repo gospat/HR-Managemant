@@ -32,7 +32,7 @@ from base.methods import sortby
 from employee.models import Employee
 from core import settings
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http import HorillaRedirect
+from core.http import HrRedirect
 from notifications.signals import notify
 from recruitment.decorators import manager_can_enter, recruitment_manager_can_enter
 from recruitment.filters import CandidateFilter, RecruitmentFilter, StageFilter
@@ -145,7 +145,7 @@ def recruitment(request):
             response = render(
                 request, "recruitment/recruitment_form.html", {"form": form}
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(request, "recruitment/recruitment_form.html", {"form": form})
 
 
@@ -303,7 +303,7 @@ def recruitment_delete(request, rec_id):
         messages.error(request, error)
         messages.error(request, _("You cannot delete this recruitment"))
     recruitment_obj = Recruitment.objects.all()
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -345,7 +345,7 @@ def recruitment_pipeline(request):
                         redirect=reverse("cbv-pipeline"),
                     )
 
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         elif request.FILES.get("resume") is not None:
             if request.user.has_perm("recruitment.add_candidate") or is_stagemanager(
                 request,
@@ -371,7 +371,7 @@ def recruitment_pipeline(request):
                         )
 
                     messages.success(request, _("Candidate added."))
-                    return HorillaRedirect(request)
+                    return HrRedirect(request)
         elif request.POST.get("stage_managers") and request.user.has_perm(
             "recruitment.add_stage"
         ):
@@ -402,7 +402,7 @@ def recruitment_pipeline(request):
                             redirect=reverse("cbv-pipeline"),
                         )
 
-                    return HorillaRedirect(request)
+                    return HrRedirect(request)
                 messages.info(request, _("You don't have access"))
     return render(
         request,
@@ -464,7 +464,7 @@ def stage_update_pipeline(request, stage_id):
                     redirect=reverse("cbv-pipeline"),
                 )
 
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return render(request, "pipeline/form/stage_update.html", {"form": form})
 
@@ -498,7 +498,7 @@ def recruitment_update_pipeline(request, rec_id):
                     redirect=reverse("cbv-pipeline"),
                 )
 
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(request, "pipeline/form/recruitment_update.html", {"form": form})
 
 
@@ -511,7 +511,7 @@ def recruitment_delete_pipeline(request, rec_id):
     Args:
         id: recruitment instance id
     Returns:
-        HorillaRedirect: Used to refresh the page
+        HrRedirect: Used to refresh the page
     """
     recruitment_obj = Recruitment.objects.get(id=rec_id)
     try:
@@ -520,7 +520,7 @@ def recruitment_delete_pipeline(request, rec_id):
     except Exception as error:
         messages.error(request, error)
         messages.error(request, _("Recruitment already in use."))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -600,7 +600,7 @@ def add_note(request, cand_id=None):
             note.updated_by = request.user.employee_get
             note.save()
             messages.success(request, _("Note added successfully.."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "pipeline/pipeline_components/add_note.html",
@@ -640,7 +640,7 @@ def note_update(request, note_id):
         if form.is_valid():
             form.save()
             messages.success(request, _("Note updated successfully..."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request, "pipeline/pipeline_components/update_note.html", {"form": form}
     )
@@ -743,7 +743,7 @@ def stage(request):
                     redirect=reverse("cbv-pipeline"),
                 )
 
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(request, "stage/stage_form.html", {"form": form})
 
 
@@ -885,7 +885,7 @@ def stage_delete(request, stage_id):
     except Exception as error:
         messages.error(request, error)
         messages.error(request, _("You cannot delete this stage"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -1102,7 +1102,7 @@ def candidate_delete(request, cand_id):
     except Exception as error:
         messages.error(request, error)
         messages.error(request, _("You cannot delete this candidate"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -1114,7 +1114,7 @@ def candidate_archive(request, cand_id):
     candidate_obj = Candidate.objects.get(id=cand_id)
     candidate_obj.is_active = not candidate_obj.is_active
     candidate_obj.save()
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required

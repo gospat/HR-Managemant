@@ -16,10 +16,10 @@ from django.utils.translation import gettext_noop
 
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -38,7 +38,7 @@ class MeetingsView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MeetingsList(HorillaListView):
+class MeetingsList(HrListView):
     """
     List view of the page
     """
@@ -119,7 +119,7 @@ class MeetingsList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MeetingsNav(HorillaNavView):
+class MeetingsNav(HrNavView):
     """
     Nav bar
     """
@@ -156,7 +156,7 @@ class MeetingsNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MeetingsDetailedView(HorillaDetailedView):
+class MeetingsDetailedView(HrDetailedView):
     """
     detail view of page
     """
@@ -191,7 +191,7 @@ class MeetingsDetailedView(HorillaDetailedView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MeetingsFormView(HorillaFormView):
+class MeetingsFormView(HrFormView):
     """
     Form View
     """
@@ -279,7 +279,7 @@ class MeetingsFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MeetingResponseFormView(HorillaFormView):
+class MeetingResponseFormView(HrFormView):
     """
     Form View
     """

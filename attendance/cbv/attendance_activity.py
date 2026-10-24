@@ -14,9 +14,9 @@ from attendance.models import AttendanceActivity
 from base.methods import filtersubordinates, has_export_access, is_reportingmanager
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 
@@ -31,7 +31,7 @@ class AttendanceActivityView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AttendanceActivityListView(HorillaListView):
+class AttendanceActivityListView(HrListView):
     """
     list view of the page
     """
@@ -115,7 +115,7 @@ class AttendanceActivityListView(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AttendanceActivityNavView(HorillaNavView):
+class AttendanceActivityNavView(HrNavView):
     """
     nav bar
     """
@@ -227,7 +227,7 @@ class AttendanceActivityNavView(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AttendanceDetailView(HorillaDetailedView):
+class AttendanceDetailView(HrDetailedView):
     """
     Detail view of page
     """

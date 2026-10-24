@@ -8,10 +8,10 @@ from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrCardView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from payroll.filters import DeductionFilter
@@ -28,7 +28,7 @@ class DeductionView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_deduction"), name="dispatch")
-class DeductionNav(HorillaNavView):
+class DeductionNav(HrNavView):
     """
     Nav bar
     """
@@ -102,7 +102,7 @@ class DeductionNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_deduction"), name="dispatch")
-class DeductionListView(HorillaListView):
+class DeductionListView(HrListView):
     """
     list view for deduction tab
     """
@@ -213,7 +213,7 @@ class DeductionListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_deduction"), name="dispatch")
-class DeductionCardView(HorillaCardView):
+class DeductionCardView(HrCardView):
     """
     card view
     """
@@ -323,7 +323,7 @@ class DeductionCardView(HorillaCardView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.add_deduction"), name="dispatch")
-class DeductionFormView(HorillaFormView):
+class DeductionFormView(HrFormView):
     """
     Form view for Deduction creation and update.
     """

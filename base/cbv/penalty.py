@@ -7,11 +7,11 @@ from django.utils.translation import gettext_lazy as _
 from base.filters import PenaltyFilter
 from base.models import PenaltyAccounts
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 
 
 @method_decorator(login_required, name="dispatch")
-class ViewPenaltyList(HorillaListView):
+class ViewPenaltyList(HrListView):
     """
     List view of penalty
     """

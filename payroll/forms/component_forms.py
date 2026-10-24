@@ -25,9 +25,9 @@ from employee.models import BonusPoint, Employee
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
-from hr_widgets.forms import HorillaForm, default_select_option_template
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.forms import HrForm, default_select_option_template
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from notifications.signals import notify
 from payroll.models import tax_models as models
 from payroll.models.models import (
@@ -570,10 +570,10 @@ class SalaryStructureForm(ModelForm):
     Form for SalaryStructure model
     """
 
-    employees = HorillaMultiSelectField(
+    employees = HrMultiSelectField(
         queryset=Employee.objects.all(),
         required=False,
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -856,7 +856,7 @@ class PayslipForm(ModelForm):
         }
 
 
-class GeneratePayslipForm(HorillaForm):
+class GeneratePayslipForm(HrForm):
     """
     Form for Payslip
     """
@@ -866,9 +866,9 @@ class GeneratePayslipForm(HorillaForm):
         required=False,
         # help_text="Enter +-something if you want to generate payslips by batches",
     )
-    employee_id = HorillaMultiSelectField(
+    employee_id = HrMultiSelectField(
         queryset=Employee.objects.none(),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",

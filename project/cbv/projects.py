@@ -18,10 +18,10 @@ from base.models import Company
 from employee.models import Employee
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrCardView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from project.cbv.cbv_decorators import is_projectmanager_or_member_or_perms
@@ -47,7 +47,7 @@ class ProjectsView(TemplateView):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_project"), name="dispatch"
 )
-class ProjectsNavView(HorillaNavView):
+class ProjectsNavView(HrNavView):
     """
     Nav bar
     """
@@ -167,7 +167,7 @@ class ProjectsNavView(HorillaNavView):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_project"), name="dispatch"
 )
-class ProjectsList(HorillaListView):
+class ProjectsList(HrListView):
     """
     Projects list view
     """
@@ -317,7 +317,7 @@ class ProjectsList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 # @method_decorator(permission_required("project.add_project"), name="dispatch")
-class ProjectFormView(HorillaFormView):
+class ProjectFormView(HrFormView):
     """
     form view for create project
     """
@@ -380,7 +380,7 @@ class DynamicProjectCreationFormView(ProjectFormView):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_project"), name="dispatch"
 )
-class ProjectCardView(HorillaCardView):
+class ProjectCardView(HrCardView):
     """
     For card view
     """

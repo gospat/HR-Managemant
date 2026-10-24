@@ -13,15 +13,15 @@ from base.models import WorkType
 from core.decorators import permission_required
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrListView,
+    HrNavView,
 )
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("base.view_worktype"), name="dispatch")
-class WorkTypeList(HorillaListView):
+class WorkTypeList(HrListView):
     """
     list view of work types in settings
     """
@@ -78,7 +78,7 @@ class WorkTypeList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("base.view_worktype"), name="dispatch")
-class WorkTypeDetailView(HorillaDetailedView):
+class WorkTypeDetailView(HrDetailedView):
     """
     detail view for work type, also registered as the related-object-link
     target for WorkType via detail_view_url_name
@@ -102,7 +102,7 @@ class WorkTypeDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("base.view_worktype"), name="dispatch")
-class WorkTypeNav(HorillaNavView):
+class WorkTypeNav(HrNavView):
     """
     navbar of worktype
     """

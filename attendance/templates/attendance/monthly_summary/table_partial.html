@@ -525,7 +525,7 @@ reloadSelectedCount($('.count_msAttendance'),'selectedInstances');">
        "Columns" panel, so it looks identical to the Employee list's.
        Behavior is a plain click-toggle + localStorage instead of
        Alpine.js/backend-persisted (ToggleColumn/ColumnOrder models),
-       since this is a bespoke table, not a HorillaListView. Drag-to-
+       since this is a bespoke table, not a HrListView. Drag-to-
        reorder is intentionally not implemented, so no drag handles or
        "drag to reorder" hint are shown — only show/hide. -->
   <div style="position:absolute; top:6px; right:24px; z-index:7;">
@@ -662,7 +662,7 @@ reloadSelectedCount($('.count_msAttendance'),'selectedInstances');">
               sortable-column pattern exactly (fa-solid fa-arrow-up/down, text-primary-600,
               cursor-pointer, both arrows stacked when this column isn't the active sort) —
               just against a plain ?sort=&dir= pair + Python sorted() in the view instead of
-              HorillaListView's session-cached sortby() machinery, since `rows` here is a
+              HrListView's session-cached sortby() machinery, since `rows` here is a
               plain list of dicts, not a queryset a .order_by() could apply to.
             {% endcomment %}
             <th data-col="employee">

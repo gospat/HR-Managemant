@@ -17,11 +17,11 @@ from django.utils.translation import gettext_noop
 from employee.models import Employee
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrCardView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from leave.filters import LeaveTypeFilter
@@ -57,7 +57,7 @@ class LeaveTypeView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="leave.view_leavetype"), name="dispatch")
-class LeaveTypeListView(HorillaListView):
+class LeaveTypeListView(HrListView):
     """
     list view
     """
@@ -70,7 +70,7 @@ class LeaveTypeListView(HorillaListView):
     model = LeaveType
 
     def get_queryset(self, queryset=None, filtered=False, *args, **kwargs):
-        # Same signature as HorillaListView.get_queryset: subclasses (e.g. the
+        # Same signature as HrListView.get_queryset: subclasses (e.g. the
         # employee Allocations "Add types" list) call it with extra arguments.
         queryset = super().get_queryset(queryset, filtered, *args, **kwargs)
         # Assigned back so callers that read self.queryset afterwards (like
@@ -137,7 +137,7 @@ class LeaveTypeListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="leave.view_leavetype"), name="dispatch")
-class LeaveTypeNavView(HorillaNavView):
+class LeaveTypeNavView(HrNavView):
     """
     navbar
     """
@@ -188,7 +188,7 @@ class LeaveTypeNavView(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="leave.view_leavetype"), name="dispatch")
-class LeaveTypeDetailView(HorillaDetailedView):
+class LeaveTypeDetailView(HrDetailedView):
     """
     detail view
     """
@@ -265,7 +265,7 @@ class LeaveTypeDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="leave.view_leavetype"), name="dispatch")
-class LeaveTypeCardView(HorillaCardView):
+class LeaveTypeCardView(HrCardView):
     """
     card view
     """
@@ -361,7 +361,7 @@ class LeaveTypeCardView(HorillaCardView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="leave.view_leavetype"), name="dispatch")
-class LeaveTypeAssignForm(HorillaFormView):
+class LeaveTypeAssignForm(HrFormView):
     """
     form view
     """

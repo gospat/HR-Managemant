@@ -50,7 +50,7 @@ from hr_api.api_methods.base.announcements import (
     visible_announcements,
 )
 from hr_api.api_methods.base.methods import reject_reason_from
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 from notifications.signals import notify
 
 from ...api_decorators.base.decorators import (
@@ -159,7 +159,7 @@ class JobPositionView(APIView):
             return Response(serializer.data, status=200)
 
         job_positions = JobPosition.objects.all()
-        paginater = HorillaPageNumberPagination()
+        paginater = HrPageNumberPagination()
         page = paginater.paginate_queryset(job_positions, request)
         serializer = self.serializer_class(page, many=True)
         return paginater.get_paginated_response(serializer.data)
@@ -206,7 +206,7 @@ class DepartmentView(APIView):
             return Response(serializer.data, status=200)
 
         departments = Department.objects.all()
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page: list[Any] | None = paginator.paginate_queryset(departments, request)
         serializer = self.serializer_class(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -253,7 +253,7 @@ class JobRoleView(APIView):
             return Response(serializer.data, status=200)
 
         job_roles = JobRole.objects.all()
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(job_roles, request)
         serializer = self.serializer_class(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -300,7 +300,7 @@ class CompanyView(APIView):
             return Response(serializer.data, status=200)
 
         companies = Company.objects.all()
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(companies, request)
         serializer = self.serializer_class(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -416,7 +416,7 @@ class WorkTypeRequestView(APIView):
                 request, url, field_name, work_type_request_filter_queryset
             )
         # pagination workflow
-        paginater = HorillaPageNumberPagination()
+        paginater = HrPageNumberPagination()
         page = paginater.paginate_queryset(work_type_request_filter_queryset, request)
         serializer = self.serializer_class(page, many=True)
         return paginater.get_paginated_response(serializer.data)
@@ -608,7 +608,7 @@ class IndividualRotatingWorktypesView(APIView):
         rotating_work_type_assigns = RotatingWorkTypeAssign.objects.filter(
             employee_id=employee_id
         )
-        pagenation = HorillaPageNumberPagination()
+        pagenation = HrPageNumberPagination()
         page = pagenation.paginate_queryset(rotating_work_type_assigns, request)
         serializer = self.serializer_class(page, many=True)
         return pagenation.get_paginated_response(serializer.data)
@@ -646,7 +646,7 @@ class RotatingWorkTypeAssignView(APIView):
                 request, url, field_name, rotating_work_type_assigns_filter_queryset
             )
 
-        pagenation = HorillaPageNumberPagination()
+        pagenation = HrPageNumberPagination()
         page = pagenation.paginate_queryset(
             rotating_work_type_assigns_filter_queryset, request
         )
@@ -718,7 +718,7 @@ class IndividualWorkTypeRequestView(APIView):
             return Response(serializer.data, status=200)
         employee_id = request.GET.get("employee_id", None)
         work_type_request = WorkTypeRequest.objects.filter(employee_id=employee_id)
-        paginater = HorillaPageNumberPagination()
+        paginater = HrPageNumberPagination()
         page = paginater.paginate_queryset(work_type_request, request)
         serializer = self.serializer_class(page, many=True)
         return paginater.get_paginated_response(serializer.data)
@@ -898,7 +898,7 @@ class IndividualRotatingShiftView(APIView):
             employee_id=employee_id
         )
 
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(rotating_shift_assigns, request)
         serializer = self.serializer_class(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -935,7 +935,7 @@ class RotatingShiftAssignView(APIView):
                 request, url, field_name, rotating_shift_assigns_filter_queryset
             )
 
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(
             rotating_shift_assigns_filter_queryset, request
         )
@@ -990,7 +990,7 @@ class IndividualShiftRequestView(APIView):
             return Response(serializer.data, status=200)
         employee_id = request.GET.get("employee_id", None)
         shift_requests = ShiftRequest.objects.filter(employee_id=employee_id)
-        paginater = HorillaPageNumberPagination()
+        paginater = HrPageNumberPagination()
         page = paginater.paginate_queryset(shift_requests, request)
         serializer = self.serializer_class(page, many=True)
         return paginater.get_paginated_response(serializer.data)
@@ -1035,7 +1035,7 @@ class ShiftRequestView(APIView):
                 request, url, field_name, shift_requests_filter_queryset
             )
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(shift_requests_filter_queryset, request)
         serializer = self.serializer_class(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -1430,7 +1430,7 @@ class AnnouncementListAPIView(APIView):
     """
 
     permission_classes = [IsAuthenticated]
-    pagination_class = HorillaPageNumberPagination
+    pagination_class = HrPageNumberPagination
 
     def get(self, request, *args, **kwargs):
         # Update missing expire_date in bulk, using each announcement's

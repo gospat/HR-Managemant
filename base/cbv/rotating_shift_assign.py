@@ -28,10 +28,10 @@ from base.models import RotatingShiftAssign
 from employee.models import Employee
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -48,7 +48,7 @@ class RotatingShiftAssignView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RotatingShiftListParent(HorillaListView):
+class RotatingShiftListParent(HrListView):
     """
     Parent class
     """
@@ -136,7 +136,7 @@ class RotatingShiftList(RotatingShiftListParent):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("base.view_rotatingshiftassign"), name="dispatch")
-class RotatingShiftAssignNav(HorillaNavView):
+class RotatingShiftAssignNav(HrNavView):
     """
     Nav bar
     """
@@ -248,7 +248,7 @@ class RotatingShiftAssignNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("base.view_rotatingshiftassign"), name="dispatch")
-class RotatingShiftDetailview(HorillaDetailedView):
+class RotatingShiftDetailview(HrDetailedView):
     """
     Detail View
     """
@@ -312,7 +312,7 @@ class RotatingExportView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("base.add_rotatingshiftassign"), name="dispatch")
-class RotatingShiftFormView(HorillaFormView):
+class RotatingShiftFormView(HrFormView):
     """
     Create and edit form
     """
@@ -388,7 +388,7 @@ class RotatingShiftFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("base.view_rotatingshiftassign"), name="dispatch")
-class RotatingShiftAssignDuplicate(HorillaFormView):
+class RotatingShiftAssignDuplicate(HrFormView):
     """
     Duplicate form view
     """

@@ -1135,10 +1135,10 @@ def export_data(request, model, form_class, filter_class, file_name, perm=None):
     }
     employee = request.user.employee_get
 
-    from core.http.response import HorillaRedirect
+    from core.http.response import HrRedirect
 
     if not has_export_access(request, model):
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("You don't have access to export this data")
         )
 

@@ -18,12 +18,12 @@ from employee.cbv.employee_profile import EmployeeProfileView
 from employee.models import Employee
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from leave.cbv.leave_tab import IndividualLeaveTab
@@ -43,7 +43,7 @@ class LeaveAllocationRequestView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class LeaveAllocationRequestList(HorillaListView):
+class LeaveAllocationRequestList(HrListView):
     """
     List view of the page
     """
@@ -147,7 +147,7 @@ class LeaveAllocationRequestList(HorillaListView):
 
 
 def _leave_allocation_tab_badge_count(request, view_cls):
-    """Same queryset rules as the tab's HorillaListView (filters, subordinates)."""
+    """Same queryset rules as the tab's HrListView (filters, subordinates)."""
     view = view_cls()
     view.request = request
     view.args = ()
@@ -157,7 +157,7 @@ def _leave_allocation_tab_badge_count(request, view_cls):
 
 
 @method_decorator(login_required, name="dispatch")
-class LeaveAllocationRequestTab(HorillaTabView):
+class LeaveAllocationRequestTab(HrTabView):
     """
     Tab View
     """
@@ -265,7 +265,7 @@ class LeaveAllocationRequests(LeaveAllocationRequestList):
                 """
 
 
-class _LeaveAllocationTabNavBase(HorillaNavView):
+class _LeaveAllocationTabNavBase(HrNavView):
     """
     Shared Search/Filter/Create/Actions wiring for each Leave Allocation
     Request tab's own, independent Nav - only search_url/search_swap_target
@@ -371,20 +371,20 @@ class LeaveAllocationRequestsNav(_LeaveAllocationTabNavBase):
             ]
 
 
-class MyLeaveAllocationTabShell(HorillaTabContentShell):
+class MyLeaveAllocationTabShell(HrTabContentShell):
     nav_url_name = "my-leave-allocation-nav"
     container_id = "myLeaveAllocationListContainer"
     tabs_root_id = "leave-allocation"
 
 
-class LeaveAllocationRequestsTabShell(HorillaTabContentShell):
+class LeaveAllocationRequestsTabShell(HrTabContentShell):
     nav_url_name = "leave-allocation-requests-nav"
     container_id = "allLeaveAllocationListContainer"
     tabs_root_id = "leave-allocation"
 
 
 @method_decorator(login_required, name="dispatch")
-class LeaveAllocationRequestDetailView(HorillaDetailedView):
+class LeaveAllocationRequestDetailView(HrDetailedView):
     """
     detail view of page
     """
@@ -428,7 +428,7 @@ class LeaveAllocationsRequestsTabDetailView(LeaveAllocationRequestDetailView):
 
 
 @method_decorator(login_required, name="dispatch")
-class LeaveAllocationRequestFormView(HorillaFormView):
+class LeaveAllocationRequestFormView(HrFormView):
     """
     Form View
     """
@@ -503,7 +503,7 @@ class LeaveAllocationRequestFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class LeaveAllocationBulkFormView(HorillaFormView):
+class LeaveAllocationBulkFormView(HrFormView):
     """
     Form view to bulk allocate (and optionally approve) leave for multiple
     employees at once.

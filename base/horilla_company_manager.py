@@ -55,12 +55,12 @@ models.Model.clean = clean
 setattr(QuerySet, "update", update)
 
 
-class HorillaCompanyManager(models.Manager):
+class HrCompanyManager(models.Manager):
 
     company_filter_path = None
 
     def __new__(cls, related_company_field=None, *args, **kwargs):
-        if cls is HorillaCompanyManager:
+        if cls is HrCompanyManager:
             cls = type(
                 cls.__name__,
                 (cls,),

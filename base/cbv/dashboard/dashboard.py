@@ -21,7 +21,7 @@ from employee.filters import EmployeeWorkInformationFilter
 from employee.forms import EmployeeWorkInformationUpdateForm
 from employee.models import EmployeeWorkInformation
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaFormView, HorillaListView
+from hr_views.generic.cbv.views import HrFormView, HrListView
 
 
 @method_decorator(login_required, name="dispatch")
@@ -62,7 +62,7 @@ class DashboardWorkTypeRequest(WorkRequestListView):
     def get_queryset(self):
         """Filter queryset based on permissions and request context."""
 
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         queryset = queryset.filter(
             employee_id__is_active=True,
             approved=False,
@@ -107,7 +107,7 @@ class ShiftRequestToApprove(ShiftRequestList):
         self.search_url = reverse("dashboard-shift-request")
 
     def get_queryset(self):
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         queryset = queryset.filter(
             approved=False, canceled=False, employee_id__is_active=True
         )
@@ -119,7 +119,7 @@ class ShiftRequestToApprove(ShiftRequestList):
 @method_decorator(
     manager_can_enter("employee.view_employeeworkinformation"), name="dispatch"
 )
-class EmployeeWorkInformationList(HorillaListView):
+class EmployeeWorkInformationList(HrListView):
     """
     Employee work information progress list
     """
@@ -164,7 +164,7 @@ class EmployeeWorkInformationList(HorillaListView):
 @method_decorator(
     manager_can_enter("employee.change_employeeworkinformation"), name="dispatch"
 )
-class EmployeeWorkInformationFormView(HorillaFormView):
+class EmployeeWorkInformationFormView(HrFormView):
     """
     form view for edit work information
     """
@@ -191,7 +191,7 @@ class EmployeeWorkInformationFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DashboardAnnouncementView(HorillaListView):
+class DashboardAnnouncementView(HrListView):
     """
     list view for dashboard announcement
     """
@@ -220,7 +220,7 @@ class DashboardAnnouncementView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("base.view_announcement"), name="dispatch")
-class AnnouncementViewedByList(HorillaListView):
+class AnnouncementViewedByList(HrListView):
     """
     List view for announcement viewed by on detail view
     """

@@ -11,14 +11,14 @@ from django.views.generic import View
 from dynamic_fields import forms, models
 from dynamic_fields.methods import structured
 from core.decorators import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaFormView
+from hr_views.generic.cbv.views import HrFormView
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(
     permission_required("horilla_automations.change_mailautomation"), name="dispatch"
 )
-class ChoiceFormView(HorillaFormView):
+class ChoiceFormView(HrFormView):
     """
     ChoiceFormView
     """
@@ -32,7 +32,7 @@ class ChoiceFormView(HorillaFormView):
 @method_decorator(
     permission_required("horilla_automations.change_mailautomation"), name="dispatch"
 )
-class DynamicFieldFormView(HorillaFormView):
+class DynamicFieldFormView(HrFormView):
     """
     DynamicFieldFormView
     """

@@ -28,7 +28,7 @@ from base.methods import (
 )
 from base.views import generate_error_report
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http import HorillaRedirect
+from core.http import HrRedirect
 from core.http.response import with_bulk_result
 from core.methods import handle_no_permission
 from notifications.signals import notify
@@ -218,7 +218,7 @@ def create_project(request):
                 "project/new/forms/project_creation.html",
                 context={"form": form},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request, "project/new/forms/project_creation.html", context={"form": form}
     )
@@ -251,7 +251,7 @@ def project_update(request, project_id):
                 "project/new/forms/project_update.html",
                 {"form": project_form, "project_id": project_id},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "project/new/forms/project_update.html",
@@ -664,7 +664,7 @@ def project_archive(request, project_id):
         return HttpResponse(
             "<script>$('#applyFilter').click();$('#reloadMessagesButton').click();</script>"
         )
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 # Task views
@@ -736,7 +736,7 @@ def quick_create_task(request, stage_id):
             },
         )
     messages.info(request, _("You don't have permission."))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -763,14 +763,14 @@ def create_task(request, stage_id):
                     "task/new/forms/create_task.html",
                     context={"form": form, "stage_id": stage_id},
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         return render(
             request,
             "task/new/forms/create_task.html",
             context={"form": form, "stage_id": stage_id},
         )
     messages.info(request, _("You don't have permission."))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -780,7 +780,7 @@ def create_task_in_project(request, project_id):
     """
     project = Project.find(project_id)
     if not project:
-        return HorillaRedirect(request, message=_("Project not found"))
+        return HrRedirect(request, message=_("Project not found"))
     stages = project.project_stages.all()
 
     # Serialize the queryset to JSON
@@ -800,7 +800,7 @@ def create_task_in_project(request, project_id):
                     "task/new/forms/create_task_project.html",
                     context={"form": form, "project_id": project_id},
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         context = {
             "form": form,
             "project_id": project_id,
@@ -810,7 +810,7 @@ def create_task_in_project(request, project_id):
             request, "task/new/forms/create_task_project.html", context=context
         )
     messages.info(request, _("You don't have permission."))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -833,7 +833,7 @@ def update_task(request, task_id):
                 "task/new/forms/update_task.html",
                 {"form": task_form, "task_id": task_id},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "task/new/forms/update_task.html",
@@ -881,7 +881,7 @@ def task_details(request, task_id):
     """
     task = Task.objects.filter(id=task_id).first()
     if not task:
-        return HorillaRedirect(request, message=_("Task not found"))
+        return HrRedirect(request, message=_("Task not found"))
     return render(request, "task/new/task_details.html", context={"task": task})
 
 
@@ -925,7 +925,7 @@ def task_stage_change(request, task_id):
     stage_id = request.GET.get("stage")
     task = Task.find(task_id)
     if not task:
-        return HorillaRedirect(request, message=_("Task not found"))
+        return HrRedirect(request, message=_("Task not found"))
 
     stage = ProjectStage.objects.filter(id=stage_id).first()
     if not stage:
@@ -993,7 +993,7 @@ def create_timesheet_task(request, task_id):
                 "task/new/forms/create_timesheet.html",
                 {"form": form, "task_id": task_id},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     context = {
         "form": form,
         "task_id": task_id,
@@ -1005,7 +1005,7 @@ def create_timesheet_task(request, task_id):
 def update_timesheet_task(request, timesheet_id):
     timesheet = TimeSheet.objects.filter(id=timesheet_id).first()
     if not timesheet:
-        return HorillaRedirect(request, message=_("Timesheet not found"))
+        return HrRedirect(request, message=_("Timesheet not found"))
     form = TimesheetInTaskForm(instance=timesheet)
     if request.method == "POST":
         form = TimesheetInTaskForm(request.POST, instance=timesheet)
@@ -1017,7 +1017,7 @@ def update_timesheet_task(request, timesheet_id):
                 "task/new/forms/update_timesheet.html",
                 {"form": form, "timesheet_id": timesheet_id},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     context = {
         "form": form,
         "timesheet_id": timesheet_id,
@@ -1116,7 +1116,7 @@ def task_all_create(request):
                     "form": form,
                 },
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "task_all/forms/create_taskall.html",
@@ -1131,7 +1131,7 @@ def update_project_task_status(request, task_id):
     status = request.GET.get("status")
     task = Task.find(task_id)
     if not task:
-        return HorillaRedirect(request, message=_("Task not found"))
+        return HrRedirect(request, message=_("Task not found"))
 
     if task.end_date and task.end_date < date.today():
         messages.warning(request, _("Cannot update status. Task has already expired."))
@@ -1157,7 +1157,7 @@ def update_task_all(request, task_id):
                 "task_all/forms/update_taskall.html",
                 context={"form": form, "task_id": task_id},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "task_all/forms/update_taskall.html",
@@ -1256,7 +1256,7 @@ def task_all_archive(request, task_id):
     """
     task = Task.objects.filter(id=task_id).first()
     if not task:
-        return HorillaRedirect(request, message=_("Task not found"))
+        return HrRedirect(request, message=_("Task not found"))
     task.is_active = not task.is_active
     task.save()
     message = _(f"{task} un-archived")
@@ -1267,7 +1267,7 @@ def task_all_archive(request, task_id):
         return HttpResponse(
             "<script>$('#applyFilter').click();$('#reloadMessagesButton').click();</script>"
         )
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 # Project stage views
@@ -1295,7 +1295,7 @@ def create_project_stage(request, project_id):
                 "project_stage/forms/create_project_stage.html",
                 context,
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     context = {"form": form, "project_id": project_id}
     return render(request, "project_stage/forms/create_project_stage.html", context)
 
@@ -1318,7 +1318,7 @@ def update_project_stage(request, stage_id):
                 "project_stage/forms/update_project_stage.html",
                 context={"form": form, "stage_id": stage_id},
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request,
         "project_stage/forms/update_project_stage.html",
@@ -1337,7 +1337,7 @@ def delete_project_stage(request, stage_id):
         view_type = "list"
     stage = ProjectStage.objects.filter(id=stage_id).first()
     if not stage:
-        return HorillaRedirect(request, message=_("Project stage not found"))
+        return HrRedirect(request, message=_("Project stage not found"))
     tasks = Task.objects.filter(stage=stage)
     project_id = stage.project.id
     if not tasks:
@@ -1630,7 +1630,7 @@ def time_sheet_creation(request):
             response = render(
                 request, "time_sheet/form-create.html", context={"form": form}
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(request, "time_sheet/form-create.html", context={"form": form})
 
 
@@ -1681,7 +1681,7 @@ def time_sheet_task_creation(request):
     if request.method == "GET":
         project_id = request.GET.get("project_id")
         if not project_id:
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message=_("Missing required parameters: project_id")
             )
         project = Project.objects.get(id=project_id)
@@ -1732,7 +1732,7 @@ def time_sheet_update(request, time_sheet_id):
                 response = render(
                     request, "time_sheet/form-create.html", context={"form": form}
                 )
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         return render(
             request,
             "time_sheet/form-update.html",
@@ -1742,7 +1742,7 @@ def time_sheet_update(request, time_sheet_id):
         )
     else:
         messages.error(request, _("You don't have permission."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
 
 @login_required
@@ -1755,13 +1755,13 @@ def time_sheet_delete(request, time_sheet_id):
         time_sheet_id (int): The ID of the timesheet to be deleted.
 
     Returns:
-        HorillaRedirect: A redirect response to the timesheet view page.
+        HrRedirect: A redirect response to the timesheet view page.
     """
     if time_sheet_delete_permissions(request, time_sheet_id):
         timesheet = TimeSheet.objects.filter(id=time_sheet_id).first()
         if not timesheet:
             messages.error(request, _("Timesheet not found."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         timesheet.delete()
         messages.success(request, _("The timesheet has been deleted successfully."))
         view_type = "card"
@@ -1938,7 +1938,7 @@ def personal_time_sheet_view(request, emp_id):
     emp = Employee.objects.filter(id=emp_id).first()
     if not emp:
         messages.error(request, _("Employee not found."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     context = {
         "emp_id": emp_id,
         "emp_name": emp.get_full_name(),
@@ -1963,7 +1963,7 @@ def time_sheet_single_view(request, time_sheet_id):
     timesheet = TimeSheet.find(time_sheet_id)
     if not timesheet:
         messages.error(request, _("Timesheet doesn't exist."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     context = {"time_sheet": timesheet}
     return render(request, "time_sheet/time_sheet_single_view.html", context)
 

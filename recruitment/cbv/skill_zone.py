@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaFormView, HorillaListView
+from hr_views.generic.cbv.views import HrFormView, HrListView
 from recruitment.cbv_decorators import manager_can_enter
 from recruitment.filters import SkillZoneCandidateFilter
 from recruitment.forms import SkillZoneCandidateForm, SkillZoneCreateForm
@@ -17,7 +17,7 @@ from recruitment.models import Candidate, SkillZone, SkillZoneCandidate
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("recruitment.add_skillzone"), name="dispatch")
-class SkillZoneFormView(HorillaFormView):
+class SkillZoneFormView(HrFormView):
     """
     form view for create talent pool
     """
@@ -50,7 +50,7 @@ class SkillZoneFormView(HorillaFormView):
 @method_decorator(
     manager_can_enter("recruitment.add_skillzonecandidate"), name="dispatch"
 )
-class SkillZoneCandidateFormView(HorillaFormView):
+class SkillZoneCandidateFormView(HrFormView):
     """
     form view for create talent pool candidate
     """
@@ -88,7 +88,7 @@ class SkillZoneCandidateFormView(HorillaFormView):
 @method_decorator(
     manager_can_enter("recruitment.add_skillzonecandidate"), name="dispatch"
 )
-class SkillZoneProfileListView(HorillaListView):
+class SkillZoneProfileListView(HrListView):
     """
     Talent Pool Candidate profile List View
     """

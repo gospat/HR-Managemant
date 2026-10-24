@@ -13,8 +13,8 @@ from employee.models import Employee
 from hr_automations.methods.methods import generate_choices
 from hr_automations.models import MODEL_CHOICES, MailAutomation
 from hr_widgets.forms import default_select_option_template
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 
 class AutomationForm(ModelForm):
@@ -35,10 +35,10 @@ class AutomationForm(ModelForm):
         super().__init__(*args, **kwargs)
 
         # --- Field: also_sent_to ---
-        self.fields["also_sent_to"] = HorillaMultiSelectField(
+        self.fields["also_sent_to"] = HrMultiSelectField(
             queryset=Employee.objects.all(),
             required=False,
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",
@@ -107,7 +107,7 @@ class AutomationForm(ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        if isinstance(self.fields["also_sent_to"], HorillaMultiSelectField):
+        if isinstance(self.fields["also_sent_to"], HrMultiSelectField):
             self.errors.pop("also_sent_to", None)
 
             employee_data = self.fields["also_sent_to"].queryset.filter(

@@ -957,7 +957,7 @@
                 ? `${offboardingPipelineUrl}?offboarding_id=${row.offboarding_id}&open_tab=1&employee_id=${row.id}`
                 : resignationUrlFor(row.id);
 
-            // Matches HorillaFilterSet._apply_custom_filters' parallel-array
+            // Matches HrFilterSet._apply_custom_filters' parallel-array
             // convention (repeated custom_field/custom_lookup/custom_value keys,
             // zipped positionally) -- the Advanced filter builder's own format,
             // reused here so a dashboard-driven date range lands as a real,

@@ -30,7 +30,7 @@ from employee.filters import EmployeeFilter
 from employee.models import Employee
 from core import settings
 from core.decorators import hx_request_required, login_required, manager_can_enter
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 
 
 def paginator_qry(qryset, page_number):
@@ -94,7 +94,7 @@ def send_mail(request, emp_id=None):
         try:
             employee = Employee.objects.get(id=emp_id)
         except Employee.DoesNotExist:
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message=_("No Employee found matching the query.")
             )
     employees = Employee.objects.all()
@@ -129,7 +129,7 @@ def employee_data_export(request, emp_id=None):
             try:
                 employee = Employee.objects.get(id=emp_id)
             except Employee.DoesNotExist:
-                return HorillaRedirect(
+                return HrRedirect(
                     request, message=_("No Employee found matching the query.")
                 )
 
@@ -207,7 +207,7 @@ def get_mail_preview(request):
     body = request.POST.get("body")
     if not body:
         messages.error(request, _("No body provided for mail preview."))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     # Strip dangerous template constructs first.
     body = sanitize_mail_template_body(body)
@@ -337,4 +337,4 @@ def send_mail_to_employee(request):
                 )
         except Exception as e:
             messages.error(request, _("Something went wrong"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)

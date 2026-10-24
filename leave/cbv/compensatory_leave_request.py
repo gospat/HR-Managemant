@@ -14,12 +14,12 @@ from django.utils.translation import gettext_lazy as _
 from base.methods import filtersubordinates, is_reportingmanager
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from leave.decorators import is_compensatory_leave_enabled
@@ -43,7 +43,7 @@ class CompensatoryLeaveView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(is_compensatory_leave_enabled(), name="dispatch")
-class CompensatoryListView(HorillaListView):
+class CompensatoryListView(HrListView):
     """
     generic list view of page
     """
@@ -129,7 +129,7 @@ class CompensatoryListView(HorillaListView):
     row_status_class = "status-{status}"
 
 
-class _CompensatoryTabNavBase(HorillaNavView):
+class _CompensatoryTabNavBase(HrNavView):
     """
     Shared Search/Filter/Create wiring for each Compensatory Leave tab's
     own, independent Nav - only search_url/search_swap_target differ per
@@ -177,20 +177,20 @@ class CompensatoryLeaveNav(_CompensatoryTabNavBase):
         self.search_swap_target = "#compensatoryListContainer"
 
 
-class MyCompensatoryTabShell(HorillaTabContentShell):
+class MyCompensatoryTabShell(HrTabContentShell):
     nav_url_name = "my-compensatory-nav"
     container_id = "myCompensatoryListContainer"
     tabs_root_id = "compensatory-tab-view"
 
 
-class CompensatoryTabShell(HorillaTabContentShell):
+class CompensatoryTabShell(HrTabContentShell):
     nav_url_name = "compensatory-nav"
     container_id = "compensatoryListContainer"
     tabs_root_id = "compensatory-tab-view"
 
 
 def _compensatory_tab_badge_count(request, view_cls):
-    """Same queryset rules as the tab's HorillaListView (filters, subordinates)."""
+    """Same queryset rules as the tab's HrListView (filters, subordinates)."""
     view = view_cls()
     view.request = request
     view.args = ()
@@ -201,7 +201,7 @@ def _compensatory_tab_badge_count(request, view_cls):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(is_compensatory_leave_enabled(), name="dispatch")
-class CompensatoryLeaveTabView(HorillaTabView):
+class CompensatoryLeaveTabView(HrTabView):
     """
     tabview of the page
     """
@@ -305,7 +305,7 @@ class CompensatoryLeaveTab(CompensatoryListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(is_compensatory_leave_enabled(), name="dispatch")
-class CompensatoryGenericDetailView(HorillaDetailedView):
+class CompensatoryGenericDetailView(HrDetailedView):
     """
     Generic Detail view of page
     """
@@ -351,7 +351,7 @@ class CompensatoryTabDetailView(CompensatoryGenericDetailView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(is_compensatory_leave_enabled(), name="dispatch")
-class CompensatoryForm(HorillaFormView):
+class CompensatoryForm(HrFormView):
     """
     for view
     """
@@ -394,7 +394,7 @@ class CompensatoryForm(HorillaFormView):
         return super().form_valid(form)
 
 
-# class CompensatoryRejectForm(HorillaFormView):
+# class CompensatoryRejectForm(HrFormView):
 #     """
 #     for view
 #     """

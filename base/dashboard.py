@@ -70,7 +70,7 @@ def _resolve_checklist_company(request):
 def _exists_for_company(ModelClass, company_id):
     """
     Return True if at least one record of ModelClass is visible for the given
-    company.  Mirrors HorillaCompanyManager: a record is visible when it is
+    company.  Mirrors HrCompanyManager: a record is visible when it is
     explicitly assigned to this company OR has no company assignment at all
     (meaning it is shared across all companies — common for lookup tables like
     WorkType, EmployeeType, EmployeeShift whose M2M company_id may be empty).
@@ -356,7 +356,7 @@ def _scoped_active_employee_ids(request):
     """
     Return subordinate employee PKs when the user lacks org-wide employee view.
 
-    ``None`` means company-scoped (HorillaCompanyManager) — no extra filter.
+    ``None`` means company-scoped (HrCompanyManager) — no extra filter.
     """
     user = request.user
     if user.is_superuser or user.has_perm("employee.view_employee"):
@@ -831,7 +831,7 @@ def dashboard_gender_split(request):
         if view == "department":
             # .order_by() clears the default ordering Django would otherwise
             # inherit here -- combined with the company-scoping manager's own
-            # .distinct() (see HorillaCompanyManager.get_queryset), an
+            # .distinct() (see HrCompanyManager.get_queryset), an
             # implicit ordering field gets dragged into the GROUP BY,
             # splitting every matching employee into their own one-row
             # "group" (count always 1) instead of aggregating by
@@ -1055,7 +1055,7 @@ def dashboard_todays_leave(request):
 def dashboard_upcoming_holidays(request):
     """Holidays occurring within the current calendar month.
 
-    ``Holidays.objects`` is a ``HorillaCompanyManager``, so the active
+    ``Holidays.objects`` is a ``HrCompanyManager``, so the active
     company (or "All Companies") is already applied automatically -- same
     as every other query on this dashboard -- with no manual session lookup
     needed here.

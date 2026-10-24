@@ -22,16 +22,16 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
-from hr_views.views import HorillaDeleteConfirmationView
+from hr_views.views import HrDeleteConfirmationView
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_assetcategory"), name="dispatch")
-class AssetCategoryFormView(HorillaFormView):
+class AssetCategoryFormView(HrFormView):
     """
     form view for create asset category
     """
@@ -83,7 +83,7 @@ class DynamicCreateAssetCategory(AssetCategoryFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.add_asset"), name="dispatch")
-class AssetFormView(HorillaFormView):
+class AssetFormView(HrFormView):
     """
     form view for create asset
     """
@@ -129,7 +129,7 @@ class AssetFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_assetcategory"), name="dispatch")
-class AssetCategoryDuplicateFormView(HorillaFormView):
+class AssetCategoryDuplicateFormView(HrFormView):
     """
     form view for create duplicate asset category
     """
@@ -167,7 +167,7 @@ class AssetCategoryDuplicateFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_asset"), name="dispatch")
-class AssetDuplicateFormView(HorillaFormView):
+class AssetDuplicateFormView(HrFormView):
     """
     form view for create duplicate for asset
     """
@@ -208,7 +208,7 @@ class AssetDuplicateFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetReportFormView(HorillaFormView):
+class AssetReportFormView(HrFormView):
     """
     form view for create button
     """
@@ -244,13 +244,13 @@ class AssetReportFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_asset"), name="dispatch")
-class AssetCategoryListView(HorillaListView):
+class AssetCategoryListView(HrListView):
     """
     Grouped list view for assets on the Asset Category page.
 
     Lists every Asset (unlike asset.cbv.asset.AssetListView, which is
     hard-filtered to one category for the per-category HTMX refresh used by
-    the asset CRUD forms) so the standard HorillaListView group-by engine can
+    the asset CRUD forms) so the standard HrListView group-by engine can
     group it by category.
     """
 
@@ -340,7 +340,7 @@ class AssetCategoryListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("asset.view_asset"), name="dispatch")
-class AssetCategoryNav(HorillaNavView):
+class AssetCategoryNav(HrNavView):
     """
     nav bar for asset category
     """
@@ -437,10 +437,10 @@ class AssetCategoryNav(HorillaNavView):
             )
 
 
-class AssetDeleteConfirmationView(HorillaDeleteConfirmationView):
+class AssetDeleteConfirmationView(HrDeleteConfirmationView):
     generic_delete_url_name = "generic-delete-asset-category"
 
     def post(self, *args, **kwargs):
         super().post(*args, **kwargs)
         # asset-category-view uses `.filterButton` (theme nav may also have `#applyFilter`)
-        return HorillaFormView.HttpResponse(targets_to_reload=[".filterButton"])
+        return HrFormView.HttpResponse(targets_to_reload=[".filterButton"])

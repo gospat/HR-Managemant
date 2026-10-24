@@ -1,14 +1,14 @@
 """
 core/inherit/model_inherit.py
 
-HorillaModelBase — metaclass for HorillaModel that enables field and method
+HrModelBase — metaclass for HrModel that enables field and method
 injection into existing models via _inherit = "app_label.ModelName".
 
 Usage in an extension app:
 
-    from core.models import HorillaModel
+    from core.models import HrModel
 
-    class AssetExtension(HorillaModel):
+    class AssetExtension(HrModel):
         _inherit = "asset.Asset"
 
         warranty_expiry_date = models.DateField(null=True, blank=True)
@@ -20,7 +20,7 @@ Usage in an extension app:
 
 This returns a placeholder, not a real model — no table, no migration in the
 target app. Fields appear on the target model and their migrations are routed
-to the extension app via INJECTION_MAP + HorillaAutodetector.
+to the extension app via INJECTION_MAP + HrAutodetector.
 """
 
 import warnings
@@ -38,9 +38,9 @@ EXTENSION_REGISTRY: dict = {}
 _SKIP_KEYS = frozenset({"_inherit", "__module__", "__qualname__", "__doc__", "Meta"})
 
 
-class HorillaModelBase(ModelBase):
+class HrModelBase(ModelBase):
     """
-    Metaclass for HorillaModel.
+    Metaclass for HrModel.
 
     When a subclass declares `_inherit = "app_label.ModelName"`, this metaclass:
       1. Extracts all Field instances and non-dunder methods from the class body.

@@ -31,10 +31,10 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -50,7 +50,7 @@ class WorkRequestView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WorkRequestListView(HorillaListView):
+class WorkRequestListView(HrListView):
     """
     list view of the work request page
     """
@@ -162,7 +162,7 @@ class WorkRequestListView(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WorkRequestNavView(HorillaNavView):
+class WorkRequestNavView(HrNavView):
     """
     nav view of the page
     """
@@ -262,7 +262,7 @@ class WorkRequestNavView(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WorkTypeDetailView(HorillaDetailedView):
+class WorkTypeDetailView(HrDetailedView):
     """
     Detail view of page
     """
@@ -320,7 +320,7 @@ class WorkExportCandidate(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DynamicWorkTypeCreateForm(HorillaFormView):
+class DynamicWorkTypeCreateForm(HrFormView):
     """
     form view for creating dynamic work types
     """
@@ -378,7 +378,7 @@ class WorkTypesCreateForm(DynamicWorkTypeCreateForm):
 
 
 @method_decorator(login_required, name="dispatch")
-class WorkTypeFormView(HorillaFormView):
+class WorkTypeFormView(HrFormView):
     """
     form view for creating work types in app
     """
@@ -453,7 +453,7 @@ class WorkTypeFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WorkTypeDuplicateForm(HorillaFormView):
+class WorkTypeDuplicateForm(HrFormView):
     """
     duplicate form
     """

@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.db import models
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 
 
 class UniversityPolicy(models.Model):
-    objects = HorillaCompanyManager(related_company_field="company")
+    objects = HrCompanyManager(related_company_field="company")
     company = models.ForeignKey("base.Company", on_delete=models.PROTECT)
     module = models.CharField(max_length=30)
     version = models.CharField(max_length=60)

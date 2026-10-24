@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from base.methods import filtersubordinates
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 from hr_api.api_serializers.project.serializers import (
     ProjectSerializer,
     ProjectStageSerializer,
@@ -88,7 +88,7 @@ class ProjectGetCreateAPIView(APIView):
             return groupby_queryset(request, url, field_name, filterset.qs)
 
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(filterset.qs, request)
         serializer = ProjectSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -152,7 +152,7 @@ class ProjectStageGetCreateAPIView(APIView):
             stages = self.get_queryset(project_id)
         else:
             stages = self.get_queryset()
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(stages, request)
         serializer = ProjectStageSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -244,7 +244,7 @@ class TaskGetCreateAPIView(APIView):
             return groupby_queryset(request, url, field_name, filterset.qs)
 
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(filterset.qs, request)
         serializer = TaskSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -338,7 +338,7 @@ class TimeSheetGetCreateAPIView(APIView):
             return groupby_queryset(request, url, field_name, filterset.qs)
 
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(filterset.qs, request)
         serializer = TimeSheetSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)

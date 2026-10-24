@@ -5,7 +5,7 @@ Why this exists
 ---------------
 Tenant scoping in this project rests on a ContextVar: ``CompanyMiddleware``
 resolves the caller's company and calls ``set_selected_company()``, and
-``HorillaCompanyManager.get_queryset()`` reads it on every query.
+``HrCompanyManager.get_queryset()`` reads it on every query.
 
 That works for session-authenticated web requests. It does not apply on the
 API path, because of ordering:
@@ -15,7 +15,7 @@ API path, because of ordering:
 
 ``CompanyMiddleware._handle()`` returns early for unauthenticated requests, so
 a token-authenticated request reaches the view with the ContextVar unset, and
-``HorillaCompanyManager`` applies no company predicate when it is unset::
+``HrCompanyManager`` applies no company predicate when it is unset::
 
     if not filter_path or not company:
         return qs          # no company context -> no predicate added
@@ -54,7 +54,7 @@ def resolve_company_id(user):
     conservative reading.
 
     Superusers are left unscoped, matching the web path, where
-    ``HorillaCompanyManager`` treats "all" as tenant-wide for them.
+    ``HrCompanyManager`` treats "all" as tenant-wide for them.
     """
     if user is None or not user.is_authenticated:
         return None
@@ -109,7 +109,7 @@ class TenantScopedJWTAuthentication(JWTAuthentication):
             set_selected_company(company_id)
         elif not user.is_superuser:
             # None means "cannot place this user", never "no restriction".
-            # Proceeding would run HorillaCompanyManager with no predicate.
+            # Proceeding would run HrCompanyManager with no predicate.
             logger.warning(
                 "API request from user_id=%s has no resolvable company; refusing",
                 getattr(user, "pk", None),

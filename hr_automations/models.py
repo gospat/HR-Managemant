@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from base.methods import eval_validate
 from base.models import HorillaMailTemplate
 from employee.models import Employee
-from core.models import HorillaModel
+from core.models import HrModel
 from hr_views.cbv_methods import render_template
 
 MODEL_CHOICES = []
@@ -21,7 +21,7 @@ CONDITIONS = [
 ]
 
 
-class MailAutomation(HorillaModel):
+class MailAutomation(HrModel):
     """
     MailAutoMation
     """

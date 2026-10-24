@@ -6,8 +6,8 @@ from base.methods import reload_queryset
 from employee.filters import EmployeeFilter
 from employee.models import Employee
 from hr_documents.models import Document, DocumentRequest
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 
 class DocumentRequestForm(ModelForm):
@@ -20,7 +20,7 @@ class DocumentRequestForm(ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        if isinstance(self.fields["employee_id"], HorillaMultiSelectField):
+        if isinstance(self.fields["employee_id"], HrMultiSelectField):
             self.errors.pop("employee_id", None)
             if len(self.data.getlist("employee_id")) < 1:
                 raise forms.ValidationError({"employee_id": "This field is required"})
@@ -34,9 +34,9 @@ class DocumentRequestForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["employee_id"] = HorillaMultiSelectField(
+        self.fields["employee_id"] = HrMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",

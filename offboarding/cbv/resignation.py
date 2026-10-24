@@ -18,10 +18,10 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from offboarding.filters import LetterFilter
@@ -59,7 +59,7 @@ class ResignationLettersView(TemplateView):
     check_feature_enabled("resignation_request", OffboardingGeneralSetting),
     name="dispatch",
 )
-class ResignationListView(HorillaListView):
+class ResignationListView(HrListView):
     """
     list view
     """
@@ -160,7 +160,7 @@ class ResignationListView(HorillaListView):
     check_feature_enabled("resignation_request", OffboardingGeneralSetting),
     name="dispatch",
 )
-class ResinationLettersNav(HorillaNavView):
+class ResinationLettersNav(HrNavView):
     """
     Nav bar
     """
@@ -225,7 +225,7 @@ class ResinationLettersNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ResignationLettersFormView(HorillaFormView):
+class ResignationLettersFormView(HrFormView):
     """
     Create and edit form for resignations
     """
@@ -291,7 +291,7 @@ class ResignationLettersFormView(HorillaFormView):
     check_feature_enabled("resignation_request", OffboardingGeneralSetting),
     name="dispatch",
 )
-class ResignationLetterDetailView(HorillaDetailedView):
+class ResignationLetterDetailView(HrDetailedView):
     """
     detail view of resignations
     """

@@ -17,7 +17,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import (
     Company,
     CompanyLeaves,
@@ -31,9 +31,9 @@ from employee.models import Employee, EmployeeWorkInformation
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
-from core.models import HorillaModel, upload_path
+from core.models import HrModel, upload_path
 from hr_audit.methods import get_diff
-from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_views.cbv_methods import render_template
 from leave.methods import (
     calculate_requested_days,
@@ -187,7 +187,7 @@ WEEK_DAYS = [
 ]
 
 
-class LeaveTypeCondition(HorillaModel):
+class LeaveTypeCondition(HrModel):
     """
     Configurable conditions that restrict leave type assignment to eligible employees.
     Mirrors the allowance condition pattern for consistency.
@@ -236,7 +236,7 @@ class LeaveTypeCondition(HorillaModel):
             )
 
 
-class LeaveType(HorillaModel):
+class LeaveType(HrModel):
     icon = models.ImageField(
         null=True, blank=True, upload_to=upload_path, verbose_name=_("Icon")
     )
@@ -352,7 +352,7 @@ class LeaveType(HorillaModel):
             "Eligibility conditions evaluated before assigning this leave type to an employee"
         ),
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         ordering = ["-id"]
@@ -632,7 +632,7 @@ class LeaveType(HorillaModel):
             self.payment_percentage = None
 
 
-class AvailableLeave(HorillaModel):
+class AvailableLeave(HrModel):
     employee_id = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
@@ -661,10 +661,10 @@ class AvailableLeave(HorillaModel):
     expired_date = models.DateField(
         blank=True, null=True, verbose_name=_("CarryForward Expired Date")
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
@@ -1150,7 +1150,7 @@ def cal_effective_requested_days(
     return requested_days
 
 
-class LeaveRequest(HorillaModel):
+class LeaveRequest(HrModel):
     employee_id = models.ForeignKey(
         Employee, on_delete=models.CASCADE, verbose_name=_("Employee")
     )
@@ -1207,7 +1207,7 @@ class LeaveRequest(HorillaModel):
     reject_reason = models.TextField(
         blank=True, verbose_name=_("Rejection Reason"), max_length=255
     )
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
@@ -1220,7 +1220,7 @@ class LeaveRequest(HorillaModel):
         related_name="leave_request_created",
         verbose_name=_("Created By"),
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -2119,7 +2119,7 @@ class LeaverequestFile(models.Model):
     file = models.FileField(upload_to=upload_path)
 
 
-class LeaverequestComment(HorillaModel):
+class LeaverequestComment(HrModel):
     """
     LeaverequestComment Model
     """
@@ -2133,7 +2133,7 @@ class LeaverequestComment(HorillaModel):
         return f"{self.comment}"
 
 
-class LeaveAllocationRequest(HorillaModel):
+class LeaveAllocationRequest(HrModel):
     leave_type_id = models.ForeignKey(
         LeaveType, on_delete=models.PROTECT, verbose_name=_("Leave type")
     )
@@ -2155,13 +2155,13 @@ class LeaveAllocationRequest(HorillaModel):
         max_length=30, choices=LEAVE_ALLOCATION_STATUS, default="requested"
     )
     reject_reason = models.TextField(blank=True)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
-    objects = HorillaCompanyManager(
+    objects = HrCompanyManager(
         related_company_field="employee_id__employee_work_info__company_id"
     )
 
@@ -2327,7 +2327,7 @@ class LeaveAllocationRequest(HorillaModel):
         return url
 
 
-class LeaveallocationrequestComment(HorillaModel):
+class LeaveallocationrequestComment(HrModel):
     """
     LeaveallocationrequestComment Model
     """
@@ -2349,7 +2349,7 @@ class LeaveRequestConditionApproval(models.Model):
     manager_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
 
-class RestrictLeave(HorillaModel):
+class RestrictLeave(HrModel):
     title = models.CharField(max_length=200, verbose_name=_("Title"))
     start_date = models.DateField(verbose_name=_("Start Date"))
     end_date = models.DateField(verbose_name=_("End Date"))
@@ -2392,7 +2392,7 @@ class RestrictLeave(HorillaModel):
         on_delete=models.CASCADE,
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     def __str__(self) -> str:
         return f"{self.title}"
@@ -2444,7 +2444,7 @@ class RestrictLeave(HorillaModel):
 
 if apps.is_installed("attendance"):
 
-    class CompensatoryLeaveRequest(HorillaModel):
+    class CompensatoryLeaveRequest(HrModel):
         leave_type_id = models.ForeignKey(
             LeaveType, on_delete=models.PROTECT, verbose_name="Leave type"
         )
@@ -2462,13 +2462,13 @@ if apps.is_installed("attendance"):
             max_length=30, choices=LEAVE_ALLOCATION_STATUS, default="requested"
         )
         reject_reason = models.TextField(blank=True, max_length=255)
-        history = HorillaAuditLog(
+        history = HrAuditLog(
             related_name="history_set",
             bases=[
                 HorillaAuditInfo,
             ],
         )
-        objects = HorillaCompanyManager(
+        objects = HrCompanyManager(
             related_company_field="employee_id__employee_work_info__company_id"
         )
 
@@ -2629,19 +2629,19 @@ if apps.is_installed("attendance"):
             super().save(*args, **kwargs)
 
 
-class LeaveGeneralSetting(HorillaModel):
+class LeaveGeneralSetting(HrModel):
     """
     LeaveGeneralSettings
     """
 
     compensatory_leave = models.BooleanField(default=True)
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
 
 
 if apps.is_installed("attendance"):
 
-    class CompensatoryLeaverequestComment(HorillaModel):
+    class CompensatoryLeaverequestComment(HrModel):
         """
         CompensatoryLeaverequestComment Model
         """
@@ -2657,12 +2657,12 @@ if apps.is_installed("attendance"):
             return f"{self.comment}"
 
 
-class EmployeePastLeaveRestrict(HorillaModel):
+class EmployeePastLeaveRestrict(HrModel):
     enabled = models.BooleanField(default=True)
     company_id = models.ForeignKey(
         Company, null=True, blank=True, on_delete=models.CASCADE
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
 
 if apps.is_installed("attendance"):

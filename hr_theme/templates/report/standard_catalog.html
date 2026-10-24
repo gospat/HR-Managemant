@@ -7,10 +7,10 @@
     .sr-tabs-row-top .oh-btn { flex-shrink: 0; }
 
     /* Browse/Audit/Subscriptions — chip-pill tabs with a count badge each,
-       matching HorillaTabView's real look (horilla_theme/templates/generic/
+       matching HrTabView's real look (horilla_theme/templates/generic/
        horilla_tabs.html: .oh-tabs__tab / .oh-tabs__tab--active / the coral
        count-circle). Values copied from that component; kept as our own
-       .sr-tab classes rather than swapping in HorillaTabView itself, since
+       .sr-tab classes rather than swapping in HrTabView itself, since
        that component's JS drives its own htmx-per-tab-url/localStorage-free
        lazy-load machinery, while this page already has its own (simpler,
        already-correct) tab-switch JS below. */
@@ -63,7 +63,7 @@
     .sr-toolbar--minimal .sr-toolbar-controls-card { display: none; }
     #srTabsRow { width: 100%; display: flex; flex-direction: column; gap: 12px; }
     /* Every region on a standard Horilla list page sits inside its own
-       white card (HorillaTabView's chip-tab bar in one, HorillaNavView's
+       white card (HrTabView's chip-tab bar in one, HrNavView's
        toolbar + the table in another) rather than floating on the grey
        page background — this reproduces that same "nothing floats bare"
        structure for the tab bar and the search/sort/view toolbar. */
@@ -97,7 +97,7 @@
     }
     .dark .sr-search input { background: hsl(0, 0%, 15%); border-color: hsl(0, 0%, 30%); }
 
-    /* Sort/Recent triggers match HorillaNavView's real Filter-button look
+    /* Sort/Recent triggers match HrNavView's real Filter-button look
        (horilla_theme/templates/generic/horilla_nav.html: white bg + a
        coral-tinted border, not oh-btn--light-bkg's grey fill -- see
        markup); only the dropdown-content panels below are page-specific. */
@@ -336,7 +336,7 @@
        those never actually applied. Sizes/colors match the real list
        table's own header/cell typography (14px/#000 header-ish text,
        14px/#666 muted cell text) confirmed via computed styles on the
-       Audit tab's real HorillaListView table. */
+       Audit tab's real HrListView table. */
     .sr-row__name { font-weight: 600; font-size: 14px; line-height: 1.4; }
     /* 13px and single-line for the list: at 14px the description carried the
        same visual weight as the name it sits under, so nothing anchored the
@@ -372,7 +372,7 @@
        of duplicate markup. Tokens (border #ebebeb, .shadow-card box-shadow,
        text-sm/text-xs sizing) are copied from the theme's own card
        component — horilla_theme/templates/generic/horilla_card.html, which
-       is what HorillaCardView (e.g. the Employees grid) actually renders. */
+       is what HrCardView (e.g. the Employees grid) actually renders. */
     /* 320px floor rather than 260px: at 260 the old four-across
        "check | icon | body | actions" band left the description roughly
        130px wide, which wrapped it to ~7 words a line and stretched cards

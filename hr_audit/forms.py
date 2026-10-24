@@ -91,14 +91,14 @@ class HistoryTrackingFieldsForm(forms.Form):
 
 
 def _eligible_models():
-    """Return concrete HorillaModel subclasses that can be audit-tracked."""
+    """Return concrete HrModel subclasses that can be audit-tracked."""
     from django.apps import apps as django_apps
 
-    from core.models import HorillaModel
+    from core.models import HrModel
 
     eligible = []
     for model in django_apps.get_models():
-        if not issubclass(model, HorillaModel) or model._meta.abstract:
+        if not issubclass(model, HrModel) or model._meta.abstract:
             continue
         eligible.append(model)
     eligible.sort(key=lambda m: (m._meta.app_label, m._meta.model_name))

@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext as _
 
 from core.decorators import apply_decorators
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_auth.models import HorillaUser
 
 
@@ -225,7 +225,7 @@ def history_tracking(request, obj_id, **kwargs):
     def _history_tracking(request, obj_id, model):
         instance = model.objects.filter(pk=obj_id).first()
         if not instance:
-            return HorillaRedirect(request, message=_("Object not found"))
+            return HrRedirect(request, message=_("Object not found"))
         histories = instance.horilla_history.all()
         page_number = request.GET.get("page", 1)
         paginator = Paginator(histories, 4)

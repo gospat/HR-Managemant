@@ -18,10 +18,10 @@ from django.utils.translation import gettext_noop
 from employee.models import Employee
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -42,7 +42,7 @@ class StageView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="recruitment.view_stage"), name="dispatch")
-class StageList(HorillaListView):
+class StageList(HrListView):
     """
     List view of stage
     """
@@ -64,7 +64,7 @@ class StageList(HorillaListView):
             .select_related("recruitment_id")
             .prefetch_related(
                 # Employee's manager silently filters is_active=True on .all()
-                # (HorillaCompanyManager), but prefetch_related builds its batch
+                # (HrCompanyManager), but prefetch_related builds its batch
                 # query from get_queryset() and skips that filter. Mismatched
                 # query shapes mean the prefetch cache never matches what the
                 # row template actually calls, causing a fresh query per stage.
@@ -166,7 +166,7 @@ class StageList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="recruitment.view_stage"), name="dispatch")
-class StageNav(HorillaNavView):
+class StageNav(HrNavView):
     """
     For nav bar
     """
@@ -200,7 +200,7 @@ class StageNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="recruitment.add_stage"), name="dispatch")
-class StageFormView(HorillaFormView):
+class StageFormView(HrFormView):
     """
     Form View
     """
@@ -288,7 +288,7 @@ class StageFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="recruitment.change_stage"), name="dispatch")
-class StageDuplicateForm(HorillaFormView):
+class StageDuplicateForm(HrFormView):
     """
     Duplicate form view
     """
@@ -335,7 +335,7 @@ class StageDuplicateForm(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="recruitment.view_stage"), name="dispatch")
-class StageDetailView(HorillaDetailedView):
+class StageDetailView(HrDetailedView):
     """
     detail view of page
     """

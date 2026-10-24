@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from base.methods import filtersubordinates
 from core.decorators import hx_request_required
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 from pms.cbv.feedback import RequestedFeedbackTab
 from pms.filters import EmployeeObjectiveFilter, KeyResultFilter
 from pms.models import EmployeeKeyResult, EmployeeObjective
@@ -68,7 +68,7 @@ class DashboardFeedbackView(RequestedFeedbackTab):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(hx_request_required, name="dispatch")
-class KeyResultStatus(HorillaListView):
+class KeyResultStatus(HrListView):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
@@ -106,11 +106,11 @@ class KeyResultStatus(HorillaListView):
 
     @method_decorator(login_required, name="dispatch")
     def dispatch(self, *args, **kwargs):
-        return super(HorillaListView, self).dispatch(*args, **kwargs)
+        return super(HrListView, self).dispatch(*args, **kwargs)
 
 
 @method_decorator(login_required, name="dispatch")
-class DasboardObjectivesRisk(HorillaListView):
+class DasboardObjectivesRisk(HrListView):
     """
     list view for objectives at risk
     """

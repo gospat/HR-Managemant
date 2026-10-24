@@ -15,7 +15,7 @@ def default_currency(request):
     """
     settings = models.PayrollSettings.objects.first()
     if settings is None:
-        # HorillaCompanyManager scopes .objects.first() to the request's
+        # HrCompanyManager scopes .objects.first() to the request's
         # current company -- a freshly created row here isn't guaranteed to
         # be visible on an immediate re-query (e.g. no company selected yet
         # for a brand new employee's very first request), so reuse this

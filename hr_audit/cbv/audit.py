@@ -17,15 +17,15 @@ from hr_audit.filters import AudiTagFilter
 from hr_audit.models import AuditTag
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("horilla_audit.view_audittag"), name="dispatch")
-class AudiTagsList(HorillaListView):
+class AudiTagsList(HrListView):
     """
     list view of the audit tags in settings
     """
@@ -82,7 +82,7 @@ class AudiTagsList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("horilla_audit.view_audittag"), name="dispatch")
-class AuditTagsNavView(HorillaNavView):
+class AuditTagsNavView(HrNavView):
     """
     navbar of audit tags view
     """
@@ -106,7 +106,7 @@ class AuditTagsNavView(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("horilla_audit.add_audittag"), name="dispatch")
-class AuditTagCreateForm(HorillaFormView):
+class AuditTagCreateForm(HrFormView):
     """
     form view for creating and update Audit Tag in settings
     """

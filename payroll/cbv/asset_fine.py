@@ -10,16 +10,16 @@ from django.utils.translation import gettext_lazy as _
 
 from base.templatetags.horillafilters import is_asset_fine_enabled
 from employee.models import Employee
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from core.methods import get_horilla_model_class
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaFormView
+from hr_views.generic.cbv.views import HrFormView
 from payroll.forms.component_forms import AssetFineForm, LoanAccountForm
 from payroll.models.models import LoanAccount
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetFineFormView(HorillaFormView):
+class AssetFineFormView(HrFormView):
     """
     form view for create asset assign form
     """
@@ -30,7 +30,7 @@ class AssetFineFormView(HorillaFormView):
 
     def dispatch(self, request, *args, **kwargs):
         if not is_asset_fine_enabled(request):
-            return HorillaRedirect(request, message=_("Asset fine is not enabled."))
+            return HrRedirect(request, message=_("Asset fine is not enabled."))
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form: AssetFineForm) -> HttpResponse:

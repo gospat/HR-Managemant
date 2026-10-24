@@ -9,7 +9,7 @@ from hr_views.cbv_methods import (
     permission_required,
     render_template,
 )
-from hr_views.generic.cbv.views import HorillaListView, HorillaNavView
+from hr_views.generic.cbv.views import HrListView, HrNavView
 
 
 @method_decorator(login_required, name="dispatch")
@@ -17,7 +17,7 @@ from hr_views.generic.cbv.views import HorillaListView, HorillaNavView
     permission_required("base.view_attendanceallowedip"),
     name="dispatch",
 )
-class IpRestrictionList(HorillaListView):
+class IpRestrictionList(HrListView):
     """
     List view of the page
     """
@@ -65,7 +65,7 @@ class IpRestrictionList(HorillaListView):
     permission_required("base.view_attendanceallowedip"),
     name="dispatch",
 )
-class IpRestrictionnav(HorillaNavView):
+class IpRestrictionnav(HrNavView):
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)

@@ -40,13 +40,13 @@ from base.models import (
 from employee.models import Employee
 from core.filters import (
     FilterSet,
-    HorillaFilterSet,
+    HrFilterSet,
     filter_by_name,
     filter_name_or_badge_terms,
 )
 
 
-class ShiftRequestFilter(HorillaFilterSet):
+class ShiftRequestFilter(HrFilterSet):
     """
     Custom filter for Shift Requests.
     """
@@ -84,7 +84,7 @@ class ShiftRequestFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=__("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- every
     # model/queryset-backed field in the modern filter panel opts in here
     # instead of pre-rendering its whole queryset as <option> tags.
@@ -229,7 +229,7 @@ class ShiftRequestFilter(HorillaFilterSet):
         )
 
 
-class WorkTypeRequestFilter(HorillaFilterSet):
+class WorkTypeRequestFilter(HrFilterSet):
     """
     Custom filter for Work Type Requests.
     """
@@ -266,7 +266,7 @@ class WorkTypeRequestFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=__("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- every
     # model/queryset-backed field in the modern filter panel opts in here
     # instead of pre-rendering its whole queryset as <option> tags.
@@ -411,7 +411,7 @@ class WorkTypeRequestFilter(HorillaFilterSet):
         )
 
 
-class RotatingShiftAssignFilters(HorillaFilterSet):
+class RotatingShiftAssignFilters(HrFilterSet):
     """
     Custom filter for Rotating Shift Assign.
     """
@@ -433,7 +433,7 @@ class RotatingShiftAssignFilters(HorillaFilterSet):
         method="filter_name_or_badge", label=__("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- every
     # model/queryset-backed field in the modern filter panel opts in here
     # instead of pre-rendering its whole queryset as <option> tags.
@@ -573,7 +573,7 @@ class RotatingShiftAssignFilters(HorillaFilterSet):
         )
 
 
-class RotatingWorkTypeAssignFilter(HorillaFilterSet):
+class RotatingWorkTypeAssignFilter(HrFilterSet):
     """
     Custom filter for Rotating Work Type Assign.
     """
@@ -595,7 +595,7 @@ class RotatingWorkTypeAssignFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=__("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- every
     # model/queryset-backed field in the modern filter panel opts in here
     # instead of pre-rendering its whole queryset as <option> tags.
@@ -799,7 +799,7 @@ class RotatingShiftRequestReGroup:
     ]
 
 
-class MultipleApprovalConditionFilter(HorillaFilterSet):
+class MultipleApprovalConditionFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
 
@@ -839,7 +839,7 @@ class EmployeeShiftScheduleFilter(FilterSet):
         fields = []
 
 
-class RotatingShiftFilter(HorillaFilterSet):
+class RotatingShiftFilter(HrFilterSet):
 
     # search = django_filters.CharFilter(
     #     field_name="name", lookup_expr="icontains"
@@ -862,7 +862,7 @@ class RotatingShiftFilter(HorillaFilterSet):
         ).distinct()
 
 
-class DepartmentViewFilter(HorillaFilterSet):
+class DepartmentViewFilter(HrFilterSet):
     search = django_filters.CharFilter(method="filter_by_all_fields")
 
     class Meta:
@@ -878,7 +878,7 @@ class DepartmentViewFilter(HorillaFilterSet):
         ).distinct()
 
 
-class WorkTypeFilter(HorillaFilterSet):
+class WorkTypeFilter(HrFilterSet):
 
     search = django_filters.CharFilter(field_name="work_type", lookup_expr="icontains")
 
@@ -889,7 +889,7 @@ class WorkTypeFilter(HorillaFilterSet):
         ]
 
 
-class RotatingWorkTypeFilter(HorillaFilterSet):
+class RotatingWorkTypeFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
 
@@ -922,7 +922,7 @@ class EmployeeTypeFilter(FilterSet):
         ]
 
 
-class JobRoleFilter(HorillaFilterSet):
+class JobRoleFilter(HrFilterSet):
     search = django_filters.CharFilter(method="filter_by_all_fields")
 
     class Meta:
@@ -961,7 +961,7 @@ class CompanyFilter(FilterSet):
         fields = ["company", "hq", "address", "country", "state", "city", "zip"]
 
 
-class MailServerFilter(HorillaFilterSet):
+class MailServerFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
 
@@ -977,7 +977,7 @@ class MailServerFilter(HorillaFilterSet):
         return ((queryset.filter(username__icontains=value))).distinct()
 
 
-class HolidayFilter(HorillaFilterSet):
+class HolidayFilter(HrFilterSet):
     """
     Filter class for Holidays model.
 
@@ -1031,7 +1031,7 @@ class HolidayFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Start Date/End Date used to each
@@ -1068,7 +1068,7 @@ class HolidayFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -1077,7 +1077,7 @@ class HolidayFilter(HorillaFilterSet):
         return self._apply_custom_filters(queryset)
 
 
-class CompanyLeaveFilter(HorillaFilterSet):
+class CompanyLeaveFilter(HrFilterSet):
     """
     Filter class for CompanyLeaves model.
 
@@ -1143,7 +1143,7 @@ class PenaltyFilter(FilterSet):
         fields = "__all__"
 
 
-class MailLogFilter(HorillaFilterSet):
+class MailLogFilter(HrFilterSet):
 
     search = django_filters.CharFilter(field_name="subject", lookup_expr="icontains")
 
@@ -1152,7 +1152,7 @@ class MailLogFilter(HorillaFilterSet):
         fields = "__all__"
 
 
-class AnnouncementFilter(HorillaFilterSet):
+class AnnouncementFilter(HrFilterSet):
 
     search = django_filters.CharFilter(field_name="title", lookup_expr="icontains")
 
@@ -1161,7 +1161,7 @@ class AnnouncementFilter(HorillaFilterSet):
         fields = "__all__"
 
 
-class AnnouncementViewFilter(HorillaFilterSet):
+class AnnouncementViewFilter(HrFilterSet):
 
     search = django_filters.CharFilter(
         field_name="announcement", lookup_expr="icontains"
@@ -1177,7 +1177,7 @@ class AnnouncementViewFilter(HorillaFilterSet):
 # ---------------------------------------------------------------------------
 
 
-class RosterFilter(HorillaFilterSet):
+class RosterFilter(HrFilterSet):
     """
     Filters the Roster queryset by employee, department, and date range.
     """
@@ -1188,7 +1188,7 @@ class RosterFilter(HorillaFilterSet):
     )
     # queryset=Department.objects.all() directly (not deferred to
     # queryset=None + a real assignment in __init__ like the pre-modern
-    # version of this field did) -- HorillaFilterSet.__init__ calls
+    # version of this field did) -- HrFilterSet.__init__ calls
     # reload_queryset() on every ModelChoiceField before __init__'s own
     # body gets a chance to run, and that reads field.queryset.model
     # unconditionally, crashing on a still-None queryset. A plain
@@ -1230,7 +1230,7 @@ class RosterFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=__("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation).
     ajax_fields = {
         "employee": {
@@ -1295,7 +1295,7 @@ class RosterFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Date's existing from_date/to_date
@@ -1326,7 +1326,7 @@ class RosterFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.

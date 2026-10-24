@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from asset.cbv.request_and_allocation import AssetAllocationList, AssetRequestList
 from base.methods import filtersubordinates
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 
 
 @method_decorator(login_required, name="dispatch")
@@ -35,7 +35,7 @@ class AssetRequestToApprove(AssetRequestList):
         self.option_method = None
 
     def get_queryset(self):
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         queryset = queryset.filter(
             asset_request_status="Requested", requested_employee_id__is_active=True
         )

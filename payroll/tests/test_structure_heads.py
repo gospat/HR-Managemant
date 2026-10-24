@@ -456,9 +456,9 @@ class DetailModalStructureTests(TestCase):
         sit against the top of an 85vh dialog rather than shrinking to fit, so
         every other Detail View in the app has to be left alone.
         """
-        from hr_views.generic.cbv.views import HorillaDetailedView
+        from hr_views.generic.cbv.views import HrDetailedView
 
-        self.assertFalse(HorillaDetailedView.sticky_chrome)
+        self.assertFalse(HrDetailedView.sticky_chrome)
 
 
 class LossOfPayLineTests(TestCase):

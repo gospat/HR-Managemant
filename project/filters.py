@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from core.filters import (
     FilterSet,
-    HorillaFilterSet,
+    HrFilterSet,
     filter_by_name,
     filter_name_or_badge_terms,
 )
@@ -15,14 +15,14 @@ from core.filters import (
 from .models import Employee, Project, ProjectStage, Task, TimeSheet
 
 
-class ProjectFilter(HorillaFilterSet):
+class ProjectFilter(HrFilterSet):
     search = django_filters.CharFilter(method="filter_by_project")
     search_field = django_filters.CharFilter(method="search_in")
     name_or_badge = django_filters.CharFilter(
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     ajax_fields = {
         "managers": {
             "key": "project-managers",
@@ -121,7 +121,7 @@ class TaskFilter(FilterSet):
         return queryset
 
 
-class TaskAllFilter(HorillaFilterSet):
+class TaskAllFilter(HrFilterSet):
     search = django_filters.CharFilter(method="filter_by_task")
     end_date = django_filters.DateFilter(
         field_name="end_date",
@@ -155,7 +155,7 @@ class TaskAllFilter(HorillaFilterSet):
         label=_("Active Till"),
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     ajax_fields = {
         "project": {
             "key": "task-project",
@@ -220,7 +220,7 @@ class TaskAllFilter(HorillaFilterSet):
         return queryset
 
 
-class TimeSheetFilter(HorillaFilterSet):
+class TimeSheetFilter(HrFilterSet):
     """
     Filter set class for Timesheet model
     """
@@ -246,7 +246,7 @@ class TimeSheetFilter(HorillaFilterSet):
     )
     search = django_filters.CharFilter(method="filter_by_employee")
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     ajax_fields = {
         "project_id": {
             "key": "timesheet-project",

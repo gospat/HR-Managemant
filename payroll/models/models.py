@@ -21,7 +21,7 @@ from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.methods import get_next_month_same_date
 from base.models import (
     Company,
@@ -36,8 +36,8 @@ from employee.methods.duration_methods import strtime_seconds
 from employee.models import BonusPoint, Employee, EmployeeWorkInformation
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
-from core.models import HorillaModel, upload_path
-from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from core.models import HrModel, upload_path
+from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_views.cbv_methods import render_template
 from payroll.methods.proration import BASIS_CHOICES
 
@@ -162,12 +162,12 @@ def get_date_range(start_date, end_date):
     return date_list
 
 
-class FilingStatus(HorillaModel):
+class FilingStatus(HrModel):
     """
     FilingStatus model
     """
 
-    # python_code holds Python source, not prose or markup, and HorillaModel's
+    # python_code holds Python source, not prose or markup, and HrModel's
     # XSS regex is built for HTML. Its inline-event-handler pattern (on\w+\s*=)
     # matches any assignment to a variable containing "on" — "month_taxable =",
     # "contribution =", "bonus =" — so a perfectly ordinary tax formula was
@@ -251,7 +251,7 @@ class FilingStatus(HorillaModel):
     company_id = models.ForeignKey(
         Company, null=True, editable=False, on_delete=models.PROTECT
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def __str__(self) -> str:
         return str(self.filing_status)
@@ -361,7 +361,7 @@ class FilingStatus(HorillaModel):
         verbose_name_plural = _("Filing Statuses")
 
 
-class Contract(HorillaModel):
+class Contract(HrModel):
     """
     Contract Model
     """
@@ -607,14 +607,14 @@ class Contract(HorillaModel):
     )
 
     note = models.TextField(null=True, blank=True)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
 
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def get_contract_detail_col(self):
         """
@@ -1196,7 +1196,7 @@ class WorkRecord(models.Model):
     is_leave_record = models.BooleanField(default=False)
     day_percentage = models.FloatField(default=0)
     last_update = models.DateTimeField(null=True, blank=True)
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def save(self, *args, **kwargs):
         self.last_update = timezone.now()
@@ -1544,10 +1544,10 @@ class SystemSafeQuerySet(models.QuerySet):
         return super().delete()
 
 
-SystemSafeCompanyManagerBase = HorillaCompanyManager.from_queryset(SystemSafeQuerySet)
+SystemSafeCompanyManagerBase = HrCompanyManager.from_queryset(SystemSafeQuerySet)
 
 
-class Allowance(HorillaModel):
+class Allowance(HrModel):
     """
     Allowance model
     """
@@ -2222,7 +2222,7 @@ class Allowance(HorillaModel):
         return super().delete(*args, **kwargs)
 
 
-class Deduction(HorillaModel):
+class Deduction(HrModel):
     """
     Deduction model
     """
@@ -2868,7 +2868,7 @@ class Deduction(HorillaModel):
         return super().delete(*args, **kwargs)
 
 
-class SalaryStructure(HorillaModel):
+class SalaryStructure(HrModel):
     """
     Salary Structure model
 
@@ -2918,7 +2918,7 @@ class SalaryStructure(HorillaModel):
     company_id = models.ForeignKey(
         Company, null=True, editable=False, on_delete=models.PROTECT
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -3412,7 +3412,7 @@ class SalaryStructure(HorillaModel):
         )
 
 
-class Payslip(HorillaModel):
+class Payslip(HrModel):
     """
     Payslip model
     """
@@ -3455,9 +3455,9 @@ class Payslip(HorillaModel):
         max_length=20, null=True, default="draft", choices=status_choices
     )
     sent_to_employee = models.BooleanField(null=True, default=False)
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
     installment_ids = models.ManyToManyField(Deduction, editable=False)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
@@ -3639,7 +3639,7 @@ class Payslip(HorillaModel):
         ]
 
 
-class LoanAccount(HorillaModel):
+class LoanAccount(HrModel):
     """
     This modal is used to store the loan Account details
     """
@@ -3683,7 +3683,7 @@ class LoanAccount(HorillaModel):
             null=True,
             editable=False,
         )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def __str__(self):
         return f"{self.title} - {self.employee_id}"
@@ -3826,7 +3826,7 @@ class ReimbursementMultipleAttachment(models.Model):
     objects = models.Manager()
 
 
-class Reimbursement(HorillaModel):
+class Reimbursement(HrModel):
     """
     Reimbursement Model
     """
@@ -3896,7 +3896,7 @@ class Reimbursement(HorillaModel):
     allowance_id = models.ForeignKey(
         Allowance, on_delete=models.SET_NULL, null=True, editable=False
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         ordering = ["-id"]
@@ -4152,7 +4152,7 @@ class ReimbursementFile(models.Model):
     objects = models.Manager()
 
 
-class ReimbursementrequestComment(HorillaModel):
+class ReimbursementrequestComment(HrModel):
     """
     ReimbursementRequestComment Model
     """
@@ -4182,7 +4182,7 @@ class PayrollGeneralSetting(models.Model):
         default=30,
     )
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
 
 class EncashmentGeneralSettings(models.Model):
@@ -4287,7 +4287,7 @@ class PayslipAutoGenerate(models.Model):
         blank=True,
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     def get_generate_day_display(self):
         """

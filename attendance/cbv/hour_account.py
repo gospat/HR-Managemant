@@ -23,10 +23,10 @@ from base.methods import (
 )
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 
@@ -41,7 +41,7 @@ class HourAccount(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HourAccountList(HorillaListView):
+class HourAccountList(HrListView):
     """
     List view
     """
@@ -116,7 +116,7 @@ class HourAccountList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HourAccountNav(HorillaNavView):
+class HourAccountNav(HrNavView):
     """
     Nav bar
     """
@@ -212,7 +212,7 @@ class HourExportView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HourAccountDetailView(HorillaDetailedView):
+class HourAccountDetailView(HrDetailedView):
     """
     Detail View
     """
@@ -241,7 +241,7 @@ class HourAccountDetailView(HorillaDetailedView):
 @method_decorator(
     manager_can_enter("attendance.add_attendanceovertime"), name="dispatch"
 )
-class HourAccountFormView(HorillaFormView):
+class HourAccountFormView(HrFormView):
     """
     Form View
     """

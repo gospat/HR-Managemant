@@ -27,7 +27,7 @@ from base.methods import (
 from employee.filters import DocumentPipelineFilter, DocumentRequestFilter
 from employee.models import Employee
 from core.decorators import manager_can_enter
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_documents.forms import DocumentForm
 from hr_documents.forms import DocumentRejectCbvForm as RejectForm
 from hr_documents.forms import DocumentRequestForm, DocumentUpdateForm
@@ -40,9 +40,9 @@ from hr_views.cbv_methods import (
 )
 from hr_views.generic.cbv.pipeline import Pipeline
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 from notifications.signals import notify
 
@@ -95,7 +95,7 @@ def htmx_refresh_document_request_container(request) -> Optional[HttpResponse]:
 @method_decorator(
     manager_can_enter("horilla_documents.add_documentrequest"), name="dispatch"
 )
-class DocumentRequestCreateForm(HorillaFormView):
+class DocumentRequestCreateForm(HrFormView):
     """
     form view for create and update document request
     """
@@ -145,13 +145,13 @@ class DocumentRequestCreateForm(HorillaFormView):
             refreshed = htmx_refresh_document_request_container(self.request)
             if refreshed is not None:
                 return refreshed
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
 
         return super().form_valid(form)
 
 
 @method_decorator(login_required, name="dispatch")
-class DocumentCreateForm(HorillaFormView):
+class DocumentCreateForm(HrFormView):
     """
     form view for upload document
     """
@@ -178,19 +178,19 @@ class DocumentCreateForm(HorillaFormView):
                 refreshed = htmx_refresh_document_request_container(self.request)
                 if refreshed is not None:
                     return refreshed
-                return HorillaRedirect(self.request)
+                return HrRedirect(self.request)
 
         form.save()
         messages.success(self.request, _("Document Uploaded Successfully"))
         refreshed = htmx_refresh_document_request_container(self.request)
         if refreshed is not None:
             return refreshed
-        return HorillaRedirect(self.request)
+        return HrRedirect(self.request)
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("horilla_documents.add_document"), name="dispatch")
-class DocumentRejectCbvForm(HorillaFormView):
+class DocumentRejectCbvForm(HrFormView):
     """
     form view for rejecting document on document request and employee individual view
     """
@@ -216,13 +216,13 @@ class DocumentRejectCbvForm(HorillaFormView):
             refreshed = htmx_refresh_document_request_container(self.request)
             if refreshed is not None:
                 return refreshed
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
 
         return super().form_valid(form)
 
 
 @method_decorator(login_required, name="dispatch")
-class DocumentUploadForm(HorillaFormView):
+class DocumentUploadForm(HrFormView):
     """
     form view for upload documents on document request and employee individual view
     """
@@ -256,7 +256,7 @@ class DocumentUploadForm(HorillaFormView):
                 refreshed = htmx_refresh_document_request_container(self.request)
                 if refreshed is not None:
                     return refreshed
-                return HorillaRedirect(self.request)
+                return HrRedirect(self.request)
 
         if form.is_valid():
             if form.instance.pk:
@@ -282,13 +282,13 @@ class DocumentUploadForm(HorillaFormView):
             refreshed = htmx_refresh_document_request_container(self.request)
             if refreshed is not None:
                 return refreshed
-            return HorillaRedirect(self.request)
+            return HrRedirect(self.request)
 
         return super().form_valid(form)
 
 
 @method_decorator(login_required, name="dispatch")
-class DocumentRequestNav(HorillaNavView):
+class DocumentRequestNav(HrNavView):
     """
     For nav bar
     """
@@ -399,7 +399,7 @@ class DocumentRequestPipelineView(Pipeline):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Pipeline never builds filter_dict itself (unlike HorillaListView), so build it here
+        # Pipeline never builds filter_dict itself (unlike HrListView), so build it here
         # the same way, or the nav's "remove filter" tags would render empty.
         data_dict = parse_qs(self.request.GET.urlencode())
         data_dict = {
@@ -445,7 +445,7 @@ class DocumentRequestPipelineView(Pipeline):
 
 
 @method_decorator(login_required, name="dispatch")
-class DocumentListView(HorillaListView):
+class DocumentListView(HrListView):
     """
     List view for document request
     """
@@ -547,7 +547,7 @@ class DocumentIndividualTabList(DocumentListView):
         if queryset is None:
             pk = self.kwargs.get("pk")
             queryset = self.model.objects.filter(employee_id=pk)
-        return HorillaListView.get_queryset(self, queryset, filtered, *args, **kwargs)
+        return HrListView.get_queryset(self, queryset, filtered, *args, **kwargs)
 
 
 @method_decorator(login_required, name="dispatch")
@@ -563,7 +563,7 @@ class DocumentIndividualTabShell(ProfileTabShellView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DocumentIndividualNav(HorillaNavView):
+class DocumentIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Documents profile tab.
     """

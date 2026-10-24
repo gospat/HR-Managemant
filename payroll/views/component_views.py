@@ -52,7 +52,7 @@ from core.decorators import (
     permission_required,
 )
 from core.group_by import group_by_queryset
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from core.methods import dynamic_attr, get_horilla_model_class, get_urlencode
 
 # from leave.models import AvailableLeave
@@ -361,7 +361,7 @@ def update_allowance(request, allowance_id, **kwargs):
     instance = Allowance.find(allowance_id)
     is_htmx = request.headers.get("HX-Request") is not None
     if not instance:
-        return HorillaRedirect(request, message=_("Allowance not found."))
+        return HrRedirect(request, message=_("Allowance not found."))
     form = forms.AllowanceForm(instance=instance)
     if request.method == "POST":
         form = forms.AllowanceForm(request.POST, instance=instance)
@@ -428,7 +428,7 @@ def update_allowance(request, allowance_id, **kwargs):
 #         request.path.split("/")[2] == "delete-employee-allowance"
 #         or not payroll.models.models.Allowance.objects.filter()
 #     ):
-#         return return HorillaRedirect(request)
+#         return return HrRedirect(request)
 #     return redirect(filter_allowance)
 
 
@@ -479,7 +479,7 @@ def delete_allowance(request, allowance_id, emp_id=None):
             http_hx_target == "payroll-deduction-container"
             and not Deduction.objects.filter()
         ):
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         if redirected_path:
             return redirect(redirected_path)
 
@@ -638,7 +638,7 @@ def update_deduction(request, deduction_id, **kwargs):
     instance = Deduction.find(deduction_id)
     is_htmx = request.headers.get("HX-Request") is not None
     if not instance:
-        return HorillaRedirect(request, message=_("Deduction not found."))
+        return HrRedirect(request, message=_("Deduction not found."))
     form = forms.DeductionForm(instance=instance)
     if request.method == "POST":
         form = forms.DeductionForm(request.POST, instance=instance)
@@ -715,7 +715,7 @@ def delete_deduction(request, deduction_id, emp_id=None):
             http_hx_target == "payroll-deduction-container"
             and not Deduction.objects.filter()
         ):
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         if redirected_path:
             return redirect(redirected_path)
 
@@ -998,7 +998,7 @@ def create_payslip(request, new_post_data=None):
                     ),
                     icon="close",
                 )
-                return HorillaRedirect(
+                return HrRedirect(
                     request,
                     redirect_to=reverse(
                         "view-created-payslip", kwargs={"payslip_id": payslip.pk}
@@ -1029,7 +1029,7 @@ def validate_start_date(request):
             int(e) for e in request.GET.getlist("employee_id") if e.isdigit()
         ]
     except:
-        return HorillaRedirect(request, message=_("Invalid Request"))
+        return HrRedirect(request, message=_("Invalid Request"))
 
     if start_date:
         start_datetime = datetime.strptime(start_date, "%Y-%m-%d").date()
@@ -1085,9 +1085,9 @@ def view_individual_payslip(request, employee_id, start_date, end_date):
     try:
         payslip_data = payroll_calculation(employee_id, start_date, end_date)
     except TaxComputationError as exc:
-        return HorillaRedirect(request, message=str(exc))
+        return HrRedirect(request, message=str(exc))
     if not payslip_data:
-        return HorillaRedirect(
+        return HrRedirect(
             request,
             message=_(
                 "Payslip data not found for the specified employee and date range."
@@ -1239,7 +1239,7 @@ def payslip_export(request):
     and generates an Excel file for download.
     """
     if not has_export_access(request, Payslip):
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("You don't have access to export this data")
         )
 
@@ -1366,7 +1366,7 @@ def send_slip(request):
     ) or not len(email_backend.dynamic_from_email_with_display_name):
         messages.error(request, _("Email server is not configured"))
         if view:
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         else:
             return redirect(reverse("payslip-list"))
 
@@ -1383,7 +1383,7 @@ def send_slip(request):
     mail_thread.start()
     messages.info(request, _("Mail processing"))
     if view:
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     else:
         return redirect(reverse("payslip-list"))
 
@@ -1394,11 +1394,11 @@ def add_bonus(request):
     employee_id = request.GET.get("employee_id")
     payslip_id = request.GET.get("payslip_id")
     if not employee_id or not payslip_id:
-        return HorillaRedirect(request, message=_("Missing required parameters."))
+        return HrRedirect(request, message=_("Missing required parameters."))
     if payslip_id != "None" and payslip_id:
         instance = Payslip.find(payslip_id)
         if not instance:
-            return HorillaRedirect(request, _("Payslip not found"))
+            return HrRedirect(request, _("Payslip not found"))
         form = forms.PayslipAllowanceForm(
             initial={"employee_id": employee_id, "date": instance.start_date}
         )
@@ -1432,7 +1432,7 @@ def add_bonus(request):
                         start_date=instance.start_date,
                         end_date=instance.end_date,
                     ).first()
-                    return HorillaRedirect(
+                    return HrRedirect(
                         request,
                         redirect_to=reverse(
                             "view-created-payslip", kwargs={"payslip_id": payslip.id}
@@ -1445,7 +1445,7 @@ def add_bonus(request):
                             "No active contract found for  {} during this payslip period"
                         ).format(employee),
                     )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return render(
         request,
@@ -1460,7 +1460,7 @@ def add_deduction(request):
     employee_id = request.GET.get("employee_id")
     payslip_id = request.GET.get("payslip_id")
     if not employee_id or not payslip_id:
-        return HorillaRedirect(request, message=_("Missing required parameters."))
+        return HrRedirect(request, message=_("Missing required parameters."))
     instance = Payslip.objects.get(id=payslip_id)
 
     if request.method == "POST":
@@ -1496,7 +1496,7 @@ def add_deduction(request):
                 end_date=instance.end_date,
             ).first()
 
-            return HorillaRedirect(
+            return HrRedirect(
                 request,
                 redirect_to=reverse(
                     "view-created-payslip", kwargs={"payslip_id": payslip.id}
@@ -1563,7 +1563,7 @@ def create_loan(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Loan created/updated"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     return render(
         request, "payroll/loan/form.html", {"form": form, "instance_id": instance_id}
     )
@@ -1577,10 +1577,10 @@ def view_installments(request):
     """
     loan_id = request.GET.get("loan_id")
     if not loan_id:
-        return HorillaRedirect(request, message=_("Missing required parameters."))
+        return HrRedirect(request, message=_("Missing required parameters."))
     loan = LoanAccount.find(loan_id)
     if not loan:
-        return HorillaRedirect(request, message=_("Loan not found."))
+        return HrRedirect(request, message=_("Loan not found."))
     installments = loan.deduction_ids.all()
 
     requests_ids_json = request.GET.get("instances_ids")
@@ -1640,7 +1640,7 @@ def edit_installment_amount(request):
     ded_id = request.GET.get("ded_id")
     amount_raw = request.POST.get("amount")
     if not loan_id or not ded_id or not amount_raw:
-        return HorillaRedirect(request, message=_("Missing required parameters."))
+        return HrRedirect(request, message=_("Missing required parameters."))
     try:
         value = float(amount_raw) if amount_raw else 0.0
         if not math.isfinite(value):
@@ -1651,11 +1651,11 @@ def edit_installment_amount(request):
     loans = LoanAccount.objects.filter(id=loan_id)
     loan = loans.first()
     if not loan:
-        return HorillaRedirect(request, message=_("Loan not found."))
+        return HrRedirect(request, message=_("Loan not found."))
     deductions = loan.deduction_ids.all().order_by("one_time_date")
     deduction = deductions.filter(id=ded_id).first()
     if not deduction:
-        return HorillaRedirect(request, message=_("Deduction not found."))
+        return HrRedirect(request, message=_("Deduction not found."))
     deductions_before = deductions.filter(one_time_date__lt=deduction.one_time_date)
     deductions_after = deductions.filter(one_time_date__gt=deduction.one_time_date)
     total_sum = deductions_before.aggregate(Sum("amount"))["amount__sum"] or 0
@@ -1836,7 +1836,7 @@ def create_reimbursement(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Reimbursement saved successfully"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
     else:
         form = forms.ReimbursementForm(instance=instance)
 
@@ -1972,7 +1972,7 @@ def approve_reimbursements(request):
     ids = request.GET.getlist("ids")
     status = request.GET.get("status")
     if not status:
-        return HorillaRedirect(request, message=_("Missing required parameters."))
+        return HrRedirect(request, message=_("Missing required parameters."))
     if status == "canceled":
         status = "rejected"
     amount = (
@@ -2068,7 +2068,7 @@ def reimbursement_individual_view(request, instance_id):
     """
     reimbursement = Reimbursement.find(instance_id)
     if not reimbursement:
-        return HorillaRedirect(request, message=_("Reimbursement request not found."))
+        return HrRedirect(request, message=_("Reimbursement request not found."))
     requests_ids_json = request.GET.get("instances_ids")
     if requests_ids_json:
         requests_ids = json.loads(requests_ids_json)
@@ -2094,7 +2094,7 @@ def reimbursement_attachments(request, instance_id):
     """
     reimbursement = Reimbursement.find(instance_id)
     if not reimbursement:
-        return HorillaRedirect(request, message=_("Reimbursement request not found."))
+        return HrRedirect(request, message=_("Reimbursement request not found."))
     return render(
         request,
         "payroll/reimbursement/attachments.html",

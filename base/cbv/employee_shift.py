@@ -12,15 +12,15 @@ from base.filters import EmployeeShiftFilter
 from base.models import EmployeeShift
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrListView,
+    HrNavView,
 )
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_employeeshift"), name="dispatch")
-class EmployeeShiftListView(HorillaListView):
+class EmployeeShiftListView(HrListView):
     """
     List view of the employee shift page
     """
@@ -82,7 +82,7 @@ class EmployeeShiftListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_employeeshift"), name="dispatch")
-class EmployeeShiftDetailView(HorillaDetailedView):
+class EmployeeShiftDetailView(HrDetailedView):
     """
     detail view for employee shift, also registered as the related-object-link
     target for EmployeeShift via detail_view_url_name
@@ -108,7 +108,7 @@ class EmployeeShiftDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_employeeshift"), name="dispatch")
-class EmployeeShiftNav(HorillaNavView):
+class EmployeeShiftNav(HrNavView):
     """
     Nav bar
     """

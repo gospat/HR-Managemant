@@ -1,8 +1,8 @@
 """XSS validation must run on every write path, not only through a ModelForm.
 
-GHSA-rf47-2qgf-qq4j: `has_xss` is applied in `HorillaModel.clean_fields()`,
+GHSA-rf47-2qgf-qq4j: `has_xss` is applied in `HrModel.clean_fields()`,
 which only reaches a save through `full_clean()` -- and `full_clean()` was
-commented out of `HorillaModel.save()` during an unrelated CBV merge. Every
+commented out of `HrModel.save()` during an unrelated CBV merge. Every
 DRF `serializer.save()` and every direct `.save()` then stored raw markup,
 which combined with `|safe` rendering re-opened stored XSS.
 

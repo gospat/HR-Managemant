@@ -12,12 +12,12 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 from payroll.filters import PayslipAutoGenerateFilter
 from payroll.forms.component_forms import PayslipAutoGenerateForm
@@ -28,7 +28,7 @@ from payroll.models.models import PayslipAutoGenerate
 @method_decorator(
     permission_required(perm="payroll.view_payslipautogenerate"), name="dispatch"
 )
-class PaySlipAutomationListView(HorillaListView):
+class PaySlipAutomationListView(HrListView):
     """
     List view of the page
     """
@@ -95,7 +95,7 @@ class PaySlipAutomationListView(HorillaListView):
 @method_decorator(
     permission_required(perm="payroll.view_payslipautogenerate"), name="dispatch"
 )
-class PaySlipAutomationNav(HorillaNavView):
+class PaySlipAutomationNav(HrNavView):
     """
     Nav bar
     """
@@ -122,7 +122,7 @@ class PaySlipAutomationNav(HorillaNavView):
 @method_decorator(
     permission_required(perm="payroll.change_payslipautogenerate"), name="dispatch"
 )
-class PaySlipAutomationFormView(HorillaFormView):
+class PaySlipAutomationFormView(HrFormView):
     """
     Create and edit form
     """
@@ -186,7 +186,7 @@ class DeleteAutoPayslipView(View):
         auto_payslip = PayslipAutoGenerate.objects.filter(id=auto_id).first()
         if not auto_payslip:
             messages.error(request, _("Payslip auto generate not found."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         if not auto_payslip.auto_generate:
             company = (
                 auto_payslip.company_id
@@ -202,4 +202,4 @@ class DeleteAutoPayslipView(View):
             messages.info(
                 request, _("Active 'Payslip auto generate' cannot be deleted.")
             )
-        return HorillaRedirect(request)
+        return HrRedirect(request)

@@ -14,9 +14,9 @@ from base.decorators import manager_can_enter
 from base.methods import is_reportingmanager
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from pms.filters import QuestionTemplateFilter
@@ -41,7 +41,7 @@ class QuestionTemplateView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.view_questiontemplate"), name="dispatch")
-class QuestionTemplateList(HorillaListView):
+class QuestionTemplateList(HrListView):
     """
     List view of the question template page
     """
@@ -78,7 +78,7 @@ class QuestionTemplateList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.view_questiontemplate"), name="dispatch")
-class QuestionTemplateNav(HorillaNavView):
+class QuestionTemplateNav(HrNavView):
     """
     Nav bar
     """
@@ -104,7 +104,7 @@ class QuestionTemplateNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.add_questiontemplate"), name="dispatch")
-class QuestionTemplateFormView(HorillaFormView):
+class QuestionTemplateFormView(HrFormView):
     """
     Form view
     """

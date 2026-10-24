@@ -30,7 +30,7 @@ from base.models import (
 from employee.models import Employee
 from core.filters import (
     FilterSet,
-    HorillaFilterSet,
+    HrFilterSet,
     filter_by_name,
     filter_name_or_badge_terms,
 )
@@ -45,7 +45,7 @@ from .models import (
 )
 
 
-class LeaveTypeFilter(HorillaFilterSet):
+class LeaveTypeFilter(HrFilterSet):
     """
     Filter class for LeaveType model.
 
@@ -73,7 +73,7 @@ class LeaveTypeFilter(HorillaFilterSet):
         exclude = ["icon"]
 
 
-class AssignedLeaveFilter(HorillaFilterSet):
+class AssignedLeaveFilter(HrFilterSet):
     """
     Filter class for AvailableLeave model.
 
@@ -103,7 +103,7 @@ class AssignedLeaveFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see LeaveRequestFilter.ajax_fields for the full explanation).
     ajax_fields = {
         "employee_id": {
@@ -181,7 +181,7 @@ class AssignedLeaveFilter(HorillaFilterSet):
         )
 
 
-class LeaveRequestFilter(HorillaFilterSet):
+class LeaveRequestFilter(HrFilterSet):
     """
     Filter class for LeaveRequest model.
     This filter allows searching LeaveRequest objects
@@ -238,7 +238,7 @@ class LeaveRequestFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation) -- every
     # model/queryset-backed field in the modern filter panel opts in here
     # instead of pre-rendering its whole queryset as <option> tags.
@@ -460,7 +460,7 @@ class LeaveRequestFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Start Date/End Date are deliberately
@@ -488,7 +488,7 @@ class LeaveRequestFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -557,7 +557,7 @@ class UserLeaveRequestFilter(FilterSet):
         self.form.fields["leave_type_id"].queryset = assigned_leave_types
 
 
-class LeaveAllocationRequestFilter(HorillaFilterSet):
+class LeaveAllocationRequestFilter(HrFilterSet):
     """
     Filter class for LeaveAllocationRequest model specific to user leave requests.
     This filter allows searching user-specific LeaveRequest objects
@@ -600,7 +600,7 @@ class LeaveAllocationRequestFilter(HorillaFilterSet):
         label=_("Created By"),
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see EmployeeFilter.ajax_fields for the full explanation).
     ajax_fields = {
         "employee_id": {
@@ -654,7 +654,7 @@ class LeaveAllocationRequestFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Requested Date and Created At are
@@ -684,7 +684,7 @@ class LeaveAllocationRequestFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -783,7 +783,7 @@ class LeaveAllocationRequestReGroup:
     ]
 
 
-class RestrictLeaveFilter(HorillaFilterSet):
+class RestrictLeaveFilter(HrFilterSet):
     """
     Filter class for Restrict model.
 
@@ -802,7 +802,7 @@ class RestrictLeaveFilter(HorillaFilterSet):
         widget=forms.DateInput(attrs={"type": "date"}),
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism,
     # see LeaveRequestFilter.ajax_fields for the full explanation). No
     # employee field exists on this model, so there's no "Name or Badge
     # ID" search here -- unlike the other modernized panels this session.
@@ -836,7 +836,7 @@ class RestrictLeaveFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Start Date/End Date used to each
@@ -873,7 +873,7 @@ class RestrictLeaveFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.

@@ -38,8 +38,8 @@ from core.decorators import (
     login_required,
     permission_required,
 )
-from core.filters import HorillaPaginator
-from core.http.response import HorillaRedirect
+from core.filters import HrPaginator
+from core.http.response import HrRedirect
 from core.scheduling import register_job
 from core.settings import TIME_ZONE
 
@@ -77,7 +77,7 @@ def paginator_qry(qryset, page_number):
     """
     This method is used to paginate query set
     """
-    paginator = HorillaPaginator(qryset, get_pagination())
+    paginator = HrPaginator(qryset, get_pagination())
     qryset = paginator.get_page(page_number)
     return qryset
 
@@ -435,7 +435,7 @@ def biometric_device_schedule(request, device_id):
                         seconds=str_time_seconds(device.scheduler_duration),
                     )
                     scheduler.start()
-                    return HorillaRedirect(request)
+                    return HrRedirect(request)
                 except Exception as error:
                     logger.error("An error comes in biometric_device_schedule ", error)
                     script = """
@@ -465,7 +465,7 @@ def biometric_device_schedule(request, device_id):
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
                 scheduler.start()
-                return HorillaRedirect(request)
+                return HrRedirect(request)
             elif device.machine_type == "dahua":
                 device.is_scheduler = True
                 device.is_live = False
@@ -478,7 +478,7 @@ def biometric_device_schedule(request, device_id):
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
                 scheduler.start()
-                return HorillaRedirect(request)
+                return HrRedirect(request)
             elif device.machine_type == "cosec":
                 device.is_scheduler = True
                 device.is_live = False
@@ -495,7 +495,7 @@ def biometric_device_schedule(request, device_id):
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
                 scheduler.start()
-                return HorillaRedirect(request)
+                return HrRedirect(request)
             elif device.machine_type == "etimeoffice":
                 device.is_scheduler = True
                 device.is_live = False
@@ -508,9 +508,9 @@ def biometric_device_schedule(request, device_id):
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
                 scheduler.start()
-                return HorillaRedirect(request)
+                return HrRedirect(request)
             else:
-                return HorillaRedirect(request)
+                return HrRedirect(request)
 
         context["scheduler_form"] = scheduler_form
         response = render(request, "biometric/scheduler_device_form.html", context)
@@ -1534,7 +1534,7 @@ def edit_cosec_user(request, user_id, device_id):
                     messages.success(
                         request, _("Biometric user data updated successfully")
                     )
-                    return HorillaRedirect(request)
+                    return HrRedirect(request)
                 if update_user.get("error"):
                     error = update_user.get("error")
                     if "validity-date-yyyy" in error:
@@ -1820,7 +1820,7 @@ def add_biometric_user(request, device_id):
             if device.machine_type == "zk":
                 conn.disable_device()
                 logger.error("An error occurred: ", str(error))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     return render(
         request,
         "biometric/add_biometric_user.html",

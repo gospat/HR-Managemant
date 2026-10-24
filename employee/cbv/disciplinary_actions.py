@@ -20,10 +20,10 @@ from employee.forms import ActiontypeForm, DisciplinaryActionForm
 from employee.models import Actiontype, DisciplinaryAction
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -39,7 +39,7 @@ class DisciplinaryActionsView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DisciplinaryActionsList(HorillaListView):
+class DisciplinaryActionsList(HrListView):
     """
     List view of disciplinary actions
     """
@@ -99,7 +99,7 @@ class DisciplinaryActionsList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DisciplinaryActionsNav(HorillaNavView):
+class DisciplinaryActionsNav(HrNavView):
     """
     For nav bar
     """
@@ -130,7 +130,7 @@ class DisciplinaryActionsNav(HorillaNavView):
     modern_filter = True
 
 
-class DynamicActionTypeFormView(HorillaFormView):
+class DynamicActionTypeFormView(HrFormView):
 
     model = Actiontype
     form_class = ActiontypeForm
@@ -151,7 +151,7 @@ class DynamicActionTypeFormView(HorillaFormView):
 @method_decorator(
     permission_required("employee.add_disciplinaryaction"), name="dispatch"
 )
-class DisciplinaryActionsFormView(HorillaFormView):
+class DisciplinaryActionsFormView(HrFormView):
     """
     Form View
     """
@@ -209,7 +209,7 @@ class DisciplinaryActionsFormView(HorillaFormView):
 @method_decorator(
     permission_required("employee.add_disciplinaryaction"), name="dispatch"
 )
-class DisciplinaryActionsFormDuplicate(HorillaFormView):
+class DisciplinaryActionsFormDuplicate(HrFormView):
     """
     Duplicate form view
     """
@@ -253,7 +253,7 @@ class DisciplinaryActionsFormDuplicate(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DisciplinaryActionsDetailView(HorillaDetailedView):
+class DisciplinaryActionsDetailView(HrDetailedView):
     """
     detail view of page
     """

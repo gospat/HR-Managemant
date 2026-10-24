@@ -31,12 +31,12 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company
-from core.models import HorillaModel
+from core.models import HrModel
 
 
-class PayPeriodSettings(HorillaModel):
+class PayPeriodSettings(HrModel):
     """
     When a pay month begins and ends, for one company.
 
@@ -91,7 +91,7 @@ class PayPeriodSettings(HorillaModel):
         on_delete=models.CASCADE,
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     class Meta:
         verbose_name = _("Pay Period Settings")
@@ -135,7 +135,7 @@ class PayPeriodSettings(HorillaModel):
         return found or cls()
 
 
-class PayrollBatch(HorillaModel):
+class PayrollBatch(HrModel):
     """
     One payroll run: a period, the people in it, and what it came to.
 
@@ -224,7 +224,7 @@ class PayrollBatch(HorillaModel):
         on_delete=models.PROTECT,
         related_name="payroll_batches",
     )
-    objects = HorillaCompanyManager("company_id")
+    objects = HrCompanyManager("company_id")
 
     class Meta:
         ordering = ["-period_end", "-created_at"]
@@ -371,7 +371,7 @@ class PayrollBatch(HorillaModel):
         )
 
 
-class PayrollBatchLine(HorillaModel):
+class PayrollBatchLine(HrModel):
     """
     One employee's place in a run: queued, done, failed, or skipped.
 
@@ -413,7 +413,7 @@ class PayrollBatchLine(HorillaModel):
         related_name="run_lines",
     )
 
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         ordering = ["employee_id__employee_first_name", "id"]

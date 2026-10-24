@@ -26,7 +26,7 @@ from base.models import (
 )
 from employee.models import Employee
 from hr_views.cbv_methods import hx_request_required, login_required
-from hr_views.generic.cbv.views import HorillaNavView, HorillaTabView
+from hr_views.generic.cbv.views import HrNavView, HrTabView
 
 
 @method_decorator(login_required, name="dispatch")
@@ -56,7 +56,7 @@ class ProfileTabShellView(TemplateView):
         return context
 
 
-class WorkAndShiftTabView(HorillaTabView):
+class WorkAndShiftTabView(HrTabView):
     """
     generic tab view for work type and shift
     """
@@ -153,7 +153,7 @@ class WorkTypeIndividualTabShell(ProfileTabShellView):
 
 
 @method_decorator(login_required, name="dispatch")
-class WorkTypeIndividualNav(HorillaNavView):
+class WorkTypeIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Work type request profile tab.
     """
@@ -211,7 +211,7 @@ class ShiftRequestIndividualTabShell(ProfileTabShellView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ShiftRequestIndividualNav(HorillaNavView):
+class ShiftRequestIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Shift request profile tab.
     """
@@ -272,7 +272,7 @@ class ShiftAllocationIndividualTabShell(ProfileTabShellView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ShiftAllocationIndividualNav(HorillaNavView):
+class ShiftAllocationIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Shift Allocation profile tab.
     """
@@ -339,7 +339,7 @@ class RotatingShiftIndividualTabShell(ProfileTabShellView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RotatingShiftIndividualNav(HorillaNavView):
+class RotatingShiftIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Rotating Shift profile tab.
     """
@@ -406,7 +406,7 @@ class RotatingWorkIndividualTabShell(ProfileTabShellView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RotatingWorkIndividualNav(HorillaNavView):
+class RotatingWorkIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Rotating work type profile tab.
     """

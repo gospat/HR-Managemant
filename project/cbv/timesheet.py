@@ -19,13 +19,13 @@ from django.utils.translation import gettext_lazy as _
 from employee.models import Employee
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrCardView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from project.cbv.cbv_decorators import is_projectmanager_or_member_or_perms
@@ -47,7 +47,7 @@ class TimeSheetView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class TimeSheetTabView(HorillaTabView):
+class TimeSheetTabView(HrTabView):
     """My Timesheets / All Timesheets tabs."""
 
     def __init__(self, **kwargs: Any) -> None:
@@ -74,7 +74,7 @@ class TimeSheetTabView(HorillaTabView):
             )
 
 
-class TimeSheetTabShell(HorillaTabContentShell):
+class TimeSheetTabShell(HrTabContentShell):
     """All Timesheets tab pane."""
 
     nav_url_name = "time-sheet-nav"
@@ -82,7 +82,7 @@ class TimeSheetTabShell(HorillaTabContentShell):
     tabs_root_id = "timesheetTabContainer"
 
 
-class MyTimeSheetTabShell(HorillaTabContentShell):
+class MyTimeSheetTabShell(HrTabContentShell):
     """My Timesheets tab pane."""
 
     nav_url_name = "my-time-sheet-nav"
@@ -94,7 +94,7 @@ class MyTimeSheetTabShell(HorillaTabContentShell):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_timesheet"), name="dispatch"
 )
-class TimeSheetNavView(HorillaNavView):
+class TimeSheetNavView(HrNavView):
     """
     Nav bar
     """
@@ -191,7 +191,7 @@ class TimeSheetNavView(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyTimeSheetNavView(HorillaNavView):
+class MyTimeSheetNavView(HrNavView):
     """Nav bar for the My Timesheets tab."""
 
     filter_form_context_name = "form"
@@ -256,7 +256,7 @@ class MyTimeSheetNavView(HorillaNavView):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_timesheet"), name="dispatch"
 )
-class TimeSheetList(HorillaListView):
+class TimeSheetList(HrListView):
     """
     Time sheet list view
     """
@@ -363,7 +363,7 @@ class TimeSheetList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MyTimeSheetList(HorillaListView):
+class MyTimeSheetList(HrListView):
     """List view for the My Timesheets tab -- own logged entries only."""
 
     model = TimeSheet
@@ -494,7 +494,7 @@ class TaskTimeSheet(TimeSheetList):
         return context
 
     def get_queryset(self):
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         task_id = self.kwargs.get("task_id")
         task = Task.objects.filter(id=task_id).first()
         queryset = TimeSheet.objects.filter(task_id=task_id)
@@ -520,7 +520,7 @@ class TaskTimeSheet(TimeSheetList):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_timesheet"), name="dispatch"
 )
-class TimeSheetFormView(HorillaFormView):
+class TimeSheetFormView(HrFormView):
     """
     form view for create project
     """
@@ -651,7 +651,7 @@ class TimeSheetFormView(HorillaFormView):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_timesheet"), name="dispatch"
 )
-class TimeSheetCardView(HorillaCardView):
+class TimeSheetCardView(HrCardView):
     """
     For card view
     """
@@ -764,7 +764,7 @@ class TimeSheetCardView(HorillaCardView):
 @method_decorator(
     is_projectmanager_or_member_or_perms("project.view_timesheet"), name="dispatch"
 )
-class TimeSheetDetailView(HorillaDetailedView):
+class TimeSheetDetailView(HrDetailedView):
     """
     detail view of the page
     """

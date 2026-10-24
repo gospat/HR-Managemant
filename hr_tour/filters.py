@@ -2,11 +2,11 @@
 
 import django_filters
 
-from core.filters import HorillaFilterSet
+from core.filters import HrFilterSet
 from hr_tour.models import Tour
 
 
-class TourFilter(HorillaFilterSet):
+class TourFilter(HrFilterSet):
     """Search + faceted filtering for the Tours settings list."""
 
     search = django_filters.CharFilter(method="search_method")

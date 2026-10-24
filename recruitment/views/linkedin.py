@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 
 from core.config import logger
 from core.decorators import login_required, permission_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from recruitment.models import LinkedInAccount
 
 
@@ -25,7 +25,7 @@ def update_isactive_linkedin(request, obj_id):
     """
     linkedin_account = LinkedInAccount.find(obj_id)
     if not linkedin_account:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No LinkedIn Account found matching the query.")
         )
 
@@ -55,14 +55,14 @@ def delete_linkedin_account(request, pk, return_redirect=True):
     except Exception as e:
         logger.error(e)
         messages.error(request, _("Something went wrong"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
 def validate_linkedin_token(request, pk):
     linkedin_account = LinkedInAccount.find(pk)
     if not linkedin_account:
-        return HorillaRedirect(
+        return HrRedirect(
             request, message=_("No LinkedIn Account found matching the query.")
         )
 

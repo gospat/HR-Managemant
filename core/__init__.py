@@ -4,7 +4,7 @@ init.py
 
 import sys
 
-# Patch makemigrations and migrate to use HorillaAutodetector.
+# Patch makemigrations and migrate to use HrAutodetector.
 #
 # Django stores the autodetector as a class attribute on each command
 # (`autodetector = MigrationAutodetector`), so we patch the class attribute
@@ -16,10 +16,10 @@ try:
     from django.core.management.commands.makemigrations import Command as _MM
     from django.core.management.commands.migrate import Command as _Migrate
 
-    from core.inherit.autodetect import HorillaAutodetector
+    from core.inherit.autodetect import HrAutodetector
 
-    _MM.autodetector = HorillaAutodetector
-    _Migrate.autodetector = HorillaAutodetector
+    _MM.autodetector = HrAutodetector
+    _Migrate.autodetector = HrAutodetector
 except ImportError:
     pass
 

@@ -2,7 +2,7 @@ from django.apps import AppConfig
 from django.conf import settings
 
 
-class HorillaMeetConfig(AppConfig):
+class HrMeetConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "hr_meet"
     # Kept at the original value so migrations, permissions and

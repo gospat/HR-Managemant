@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_automations.methods.methods import (
     clear_refresh_pending,
     generate_choices,
@@ -20,7 +20,7 @@ from hr_automations.methods.methods import (
 from hr_automations.methods.serialize import serialize_form
 from hr_automations.models import MailAutomation
 from hr_automations.signals import REFRESH_METHODS
-from hr_views.generic.cbv.views import HorillaFormView
+from hr_views.generic.cbv.views import HrFormView
 
 
 @login_required
@@ -31,7 +31,7 @@ def get_to_field(request):
     model_path = request.GET.get("model")
 
     if not model_path:
-        return HorillaRedirect(
+        return HrRedirect(
             request,
             message=_("No matching query found."),
         )
@@ -114,7 +114,7 @@ def refresh_automations(request):
     else:
         messages.error(request, _("Automation method not available to refresh."))
 
-    return HorillaFormView.HttpResponse(
+    return HrFormView.HttpResponse(
         script=(
             "if (window.hideRefreshAutomationsBanner) { hideRefreshAutomationsBanner(); }"
             if refreshed

@@ -17,8 +17,8 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaListView,
-    HorillaNavView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from onboarding.filters import CandidateTaskFilter
@@ -56,7 +56,7 @@ class OnboardingCandidatesView(TemplateView):
 @method_decorator(
     permission_required(perm="recruitment.view_candidate"), name="dispatch"
 )
-class OnboardingCandidatesList(HorillaListView):
+class OnboardingCandidatesList(HrListView):
     """
     List view
     """
@@ -202,7 +202,7 @@ class OnboardingCandidatesList(HorillaListView):
 @method_decorator(
     permission_required(perm="recruitment.view_candidate"), name="dispatch"
 )
-class OnboardingCandidatesNav(HorillaNavView):
+class OnboardingCandidatesNav(HrNavView):
     """
     Nav bar
     """
@@ -269,7 +269,7 @@ class OnboardingCandidatesNav(HorillaNavView):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.view_candidate"), name="dispatch"
 )
-class CandidateProfileTasks(HorillaListView):
+class CandidateProfileTasks(HrListView):
     """
     CandidateProfileTasks
     """

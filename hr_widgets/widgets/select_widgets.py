@@ -21,9 +21,9 @@ def get_short_uuid(length: int, prefix: str = "widget"):
     return prefix + str(uuid_str[:length]).replace("-", "")
 
 
-class HorillaMultiSelectWidget(forms.Widget):
+class HrMultiSelectWidget(forms.Widget):
     """
-    HorillaMultiSelectWidget
+    HrMultiSelectWidget
     """
 
     def __init__(
@@ -102,7 +102,7 @@ class HorillaMultiSelectWidget(forms.Widget):
         return context
 
 
-class HorillaAjaxSelectWidget(forms.SelectMultiple):
+class HrAjaxSelectWidget(forms.SelectMultiple):
     """
     A plain forms.SelectMultiple that defers option loading to an AJAX
     search endpoint (see
@@ -118,7 +118,7 @@ class HorillaAjaxSelectWidget(forms.SelectMultiple):
     The caller is responsible for trimming the field's queryset down to
     just the currently selected instance(s) (or none) before rendering,
     so the widget still displays correctly without an extra round trip --
-    see core.filters.HorillaFilterSet._apply_ajax_fields (the generic
+    see core.filters.HrFilterSet._apply_ajax_fields (the generic
     ajax_fields mechanism) for the pattern. Everything else is fetched on
     demand by the .oh-select-ajax initializer
     (hr_theme/static/hr_theme/assets/js/htmxSelect2.js).

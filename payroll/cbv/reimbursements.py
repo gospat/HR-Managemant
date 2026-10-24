@@ -10,12 +10,12 @@ from base.methods import filter_own_records
 from core.methods import handle_no_permission
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from payroll.decorators import is_leave_encashment_enabled, leave_encashment_visible_to
@@ -34,7 +34,7 @@ class ReimbursementsView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReimbursementsAndEncashmentsTabView(HorillaTabView):
+class ReimbursementsAndEncashmentsTabView(HrTabView):
     """
     Tab View
     """
@@ -103,7 +103,7 @@ class ReimbursementsAndEncashmentsTabView(HorillaTabView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReimbursementsAndEncashmentsListView(HorillaListView):
+class ReimbursementsAndEncashmentsListView(HrListView):
     """
     list view
     """
@@ -321,7 +321,7 @@ class BonusEncashmentsListView(ReimbursementsAndEncashmentsListView):
         return queryset
 
 
-class _ReimbursementTabNavBase(HorillaNavView):
+class _ReimbursementTabNavBase(HrNavView):
     """
     Shared Search/Filter/Create wiring for each Reimbursements/Encashments
     tab's own, independent Nav - nav_title/search_url/search_swap_target
@@ -401,20 +401,20 @@ class BonusEncashNav(_ReimbursementTabNavBase):
         self.search_swap_target = "#bonusEncashListContainer"
 
 
-class ReimbursementTabShell(HorillaTabContentShell):
+class ReimbursementTabShell(HrTabContentShell):
     nav_url_name = "reimbursement-nav"
     container_id = "reimbursementListContainer"
     tabs_root_id = "reimbursmentContainer"
 
 
 @method_decorator(is_leave_encashment_enabled(), name="dispatch")
-class LeaveEncashTabShell(HorillaTabContentShell):
+class LeaveEncashTabShell(HrTabContentShell):
     nav_url_name = "leave-encash-nav"
     container_id = "leaveEncashListContainer"
     tabs_root_id = "reimbursmentContainer"
 
 
-class BonusEncashTabShell(HorillaTabContentShell):
+class BonusEncashTabShell(HrTabContentShell):
     nav_url_name = "bonus-encash-nav"
     container_id = "bonusEncashListContainer"
     tabs_root_id = "reimbursmentContainer"
@@ -439,7 +439,7 @@ class BonusEncashTabShell(HorillaTabContentShell):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReimbursementsDetailView(HorillaDetailedView):
+class ReimbursementsDetailView(HrDetailedView):
     """
     detail view of reimbursements
     """
@@ -490,7 +490,7 @@ class BonusEncashmentsDetailedView(ReimbursementsDetailView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ReimbursementsFormView(HorillaFormView):
+class ReimbursementsFormView(HrFormView):
     """
     Create and edit form for reimbursements
     """

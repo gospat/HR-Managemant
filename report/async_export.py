@@ -41,7 +41,7 @@ def queue_export_email(
 
     ``company_id`` is the caller's selected company. It has to be passed in
     explicitly: the worker runs outside the request, so neither the session
-    nor the ``current_company_id`` ContextVar that HorillaCompanyManager
+    nor the ``current_company_id`` ContextVar that HrCompanyManager
     scopes on is available to it. Without it the emailed workbook spans every
     company while its letterhead names one.
     """

@@ -15,9 +15,9 @@ from base.filters import MailLogFilter
 from base.models import EmailLog
 from employee.models import Employee
 from core.decorators import check_manager
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaDetailedView, HorillaListView
+from hr_views.generic.cbv.views import HrDetailedView, HrListView
 
 
 def _can_view_mail_log(request, employee):
@@ -40,7 +40,7 @@ def _employee_for_log(log):
 
 
 @method_decorator(login_required, name="dispatch")
-class MailLogTabList(HorillaListView):
+class MailLogTabList(HrListView):
     """
     list view for mail log  tab
     """
@@ -68,10 +68,10 @@ class MailLogTabList(HorillaListView):
         employee = Employee.objects.filter(id=pk).first()
         if not employee:
             messages.error(request, _("Employee not found."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         if not _can_view_mail_log(request, employee):
             messages.info(request, _("You don't have access to the feature"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -107,7 +107,7 @@ class MailLogTabList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class MailLogDetailView(HorillaDetailedView):
+class MailLogDetailView(HrDetailedView):
     """
     detail view for mail log tab
     """
@@ -119,7 +119,7 @@ class MailLogDetailView(HorillaDetailedView):
         log = EmailLog.objects.filter(id=kwargs.get("pk")).first()
         if not _can_view_mail_log(request, _employee_for_log(log)):
             messages.info(request, _("You don't have access to the feature"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs: Any):

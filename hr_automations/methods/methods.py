@@ -13,7 +13,7 @@ from django.http import QueryDict
 
 from base.templatetags.horillafilters import app_installed
 from employee.models import Employee
-from core.models import HorillaModel
+from core.models import HrModel
 
 REFRESH_PENDING_KEY = "mail_automations_refresh_pending"
 
@@ -38,7 +38,7 @@ if app_installed("recruitment"):
     recruitment_installed = True
 
 
-def get_related_models(model: HorillaModel) -> list:
+def get_related_models(model: HrModel) -> list:
     related_models = []
     for field in model._meta.get_fields():
         if field.one_to_many or field.one_to_one or field.many_to_many:

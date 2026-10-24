@@ -21,7 +21,7 @@ from base.urls import urlpatterns
 from employee.models import EmployeeGeneralSetting, ProfileEditFeature
 from core.__version__ import __version__
 from core.decorators import hx_request_required, login_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from core.methods import get_horilla_model_class
 
 
@@ -148,10 +148,10 @@ def update_selected_company(request):
                 target_allowed = False
         if not target_allowed:
             messages.error(request, _("You do not have access to that company."))
-            return HorillaRedirect(request, redirect_to=next_url)
+            return HrRedirect(request, redirect_to=next_url)
     elif not request.user.has_perm("base.change_company"):
         messages.error(request, _("You do not have permission to switch the company."))
-        return HorillaRedirect(request, redirect_to=next_url)
+        return HrRedirect(request, redirect_to=next_url)
     user = request.user.employee_get
     user_company = getattr(
         getattr(user, "employee_work_info", None), "company_id", None
@@ -192,7 +192,7 @@ def update_selected_company(request):
         "id": company.id,
     }
     request.session["selected_company_instance"] = company
-    return HorillaRedirect(request, redirect_to=next_url)
+    return HrRedirect(request, redirect_to=next_url)
 
 
 urlpatterns.append(

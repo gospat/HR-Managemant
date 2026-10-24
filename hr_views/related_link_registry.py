@@ -14,7 +14,7 @@ _registry = {}
 
 # Query param appended to every resolved related-object link so the Detail View
 # it opens knows it was reached through related-object navigation (see
-# HorillaDetailedView.get_context_data, which reads it to suppress the
+# HrDetailedView.get_context_data, which reads it to suppress the
 # list-driven Previous/Next controls).
 RELATED_VIEW_PARAM = "related_view"
 

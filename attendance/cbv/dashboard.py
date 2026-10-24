@@ -14,7 +14,7 @@ from attendance.filters import LateComeEarlyOutFilter
 from attendance.models import AttendanceLateComeEarlyOut, AttendanceValidationCondition
 from base.methods import filtersubordinates
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 
 
 @method_decorator(login_required, name="dispatch")
@@ -86,7 +86,7 @@ class DashboardaAttendanceOT(OTAttendancesList):
 
 
 @method_decorator(login_required, name="dispatch")
-class DashboardOnBreak(HorillaListView):
+class DashboardOnBreak(HrListView):
     """
     view for on break employee list
     """

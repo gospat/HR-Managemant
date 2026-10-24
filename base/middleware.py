@@ -16,7 +16,7 @@ from django.utils.translation import gettext_lazy as _
 
 from base.backends import ConfiguredEmailBackend
 from base.context_processors import AllCompany, AllMyCompanies
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from base.models import Company, ShiftRequest, WorkTypeRequest
 from employee.models import (
     DisciplinaryAction,
@@ -112,7 +112,7 @@ CACHE_KEY = "horilla_company_models_cache_key"
 #         """
 #         is_company_model = model in self._get_company_models()
 #         company_field = getattr(model, "company_id", None)
-#         is_horilla_manager = isinstance(model.objects, HorillaCompanyManager)
+#         is_horilla_manager = isinstance(model.objects, HrCompanyManager)
 #         related_company_field = getattr(model.objects, "related_company_field", None)
 
 #         if is_company_model:
@@ -344,11 +344,11 @@ class CompanyMiddleware:
             return self._handle(request)
         finally:
             # Threads are reused across requests and across tests, so a request
-            # left here outlives its own lifecycle. HorillaModel.save() reads it
+            # left here outlives its own lifecycle. HrModel.save() reads it
             # to stamp created_by/modified_by, which then point at a stale user.
             _thread_locals.request = None
             # Same lifetime problem for the company ContextVar _handle() sets:
-            # HorillaCompanyManager.get_queryset() reads it on every query, so a
+            # HrCompanyManager.get_queryset() reads it on every query, so a
             # value left behind scopes whatever runs next on this thread to the
             # previous request's company. Anonymous requests happen to reset it
             # (see _handle), but nothing guarantees one runs in between.

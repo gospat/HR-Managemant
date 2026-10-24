@@ -18,7 +18,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
 from base.forms import ModelForm as BaseForm
-from base.forms import ModelForm as HorillaModelForm
+from base.forms import ModelForm as HrModelForm
 from base.methods import (
     check_manager,
     filtersubordinatesemployeemodel,
@@ -28,8 +28,8 @@ from base.methods import (
 from base.models import Company
 from employee.filters import EmployeeFilter
 from core import horilla_middlewares
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from pms.models import (
     AnonymousFeedback,
     BonusPointSetting,
@@ -119,9 +119,9 @@ class ObjectiveForm(BaseForm):
             "employee", None
         )  # access the logged-in user's information
         super().__init__(*args, **kwargs)
-        self.fields["assignees"] = HorillaMultiSelectField(
+        self.fields["assignees"] = HrMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",
@@ -132,9 +132,9 @@ class ObjectiveForm(BaseForm):
             label="Assignees",
         )
 
-        self.fields["managers"] = HorillaMultiSelectField(
+        self.fields["managers"] = HrMultiSelectField(
             queryset=Employee.objects.all(),
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",
@@ -160,7 +160,7 @@ class ObjectiveForm(BaseForm):
         cleaned_data = super().clean()
         add_assignees = cleaned_data.get("add_assignees")
         for field_name, field_instance in self.fields.items():
-            if isinstance(field_instance, HorillaMultiSelectField):
+            if isinstance(field_instance, HrMultiSelectField):
                 self.errors.pop(field_name, None)
                 if (
                     add_assignees
@@ -468,7 +468,7 @@ class EmployeeKeyResultForm(BaseForm):
             )
 
 
-class KRForm(HorillaModelForm):
+class KRForm(HrModelForm):
     """
     A form used for creating KeyResult object
     """
@@ -677,7 +677,7 @@ class KeyResultForm(ModelForm):
         return cleaned_data
 
 
-class FeedbackForm(HorillaModelForm):
+class FeedbackForm(HrModelForm):
     """
     FeedbackForm for better performance.
     """
@@ -829,9 +829,9 @@ class FeedbackForm(HorillaModelForm):
             )
 
         # # Horilla multi-select filter for subordinates
-        # self.fields["subordinate_id"] = HorillaMultiSelectField(
+        # self.fields["subordinate_id"] = HrMultiSelectField(
         #     queryset=Employee.objects.all(),
-        #     widget=HorillaMultiSelectWidget(
+        #     widget=HrMultiSelectWidget(
         #         filter_route_name="employee-widget-filter",
         #         filter_class=EmployeeFilter,
         #         filter_instance_context_name="f",
@@ -1137,7 +1137,7 @@ class MeetingsForm(BaseForm):
         employees = Employee.objects.filter(id__in=employee_id)
         cleaned_data["employee_id"] = employees
 
-        if isinstance(self.fields["employee_id"], HorillaMultiSelectField):
+        if isinstance(self.fields["employee_id"], HrMultiSelectField):
             ids = self.data.getlist("employee_id")
             if ids:
                 self.errors.pop("employee_id", None)
@@ -1155,9 +1155,9 @@ class MeetingsForm(BaseForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["employee_id"] = HorillaMultiSelectField(
+        self.fields["employee_id"] = HrMultiSelectField(
             queryset=Employee.objects.filter(employee_work_info__isnull=False),
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",
@@ -1192,7 +1192,7 @@ class MeetingResponseForm(ModelForm):
         }
 
 
-class BonusPointSettingForm(HorillaModelForm):
+class BonusPointSettingForm(HrModelForm):
     """
     BonusPointSetting form
     """
@@ -1247,7 +1247,7 @@ class BonusPointSettingForm(HorillaModelForm):
         return cleaned_data
 
 
-class EmployeeBonusPointForm(HorillaModelForm):
+class EmployeeBonusPointForm(HrModelForm):
     """
     EmployeeBonusPoint form
     """
@@ -1297,7 +1297,7 @@ class EmployeeBonusPointForm(HorillaModelForm):
         return cleaned_data
 
 
-class EmployeeFeedbackForm(HorillaModelForm):
+class EmployeeFeedbackForm(HrModelForm):
 
     cols = {"others_id": 12}
 
@@ -1307,9 +1307,9 @@ class EmployeeFeedbackForm(HorillaModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["others_id"] = HorillaMultiSelectField(
+        self.fields["others_id"] = HrMultiSelectField(
             queryset=Employee.objects.filter(employee_work_info__isnull=False),
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",
@@ -1322,7 +1322,7 @@ class EmployeeFeedbackForm(HorillaModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        if isinstance(self.fields["others_id"], HorillaMultiSelectField):
+        if isinstance(self.fields["others_id"], HrMultiSelectField):
             self.errors.pop("others_id", None)
 
             employee_data = self.fields["others_id"].queryset.filter(
@@ -1334,7 +1334,7 @@ class EmployeeFeedbackForm(HorillaModelForm):
         return cleaned_data
 
 
-class BulkFeedbackForm(HorillaModelForm):
+class BulkFeedbackForm(HrModelForm):
     """Form for creating feedback in bulk"""
 
     title = forms.CharField(required=True, label=_("Title"))
@@ -1404,9 +1404,9 @@ class BulkFeedbackForm(HorillaModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["employee_ids"] = HorillaMultiSelectField(
+        self.fields["employee_ids"] = HrMultiSelectField(
             queryset=Employee.objects.filter(employee_work_info__isnull=False),
-            widget=HorillaMultiSelectWidget(
+            widget=HrMultiSelectWidget(
                 filter_route_name="employee-widget-filter",
                 filter_class=EmployeeFilter,
                 filter_instance_context_name="f",
@@ -1423,7 +1423,7 @@ class BulkFeedbackForm(HorillaModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        if isinstance(self.fields["employee_ids"], HorillaMultiSelectField):
+        if isinstance(self.fields["employee_ids"], HrMultiSelectField):
             self.errors.pop("employee_ids", None)
 
             employee_data = self.fields["employee_ids"].queryset.filter(

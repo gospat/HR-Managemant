@@ -112,7 +112,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         # Subclasses JWTAuthentication to also set the company ContextVar that
-        # HorillaCompanyManager scopes on. CompanyMiddleware cannot do it for
+        # HrCompanyManager scopes on. CompanyMiddleware cannot do it for
         # API calls: middleware runs before DRF resolves the token, so it sees
         # AnonymousUser and returns early, leaving queries unscoped. See
         # hr_api/authentication.py.

@@ -8,15 +8,15 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext_noop
 
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -50,7 +50,7 @@ class ObjectiveTemplateView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class ObjectivesList(HorillaListView):
+class ObjectivesList(HrListView):
     """
     List view of the page
     """
@@ -208,7 +208,7 @@ class ObjectiveTemplateList(AllObjectives):
 
 
 @method_decorator(login_required, name="dispatch")
-class ObjectivesTab(HorillaTabView):
+class ObjectivesTab(HrTabView):
     """
     Tab View
     """
@@ -291,7 +291,7 @@ class ObjectivesTab(HorillaTabView):
         return context
 
 
-class _ObjectivesTabNavBase(HorillaNavView):
+class _ObjectivesTabNavBase(HrNavView):
     """
     Shared Search/Filter/Create wiring for each Objectives tab's own,
     independent Nav - only search_url/search_swap_target differ per tab.
@@ -360,13 +360,13 @@ class AllObjectivesNav(_ObjectivesTabNavBase):
         self.search_swap_target = "#allObjectivesListContainer"
 
 
-class MyObjectivesTabShell(HorillaTabContentShell):
+class MyObjectivesTabShell(HrTabContentShell):
     nav_url_name = "my-objectives-nav"
     container_id = "myObjectivesListContainer"
     tabs_root_id = "objContainer"
 
 
-class AllObjectivesTabShell(HorillaTabContentShell):
+class AllObjectivesTabShell(HrTabContentShell):
     nav_url_name = "all-objectives-nav"
     container_id = "allObjectivesListContainer"
     tabs_root_id = "objContainer"
@@ -403,7 +403,7 @@ class DynamicKeyResultCreateForm(KeyResultFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CreateEmployeeObjectiveForm(HorillaFormView):
+class CreateEmployeeObjectiveForm(HrFormView):
     """
     form view for create employee objective
     """
@@ -457,7 +457,7 @@ class CreateEmployeeObjectiveForm(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CreateObjectiveFormView(HorillaFormView):
+class CreateObjectiveFormView(HrFormView):
     """
     form view for create objectives
     """
@@ -597,12 +597,12 @@ class CreateTemplateObjectiveFormView(CreateObjectiveFormView):
             messages.info(
                 request, _("You don't have permission to perform this action")
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return super().dispatch(request, *args, **kwargs)
 
 
 @method_decorator(login_required, name="dispatch")
-class AddAssigneesFormView(HorillaFormView):
+class AddAssigneesFormView(HrFormView):
     """
     form view for add assignees
     """
@@ -621,12 +621,12 @@ class AddAssigneesFormView(HorillaFormView):
         obj_id = kwargs.get("pk")
 
         if not obj_id:
-            return HorillaRedirect(request, message=_("Objective ID is missing"))
+            return HrRedirect(request, message=_("Objective ID is missing"))
 
         self.object = Objective.objects.filter(pk=obj_id).first()
 
         if not self.object:
-            return HorillaRedirect(request, message=_("Invalid Objective"))
+            return HrRedirect(request, message=_("Invalid Objective"))
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -679,7 +679,7 @@ class AddAssigneesFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class CreateEmployeeKeyResultFormView(HorillaFormView):
+class CreateEmployeeKeyResultFormView(HrFormView):
     """
     form view for create employee key result form
     """
@@ -706,11 +706,11 @@ class CreateEmployeeKeyResultFormView(HorillaFormView):
 
         if (emp_obj_id or pk) and not self.emp_objective:
             messages.error(request, _("Employee objective not found."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
         if not self.has_key_result_permission():
             messages.info(request, _("You don't have permission"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return super().dispatch(request, *args, **kwargs)
 
     def has_key_result_permission(self):
@@ -792,7 +792,7 @@ class CreateEmployeeKeyResultFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeObjectiveDetailView(HorillaDetailedView):
+class EmployeeObjectiveDetailView(HrDetailedView):
     """
     Generic Detail view of page
     """
@@ -829,7 +829,7 @@ EmployeeKeyResult.get_history_url = get_history_url
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeObjectiveKeyResultDetailListView(HorillaListView):
+class EmployeeObjectiveKeyResultDetailListView(HrListView):
     """
     List view of the page
     """
@@ -1009,7 +1009,7 @@ class EKRTab(EmployeeObjectiveKeyResultDetailListView):
     filter_selected = False
 
     def get_queryset(self, queryset=None, filtered=False, *args, **kwargs):
-        self.queryset = HorillaListView.get_queryset(
+        self.queryset = HrListView.get_queryset(
             self, queryset, filtered, *args, **kwargs
         ).filter(employee_objective_id__employee_id__pk=self.kwargs["pk"])
         self._saved_filters = self._saved_filters.copy()

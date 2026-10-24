@@ -9,14 +9,14 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaListView, HorillaNavView
+from hr_views.generic.cbv.views import HrListView, HrNavView
 from payroll.filters import PayrollBatchFilter
 from payroll.models.payroll_batch import PayrollBatch
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_payslip"), name="dispatch")
-class PayrollBatchList(HorillaListView):
+class PayrollBatchList(HrListView):
     """Every run, newest first."""
 
     model = PayrollBatch
@@ -66,7 +66,7 @@ class PayrollBatchList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_payslip"), name="dispatch")
-class PayrollBatchNav(HorillaNavView):
+class PayrollBatchNav(HrNavView):
     """Search and the slide-over filter for the runs list."""
 
     nav_title = " "

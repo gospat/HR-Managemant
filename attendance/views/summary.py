@@ -365,7 +365,7 @@ def build_monthly_summary(from_date, to_date, employee_qs):
     # Fetch worked seconds + minimum per record; classify as full (1.0),
     # half (0.5), or absent (0.0) using the default grace time.
     # Using values() + Python loop instead of annotate(Count()) avoids the
-    # GROUP BY join-multiplication caused by HorillaCompanyManager's work-info
+    # GROUP BY join-multiplication caused by HrCompanyManager's work-info
     # join.
     from attendance.methods.utils import strtime_seconds as _strtime_secs
     from attendance.models import GraceTime as _GraceTime
@@ -932,7 +932,7 @@ def attendance_monthly_summary(request):
     # than pre-rendering every instance as an <option> tag -- Employee in
     # particular doesn't scale as a full dump. Only the currently-selected
     # instances need a real <option> here (select2's own preload
-    # requirement), same pattern as HorillaFilterSet._apply_ajax_fields.
+    # requirement), same pattern as HrFilterSet._apply_ajax_fields.
     context = {
         "from_date": request.GET.get("from_date", from_date_default.isoformat()),
         "to_date": request.GET.get("to_date", to_date_default.isoformat()),
@@ -1067,12 +1067,12 @@ def attendance_monthly_summary_table(request):
         from_date, to_date, employee_qs
     )
 
-    # Sorting — mirrors the outcome of HorillaListView's sortby() (query
+    # Sorting — mirrors the outcome of HrListView's sortby() (query
     # param + toggling asc/desc, arrows reflected in the header) without its
     # session-cached Reverse()-object machinery, since `rows` here is a
     # plain list of dicts built by build_monthly_summary(), not a queryset
     # a .order_by() could apply to. "Working Days" is deliberately excluded
-    # (like HorillaListView leaves some columns out of its sortby_mapping)
+    # (like HrListView leaves some columns out of its sortby_mapping)
     # since it's the same fleet-wide value on every row — sorting by it is
     # a no-op.
     def _dept_name(row):
@@ -1100,7 +1100,7 @@ def attendance_monthly_summary_table(request):
     if sort_key in SORT_KEYS:
         rows = sorted(rows, key=SORT_KEYS[sort_key], reverse=(sort_dir == "desc"))
 
-    # Same convention as HorillaListView.select_all(): every pk matching the
+    # Same convention as HrListView.select_all(): every pk matching the
     # current filters (not just this page) is baked into the "Select" button
     # at render time, so clicking it needs no extra request. Derived from
     # `rows` (the same list summary_totals/"Employees" is built from) rather

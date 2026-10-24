@@ -13,12 +13,12 @@ from employee.filters import PolicyFilter
 from employee.forms import PolicyForm
 from employee.models import Policy
 from hr_views.cbv_methods import login_required, permission_required
-from hr_views.generic.cbv.views import HorillaFormView, HorillaNavView
+from hr_views.generic.cbv.views import HrFormView, HrNavView
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="employee.add_policy"), name="dispatch")
-class PolicyFormView(HorillaFormView):
+class PolicyFormView(HrFormView):
     """
     form view for create policy
     """
@@ -48,7 +48,7 @@ class PolicyFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class PoliciesNav(HorillaNavView):
+class PoliciesNav(HrNavView):
     """
     Policies Nav
     """

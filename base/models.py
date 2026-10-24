@@ -16,12 +16,12 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
-from core.models import HorillaModel, NoPermissionModel, upload_path
-from hr_audit.models import HorillaAuditInfo, HorillaAuditLog
+from core.models import HrModel, NoPermissionModel, upload_path
+from hr_audit.models import HorillaAuditInfo, HrAuditLog
 from hr_auth.models import HorillaUser
 from hr_views.cbv_methods import render_template
 
@@ -89,7 +89,7 @@ def clear_messages(request):
         pass
 
 
-class Company(HorillaModel):
+class Company(HrModel):
     """
     Company model
     """
@@ -155,7 +155,7 @@ class Company(HorillaModel):
         return self.pk
 
 
-class CompanyGroupAssignment(HorillaModel):
+class CompanyGroupAssignment(HrModel):
     """
     Company-scoped membership of a user in an auth Group.
 
@@ -210,7 +210,7 @@ class CompanyGroupAssignment(HorillaModel):
             user.groups.remove(group)
 
 
-class Department(HorillaModel):
+class Department(HrModel):
     """
     Department model
     """
@@ -220,7 +220,7 @@ class Department(HorillaModel):
     )
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -301,7 +301,7 @@ class Department(HorillaModel):
         return str(self.department)
 
 
-class JobPosition(HorillaModel):
+class JobPosition(HrModel):
     """
     JobPosition model
     """
@@ -317,7 +317,7 @@ class JobPosition(HorillaModel):
     )
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager("department_id__company_id")
+    objects = HrCompanyManager("department_id__company_id")
 
     class Meta:
         """
@@ -354,7 +354,7 @@ class JobPosition(HorillaModel):
         )
 
 
-class JobRole(HorillaModel):
+class JobRole(HrModel):
     """JobRole model"""
 
     job_position_id = models.ForeignKey(
@@ -365,7 +365,7 @@ class JobRole(HorillaModel):
     )
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager("job_position_id__department_id__company_id")
+    objects = HrCompanyManager("job_position_id__department_id__company_id")
 
     class Meta:
         """
@@ -380,7 +380,7 @@ class JobRole(HorillaModel):
         return f"{self.job_role} - {self.job_position_id.job_position}"
 
 
-class WorkType(HorillaModel):
+class WorkType(HrModel):
     """
     WorkType model
     """
@@ -388,7 +388,7 @@ class WorkType(HorillaModel):
     work_type = models.CharField(max_length=50, verbose_name=_("Work Type"))
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -454,7 +454,7 @@ class WorkType(HorillaModel):
         return self
 
 
-class RotatingWorkType(HorillaModel):
+class RotatingWorkType(HrModel):
     """
     RotatingWorkType model
     """
@@ -482,7 +482,7 @@ class RotatingWorkType(HorillaModel):
         blank=True,
         null=True,
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         """
@@ -576,7 +576,7 @@ class RotatingWorkType(HorillaModel):
         return additional_work_types
 
 
-class RotatingWorkTypeAssign(HorillaModel):
+class RotatingWorkTypeAssign(HrModel):
     """
     RotatingWorkTypeAssign model
     """
@@ -635,13 +635,13 @@ class RotatingWorkTypeAssign(HorillaModel):
         blank=True,
         null=True,
     )
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         """
@@ -732,7 +732,7 @@ class RotatingWorkTypeAssign(HorillaModel):
         )
 
 
-class EmployeeType(HorillaModel):
+class EmployeeType(HrModel):
     """
     EmployeeType model
     """
@@ -740,7 +740,7 @@ class EmployeeType(HorillaModel):
     employee_type = models.CharField(max_length=50, verbose_name=_("Employee Type"))
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -802,7 +802,7 @@ class EmployeeShiftDay(models.Model):
     day = models.CharField(max_length=20, choices=DAY)
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -816,7 +816,7 @@ class EmployeeShiftDay(models.Model):
         return str(_(self.day).capitalize())
 
 
-class EmployeeShift(HorillaModel):
+class EmployeeShift(HrModel):
     """
     EmployeeShift model
     """
@@ -849,7 +849,7 @@ class EmployeeShift(HorillaModel):
             verbose_name=_("Grace Time"),
         )
 
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -909,7 +909,7 @@ class EmployeeShift(HorillaModel):
         return self
 
 
-class EmployeeShiftSchedule(HorillaModel):
+class EmployeeShiftSchedule(HrModel):
     """
     EmployeeShiftSchedule model
     """
@@ -945,7 +945,7 @@ class EmployeeShiftSchedule(HorillaModel):
 
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
 
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         """
@@ -1033,7 +1033,7 @@ class EmployeeShiftSchedule(HorillaModel):
         return dict(DAY).get(self.day.day)
 
 
-class RotatingShift(HorillaModel):
+class RotatingShift(HrModel):
     """
     RotatingShift model
     """
@@ -1063,7 +1063,7 @@ class RotatingShift(HorillaModel):
         blank=True,
         null=True,
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         """
@@ -1158,7 +1158,7 @@ class RotatingShift(HorillaModel):
         return total_shifts
 
 
-class RotatingShiftAssign(HorillaModel):
+class RotatingShiftAssign(HrModel):
     """
     RotatingShiftAssign model
     """
@@ -1216,13 +1216,13 @@ class RotatingShiftAssign(HorillaModel):
         blank=True,
         null=True,
     )
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     def rotating_column(self):
         """
@@ -1340,7 +1340,7 @@ class RotatingShiftAssign(HorillaModel):
 # ---------------------------------------------------------------------------
 
 
-class Roster(HorillaModel):
+class Roster(HrModel):
     """
     Forward-planning shift roster entry: one employee, one date, one shift.
     Planners assign shifts in advance; employees see published entries via My Roster.
@@ -1391,7 +1391,7 @@ class Roster(HorillaModel):
         verbose_name=_("Created By"),
     )
 
-    objects = HorillaCompanyManager("employee__employee_work_info__company_id")
+    objects = HrCompanyManager("employee__employee_work_info__company_id")
 
     class Meta:
         verbose_name = _("Roster Entry")
@@ -1448,7 +1448,7 @@ class BaserequestFile(models.Model):
     objects = models.Manager()
 
 
-class WorkTypeRequest(HorillaModel):
+class WorkTypeRequest(HrModel):
     """
     WorkTypeRequest model
     """
@@ -1487,13 +1487,13 @@ class WorkTypeRequest(HorillaModel):
     approved = models.BooleanField(default=False, verbose_name=_("Approved"))
     canceled = models.BooleanField(default=False, verbose_name=_("Canceled"))
     work_type_changed = models.BooleanField(default=False)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         """
@@ -1657,7 +1657,7 @@ class WorkTypeRequest(HorillaModel):
             {self.employee_id.employee_last_name} - {self.requested_date}"
 
 
-class WorkTypeRequestComment(HorillaModel):
+class WorkTypeRequestComment(HrModel):
     """
     WorkTypeRequestComment Model
     """
@@ -1674,7 +1674,7 @@ class WorkTypeRequestComment(HorillaModel):
         return f"{self.comment}"
 
 
-class ShiftRequest(HorillaModel):
+class ShiftRequest(HrModel):
     """
     ShiftRequest model
     """
@@ -1723,13 +1723,13 @@ class ShiftRequest(HorillaModel):
     approved = models.BooleanField(default=False, verbose_name=_("Approved"))
     canceled = models.BooleanField(default=False, verbose_name=_("Canceled"))
     shift_changed = models.BooleanField(default=False)
-    history = HorillaAuditLog(
+    history = HrAuditLog(
         related_name="history_set",
         bases=[
             HorillaAuditInfo,
         ],
     )
-    objects = HorillaCompanyManager("employee_id__employee_work_info__company_id")
+    objects = HrCompanyManager("employee_id__employee_work_info__company_id")
 
     class Meta:
         """
@@ -1969,7 +1969,7 @@ class ShiftRequest(HorillaModel):
             {self.employee_id.employee_last_name} - {self.requested_date}"
 
 
-class ShiftRequestComment(HorillaModel):
+class ShiftRequestComment(HrModel):
     """
     ShiftRequestComment Model
     """
@@ -1986,13 +1986,13 @@ class ShiftRequestComment(HorillaModel):
         return f"{self.comment}"
 
 
-class Tags(HorillaModel):
+class Tags(HrModel):
     title = models.CharField(max_length=30)
     color = models.CharField(max_length=30)
     company_id = models.ForeignKey(
         Company, null=True, editable=False, on_delete=models.PROTECT
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         verbose_name = _("Tag")
@@ -2043,7 +2043,7 @@ class Tags(HorillaModel):
         return url
 
 
-class HorillaMailTemplate(HorillaModel):
+class HorillaMailTemplate(HrModel):
     title = models.CharField(max_length=100, unique=True)
     body = models.TextField()
     company_id = models.ForeignKey(
@@ -2053,7 +2053,7 @@ class HorillaMailTemplate(HorillaModel):
         on_delete=models.CASCADE,
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         verbose_name = _("Mail Template")
@@ -2063,7 +2063,7 @@ class HorillaMailTemplate(HorillaModel):
         return f"{self.title}"
 
 
-class DynamicEmailConfiguration(HorillaModel):
+class DynamicEmailConfiguration(HrModel):
     """
     SingletonModel to keep the mail server configurations
     """
@@ -2186,7 +2186,7 @@ CONDITION_CHOICE = [
 ]
 
 
-class MultipleApprovalCondition(HorillaModel):
+class MultipleApprovalCondition(HrModel):
     """
     Multiple approve conditions
     """
@@ -2229,7 +2229,7 @@ class MultipleApprovalCondition(HorillaModel):
         on_delete=models.CASCADE,
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def __str__(self) -> str:
         return f"{self.condition_field} {self.condition_operator}"
@@ -2423,7 +2423,7 @@ class MultipleApprovalManagers(models.Model):
     sequence = models.IntegerField(null=False, blank=False)
     employee_id = models.IntegerField(null=True, blank=True)
     reporting_manager = models.CharField(max_length=100, null=True, blank=True)
-    objects = HorillaCompanyManager(related_company_field="condition_id__company_id")
+    objects = HrCompanyManager(related_company_field="condition_id__company_id")
 
     class Meta:
         verbose_name = _("Multiple Approval Managers")
@@ -2452,7 +2452,7 @@ class DynamicPagination(models.Model):
     )
     company_id = models.ForeignKey("base.Company", on_delete=models.CASCADE, null=True)
     pagination = models.IntegerField(default=50, validators=[MinValueValidator(1)])
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def save(self, *args, **kwargs):
         request = getattr(_thread_locals, "request", None)
@@ -2486,7 +2486,7 @@ class AnnouncementExpire(models.Model):
 
     days = models.IntegerField(null=True, blank=True, default=30)
     company_id = models.ForeignKey("base.Company", on_delete=models.CASCADE, null=True)
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def company_col(self):
         return self.company_id.company if self.company_id else "All Company"
@@ -2497,7 +2497,7 @@ class AnnouncementExpire(models.Model):
         )
 
 
-class Announcement(HorillaModel):
+class Announcement(HrModel):
     """
     Announcement Model for storing all announcements.
     """
@@ -2548,7 +2548,7 @@ class Announcement(HorillaModel):
     filtered_employees = models.ManyToManyField(
         Employee, related_name="announcement_filtered_employees", editable=False
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         verbose_name = _("Announcement")
@@ -2597,7 +2597,7 @@ class Announcement(HorillaModel):
         )
 
 
-class AnnouncementComment(HorillaModel):
+class AnnouncementComment(HrModel):
     """
     AnnouncementComment Model
     """
@@ -2654,7 +2654,7 @@ class EmailLog(models.Model):
     # the mail-log views -- which match only on recipient address -- could show
     # one tenant's mail to another. Bodies are redacted on write; see
     # base/email_redaction.py.
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def __str__(self) -> str:
         return f"{self.subject} {self.to}"
@@ -2708,7 +2708,7 @@ class DriverViewed(models.Model):
         return self.user.driverviewed_set.values_list("viewed", flat=True)
 
 
-class DashboardEmployeeCharts(HorillaModel):
+class DashboardEmployeeCharts(HrModel):
     """
     dashboard employee chart
     """
@@ -2742,7 +2742,7 @@ class BiometricAttendance(models.Model):
         related_name="biometric_enabled_company",
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     def __str__(self):
         return f"{self.is_installed}"
@@ -2780,7 +2780,7 @@ class AttendanceAllowedIP(models.Model):
     additional_data = models.JSONField(
         null=True, blank=True, default=default_additional_data
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     def clean(self):
         """
@@ -2798,7 +2798,7 @@ class AttendanceAllowedIP(models.Model):
         return f"AttendanceAllowedIP ({company}) - {'enabled' if self.is_enabled else 'disabled'}"
 
 
-class TrackLateComeEarlyOut(HorillaModel):
+class TrackLateComeEarlyOut(HrModel):
     is_enable = models.BooleanField(
         default=True,
         verbose_name=_("Enable"),
@@ -2812,7 +2812,7 @@ class TrackLateComeEarlyOut(HorillaModel):
         on_delete=models.CASCADE,
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         verbose_name = _("Track Late Arrival & Early Departure")
@@ -2835,7 +2835,7 @@ class TrackLateComeEarlyOut(HorillaModel):
         return super().save(*args, **kwargs)
 
 
-class Holidays(HorillaModel):
+class Holidays(HrModel):
     ASSIGNING_TYPE = [
         ("department", _("Department")),
         ("job_position", _("Job Position")),
@@ -2873,7 +2873,7 @@ class Holidays(HorillaModel):
         on_delete=models.PROTECT,
         verbose_name=_("Company"),
     )
-    objects = HorillaCompanyManager(related_company_field="company_id")
+    objects = HrCompanyManager(related_company_field="company_id")
 
     class Meta:
         verbose_name = _("Holiday")
@@ -2990,7 +2990,7 @@ class Holidays(HorillaModel):
         return qs
 
 
-class CompanyLeaves(HorillaModel):
+class CompanyLeaves(HrModel):
     based_on_week = models.CharField(
         max_length=100,
         choices=WEEKS,
@@ -3002,7 +3002,7 @@ class CompanyLeaves(HorillaModel):
         max_length=100, choices=WEEK_DAYS, verbose_name=_("Based On Week Day")
     )
     company_id = models.ManyToManyField(Company, blank=True, verbose_name=_("Company"))
-    objects = HorillaCompanyManager()
+    objects = HrCompanyManager()
 
     class Meta:
         unique_together = ("based_on_week", "based_on_week_day")
@@ -3085,7 +3085,7 @@ class CompanyLeaves(HorillaModel):
         return url
 
 
-class PenaltyAccounts(HorillaModel):
+class PenaltyAccounts(HrModel):
     """
     LateComeEarlyOutPenaltyAccount
     """
@@ -3201,7 +3201,7 @@ class NotificationSound(models.Model):
     sound_enabled = models.BooleanField(default=False)
 
 
-class IntegrationApps(HorillaModel, NoPermissionModel):
+class IntegrationApps(HrModel, NoPermissionModel):
     app_label = models.CharField(max_length=255)
     company = models.ForeignKey(
         "base.Company",
@@ -3246,7 +3246,7 @@ class SetupChecklistDismissal(models.Model):
         return f"{self.user} — {self.company or 'global'}"
 
 
-class DefaultExportPermission(HorillaModel):
+class DefaultExportPermission(HrModel):
     """
     Per-company toggle for the "Default Export Access" setting. When
     enabled for a company, every user of that company may export data
@@ -3289,7 +3289,7 @@ class DefaultExportPermission(HorillaModel):
         return f"Default Export Access for {self.company_id} is {'enabled' if self.is_enabled else 'disabled'}"
 
 
-class CompanyLanguageSetting(HorillaModel):
+class CompanyLanguageSetting(HrModel):
     """
     Per-company list of enabled languages for the navbar language switcher.
     When a company has one or more languages configured here, only those

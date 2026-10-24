@@ -4073,12 +4073,12 @@ $(document).on("htmx:afterSwap", reinitPlainSelects);
 $(document).on("htmx:afterSettle", reinitPlainSelects);
 
 
-// Generic AJAX-backed select (HorillaAjaxSelectWidget, horilla_widgets) --
+// Generic AJAX-backed select (HrAjaxSelectWidget, horilla_widgets) --
 // unlike .oh-select above, these ship with only the currently selected
 // option (or none) pre-rendered, so search/pagination is delegated to
 // whatever endpoint the field's data-ajax-url points at instead of ever
 // rendering the full option list server-side. Kept generic: any app can
-// opt a ModelChoiceField into this by using HorillaAjaxSelectWidget --
+// opt a ModelChoiceField into this by using HrAjaxSelectWidget --
 // no per-app JS wiring needed.
 function initOhSelectAjax(scope) {
     var selects = scope.filter(".oh-select-ajax").add(scope.find(".oh-select-ajax"));

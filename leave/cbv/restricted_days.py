@@ -12,10 +12,10 @@ from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from leave.filters import RestrictLeaveFilter
@@ -33,7 +33,7 @@ class RestrictedDaysView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RestrictedDaysList(HorillaListView):
+class RestrictedDaysList(HrListView):
     """
     List view of the resticted days page
     """
@@ -81,7 +81,7 @@ class RestrictedDaysList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RestrictedDaysNav(HorillaNavView):
+class RestrictedDaysNav(HrNavView):
     """
     Nav bar
     """
@@ -122,7 +122,7 @@ class RestrictedDaysNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("leave.add_restrictleave"), name="dispatch")
-class RestrictedDaysFormView(HorillaFormView):
+class RestrictedDaysFormView(HrFormView):
     """
     Create and edit form
     """
@@ -152,7 +152,7 @@ class RestrictedDaysFormView(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RestrictedDaysDetailView(HorillaDetailedView):
+class RestrictedDaysDetailView(HrDetailedView):
     """
     detail view of page
     """

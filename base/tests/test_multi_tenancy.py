@@ -1,4 +1,4 @@
-"""Company isolation via HorillaCompanyManager + selected-company context."""
+"""Company isolation via HrCompanyManager + selected-company context."""
 
 from datetime import date, timedelta
 

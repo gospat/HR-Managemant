@@ -2,7 +2,7 @@
 generic_ajax.py
 
 Generic, reusable building block for AJAX-backed select widgets (see
-horilla_widgets.widgets.select_widgets.HorillaAjaxSelectWidget). An app view
+horilla_widgets.widgets.select_widgets.HrAjaxSelectWidget). An app view
 scopes/permission-checks its own queryset as usual, then hands it to
 build_ajax_choices_response() to get back a Select2-format JSON response --
 so every field's search endpoint stays a few lines of app-specific code
@@ -17,7 +17,7 @@ from django.http import JsonResponse
 DEFAULT_PAGE_SIZE = 20
 
 # Populated only from FilterSet class bodies at import time (see
-# core.filters.HorillaFilterSet.ajax_fields / __init_subclass__), never
+# core.filters.HrFilterSet.ajax_fields / __init_subclass__), never
 # from client input -- horilla_widgets.views.ajax_select_choices looks up
 # a client-supplied "key" here, so a key that was never registered here
 # simply can't resolve to a queryset, regardless of what a client sends.

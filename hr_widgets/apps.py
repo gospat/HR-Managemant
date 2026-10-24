@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class HorillaWidgetsConfig(AppConfig):
+class HrWidgetsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "hr_widgets"
     # Kept at the original value so migrations, permissions and

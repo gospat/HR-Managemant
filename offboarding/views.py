@@ -29,10 +29,10 @@ from core.decorators import (
     permission_required,
 )
 from core.group_by import group_by_queryset as group_by
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from core.methods import get_horilla_model_class
 from hr_auth.models import HorillaUser
-from hr_views.generic.cbv.views import HorillaFormView
+from hr_views.generic.cbv.views import HrFormView
 from notifications.signals import notify
 from offboarding.decorators import (
     any_manager_can_enter,
@@ -254,7 +254,7 @@ def create_offboarding(request):
                 redirect=reverse("offboarding-pipeline"),
             )
 
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return render(
         request,
@@ -310,7 +310,7 @@ def create_stage(request):
                 icon="people-circle",
                 redirect=reverse("offboarding-pipeline"),
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return render(request, "offboarding/stage/form.html", {"form": form})
 
@@ -323,7 +323,7 @@ def update_stage_order(request, pk):
     """
     offboarding = Offboarding.find(pk)
     if not offboarding:
-        return HorillaRedirect(request, message=_("Offboarding not found"))
+        return HrRedirect(request, message=_("Offboarding not found"))
 
     if request.method == "POST":
         try:
@@ -393,7 +393,7 @@ def add_employee(request):
                     redirect=reverse("offboarding-pipeline"),
                     icon="information",
                 )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return render(request, "offboarding/employee/form.html", {"form": form})
 
@@ -439,7 +439,7 @@ def delete_stage(request):
             messages.error(request, _("Stage not found"))
     except OverflowError:
         messages.error(request, _("Stage not found"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 def _blocked_required_tasks_message(employees, stage):
@@ -593,7 +593,7 @@ def change_offboarding_stage(request):
 
     blocked_message = _blocked_required_tasks_message(employees, stage)
     if blocked_message:
-        return HorillaFormView.HttpResponse(
+        return HrFormView.HttpResponse(
             script=(
                 "Swal.fire({"
                 f"icon: 'error', title: {json.dumps(str(_('Cannot Change Stage')))}, "
@@ -635,7 +635,7 @@ def change_offboarding_stage(request):
     for item in groups:
         setattr(item["offboarding"], "stages", item["stages"])
 
-    return HorillaFormView.HttpResponse()
+    return HrFormView.HttpResponse()
 
 
 @login_required
@@ -682,10 +682,10 @@ def add_note(request):
     """
     employee_id = request.GET.get("employee_id")
     if not employee_id:
-        return HorillaRedirect(request, message=_("Missing required parameter."))
+        return HrRedirect(request, message=_("Missing required parameter."))
     employee = OffboardingEmployee.find(employee_id)
     if not employee:
-        return HorillaRedirect(request, message=_("Employee not found."))
+        return HrRedirect(request, message=_("Employee not found."))
     form = NoteForm()
     if request.method == "POST":
         form = NoteForm(request.POST, request.FILES)
@@ -716,7 +716,7 @@ def offboarding_note_delete(request, note_id):
         note.delete()
         messages.success(request, _("The note has been successfully deleted."))
     except OffboardingNote.DoesNotExist:
-        return HorillaRedirect(request, message=_("Note not found."))
+        return HrRedirect(request, message=_("Note not found."))
     return HttpResponse(script)
 
 
@@ -786,7 +786,7 @@ def update_task_status(request, *args, **kwargs):
     task_id = request.GET.get("task_id")
     status = request.GET.get("task_status")
     if not task_id or not status or not stage_id or not employee_ids:
-        return HorillaRedirect(request, message=_("Missing required parameters."))
+        return HrRedirect(request, message=_("Missing required parameters."))
     employee_task = EmployeeTask.objects.filter(
         employee_id__id__in=employee_ids, task_id__id=task_id
     )
@@ -805,7 +805,7 @@ def update_task_status(request, *args, **kwargs):
     )
     stage = OffboardingStage.find(stage_id)
     if not stage:
-        return HorillaRedirect(request, message=_("Stage not found"))
+        return HrRedirect(request, message=_("Stage not found"))
     stage_forms = {}
     stage_forms[str(stage.offboarding_id.id)] = StageSelectForm(
         offboarding=stage.offboarding_id
@@ -835,7 +835,7 @@ def task_assign(request):
     employees = OffboardingEmployee.objects.filter(id__in=employee_ids)
     task = OffboardingTask.find(task_id)
     if not task:
-        return HorillaRedirect(request, message=_("Task not found"))
+        return HrRedirect(request, message=_("Task not found"))
     failed = []
     for employee in employees:
         try:
@@ -959,7 +959,7 @@ def request_view(request):
 def request_single_view(request, id):
     letter = ResignationLetter.find(id)
     if not letter:
-        return HorillaRedirect(request, message=_("Resignation letter not found"))
+        return HrRedirect(request, message=_("Resignation letter not found"))
     context = {
         "letter": letter,
     }
@@ -1158,7 +1158,7 @@ def create_resignation_request(request):
                     "A rejected resignation letter cannot be modified. Only deletion is allowed."
                 ),
             )
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         if not (
             request.user.has_perm("offboarding.change_resignationletter")
             or instance.employee_id == request.user.employee_get
@@ -1170,7 +1170,7 @@ def create_resignation_request(request):
         if form.is_valid():
             if form.save() is not None:
                 messages.success(request, _("Resignation letter saved"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
 
     return render(request, "offboarding/resignation/form.html", {"form": form})
 

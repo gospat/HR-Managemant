@@ -2,7 +2,7 @@ from django.apps import AppConfig
 from django.conf import settings
 
 
-class HorillaApiConfig(AppConfig):
+class HrApiConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "hr_api"
     # Kept at the original value so migrations, permissions and

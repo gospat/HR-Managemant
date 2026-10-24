@@ -31,19 +31,19 @@ from employee.cbv.employee_profile import EmployeeProfileView
 from employee.cbv.employees import EmployeeCard, EmployeeNav, EmployeesList
 from employee.filters import EmployeeFilter
 from employee.models import Employee
-from core.filters import HorillaFilterSet
+from core.filters import HrFilterSet
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     render_template,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 
@@ -59,7 +59,7 @@ class AttendancesView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AttendancesListView(HorillaListView):
+class AttendancesListView(HrListView):
     """
     list view
     """
@@ -179,7 +179,7 @@ class AttendancesListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("attendance.view_attendance"), name="dispatch")
-class AttendancesTabView(HorillaTabView):
+class AttendancesTabView(HrTabView):
     """
     tabview of candidate page
     """
@@ -292,7 +292,7 @@ def _attendance_ot_bulk_action():
     }
 
 
-class _AttendanceTabNavBase(HorillaNavView):
+class _AttendanceTabNavBase(HrNavView):
     """
     Shared Search/Filter/Create wiring for each Attendances tab's own,
     independent Nav - only search_url/search_swap_target/actions differ
@@ -422,21 +422,21 @@ class ValidatedAttendanceNav(_AttendanceTabNavBase):
         self.actions = _attendance_nav_common_actions(self.request)
 
 
-class ValidateAttendanceTabShell(HorillaTabContentShell):
+class ValidateAttendanceTabShell(HrTabContentShell):
     nav_url_name = "validate-attendance-nav"
     container_id = "validateListContainer"
     tabs_root_id = "attendances-tab"
     selected_instances_key_id = "validateselectedInstances"
 
 
-class OTAttendanceTabShell(HorillaTabContentShell):
+class OTAttendanceTabShell(HrTabContentShell):
     nav_url_name = "ot-attendance-nav"
     container_id = "otListContainer"
     tabs_root_id = "attendances-tab"
     selected_instances_key_id = "overtimeselectedInstances"
 
 
-class ValidatedAttendanceTabShell(HorillaTabContentShell):
+class ValidatedAttendanceTabShell(HrTabContentShell):
     nav_url_name = "validated-attendance-nav"
     container_id = "validatedListContainer"
     tabs_root_id = "attendances-tab"
@@ -611,7 +611,7 @@ class ValidatedAttendancesList(AttendancesListView):
 
 def _badge_count_from_attendance_list_view(request, view_cls):
     """
-    Use the same queryset rules as each tab's HorillaListView (filters, subordinates).
+    Use the same queryset rules as each tab's HrListView (filters, subordinates).
     """
     view = view_cls()
     view.request = request
@@ -634,7 +634,7 @@ def attendance_tabs_badge_counts(request):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("attendance.view_attendance"), name="dispatch")
-class GenericAttendancesDetailView(HorillaDetailedView):
+class GenericAttendancesDetailView(HrDetailedView):
     """
     Generic Detail view of page
     """
@@ -699,7 +699,7 @@ class ValidatedDetailView(GenericAttendancesDetailView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("attendance.add_attendance"), name="dispatch")
-class AttendancesFormView(HorillaFormView):
+class AttendancesFormView(HrFormView):
     """
     form view
     """
@@ -732,7 +732,7 @@ class AttendancesFormView(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("attendance.change_attendance"), name="dispatch")
-class AttendanceUpdateFormView(HorillaFormView):
+class AttendanceUpdateFormView(HrFormView):
     """
     form for update
     """
@@ -791,7 +791,7 @@ class AttendanceDetailActivityList(AttendanceActivityListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class PenaltyAccountListView(HorillaListView):
+class PenaltyAccountListView(HrListView):
     """
     list view for penalty tab
     """

@@ -34,7 +34,7 @@ from pms.methods import check_duplication
 # ================Models for BonusPointSetting==============
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.view_bonuspointsetting"), name="dispatch")
-class BonusPointSettingSectionView(views.HorillaSectionView):
+class BonusPointSettingSectionView(views.HrSectionView):
     """
     BonusPointSetting SectionView
     """
@@ -52,7 +52,7 @@ class BonusPointSettingSectionView(views.HorillaSectionView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.view_bonuspointsetting"), name="dispatch")
-class BonusPointSettingNavView(views.HorillaNavView):
+class BonusPointSettingNavView(views.HrNavView):
     """
     BonusPointSetting nav view
     """
@@ -76,7 +76,7 @@ class BonusPointSettingNavView(views.HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.add_bonuspointsetting"), name="dispatch")
-class BonusPointSettingFormView(views.HorillaFormView):
+class BonusPointSettingFormView(views.HrFormView):
     """
     BonusPointSettingForm View
     """
@@ -120,7 +120,7 @@ class BonusPointSettingFormView(views.HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.view_bonuspointsetting"), name="dispatch")
-class BonusPointSettingListView(views.HorillaListView):
+class BonusPointSettingListView(views.HrListView):
     """
     BnusPointSetting list view
     """
@@ -153,7 +153,7 @@ class BonusPointSettingListView(views.HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.view_bonuspointsetting"), name="dispatch")
-class BonusPointSettingDetailView(views.HorillaDetailedView):
+class BonusPointSettingDetailView(views.HrDetailedView):
     """
     BonusPointSetting detail view
     """
@@ -184,7 +184,7 @@ class BonusPointSettingDetailView(views.HorillaDetailedView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeBonusPointSectionView(views.HorillaSectionView):
+class EmployeeBonusPointSectionView(views.HrSectionView):
     """
     EmployeeBonusPoint SectionView
     """
@@ -201,7 +201,7 @@ class EmployeeBonusPointSectionView(views.HorillaSectionView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeBonusPointNavView(views.HorillaNavView):
+class EmployeeBonusPointNavView(views.HrNavView):
     """
     BonusPoint nav view
     """
@@ -242,7 +242,7 @@ class EmployeeBonusPointNavView(views.HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeBonusPointFormView(views.HorillaFormView):
+class EmployeeBonusPointFormView(views.HrFormView):
     """
     BonusPointForm View
     """
@@ -316,7 +316,7 @@ class EmployeeBonusPointFormView(views.HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class EmployeeBonusPointListView(views.HorillaListView):
+class EmployeeBonusPointListView(views.HrListView):
     """
     BnusPoint list view
     """
@@ -366,7 +366,7 @@ class EmployeeBonusPointListView(views.HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class FeedbackEmployeeFormView(views.HorillaFormView):
+class FeedbackEmployeeFormView(views.HrFormView):
     """
     Feedback other employee form View
     """
@@ -403,7 +403,7 @@ class FeedbackEmployeeFormView(views.HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("pms.add_feedback"), name="dispatch")
-class BulkFeedbackFormView(views.HorillaFormView):
+class BulkFeedbackFormView(views.HrFormView):
     """
     Feedback other employee form View
     """

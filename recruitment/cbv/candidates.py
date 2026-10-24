@@ -28,7 +28,7 @@ from xhtml2pdf import pisa
 from base.methods import has_export_access
 from employee.forms import BulkUpdateFieldForm
 from core.horilla_middlewares import _thread_locals
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import (
     export_xlsx,
     hx_request_required,
@@ -37,11 +37,11 @@ from hr_views.cbv_methods import (
 )
 from hr_views.forms import DynamicBulkUpdateForm
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrCardView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from hr_views.templatetags.generic_template_filters import getattribute
@@ -94,7 +94,7 @@ class CandidatesView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="recruitment.view_candidate"), name="dispatch")
-class ListCandidates(HorillaListView):
+class ListCandidates(HrListView):
     """
     List view of candidates
     """
@@ -287,7 +287,7 @@ class ListCandidates(HorillaListView):
 
         _model = self.model
 
-        class HorillaListViewResorce(resources.ModelResource):
+        class HrListViewResorce(resources.ModelResource):
             """
             Instant Resource class
             """
@@ -396,7 +396,7 @@ class ListCandidates(HorillaListView):
                 cleaned_text = "\n".join(non_blank_lines)
                 return cleaned_text
 
-        book_resource = HorillaListViewResorce()
+        book_resource = HrListViewResorce()
 
         # Export the data using the resource
         dataset = book_resource.export(queryset)
@@ -521,7 +521,7 @@ class ListCandidates(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="recruitment.view_candidate"), name="dispatch")
-class CardCandidates(HorillaCardView):
+class CardCandidates(HrCardView):
     """
     For card view
     """
@@ -681,7 +681,7 @@ class CardCandidates(HorillaCardView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter(perm="recruitment.view_candidate"), name="dispatch")
-class CandidateNav(HorillaNavView):
+class CandidateNav(HrNavView):
     """
     For nav bar
     """
@@ -880,7 +880,7 @@ class AddToRejectedCandidatesView(View):
         if form.is_valid():
             form.save()
             messages.success(request, _("Candidate reject reason saved"))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return render(request, self.template_name, {"form": form})
 
 
@@ -888,7 +888,7 @@ class AddToRejectedCandidatesView(View):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.view_candidate"), name="dispatch"
 )
-class CandidateDetail(HorillaDetailedView):
+class CandidateDetail(HrDetailedView):
     """
     Candidate detail
     """
@@ -923,7 +923,7 @@ class CandidateDetail(HorillaDetailedView):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.change_candidate"), name="dispatch"
 )
-class ToSkillZoneFormView(HorillaFormView):
+class ToSkillZoneFormView(HrFormView):
     """
     Form View
     """
@@ -1002,7 +1002,7 @@ class ToSkillZoneFormView(HorillaFormView):
 @method_decorator(
     all_manager_can_enter(perm="recruitment.change_candidate"), name="dispatch"
 )
-class RejectReasonFormView(HorillaFormView):
+class RejectReasonFormView(HrFormView):
     """
     Form View
     """

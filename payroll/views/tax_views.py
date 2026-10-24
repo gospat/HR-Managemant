@@ -23,7 +23,7 @@ from django.views.decorators.http import require_POST
 
 from base.methods import get_key_instances
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from payroll.forms.tax_forms import (
     FilingStatusForm,
     FilingStatusTaxRulesForm,
@@ -169,7 +169,7 @@ def update_filing_status(request, filing_status_id):
     filing_status = FilingStatus.find(filing_status_id)
     if not filing_status:
         messages.error(request, _("Filing status not found"))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     filing_status_form = FilingStatusForm(instance=filing_status)
     if request.method == "POST":
         filing_status_form = FilingStatusForm(request.POST, instance=filing_status)
@@ -214,7 +214,7 @@ def filing_status_delete(request, filing_status_id):
             request, _("An error occurred while trying to delete the filing status.")
         )
     if not FilingStatus.objects.exists():
-        return HorillaRedirect(request)
+        return HrRedirect(request)
     # By URL name, not by the view function. This used to be
     # ``redirect(filing_status_search)``, but that view's path() is commented
     # out in tax_urls.py — the name now routes to FilingStatusPipeline — so
@@ -345,7 +345,7 @@ def update_tax_bracket(request, tax_bracket_id):
         }
         return render(request, "payroll/tax/tax_bracket_edit.html", context)
     messages.error(request, _("Tax bracket not found"))
-    return HorillaRedirect(request)
+    return HrRedirect(request)
 
 
 @login_required
@@ -439,7 +439,7 @@ def load_tax_pack(request):
     keys = request.POST.getlist("packs")
     if not keys:
         messages.error(request, _("Select at least one tax configuration to load."))
-        return HorillaRedirect(request, reverse("filing-status-view"))
+        return HrRedirect(request, reverse("filing-status-view"))
 
     created = load_tax_packs(keys)
     if created:
@@ -453,7 +453,7 @@ def load_tax_pack(request):
         )
     else:
         messages.info(request, _("Those tax configurations are already loaded."))
-    return HorillaRedirect(request, reverse("filing-status-view"))
+    return HrRedirect(request, reverse("filing-status-view"))
 
 
 @login_required
@@ -473,7 +473,7 @@ def filing_status_rules(request, pk):
     filing_status = FilingStatus.find(pk)
     if not filing_status:
         messages.error(request, _("Filing status not found"))
-        return HorillaRedirect(request)
+        return HrRedirect(request)
 
     if request.method == "POST":
         rules_form = FilingStatusTaxRulesForm(request.POST, instance=filing_status)
@@ -482,7 +482,7 @@ def filing_status_rules(request, pk):
             rules_form.save()
             bracket_formset.save()
             messages.success(request, _("Tax rules saved."))
-            return HorillaRedirect(
+            return HrRedirect(
                 request, reverse("filing-status-rules", kwargs={"pk": filing_status.pk})
             )
     else:

@@ -15,9 +15,9 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from payroll.filters import ContractFilter
@@ -37,7 +37,7 @@ class ContractsView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_contract"), name="dispatch")
-class ContractsList(HorillaListView):
+class ContractsList(HrListView):
     """
     List view
     """
@@ -174,7 +174,7 @@ class ContractsList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_contract"), name="dispatch")
-class ContractsNav(HorillaNavView):
+class ContractsNav(HrNavView):
     """
     Nav bar
     """
@@ -294,7 +294,7 @@ class ContractsExportView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_contract"), name="dispatch")
-class ContractsDetailView(HorillaDetailedView):
+class ContractsDetailView(HrDetailedView):
     """
     Detail View
     """

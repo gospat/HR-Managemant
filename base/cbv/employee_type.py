@@ -15,15 +15,15 @@ from base.forms import EmployeeTypeForm
 from base.models import EmployeeType
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_employeetype"), name="dispatch")
-class EmployeeTypeListView(HorillaListView):
+class EmployeeTypeListView(HrListView):
     """
     List view of the resticted days page
     """
@@ -76,7 +76,7 @@ class EmployeeTypeListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.view_employeetype"), name="dispatch")
-class EmployeeTypeNav(HorillaNavView):
+class EmployeeTypeNav(HrNavView):
     """
     Nav bar
     """
@@ -102,7 +102,7 @@ class EmployeeTypeNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="base.add_employeetype"), name="dispatch")
-class EmployeeTypeFormView(HorillaFormView):
+class EmployeeTypeFormView(HrFormView):
     """
     Create and edit form
     """

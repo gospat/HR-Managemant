@@ -682,7 +682,7 @@ def _as_request():
 
     from core.horilla_middlewares import _thread_locals
 
-    # A real user row, because HorillaModel.save() assigns request.user to
+    # A real user row, because HrModel.save() assigns request.user to
     # created_by and that has to be a HorillaUser. Where there is no superuser
     # -- a fresh database, or a test -- the first user is promoted in memory
     # and never saved: has_perm() then answers True without the fixture

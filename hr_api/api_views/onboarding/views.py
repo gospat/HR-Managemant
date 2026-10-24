@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from base.methods import filtersubordinates
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 from hr_api.api_serializers.onboarding.serializers import (
     CandidateStageSerializer,
     CandidateTaskSerializer,
@@ -89,7 +89,7 @@ class OnboardingStageGetCreateAPIView(APIView):
             return groupby_queryset(request, url, field_name, filterset.qs)
 
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(filterset.qs, request)
         serializer = OnboardingStageSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -177,7 +177,7 @@ class OnboardingTaskGetCreateAPIView(APIView):
             return groupby_queryset(request, url, field_name, filterset.qs)
 
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(filterset.qs, request)
         serializer = OnboardingTaskSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -267,7 +267,7 @@ class CandidateStageGetCreateAPIView(APIView):
             return groupby_queryset(request, url, field_name, filterset.qs)
 
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(filterset.qs, request)
         serializer = CandidateStageSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -365,7 +365,7 @@ class CandidateTaskGetCreateAPIView(APIView):
             return groupby_queryset(request, url, field_name, filterset.qs)
 
         # pagination section
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(filterset.qs, request)
         serializer = CandidateTaskSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -448,7 +448,7 @@ class OnboardingPortalGetCreateAPIView(APIView):
             return Response(serializer.data, status=200)
 
         portals = self.get_queryset(request, candidate_id)
-        paginator = HorillaPageNumberPagination()
+        paginator = HrPageNumberPagination()
         page = paginator.paginate_queryset(portals, request)
         serializer = OnboardingPortalSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)

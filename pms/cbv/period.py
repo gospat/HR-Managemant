@@ -14,10 +14,10 @@ from base.decorators import manager_can_enter
 from base.methods import is_reportingmanager
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from pms.filters import PeriodFilter
@@ -37,7 +37,7 @@ class PeriodView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.view_period"), name="dispatch")
-class PeriodList(HorillaListView):
+class PeriodList(HrListView):
     """
     List view of the question template page
     """
@@ -82,7 +82,7 @@ class PeriodList(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.view_period"), name="dispatch")
-class PeriodNav(HorillaNavView):
+class PeriodNav(HrNavView):
     """
     Nav bar
     """
@@ -108,7 +108,7 @@ class PeriodNav(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.view_period"), name="dispatch")
-class PeriodDetailView(HorillaDetailedView):
+class PeriodDetailView(HrDetailedView):
     """
     detail view of page
     """
@@ -129,7 +129,7 @@ class PeriodDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("pms.add_period"), name="dispatch")
-class PeriodFormView(HorillaFormView):
+class PeriodFormView(HrFormView):
     """
     Create and edit form
     """

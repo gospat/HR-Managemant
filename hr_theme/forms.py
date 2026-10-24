@@ -8,7 +8,7 @@ from django import forms
 
 from accessibility.filters import (
     AccessibilityFilter,
-    HorillaFilterSet,
+    HrFilterSet,
     _filter_form_structured,
 )
 

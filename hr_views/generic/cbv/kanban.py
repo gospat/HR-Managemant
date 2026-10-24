@@ -11,10 +11,10 @@ from django.http import HttpResponse, JsonResponse
 from django.utils.translation import gettext as _
 
 from hr_views.cbv_methods import get_nested_field
-from hr_views.generic.cbv.views import HorillaCardView
+from hr_views.generic.cbv.views import HrCardView
 
 
-class HorillaKanbanView(HorillaCardView):
+class HrKanbanView(HrCardView):
     group_key: str = ""
     group_filter_class = None
     template_name: str = "generic/horilla_kanban_view.html"

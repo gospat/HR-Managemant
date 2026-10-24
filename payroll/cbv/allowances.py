@@ -13,11 +13,11 @@ from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaCardView,
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrCardView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from payroll.filters import AllowanceFilter
@@ -27,7 +27,7 @@ from payroll.models.models import Allowance
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.add_allowance"), name="dispatch")
-class AllowanceFormView(HorillaFormView):
+class AllowanceFormView(HrFormView):
     """
     Form view for Allowance creation and update.
     """
@@ -71,7 +71,7 @@ class AllowanceViewPage(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_allowance"), name="dispatch")
-class AllowanceListView(HorillaListView):
+class AllowanceListView(HrListView):
     """
     list view of the page
     """
@@ -207,7 +207,7 @@ class AllowanceListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_allowance"), name="dispatch")
-class AllowanceNavView(HorillaNavView):
+class AllowanceNavView(HrNavView):
     """
     nav bar of the page
     """
@@ -284,7 +284,7 @@ class AllowanceNavView(HorillaNavView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_allowance"), name="dispatch")
-class AllowancesCardView(HorillaCardView):
+class AllowancesCardView(HrCardView):
     """
     card view for the page
     """
@@ -406,7 +406,7 @@ class AllowancesCardView(HorillaCardView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="payroll.view_allowance"), name="dispatch")
-class AllowanceDetailView(HorillaDetailedView):
+class AllowanceDetailView(HrDetailedView):
     """
     detail view for allowances
     """

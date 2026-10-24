@@ -11,9 +11,9 @@ from core.decorators import login_required as func_login_required
 from core.decorators import permission_required
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
 )
 from whatsapp.filters import CredentialsViewFilter
 from whatsapp.forms import WhatsappForm
@@ -26,7 +26,7 @@ from whatsapp.utils import send_text_message
     permission_required("whatsapp.view_whatsappcredientials"), name="dispatch"
 )
 @method_decorator(check_integration_enabled(app_name="whatsapp"), name="dispatch")
-class CredentialListView(HorillaListView):
+class CredentialListView(HrListView):
     """
     List view for Whatsapp credential settings view
     """
@@ -101,7 +101,7 @@ class CredentialListView(HorillaListView):
     permission_required("whatsapp.view_whatsappcredientials"), name="dispatch"
 )
 @method_decorator(check_integration_enabled(app_name="whatsapp"), name="dispatch")
-class CredentialNav(HorillaNavView):
+class CredentialNav(HrNavView):
     """
     Nav view for Whatsapp credential settings view
     """
@@ -126,7 +126,7 @@ class CredentialNav(HorillaNavView):
     permission_required("whatsapp.add_whatsappcredientials"), name="dispatch"
 )
 @method_decorator(check_integration_enabled(app_name="whatsapp"), name="dispatch")
-class CredentialForm(HorillaFormView):
+class CredentialForm(HrFormView):
     """
     Form view for Whatsapp credential settings view
     """

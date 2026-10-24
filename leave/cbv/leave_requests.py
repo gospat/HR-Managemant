@@ -27,10 +27,10 @@ from base.methods import (
 from base.models import PenaltyAccounts
 from hr_views.cbv_methods import hx_request_required, login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from leave.filters import LeaveRequestFilter
@@ -54,7 +54,7 @@ class LeaveRequestsView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_leaverequest"), name="dispatch")
-class LeaveRequestsListView(HorillaListView):
+class LeaveRequestsListView(HrListView):
     """
     Lits view of the page
     """
@@ -224,7 +224,7 @@ class LeaveRequestsListView(HorillaListView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_leaverequest"), name="dispatch")
-class LeaveRequestsNavView(HorillaNavView):
+class LeaveRequestsNavView(HrNavView):
     """
     nav bar
     """
@@ -380,7 +380,7 @@ class LeaveRequestsExportNav(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.view_leaverequest"), name="dispatch")
-class LeaveRequestsDetailView(HorillaDetailedView):
+class LeaveRequestsDetailView(HrDetailedView):
     """
     detail view of page
     """
@@ -441,7 +441,7 @@ class LeaveRequestsDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(manager_can_enter("leave.add_leaverequest"), name="dispatch")
-class LeaveRequestFormView(HorillaFormView):
+class LeaveRequestFormView(HrFormView):
     """
     form view
     """
@@ -661,7 +661,7 @@ class LeaveClashListView(LeaveRequestsListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         pk = self.kwargs.get("pk")
         record = LeaveRequest.objects.filter(id=pk).first()
         if not record:

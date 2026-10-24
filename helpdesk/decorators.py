@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 
 from base.methods import check_manager
 from helpdesk.models import Ticket
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 
 decorator_with_arguments = (
     lambda decorator: lambda *args, **kwargs: lambda func: decorator(
@@ -37,7 +37,7 @@ def ticket_owner_can_enter(function, perm: str, model: object, manager_access=Fa
                 employee = model.objects.get(id=instance_id).employee_id
             except:
                 messages.error(request, _("Sorry, something went wrong!"))
-                return HorillaRedirect(request)
+                return HrRedirect(request)
         can_enter = (
             request.user.employee_get == employee
             or request.user.has_perm(perm)

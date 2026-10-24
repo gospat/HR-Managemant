@@ -39,7 +39,7 @@ from asset.models import (
 from base.methods import filtersubordinates
 from employee.models import Employee
 from core.horilla_middlewares import _thread_locals
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from core.methods import horilla_users_with_perms
 from hr_views.cbv_methods import (
     login_required,
@@ -47,12 +47,12 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -78,7 +78,7 @@ class RequestAndAllocationView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AllocationList(HorillaListView):
+class AllocationList(HrListView):
     """
     For both  asset allocation and asset tab
     """
@@ -121,7 +121,7 @@ class AllocationList(HorillaListView):
         data-toggle="oh-modal-toggle"
     """
 
-    # Mixed fields from both tabs' models; HorillaListView falls back silently
+    # Mixed fields from both tabs' models; HrListView falls back silently
     # for whichever fields don't exist on the currently active tab's model.
     nested_group_by_fields = [
         ("requested_employee_id", _("Asset Request / Employee")),
@@ -211,7 +211,7 @@ class AssetAllocationList(AllocationList):
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetRequestList(HorillaListView):
+class AssetRequestList(HrListView):
     """
     Asset Request Tab
     """
@@ -301,7 +301,7 @@ class AssetRequestList(HorillaListView):
 @method_decorator(
     permission_required(perm="asset.change_assetassignment"), name="dispatch"
 )
-class AssetServiceRequestList(HorillaListView):
+class AssetServiceRequestList(HrListView):
     """
     Service Request Tab -- manager review/triage list of every service
     request raised across the company (same audience as the Asset
@@ -415,7 +415,7 @@ class AssetAllocationDelete(DeleteView):
         self.object.delete()
         messages.success(request, _("Allocation deleted successfully"))
 
-        return HorillaFormView.HttpResponse()
+        return HrFormView.HttpResponse()
 
 
 @method_decorator(login_required, name="dispatch")
@@ -435,7 +435,7 @@ class AssetRequestDelete(DeleteView):
         self.object.delete()
         messages.success(request, _("Asset request deleted successfully"))
 
-        return HorillaFormView.HttpResponse()
+        return HrFormView.HttpResponse()
 
 
 def _query_for_tab(params, filter_class, all_filters):
@@ -470,7 +470,7 @@ def _query_for_tab(params, filter_class, all_filters):
 
 
 @method_decorator(login_required, name="dispatch")
-class RequestAndAllocationTab(HorillaTabView):
+class RequestAndAllocationTab(HrTabView):
     """
     Tab View
     """
@@ -574,7 +574,7 @@ class RequestAndAllocationTab(HorillaTabView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetNav(HorillaNavView):
+class AssetNav(HrNavView):
     """
     Independent Nav for the Asset tab. No create flow of its own (this tab
     just lists the logged-in employee's own allocations).
@@ -600,7 +600,7 @@ class AssetNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetRequestNav(HorillaNavView):
+class AssetRequestNav(HrNavView):
     """
     Independent Nav for the Asset Request tab.
     """
@@ -639,7 +639,7 @@ class AssetRequestNav(HorillaNavView):
 @method_decorator(
     permission_required(perm="asset.change_assetassignment"), name="dispatch"
 )
-class AssetServiceRequestNav(HorillaNavView):
+class AssetServiceRequestNav(HrNavView):
     """
     Independent Nav for the Service Request tab. No create flow of its
     own -- employees file a service request from their own My Assets tab,
@@ -667,7 +667,7 @@ class AssetServiceRequestNav(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetAllocationNav(HorillaNavView):
+class AssetAllocationNav(HrNavView):
     """
     Independent Nav for the Asset Allocation tab.
     """
@@ -710,25 +710,25 @@ class AssetAllocationNav(HorillaNavView):
             ]
 
 
-class AssetTabShell(HorillaTabContentShell):
+class AssetTabShell(HrTabContentShell):
     nav_url_name = "req-alloc-asset-nav"
     container_id = "assetListContainer"
     tabs_root_id = "assetReqAllocContainer"
 
 
-class AssetRequestTabShell(HorillaTabContentShell):
+class AssetRequestTabShell(HrTabContentShell):
     nav_url_name = "req-alloc-asset-request-nav"
     container_id = "assetRequestListContainer"
     tabs_root_id = "assetReqAllocContainer"
 
 
-class AssetAllocationTabShell(HorillaTabContentShell):
+class AssetAllocationTabShell(HrTabContentShell):
     nav_url_name = "req-alloc-asset-allocation-nav"
     container_id = "assetAllocationListContainer"
     tabs_root_id = "assetReqAllocContainer"
 
 
-class AssetServiceRequestTabShell(HorillaTabContentShell):
+class AssetServiceRequestTabShell(HrTabContentShell):
     nav_url_name = "req-alloc-service-request-nav"
     container_id = "assetServiceRequestListContainer"
     tabs_root_id = "assetReqAllocContainer"
@@ -743,7 +743,7 @@ class AssetServiceRequestTabShell(HorillaTabContentShell):
     ),
     name="dispatch",
 )
-class AssetDetailView(HorillaDetailedView):
+class AssetDetailView(HrDetailedView):
     """
     detail view of asset tab
     """
@@ -781,7 +781,7 @@ class AssetDetailView(HorillaDetailedView):
     ),
     name="dispatch",
 )
-class AssetRequestDetailView(HorillaDetailedView):
+class AssetRequestDetailView(HrDetailedView):
     """
     detail view of asset request tab
     """
@@ -818,7 +818,7 @@ class AssetRequestDetailView(HorillaDetailedView):
     ),
     name="dispatch",
 )
-class AssetAllocationDetailView(HorillaDetailedView):
+class AssetAllocationDetailView(HrDetailedView):
     """
     detail view of asset allocation tab
     """
@@ -858,7 +858,7 @@ class AssetAllocationDetailView(HorillaDetailedView):
     ),
     name="dispatch",
 )
-class AssetServiceRequestHistoryView(HorillaDetailedView):
+class AssetServiceRequestHistoryView(HrDetailedView):
     """
     Read-only view of every service request ever raised against one
     allocation, newest first -- opened from a button on that request's
@@ -893,7 +893,7 @@ class AssetServiceRequestHistoryView(HorillaDetailedView):
     ),
     name="dispatch",
 )
-class AssetServiceRequestDetailView(HorillaDetailedView):
+class AssetServiceRequestDetailView(HrDetailedView):
     """
     Detail view of a single service request. Status is a stepper at the
     top right (self-submits back to this same view); notes accumulate
@@ -965,7 +965,7 @@ class AssetServiceRequestDetailView(HorillaDetailedView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetRequestCreateForm(HorillaFormView):
+class AssetRequestCreateForm(HrFormView):
     """
     Create Asset request
     """
@@ -985,7 +985,7 @@ class AssetRequestCreateForm(HorillaFormView):
                 has_perm = request.user.has_perm("asset.change_assetrequest")
                 if not (is_owner or has_perm):
                     messages.error(request, _("You don't have permission."))
-                    return HorillaRedirect(request)
+                    return HrRedirect(request)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -1014,7 +1014,7 @@ class AssetRequestCreateForm(HorillaFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class AssetServiceRequestCreateForm(HorillaFormView):
+class AssetServiceRequestCreateForm(HrFormView):
     """
     Create Asset Service Request -- self-service, launched from an
     employee's own My Assets row.
@@ -1058,7 +1058,7 @@ class AssetServiceRequestCreateForm(HorillaFormView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required(perm="asset.add_asset"), name="dispatch")
-class AssetAllocationFormView(HorillaFormView):
+class AssetAllocationFormView(HrFormView):
     """
     Create Asset Allocation
     """
@@ -1072,7 +1072,7 @@ class AssetAllocationFormView(HorillaFormView):
         pk = kwargs.get("pk")
         if pk and not AssetAssignment.objects.filter(id=pk).exists():
             messages.error(request, _("Asset allocation not found."))
-            return HorillaRedirect(request)
+            return HrRedirect(request)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -1119,7 +1119,7 @@ class AssetAllocationFormView(HorillaFormView):
 @method_decorator(
     permission_required(perm="asset.add_assetassignment"), name="dispatch"
 )
-class AssetApproveFormView(HorillaFormView):
+class AssetApproveFormView(HrFormView):
     """
     Create Asset Allocation
     """
@@ -1219,7 +1219,7 @@ class AssetRenewalView(TemplateView):
 @method_decorator(
     permission_required(perm="asset.change_assetassignment"), name="dispatch"
 )
-class AssetRenewalNav(HorillaNavView):
+class AssetRenewalNav(HrNavView):
     """
     Nav bar for the asset renewal page.
     """
@@ -1239,7 +1239,7 @@ class AssetRenewalNav(HorillaNavView):
 @method_decorator(
     permission_required(perm="asset.change_assetassignment"), name="dispatch"
 )
-class ExpiringAssignmentList(HorillaListView):
+class ExpiringAssignmentList(HrListView):
     """
     Lists active assignments whose asset expires within 30 days (or is already expired).
     """
@@ -1283,7 +1283,7 @@ class ExpiringAssignmentList(HorillaListView):
 @method_decorator(
     permission_required(perm="asset.change_assetassignment"), name="dispatch"
 )
-class AssetReassignFormView(HorillaFormView):
+class AssetReassignFormView(HrFormView):
     """
     Modal form to swap the asset on an existing assignment to a replacement.
     """

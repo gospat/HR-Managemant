@@ -2,7 +2,7 @@
 Build-time guard against unscoped tenant models.
 
 Tenancy is opt-in: a model is isolated only if someone remembered to give it a
-``HorillaCompanyManager``. Across 233 models that is 233 chances to forget, and
+``HrCompanyManager``. Across 233 models that is 233 chances to forget, and
 forgetting is silent -- the model works fine and leaks across tenants. EmailLog
 had a ``company_id`` FK and a plain ``Manager()`` for exactly this reason.
 
@@ -35,7 +35,7 @@ EXEMPT = {
         "Attachment reached via its scoped parent claim."
     ),
     "pms.AnonymousFeedback": "Anonymity is the point; scoping would deanonymise.",
-    "core.HorillaModel": "Abstract base.",
+    "core.HrModel": "Abstract base.",
     # Per-company settings singletons. These are always looked up by an
     # explicit company_id (a settings row for company X, fetched deliberately),
     # never listed under ambient scope, so the manager filter would add nothing.
@@ -62,7 +62,7 @@ def check_company_scoped_managers(app_configs, **kwargs):
     """Warn when a model has a company FK but no company-scoped manager."""
     from django.apps import apps
 
-    from base.horilla_company_manager import HorillaCompanyManager
+    from base.horilla_company_manager import HrCompanyManager
 
     problems = []
     models = (
@@ -84,7 +84,7 @@ def check_company_scoped_managers(app_configs, **kwargs):
             # warns rather than errors.
             continue
 
-        if isinstance(model._default_manager, HorillaCompanyManager):
+        if isinstance(model._default_manager, HrCompanyManager):
             continue
 
         problems.append(
@@ -93,7 +93,7 @@ def check_company_scoped_managers(app_configs, **kwargs):
                 f"{type(model._default_manager).__name__}, so queries are not "
                 f"company-scoped.",
                 hint=(
-                    "Set `objects = HorillaCompanyManager()` on the model, or "
+                    "Set `objects = HrCompanyManager()` on the model, or "
                     "add it to base.checks.EXEMPT with the reason it is global."
                 ),
                 obj=model,

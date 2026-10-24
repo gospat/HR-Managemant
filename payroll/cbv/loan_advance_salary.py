@@ -12,12 +12,12 @@ from django.utils.translation import gettext_lazy as _
 
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from payroll.filters import LoanAccountFilter
@@ -37,7 +37,7 @@ class AdvanceSalaryView(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_loanaccount"), name="dispatch")
-class LoansGenericTab(HorillaTabView):
+class LoansGenericTab(HrTabView):
     """
     Tab view for loans/advanced salary
     """
@@ -91,7 +91,7 @@ class LoansGenericTab(HorillaTabView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_loanaccount"), name="dispatch")
-class LoanListView(HorillaListView):
+class LoanListView(HrListView):
     """
     List view for loan tab
     """
@@ -177,7 +177,7 @@ class AdvancedSalaryList(LoanListView):
         self.search_url = reverse("advanced-salary-list-view")
 
     def get_queryset(self):
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         queryset = queryset.filter(type="advanced_salary")
         return queryset
 
@@ -194,12 +194,12 @@ class FinesListView(LoanListView):
         self.search_url = reverse("fines-list-view")
 
     def get_queryset(self):
-        queryset = HorillaListView.get_queryset(self)
+        queryset = HrListView.get_queryset(self)
         queryset = queryset.filter(type="fine")
         return queryset
 
 
-class _LoanTabNavBase(HorillaNavView):
+class _LoanTabNavBase(HrNavView):
     """
     Shared Search/Filter wiring for each Loans & Salary Advances tab's own,
     independent Nav - nav_title/search_url/search_swap_target/create_attrs
@@ -275,19 +275,19 @@ class FineNav(_LoanTabNavBase):
         self._set_create_attrs("fine-create-form")
 
 
-class LoanTabShell(HorillaTabContentShell):
+class LoanTabShell(HrTabContentShell):
     nav_url_name = "loan-nav"
     container_id = "loanListContainer"
     tabs_root_id = "loan-generic-tab-view"
 
 
-class AdvancedSalaryTabShell(HorillaTabContentShell):
+class AdvancedSalaryTabShell(HrTabContentShell):
     nav_url_name = "advanced-salary-nav"
     container_id = "advancedSalaryListContainer"
     tabs_root_id = "loan-generic-tab-view"
 
 
-class FineTabShell(HorillaTabContentShell):
+class FineTabShell(HrTabContentShell):
     nav_url_name = "fine-nav"
     container_id = "fineListContainer"
     tabs_root_id = "loan-generic-tab-view"
@@ -319,7 +319,7 @@ class FineTabShell(HorillaTabContentShell):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_loanaccount"), name="dispatch")
-class LoanDetailView(HorillaDetailedView):
+class LoanDetailView(HrDetailedView):
     """
     detail view for the loan page
     """
@@ -370,7 +370,7 @@ class LoanDetailView(HorillaDetailedView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.view_loanaccount"), name="dispatch")
-class LoanFormView(HorillaFormView):
+class LoanFormView(HrFormView):
     """
     Form view for creating and editing loans. Also the base class for
     AdvancedSalaryFormView/FineFormView below, which reuse everything here

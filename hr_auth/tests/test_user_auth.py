@@ -8,7 +8,7 @@ from core.testkit import make_company, make_employee, make_user
 from hr_auth.models import HorillaUser
 
 
-class HorillaUserModelTests(TestCase):
+class HrUserModelTests(TestCase):
     def setUp(self):
         # django-axes needs a request to attribute an attempt to a client; it
         # raises rather than silently skipping the check when one is missing.

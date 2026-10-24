@@ -19,7 +19,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from payroll.models.models import Allowance, Contract, Deduction, SalaryStructure
 
 
@@ -84,7 +84,7 @@ def contract_components(request, pk):
     """Tick the components that apply to this contract's employee."""
     contract = Contract.objects.filter(pk=pk).first()
     if contract is None:
-        return HorillaRedirect(request, "/payroll/view-contract/")
+        return HrRedirect(request, "/payroll/view-contract/")
 
     if request.method != "POST":
         return render(
@@ -122,7 +122,7 @@ def contract_components(request, pk):
     else:
         messages.info(request, _("Nothing changed."))
 
-    return HorillaRedirect(request, "/payroll/view-contract/")
+    return HrRedirect(request, "/payroll/view-contract/")
 
 
 @login_required
@@ -161,7 +161,7 @@ def bulk_contract_components(request):
 
     if not contracts.exists():
         messages.error(request, _("No contracts were selected."))
-        return HorillaRedirect(request, "/payroll/view-contract/")
+        return HrRedirect(request, "/payroll/view-contract/")
 
     action = request.POST.get("action")
 
@@ -171,7 +171,7 @@ def bulk_contract_components(request):
         ).first()
         if structure is None:
             messages.error(request, _("Choose a salary structure."))
-            return HorillaRedirect(request, "/payroll/view-contract/")
+            return HrRedirect(request, "/payroll/view-contract/")
 
         for contract in contracts:
             # set_salary_structure, not a direct assignment: it is what syncs
@@ -183,13 +183,13 @@ def bulk_contract_components(request):
             _("%(count)s contract(s) moved to %(structure)s.")
             % {"count": contracts.count(), "structure": structure},
         )
-        return HorillaRedirect(request, "/payroll/view-contract/")
+        return HrRedirect(request, "/payroll/view-contract/")
 
     employees = [contract.employee_id for contract in contracts]
     chosen = request.POST.getlist("components")
     if not chosen:
         messages.error(request, _("Choose at least one component."))
-        return HorillaRedirect(request, "/payroll/view-contract/")
+        return HrRedirect(request, "/payroll/view-contract/")
 
     removing = action == "remove"
     touched = 0
@@ -214,4 +214,4 @@ def bulk_contract_components(request):
             "count": len(employees),
         },
     )
-    return HorillaRedirect(request, "/payroll/view-contract/")
+    return HrRedirect(request, "/payroll/view-contract/")

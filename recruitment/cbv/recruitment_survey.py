@@ -13,15 +13,15 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
 
 from core.decorators import hx_request_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import login_required, permission_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 from recruitment.filters import SurveyFilter, SurveyTemplateFilter
@@ -33,7 +33,7 @@ from recruitment.models import RecruitmentSurvey, SurveyTemplate
 @method_decorator(
     permission_required("recruitment.add_recruitmentsurvey"), name="dispatch"
 )
-class QuestionFormView(HorillaFormView):
+class QuestionFormView(HrFormView):
     """
     form view for create button
     """
@@ -69,7 +69,7 @@ class QuestionFormView(HorillaFormView):
 @method_decorator(
     permission_required("recruitment.add_recruitmentsurvey"), name="dispatch"
 )
-class QuestionDuplicateFormView(HorillaFormView):
+class QuestionDuplicateFormView(HrFormView):
     """
     form view for create duplicate for asset
     """
@@ -116,7 +116,7 @@ class QuestionDuplicateFormView(HorillaFormView):
 @method_decorator(
     permission_required("recruitment.add_surveytemplate"), name="dispatch"
 )
-class SurveyTemplateFormView(HorillaFormView):
+class SurveyTemplateFormView(HrFormView):
     """
     form view for create and edit survey templates
     """
@@ -182,7 +182,7 @@ class SurveyTemplateDuplicateFormView(SurveyTemplateFormView):
 
 
 @method_decorator(login_required, name="dispatch")
-class RecruitmentSurveyDetailView(HorillaDetailedView):
+class RecruitmentSurveyDetailView(HrDetailedView):
     """
     detail view of the page
     """
@@ -215,7 +215,7 @@ class SurveyTemplateSettingsView(TemplateView):
 @method_decorator(
     permission_required(perm="recruitment.view_recruitmentsurvey"), name="dispatch"
 )
-class SurveyTemplateTabView(HorillaTabView):
+class SurveyTemplateTabView(HrTabView):
     """
     tab view for survey templates, shows template and questions as tabs
     """
@@ -242,7 +242,7 @@ class SurveyTemplateTabView(HorillaTabView):
 @method_decorator(
     permission_required(perm="recruitment.view_recruitmentsurvey"), name="dispatch"
 )
-class SurveyTemplateNavView(HorillaNavView):
+class SurveyTemplateNavView(HrNavView):
     """
     navbar of the Template tab
     """
@@ -275,7 +275,7 @@ class SurveyTemplateNavView(HorillaNavView):
 @method_decorator(
     permission_required(perm="recruitment.view_recruitmentsurvey"), name="dispatch"
 )
-class SurveyQuestionNavView(HorillaNavView):
+class SurveyQuestionNavView(HrNavView):
     """
     navbar of the Questions tab
     """
@@ -321,7 +321,7 @@ def _recruitment_survey_queryset_for(request):
 
 
 @method_decorator(login_required, name="dispatch")
-class SurveyTemplateQuestionsTab(HorillaTabView):
+class SurveyTemplateQuestionsTab(HrTabView):
     """
     Tab View for the Survey Templates page
     """
@@ -344,7 +344,7 @@ class SurveyTemplateQuestionsTab(HorillaTabView):
 
 
 @method_decorator(login_required, name="dispatch")
-class SurveyTemplateList(HorillaListView):
+class SurveyTemplateList(HrListView):
     """
     List view of the Templates tab
     """
@@ -360,7 +360,7 @@ class SurveyTemplateList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class SurveyQuestionList(HorillaListView):
+class SurveyQuestionList(HrListView):
     """
     List view of the Questions tab
     """
@@ -385,14 +385,14 @@ class SurveyQuestionList(HorillaListView):
         return queryset
 
 
-class SurveyTemplateTabShell(HorillaTabContentShell):
+class SurveyTemplateTabShell(HrTabContentShell):
     nav_url_name = "survey-template-nav"
     container_id = "view-container"
     tabs_root_id = "surveyTemplateSettingsTab"
     selected_instances_key_id = "surveyTemplateSelectedInstances"
 
 
-class SurveyQuestionTabShell(HorillaTabContentShell):
+class SurveyQuestionTabShell(HrTabContentShell):
     nav_url_name = "survey-question-nav"
     container_id = "questionViewContainer"
     tabs_root_id = "surveyTemplateSettingsTab"

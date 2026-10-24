@@ -14,7 +14,7 @@ from base.cbv.work_shift_tab import ProfileTabShellView
 from employee.cbv.employee_profile import EmployeeProfileView
 from employee.models import Employee
 from hr_views.cbv_methods import login_required, owner_can_enter
-from hr_views.generic.cbv.views import HorillaNavView, HorillaTabView
+from hr_views.generic.cbv.views import HrNavView, HrTabView
 
 
 # Every view below is opened with the *employee's* id in the url (pk), so the
@@ -100,7 +100,7 @@ class AssetRequestIndividualTabShell(ProfileTabShellView):
     owner_can_enter("asset.view_assetrequest", Employee),
     name="dispatch",
 )
-class AssetRequestIndividualNav(HorillaNavView):
+class AssetRequestIndividualNav(HrNavView):
     """
     Minimal nav (Create button only) for the Asset Request profile tab -
     matches the original create_asset_request_accessibility check (perm,
@@ -133,7 +133,7 @@ class AssetRequestIndividualNav(HorillaNavView):
     owner_can_enter("asset.view_assetassignment", Employee),
     name="dispatch",
 )
-class AssetTabView(HorillaTabView):
+class AssetTabView(HrTabView):
     """
     generic tab view for asset tab
     """

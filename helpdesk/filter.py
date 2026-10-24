@@ -15,7 +15,7 @@ from django_filters import CharFilter, DateFilter
 from base.models import Tags
 from employee.models import Employee
 from helpdesk.models import FAQ, DepartmentManager, FAQCategory, Ticket, TicketType
-from core.filters import FilterSet, HorillaFilterSet
+from core.filters import FilterSet, HrFilterSet
 
 
 class FAQFilter(FilterSet):
@@ -61,7 +61,7 @@ class FAQCategoryFilter(FilterSet):
         ]
 
 
-class TicketFilter(HorillaFilterSet):
+class TicketFilter(HrFilterSet):
     """
     Filter set class for Ticket model
 
@@ -111,7 +111,7 @@ class TicketFilter(HorillaFilterSet):
         field_name="employee_id__employee_work_info__department_id",
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- Owner, Ticket Type, Assigned To, and Tags opt into AJAX-searched
     # comboboxes instead of pre-rendering their whole queryset as
     # <option> tags. No dedicated "Name or Badge ID" field is added:
@@ -152,7 +152,7 @@ class TicketFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/PMS FeedbackFilter/AssetFilter. Deadline, Created
@@ -186,7 +186,7 @@ class TicketFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -319,7 +319,7 @@ class TagsFilter(FilterSet):
         ]
 
 
-class DepartmentManagerFilter(HorillaFilterSet):
+class DepartmentManagerFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
     search_field = django_filters.CharFilter(method="search_in")

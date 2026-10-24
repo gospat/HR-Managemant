@@ -1,4 +1,4 @@
-"""Helpers for testing HorillaCompanyManager tenancy filtering."""
+"""Helpers for testing HrCompanyManager tenancy filtering."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ def clear_selected_company() -> None:
 
 class CompanyFilterTestMixin:
     """
-    Set/clear the ContextVar used by ``HorillaCompanyManager.get_queryset``.
+    Set/clear the ContextVar used by ``HrCompanyManager.get_queryset``.
 
     Prefer this over mutating model class attributes — current Horilla
     tenancy reads ``get_selected_company()``, not ``model.company_filter``.

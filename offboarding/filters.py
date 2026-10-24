@@ -20,7 +20,7 @@ from base.models import (
     WorkType,
 )
 from employee.models import Employee
-from core.filters import HorillaFilterSet, filter_name_or_badge_terms
+from core.filters import HrFilterSet, filter_name_or_badge_terms
 from offboarding.models import (
     EmployeeTask,
     Offboarding,
@@ -30,7 +30,7 @@ from offboarding.models import (
 )
 
 
-class LetterFilter(HorillaFilterSet):
+class LetterFilter(HrFilterSet):
     """
     LetterFilter class
     """
@@ -120,7 +120,7 @@ class LetterFilter(HorillaFilterSet):
     # note in this same module).
     exit_reason = django_filters.CharFilter(method="filter_exit_reason")
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- every model/queryset-backed field in the modern filter panel opts
     # in here instead of pre-rendering its whole queryset as <option> tags.
     ajax_fields = {
@@ -195,7 +195,7 @@ class LetterFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Planned To Leave On stays available
@@ -244,7 +244,7 @@ class LetterFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -259,7 +259,7 @@ class LetterFilter(HorillaFilterSet):
         )
 
 
-class EmployeeTaskListFilter(HorillaFilterSet):
+class EmployeeTaskListFilter(HrFilterSet):
     """
     Filter for the standalone offboarding task list page
     """
@@ -306,7 +306,7 @@ class EmployeeTaskListFilter(HorillaFilterSet):
         ).distinct()
 
 
-class PipelineFilter(HorillaFilterSet):
+class PipelineFilter(HrFilterSet):
     """
     PipelineFilter
     """
@@ -322,7 +322,7 @@ class PipelineFilter(HorillaFilterSet):
     # PipelineEmployeeFilter.employee_id's own deep-link filter.
     offboarding_id = django_filters.CharFilter(field_name="id")
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- Managers opts into an AJAX-searched combobox instead of
     # pre-rendering its whole queryset as <option> tags.
     ajax_fields = {
@@ -354,7 +354,7 @@ class PipelineFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Created At is the only real date
@@ -377,7 +377,7 @@ class PipelineFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -386,14 +386,14 @@ class PipelineFilter(HorillaFilterSet):
         return self._apply_custom_filters(queryset)
 
 
-class PipelineStageFilter(HorillaFilterSet):
+class PipelineStageFilter(HrFilterSet):
     """
     PipelineStageFilter
     """
 
     search = django_filters.CharFilter(method="search_method", lookup_expr="icontains")
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- Offboarding opts into an AJAX-searched combobox instead of
     # pre-rendering its whole queryset as <option> tags.
     ajax_fields = {
@@ -429,7 +429,7 @@ class PipelineStageFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Created At is the only real date
@@ -452,7 +452,7 @@ class PipelineStageFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -461,7 +461,7 @@ class PipelineStageFilter(HorillaFilterSet):
         return self._apply_custom_filters(queryset)
 
 
-class PipelineEmployeeFilter(HorillaFilterSet):
+class PipelineEmployeeFilter(HrFilterSet):
     """
     PipelineEmployeeFilter
     """
@@ -505,7 +505,7 @@ class PipelineEmployeeFilter(HorillaFilterSet):
     def filter_exit_reason(self, queryset, name, value):
         return queryset.filter(exitreason__title=value)
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- Department/Job Position/Job Role/Employee Type/Shift/Work Type
     # opt into AJAX-searched comboboxes instead of pre-rendering their
     # whole queryset as <option> tags.
@@ -584,7 +584,7 @@ class PipelineEmployeeFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Notice Period Starts/Ends used to
@@ -627,7 +627,7 @@ class PipelineEmployeeFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.

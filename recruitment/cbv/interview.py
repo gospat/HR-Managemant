@@ -14,10 +14,10 @@ from django.utils.translation import gettext_noop
 
 from hr_views.cbv_methods import login_required
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -43,7 +43,7 @@ class InterviewViewPage(TemplateView):
 @method_decorator(
     recruitment_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class InterviewNavView(HorillaNavView):
+class InterviewNavView(HrNavView):
     """
     nav bar of the page
     """
@@ -86,7 +86,7 @@ class InterviewNavView(HorillaNavView):
 @method_decorator(
     recruitment_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class InterviewLIstView(HorillaListView):
+class InterviewLIstView(HrListView):
     """
     list view of the page
     """
@@ -156,7 +156,7 @@ class InterviewLIstView(HorillaListView):
 @method_decorator(
     recruitment_manager_can_enter(perm="recruitment.view_recruitment"), name="dispatch"
 )
-class InterviewDetailView(HorillaDetailedView):
+class InterviewDetailView(HrDetailedView):
     """
     detailed view
     """
@@ -183,7 +183,7 @@ class InterviewDetailView(HorillaDetailedView):
 @method_decorator(
     manager_can_enter(perm="recruitment.add_interviewschedule"), name="dispatch"
 )
-class InterviewForm(HorillaFormView):
+class InterviewForm(HrFormView):
     """
     form view
     """

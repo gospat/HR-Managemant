@@ -81,8 +81,8 @@ from core.horilla_middlewares import _thread_locals
 from core.methods import get_horilla_model_class
 from hr_audit.models import AuditTag
 from hr_auth.models import HorillaUser
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 
 # your form here
 
@@ -438,11 +438,11 @@ class AssignUserGroup(Form):
     Form to assign employees to a group (searchable multi-select).
     """
 
-    employee = HorillaMultiSelectField(
+    employee = HrMultiSelectField(
         queryset=Employee.objects.filter(
             is_active=True, employee_user_id__isnull=False
         ),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -659,9 +659,9 @@ class AssignPermission(Form):
     Forms to assign user permision
     """
 
-    employee = HorillaMultiSelectField(
+    employee = HrMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -920,7 +920,7 @@ class JobPositionMultiForm(ModelForm):
     JobPosition model's form
     """
 
-    department_id = HorillaMultiSelectField(
+    department_id = HrMultiSelectField(
         queryset=Department.objects.all(),
         label=JobPosition._meta.get_field("department_id").verbose_name,
         widget=forms.SelectMultiple(
@@ -1257,9 +1257,9 @@ class RotatingWorkTypeAssignForm(ModelForm):
         "rotate_every": 12,
     }
 
-    # employee_id = HorillaMultiSelectField(
+    # employee_id = HrMultiSelectField(
     #     queryset=Employee.objects.filter(employee_work_info__isnull=False),
-    #     widget=HorillaMultiSelectWidget(
+    #     widget=HrMultiSelectWidget(
     #         filter_route_name="employee-widget-filter",
     #         filter_class=EmployeeFilter,
     #         filter_instance_context_name="f",
@@ -1303,11 +1303,11 @@ class RotatingWorkTypeAssignForm(ModelForm):
         request = getattr(_thread_locals, "request", None)
         self.fields["employee_id"].initial = request.GET.get("emp_id")
         if not self.instance.pk and not request.GET.get("emp_id"):
-            self.fields["employee_id"] = HorillaMultiSelectField(
+            self.fields["employee_id"] = HrMultiSelectField(
                 queryset=Employee.objects.filter(
                     employee_work_info__isnull=False, is_active=True
                 ),
-                widget=HorillaMultiSelectWidget(
+                widget=HrMultiSelectWidget(
                     filter_route_name="employee-widget-filter",
                     filter_class=EmployeeFilter,
                     filter_instance_context_name="f",
@@ -1952,9 +1952,9 @@ class RotatingShiftAssignForm(ModelForm):
         "rotate_every": 12,
     }
 
-    # employee_id = HorillaMultiSelectField(
+    # employee_id = HrMultiSelectField(
     #     queryset=Employee.objects.filter(employee_work_info__isnull=False),
-    #     widget=HorillaMultiSelectWidget(
+    #     widget=HrMultiSelectWidget(
     #         filter_route_name="employee-widget-filter",
     #         filter_class=EmployeeFilter,
     #         filter_instance_context_name="f",
@@ -1999,11 +1999,11 @@ class RotatingShiftAssignForm(ModelForm):
         request = getattr(_thread_locals, "request", None)
         self.fields["employee_id"].initial = request.GET.get("emp_id")
         if not self.instance.pk and not request.GET.get("emp_id"):
-            self.fields["employee_id"] = HorillaMultiSelectField(
+            self.fields["employee_id"] = HrMultiSelectField(
                 queryset=Employee.objects.filter(
                     employee_work_info__isnull=False, is_active=True
                 ),
-                widget=HorillaMultiSelectWidget(
+                widget=HrMultiSelectWidget(
                     filter_route_name="employee-widget-filter",
                     filter_class=EmployeeFilter,
                     filter_instance_context_name="f",
@@ -3006,9 +3006,9 @@ class AnnouncementForm(ModelForm):
     Announcement Form
     """
 
-    employees = HorillaMultiSelectField(
+    employees = HrMultiSelectField(
         queryset=Employee.objects.all(),
-        widget=HorillaMultiSelectWidget(
+        widget=HrMultiSelectWidget(
             filter_route_name="employee-widget-filter",
             filter_class=EmployeeFilter,
             filter_instance_context_name="f",
@@ -3124,7 +3124,7 @@ class AnnouncementForm(ModelForm):
         cleaned_data = super().clean()
 
         # Remove 'employees' field error if it's handled manually
-        if isinstance(self.fields["employees"], HorillaMultiSelectField):
+        if isinstance(self.fields["employees"], HrMultiSelectField):
             self.errors.pop("employees", None)
             employee_data = self.fields["employees"].queryset.filter(
                 id__in=self.data.getlist("employees")

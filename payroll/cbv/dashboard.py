@@ -15,13 +15,13 @@ from django.utils.translation import gettext_lazy as _
 from base.filters import DepartmentViewFilter
 from base.models import Department
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.views import HorillaListView
+from hr_views.generic.cbv.views import HrListView
 from payroll.filters import ContractFilter
 from payroll.models.models import Contract
 
 
 @method_decorator(login_required, name="dispatch")
-class DashboardDepartmentPayslip(HorillaListView):
+class DashboardDepartmentPayslip(HrListView):
     """
     list view for total department payslip
     """
@@ -82,7 +82,7 @@ class DashboardDepartmentPayslip(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DashboardContractList(HorillaListView):
+class DashboardContractList(HrListView):
     """
     list view for contract ending this month
     """
@@ -146,7 +146,7 @@ class DashboardContractList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class DashboardContractListExpired(HorillaListView):
+class DashboardContractListExpired(HrListView):
     """
     list view for contract ending this month
     """

@@ -15,7 +15,7 @@ from django.utils.translation import gettext_lazy as _
 logger = logging.getLogger(__name__)
 
 
-class HorillaAutomationConfig(AppConfig):
+class HrAutomationConfig(AppConfig):
     """Configuration class for the Horilla Automations Django app."""
 
     default_auto_field = "django.db.models.BigAutoField"

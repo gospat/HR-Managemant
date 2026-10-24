@@ -1,20 +1,20 @@
 """
 core/inherit/view_inherit.py
 
-HorillaViewInheritMixin — add to an extension class to enable view replacement.
+HrViewInheritMixin — add to an extension class to enable view replacement.
 
 Two _inherit modes
 ------------------
 
 Mode 1  _inherit = True   (direct subclass replacement)
-  Include HorillaViewInheritMixin as the first base alongside the target view.
+  Include HrViewInheritMixin as the first base alongside the target view.
   The extension replaces the parent view in URL routing via __new__ patching.
   Full Python inheritance — super(), MRO, and attribute lookup all work normally.
 
     from asset.cbv.asset import AssetListView
-    from core.inherit import HorillaViewInheritMixin
+    from core.inherit import HrViewInheritMixin
 
-    class AssetListExtension(HorillaViewInheritMixin, AssetListView):
+    class AssetListExtension(HrViewInheritMixin, AssetListView):
         _inherit = True
 
         def __init__(self, **kwargs):
@@ -26,7 +26,7 @@ Mode 2  _inherit = "app_label.ClassName"  (indirect attribute injection)
   Declared non-dunder attributes are injected onto the target via setattr.
   The target view must be registered via register_view() to be reachable.
 
-    class AssetListExtension(HorillaViewInheritMixin):
+    class AssetListExtension(HrViewInheritMixin):
         _inherit = "asset.AssetList"
         columns = ["name", "asset_status", "warranty_expiry_date"]
 """
@@ -45,7 +45,7 @@ _VIEW_SKIP_KEYS = frozenset(
 )
 
 
-class HorillaViewInheritMixin:
+class HrViewInheritMixin:
     """
     Mixin that enables _inherit on Horilla CBV extension classes.
 
@@ -60,7 +60,7 @@ class HorillaViewInheritMixin:
 
         if inherit is True:
             parent = next(
-                (b for b in cls.__bases__ if b is not HorillaViewInheritMixin),
+                (b for b in cls.__bases__ if b is not HrViewInheritMixin),
                 None,
             )
             if parent is not None:

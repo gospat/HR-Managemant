@@ -25,7 +25,7 @@ from base.models import (
     WorkType,
 )
 from employee.models import Employee
-from core.filters import HorillaFilterSet, filter_by_name, filter_name_or_badge_terms
+from core.filters import HrFilterSet, filter_by_name, filter_name_or_badge_terms
 from payroll.models.models import (
     Allowance,
     Contract,
@@ -41,7 +41,7 @@ from payroll.models.payroll_batch import PayrollBatch
 from payroll.models.tax_models import TaxBracket
 
 
-class ContractFilter(HorillaFilterSet):
+class ContractFilter(HrFilterSet):
     """
     Filter set class for Contract model
 
@@ -91,7 +91,7 @@ class ContractFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- every model/queryset-backed field in the modern filter panel opts
     # in here instead of pre-rendering its whole queryset as <option> tags.
     # Note: department/job_position/job_role/shift/work_type are FK fields
@@ -236,7 +236,7 @@ class ContractFilter(HorillaFilterSet):
         return queryset
 
 
-class AllowanceFilter(HorillaFilterSet):
+class AllowanceFilter(HrFilterSet):
     """
     Filter set class for Allowance model.
     """
@@ -287,7 +287,7 @@ class AllowanceFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Created At is the only real date
@@ -310,7 +310,7 @@ class AllowanceFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -319,7 +319,7 @@ class AllowanceFilter(HorillaFilterSet):
         return self._apply_custom_filters(queryset)
 
 
-class DeductionFilter(HorillaFilterSet):
+class DeductionFilter(HrFilterSet):
     """
     Filter set class for Deduction model.
     """
@@ -370,7 +370,7 @@ class DeductionFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Created At is the only real date
@@ -393,7 +393,7 @@ class DeductionFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -402,7 +402,7 @@ class DeductionFilter(HorillaFilterSet):
         return self._apply_custom_filters(queryset)
 
 
-class SalaryStructureFilter(HorillaFilterSet):
+class SalaryStructureFilter(HrFilterSet):
     """
     Filter set class for SalaryStructure model.
     """
@@ -418,7 +418,7 @@ class SalaryStructureFilter(HorillaFilterSet):
         fields = ["title"]
 
 
-class PayslipFilter(HorillaFilterSet):
+class PayslipFilter(HrFilterSet):
     """
     Filter set class for payslip model.
     """
@@ -438,7 +438,7 @@ class PayslipFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- Employee is opted into an AJAX-searched combobox instead of a
     # pre-rendered <option> list.
     ajax_fields = {
@@ -455,7 +455,7 @@ class PayslipFilter(HorillaFilterSet):
         """
         Delegates to the shared core.filters.filter_by_name, except when
         search_field is set (field-scoped search takes over instead -- see
-        HorillaFilterSet.search_in).
+        HrFilterSet.search_in).
         """
         if self.data.get("search_field"):
             return queryset
@@ -642,7 +642,7 @@ class PayslipFilter(HorillaFilterSet):
         )
 
 
-class LoanAccountFilter(HorillaFilterSet):
+class LoanAccountFilter(HrFilterSet):
     """
     LoanAccountFilter
     """
@@ -673,7 +673,7 @@ class LoanAccountFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- every model/queryset-backed field in the modern filter panel opts
     # in here instead of pre-rendering its whole queryset as <option> tags.
     ajax_fields = {
@@ -734,7 +734,7 @@ class LoanAccountFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter. Provided Date is a plain DateField
@@ -775,7 +775,7 @@ class LoanAccountFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter.
@@ -804,7 +804,7 @@ class LoanAccountFilter(HorillaFilterSet):
         )
 
 
-class ReimbursementFilter(HorillaFilterSet):
+class ReimbursementFilter(HrFilterSet):
     """
     ReimbursementFilter
     """
@@ -828,7 +828,7 @@ class ReimbursementFilter(HorillaFilterSet):
         method="filter_name_or_badge", label=_("Name or Badge ID")
     )
 
-    # HorillaFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
+    # HrFilterSet.ajax_fields (generic AJAX-loaded combobox mechanism)
     # -- every model/queryset-backed field in the modern filter panel opts
     # in here instead of pre-rendering its whole queryset as <option> tags.
     ajax_fields = {
@@ -905,7 +905,7 @@ class ReimbursementFilter(HorillaFilterSet):
     def _build_custom_filter_fields(self):
         """
         Registry backing the Advanced section's "+ Add filter" builder
-        (see HorillaFilterSet._build_custom_filter_fields's docstring
+        (see HrFilterSet._build_custom_filter_fields's docstring
         for the two supported entry shapes) -- same "choose field, then
         lookup, then value" pattern used by AttendanceFilters/
         EmployeeFilter/AssetFilter/LoanAccountFilter. Allowance On and
@@ -935,7 +935,7 @@ class ReimbursementFilter(HorillaFilterSet):
 
     def filter_queryset(self, queryset):
         """
-        HorillaFilterSet._apply_custom_filters isn't wired into the base
+        HrFilterSet._apply_custom_filters isn't wired into the base
         filter_queryset automatically -- this is the minimal "call it at
         the end" hookup, same as AttendanceFilters/FeedbackFilter/
         AssetFilter/LoanAccountFilter.
@@ -950,7 +950,7 @@ class ReimbursementFilter(HorillaFilterSet):
         )
 
 
-class TaxBracketFilter(HorillaFilterSet):
+class TaxBracketFilter(HrFilterSet):
     """
     Filter set class for TaxBracket model.
     """
@@ -971,7 +971,7 @@ class TaxBracketFilter(HorillaFilterSet):
         ).distinct()
 
 
-class FilingStatusFilter(HorillaFilterSet):
+class FilingStatusFilter(HrFilterSet):
     """
     Filter set class for TaxBracket model.
     """
@@ -1034,7 +1034,7 @@ class PayslipReGroup:
     ]
 
 
-class PayslipAutoGenerateFilter(HorillaFilterSet):
+class PayslipAutoGenerateFilter(HrFilterSet):
 
     search = django_filters.CharFilter(method="search_method")
 
@@ -1050,7 +1050,7 @@ class PayslipAutoGenerateFilter(HorillaFilterSet):
         return ((queryset.filter(company_id__company__icontains=value))).distinct()
 
 
-class PayrollBatchFilter(HorillaFilterSet):
+class PayrollBatchFilter(HrFilterSet):
     """Filter set for the payroll runs list."""
 
     search = django_filters.CharFilter(method="filter_search")

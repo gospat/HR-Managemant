@@ -1,6 +1,6 @@
 """A FilterSet must accept a plain dict as `data`, not only a QueryDict.
 
-CybroOdooDev/Horilla#3313. `HorillaFilterSet` called `self.data.getlist(...)`
+CybroOdooDev/Horilla#3313. `HrFilterSet` called `self.data.getlist(...)`
 at six places. django-filter accepts any mapping as `data`, and eight call
 sites in the dashboards pass a dict literal --
 `EmployeeFilter({"not_in_yet": today})` and friends. Every one of them raised

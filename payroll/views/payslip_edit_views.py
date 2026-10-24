@@ -16,7 +16,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from core.decorators import hx_request_required, login_required, permission_required
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from payroll.methods.component_formula import (
     ComponentFormulaError,
     run_component_formula,
@@ -80,7 +80,7 @@ def edit_payslip_components(request, payslip_id):
 
     if payslip.status == "paid":
         messages.error(request, _("A paid payslip cannot be edited."))
-        return HorillaRedirect(
+        return HrRedirect(
             request, reverse("view-created-payslip", kwargs={"payslip_id": payslip.pk})
         )
 
@@ -101,7 +101,7 @@ def edit_payslip_components(request, payslip_id):
             # way to say so on a response that swaps the payslip itself -- so
             # the redirect is what carries the message.
             messages.error(request, exc.args[0])
-            return HorillaRedirect(
+            return HrRedirect(
                 request,
                 reverse("view-created-payslip", kwargs={"payslip_id": payslip.pk}),
             )

@@ -2,7 +2,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from hr_api.api_methods.base.pagination import HorillaPageNumberPagination
+from hr_api.api_methods.base.pagination import HrPageNumberPagination
 
 from ...api_serializers.notifications.serializers import NotificationSerializer
 
@@ -18,7 +18,7 @@ class NotificationView(APIView):
         elif type == "unread":
             queryset = request.user.notifications.unread()
 
-        pagination = HorillaPageNumberPagination()
+        pagination = HrPageNumberPagination()
         page = pagination.paginate_queryset(queryset, request)
         serializer = NotificationSerializer(page, many=True)
         return pagination.get_paginated_response(serializer.data)

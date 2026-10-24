@@ -4,11 +4,11 @@ horilla_mail/filters.py
 
 from django import forms
 
-from core.filters import HorillaFilterSet, django_filters
+from core.filters import HrFilterSet, django_filters
 from hr_meet.models import GoogleMeeting
 
 
-class GoogleMeetingFilter(HorillaFilterSet):
+class GoogleMeetingFilter(HrFilterSet):
     """
     AutomationFilter
     """

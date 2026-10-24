@@ -18,12 +18,12 @@ from hr_meet.filters import GoogleMeetingFilter
 from hr_meet.form import GoogleCloudCredentialForm, GoogleMeetingForm
 from hr_meet.models import GoogleCloudCredential, GoogleCredential, GoogleMeeting
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
-    HorillaSectionView,
-    HorillaTabView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
+    HrSectionView,
+    HrTabView,
 )
 
 # -------------------------------------- Google Credentials --------------------------------
@@ -33,11 +33,11 @@ from hr_views.generic.cbv.views import (
 @method_decorator(
     permission_required("horilla_meet.view_googlecloudcredential"), name="dispatch"
 )
-class GMeetCredentialSectionView(HorillaSectionView):
+class GMeetCredentialSectionView(HrSectionView):
     """
     View for displaying the Google Meet credentials section.
 
-    Inherits from `HorillaSectionView` to manage the section for Google Cloud credentials in the user interface.
+    Inherits from `HrSectionView` to manage the section for Google Cloud credentials in the user interface.
     Defines the URLs for navigation and the view, as well as the container element for the list.
 
     Attributes:
@@ -59,11 +59,11 @@ class GMeetCredentialSectionView(HorillaSectionView):
 @method_decorator(
     permission_required("horilla_meet.view_googlecloudcredential"), name="dispatch"
 )
-class GmeetCredentialNavView(HorillaNavView):
+class GmeetCredentialNavView(HrNavView):
     """
     View for the Google Meet credentials nav view.
 
-    Inherits from `HorillaNavView` to manage nav view for Google Cloud credentials. Handles dynamic attributes
+    Inherits from `HrNavView` to manage nav view for Google Cloud credentials. Handles dynamic attributes
     for creating credentials and updating modal behavior.
 
     Attributes:
@@ -91,11 +91,11 @@ class GmeetCredentialNavView(HorillaNavView):
 @method_decorator(
     permission_required("horilla_meet.view_googlecloudcredential"), name="dispatch"
 )
-class GmeetCredentialListView(HorillaListView):
+class GmeetCredentialListView(HrListView):
     """
     View for listing Google Meet credentials.
 
-    Inherits from `HorillaListView` to manage the listing of Google Cloud credentials with actions like edit and delete.
+    Inherits from `HrListView` to manage the listing of Google Cloud credentials with actions like edit and delete.
     Defines how credentials are presented in the list (columns and actions) and handles interaction with the data.
 
     Attributes:
@@ -158,11 +158,11 @@ class GmeetCredentialListView(HorillaListView):
 @method_decorator(
     permission_required("horilla_meet.add_googlecloudcredential"), name="dispatch"
 )
-class GoogleCredentialsFormView(HorillaFormView):
+class GoogleCredentialsFormView(HrFormView):
     """
     View for creating or updating Google Cloud credentials.
 
-    Inherits from `HorillaFormView` to manage the form for creating or updating Google Cloud credentials.
+    Inherits from `HrFormView` to manage the form for creating or updating Google Cloud credentials.
     Handles form validation, success, and failure responses. Displays success or error messages accordingly.
 
     Attributes:
@@ -217,11 +217,11 @@ class GoogleCredentialsFormView(HorillaFormView):
     permission_required("horilla_meet.add_googlemeeting"), name="dispatch"
 )
 @method_decorator(check_integration_enabled(app_name="horilla_meet"), name="dispatch")
-class GmeetFormView(HorillaFormView):
+class GmeetFormView(HrFormView):
     """
     View for creating or updating Google Meet meetings.
 
-    Inherits from `HorillaFormView` to manage the form for creating or updating Google Meet meetings.
+    Inherits from `HrFormView` to manage the form for creating or updating Google Meet meetings.
     Handles form validation, success, and failure responses. Displays success or error messages accordingly.
 
     Attributes:
@@ -273,11 +273,11 @@ class GmeetFormView(HorillaFormView):
 @method_decorator(
     permission_required("horilla_meet.view_googlemeeting"), name="dispatch"
 )
-class GmeetSectionView(HorillaSectionView):
+class GmeetSectionView(HrSectionView):
     """
     View for displaying the Google Meet section.
 
-    Inherits from `HorillaSectionView` to manage the section for Google Meet in the user interface.
+    Inherits from `HrSectionView` to manage the section for Google Meet in the user interface.
     Provides context regarding the user's credentials and renders the associated template.
 
     Attributes:
@@ -306,7 +306,7 @@ class GmeetSectionView(HorillaSectionView):
 @method_decorator(
     permission_required("horilla_meet.view_googlecloudcredential"), name="dispatch"
 )
-class GmeetSettingsTabView(HorillaTabView):
+class GmeetSettingsTabView(HrTabView):
     """Tab view for the Google Meet settings page (Rules and Meetings)."""
 
     def __init__(self, **kwargs) -> None:
@@ -361,11 +361,11 @@ class GmeetMeetingsTab(TemplateView):
 @method_decorator(
     permission_required("horilla_meet.view_googlemeeting"), name="dispatch"
 )
-class GmeetNavView(HorillaNavView):
+class GmeetNavView(HrNavView):
     """
     Nav view for Google Meet.
 
-    Inherits from `HorillaNavView` to manage nav bar for Google Meet view. Handles dynamic attributes for creating
+    Inherits from `HrNavView` to manage nav bar for Google Meet view. Handles dynamic attributes for creating
     a Google Meet based on whether the user has credentials.
 
     Attributes:
@@ -408,11 +408,11 @@ class GmeetNavView(HorillaNavView):
 @method_decorator(
     permission_required("horilla_meet.view_googlemeeting"), name="dispatch"
 )
-class GmeetListView(HorillaListView):
+class GmeetListView(HrListView):
     """
     View for listing Google Meetings.
 
-    Inherits from `HorillaListView` to manage the listing of Google meetings with actions like edit, delete, and view meeting link.
+    Inherits from `HrListView` to manage the listing of Google meetings with actions like edit, delete, and view meeting link.
 
     Attributes:
         model (Model): The model for Google Meetings.
@@ -491,11 +491,11 @@ class GmeetListView(HorillaListView):
 @method_decorator(
     permission_required("horilla_meet.view_googlemeeting"), name="dispatch"
 )
-class GmeetDetailedView(HorillaDetailedView):
+class GmeetDetailedView(HrDetailedView):
     """
     Detailed view for Google Meetings.
 
-    Inherits from `HorillaDetailedView` to manage the detailed view of a specific Google Meeting.
+    Inherits from `HrDetailedView` to manage the detailed view of a specific Google Meeting.
     Displays information such as the meeting URL, event ID, start time, end time, and description.
 
     Attributes:

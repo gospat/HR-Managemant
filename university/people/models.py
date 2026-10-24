@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
-from base.horilla_company_manager import HorillaCompanyManager
+from base.horilla_company_manager import HrCompanyManager
 
 
 class Faculty(models.Model):
     company = models.ForeignKey("base.Company", on_delete=models.PROTECT)
     name = models.CharField(max_length=150)
     code = models.CharField(max_length=20)
-    objects = HorillaCompanyManager(related_company_field="company")
+    objects = HrCompanyManager(related_company_field="company")
 
     class Meta:
         ordering = ["name"]

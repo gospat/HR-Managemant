@@ -16,16 +16,16 @@ from django.utils.translation import gettext_noop
 from base.methods import has_export_access
 from employee import views as employee_view
 from employee.cbv.employee_profile import EmployeeProfileView
-from core.http.response import HorillaRedirect
+from core.http.response import HrRedirect
 from hr_views.cbv_methods import (
     hx_request_required,
     login_required,
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 from notifications.signals import notify
@@ -62,7 +62,7 @@ class PayslipView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class PayslipList(HorillaListView):
+class PayslipList(HrListView):
     """
     list view
     """
@@ -196,7 +196,7 @@ class PayslipList(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class PayslipNav(HorillaNavView):
+class PayslipNav(HrNavView):
     """
     navbar
     """
@@ -357,7 +357,7 @@ class PayslipRunList(PayslipList):
         )
         if not self.request.user.has_perm("payroll.view_payslip"):
             base = base.filter(employee_id__employee_user_id=self.request.user)
-        return HorillaListView.get_queryset(self, base, *args, **kwargs)
+        return HrListView.get_queryset(self, base, *args, **kwargs)
 
 
 @method_decorator(login_required, name="dispatch")
@@ -395,7 +395,7 @@ class PayslipBulkExport(TemplateView):
 
     def get(self, request, *args, **kwargs):
         if not has_export_access(request, Payslip):
-            return HorillaRedirect(
+            return HrRedirect(
                 request, message=_("You don't have access to export this data")
             )
         return super().get(request, *args, **kwargs)
@@ -419,7 +419,7 @@ class PayslipBulkExport(TemplateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(permission_required("payroll.add_payslip"), name="dispatch")
-class PayrollCreateFormView(HorillaFormView):
+class PayrollCreateFormView(HrFormView):
     """
     form view for creating payslip
     """

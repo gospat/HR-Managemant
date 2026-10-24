@@ -11,7 +11,7 @@ ContextVar before any view or template runs).
 Resolution rules (flag on, non-superusers — superusers bypass backends):
 - specific company selected  -> permissions from groups assigned for that company
 - "all" / "All my companies" -> union of the user's per-company assignments
-  (data layer still limits rows to those companies via HorillaCompanyManager)
+  (data layer still limits rows to those companies via HrCompanyManager)
 - no company context (API/JWT without session, shells, schedulers)
                              -> user's work-info company; if none, the union
                                 of all their per-company assignments

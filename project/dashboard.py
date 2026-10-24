@@ -125,7 +125,7 @@ def project_status_pipeline(request):
     from project.models import Project
 
     qs = _period_overlap(Project.objects.filter(is_active=True), request)
-    # HorillaCompanyManager's get_queryset() applies .distinct() whenever the
+    # HrCompanyManager's get_queryset() applies .distinct() whenever the
     # company OR-filter is active; chaining .values("status").annotate(Count())
     # on top of that collapses to one row per Project instead of one row per
     # status (Django groups by the queryset's already-selected columns, not

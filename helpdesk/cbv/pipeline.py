@@ -8,12 +8,12 @@ from base.methods import filtersubordinates, is_reportingmanager
 from helpdesk.filter import TicketFilter
 from helpdesk.models import Ticket
 from hr_views.cbv_methods import login_required
-from hr_views.generic.cbv.kanban import HorillaKanbanView
+from hr_views.generic.cbv.kanban import HrKanbanView
 from hr_views.generic.cbv.views import (
-    HorillaListView,
-    HorillaNavView,
-    HorillaTabContentShell,
-    HorillaTabView,
+    HrListView,
+    HrNavView,
+    HrTabContentShell,
+    HrTabView,
     TemplateView,
 )
 
@@ -27,7 +27,7 @@ class TicketPipelineView(TemplateView):
     template_name = "cbv/pipeline/ticket_section_view.html"
 
 
-class _TicketTabNavBase(HorillaNavView):
+class _TicketTabNavBase(HrNavView):
     """
     Shared Filter/Group-by/Actions/Create wiring for each Tickets tab's own,
     independent Nav - only search_url/search_swap_target/view_types differ
@@ -179,26 +179,26 @@ class AllTicketsNav(_TicketTabNavBase):
         ]
 
 
-class MyTicketsTabShell(HorillaTabContentShell):
+class MyTicketsTabShell(HrTabContentShell):
     nav_url_name = "my-tickets-nav"
     container_id = "myTicketsListContainer"
     tabs_root_id = "ticketPipelineContainer"
 
 
-class SuggestedTicketsTabShell(HorillaTabContentShell):
+class SuggestedTicketsTabShell(HrTabContentShell):
     nav_url_name = "suggested-tickets-nav"
     container_id = "suggestedTicketsListContainer"
     tabs_root_id = "ticketPipelineContainer"
 
 
-class AllTicketsTabShell(HorillaTabContentShell):
+class AllTicketsTabShell(HrTabContentShell):
     nav_url_name = "all-tickets-nav"
     container_id = "allTicketsListContainer"
     tabs_root_id = "ticketPipelineContainer"
 
 
 @method_decorator(login_required, name="dispatch")
-class TicketTabView(HorillaTabView):
+class TicketTabView(HrTabView):
     """
     Pipeline List View
     """
@@ -285,7 +285,7 @@ class TicketTabView(HorillaTabView):
 
 
 @method_decorator(login_required, name="dispatch")
-class TicketListBase(HorillaListView):
+class TicketListBase(HrListView):
     """
     Shared columns/actions/queryset base for each Tickets tab's own list.
     """
@@ -492,7 +492,7 @@ class AllTicketsList(TicketListBase):
 
 
 @method_decorator(login_required, name="dispatch")
-class TicketCardBase(HorillaKanbanView):
+class TicketCardBase(HrKanbanView):
     """
     Shared columns/actions/queryset base for each Tickets tab's own kanban
     board.

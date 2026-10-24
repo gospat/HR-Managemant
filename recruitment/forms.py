@@ -22,8 +22,8 @@ from employee.filters import EmployeeFilter
 from employee.models import Employee
 from core import horilla_middlewares
 from core.horilla_middlewares import _thread_locals
-from hr_widgets.widgets.horilla_multi_select_field import HorillaMultiSelectField
-from hr_widgets.widgets.select_widgets import HorillaMultiSelectWidget
+from hr_widgets.widgets.horilla_multi_select_field import HrMultiSelectField
+from hr_widgets.widgets.select_widgets import HrMultiSelectWidget
 from recruitment import widgets
 from recruitment.models import (
     Candidate,
@@ -293,9 +293,9 @@ class RecruitmentCreationForm(BaseModelForm):
         self.fields["open_positions"].required = True
         if not self.instance.pk:
             self.fields["vacancy"].initial = 1
-            self.fields["recruitment_managers"] = HorillaMultiSelectField(
+            self.fields["recruitment_managers"] = HrMultiSelectField(
                 queryset=Employee.objects.filter(is_active=True),
-                widget=HorillaMultiSelectWidget(
+                widget=HrMultiSelectWidget(
                     filter_route_name="employee-widget-filter",
                     filter_class=EmployeeFilter,
                     filter_instance_context_name="f",
@@ -328,7 +328,7 @@ class RecruitmentCreationForm(BaseModelForm):
     #     option = super().create_option(*args,**kwargs)
 
     def clean(self):
-        if isinstance(self.fields["recruitment_managers"], HorillaMultiSelectField):
+        if isinstance(self.fields["recruitment_managers"], HrMultiSelectField):
             ids = self.data.getlist("recruitment_managers")
             if ids:
                 self.errors.pop("recruitment_managers", None)
@@ -367,9 +367,9 @@ class StageCreationForm(BaseModelForm):
         super().__init__(*args, **kwargs)
         reload_queryset(self.fields)
         if not self.instance.pk:
-            self.fields["stage_managers"] = HorillaMultiSelectField(
+            self.fields["stage_managers"] = HrMultiSelectField(
                 queryset=Employee.objects.filter(is_active=True),
-                widget=HorillaMultiSelectWidget(
+                widget=HrMultiSelectWidget(
                     filter_route_name="employee-widget-filter",
                     filter_class=EmployeeFilter,
                     filter_instance_context_name="f",
@@ -380,7 +380,7 @@ class StageCreationForm(BaseModelForm):
             )
 
     def clean(self):
-        if isinstance(self.fields["stage_managers"], HorillaMultiSelectField):
+        if isinstance(self.fields["stage_managers"], HrMultiSelectField):
             ids = self.data.getlist("stage_managers")
             if ids:
                 self.errors.pop("stage_managers", None)

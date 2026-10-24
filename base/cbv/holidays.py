@@ -21,10 +21,10 @@ from hr_views.cbv_methods import (
     permission_required,
 )
 from hr_views.generic.cbv.views import (
-    HorillaDetailedView,
-    HorillaFormView,
-    HorillaListView,
-    HorillaNavView,
+    HrDetailedView,
+    HrFormView,
+    HrListView,
+    HrNavView,
     TemplateView,
 )
 
@@ -39,7 +39,7 @@ class HolidaysView(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HolidayListView(HorillaListView):
+class HolidayListView(HrListView):
     """
     list view
     """
@@ -88,7 +88,7 @@ class HolidayListView(HorillaListView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HolidayNavView(HorillaNavView):
+class HolidayNavView(HrNavView):
     """
     nav bar
     """
@@ -154,7 +154,7 @@ class HolidayNavView(HorillaNavView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HolidayDetailView(HorillaDetailedView):
+class HolidayDetailView(HrDetailedView):
     """
     detail view of the page
     """
@@ -202,7 +202,7 @@ class HolidayExport(TemplateView):
 
 
 @method_decorator(login_required, name="dispatch")
-class HolidayFormView(HorillaFormView):
+class HolidayFormView(HrFormView):
     """
     form view for create button
     """

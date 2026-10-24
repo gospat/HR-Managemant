@@ -4,7 +4,7 @@ Company scoping on the API path.
 Tenant scoping rests on a ContextVar that CompanyMiddleware sets, but
 middleware runs before DRF resolves the JWT -- so on a tokened request the
 ContextVar is unset unless the authentication class sets it, and
-HorillaCompanyManager adds no company predicate when it is unset.
+HrCompanyManager adds no company predicate when it is unset.
 
 These tests pin that behaviour. Note the shape they deliberately avoid:
 asserting only that a user can see its own data passes whether or not
@@ -104,7 +104,7 @@ class ApiTenantScopingTests(TestCase):
         """Scope is established when the token is resolved.
 
         Without it, get_selected_company() is None inside the view and
-        HorillaCompanyManager adds no company predicate.
+        HrCompanyManager adds no company predicate.
         """
         from rest_framework.test import APIRequestFactory
 

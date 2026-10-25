@@ -31,6 +31,7 @@ type Options = {
   faculties: { id: number; name: string; company_id: number }[];
 };
 const empty: Results = { count: 0, next: null, previous: null, results: [] };
+const REQUEST_TIMEOUT_MS = 8000;
 
 export default function StaffDirectory() {
   const [session, setSession] = useState<Session | null>(null);
@@ -50,22 +51,39 @@ export default function StaffDirectory() {
   const dialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
+    let active = true;
     const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    setLoading(true);
+    setError("");
     fetch("/university-api/session/", {
       cache: "no-store",
       signal: controller.signal,
     })
       .then(async (r) => {
         if (!r.ok) throw new Error("Unable to connect to the HR service.");
-        setSession(await r.json());
+        return (await r.json()) as Session;
+      })
+      .then((value) => {
+        if (active) setSession(value);
       })
       .catch((e) => {
-        if (e.name !== "AbortError") {
-          setError(e.message);
-          setLoading(false);
-        }
+        if (!active) return;
+        setError(
+          e.name === "AbortError"
+            ? "Unable to reach the HR service right now. Please refresh and try again."
+            : e.message,
+        );
+      })
+      .finally(() => {
+        window.clearTimeout(timer);
+        if (active) setLoading(false);
       });
-    return () => controller.abort();
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+      controller.abort();
+    };
   }, []);
 
   useEffect(() => {
@@ -74,7 +92,9 @@ export default function StaffDirectory() {
       setLoading(false);
       return;
     }
+    let active = true;
     const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
     setLoading(true);
     setError("");
     const params = new URLSearchParams({
@@ -93,15 +113,28 @@ export default function StaffDirectory() {
               ? "Your session expired or access was denied. Please sign in again."
               : "Unable to load staff records. Please try again.",
           );
-        setData(await r.json());
+        return (await r.json()) as Results;
+      })
+      .then((value) => {
+        if (active) setData(value);
       })
       .catch((e) => {
-        if (e.name !== "AbortError") setError(e.message);
+        if (!active) return;
+        setError(
+          e.name === "AbortError"
+            ? "Staff records took too long to load. Please refresh and try again."
+            : e.message,
+        );
       })
       .finally(() => {
-        if (!controller.signal.aborted) setLoading(false);
+        window.clearTimeout(timer);
+        if (active) setLoading(false);
       });
-    return () => controller.abort();
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+      controller.abort();
+    };
   }, [session, query, category, page, refresh]);
 
   async function signOut() {

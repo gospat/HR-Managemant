@@ -142,8 +142,7 @@
                     </div>
                 </div>
                 <img
-                    src="{% if white_label_company.icon %}
-                "{% static 'images/ui/auth-logo.png' %}"
+                    src="{% if white_label_company.icon %}{{ white_label_company.icon.url }}{% else %}{% static 'images/ui/auth-logo.png' %}{% endif %}"
                     alt="{{ white_label_company_name }}"
                 >
             </main>
